@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BE
+{
+    class Host
+    {
+        int hostKey;
+        string privateName;
+        string familyName;
+        int phoneNumber;
+        string mailAddress;
+        BankAccount bankAccount;
+        bool collectionClearance;
+
+        public override string ToString()
+        {
+            return "Hiiiiiiiiiii";
+        }
+
+        public int HostKey { get => hostKey; set => hostKey = value; }
+        public string PrivateName { get => privateName; set => privateName = value; }
+        public string FamilyName { get => familyName; set => familyName = value; }
+        public int PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
+        public string MailAddress { get => mailAddress; set => mailAddress = value; }
+        public bool CollectionClearance { get => collectionClearance; set => collectionClearance = value; }
+        internal BankAccount BankAccount { get => bankAccount; set => bankAccount = value; }
+    }
+}
