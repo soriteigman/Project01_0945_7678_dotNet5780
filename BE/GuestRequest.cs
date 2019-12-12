@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    class GuestRequest
+    public class GuestRequest: IEnumerable
     {
         int guestRequestKey;
         string privateName;
@@ -29,6 +30,13 @@ namespace BE
         public override string ToString()
         {
             return "Hiiiiiiiiiii";
+        }
+
+       
+
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable)GuestRequestKey).GetEnumerator();
         }
 
         public int GuestRequestKey { get => guestRequestKey; set => guestRequestKey = value; }
