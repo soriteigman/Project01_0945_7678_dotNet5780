@@ -21,6 +21,6 @@ namespace BE
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
         public string HostingUnitName { get => hostingUnitName; set => hostingUnitName = value; }
         public bool[,] Diary { get => diary; set => diary = value; }
-        internal Host Owner { get => owner; set => owner = value; }
+        public Host Owner { get => owner; set => owner = value; }
     }
 }

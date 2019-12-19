@@ -11,7 +11,7 @@ namespace BE
         int hostingUnitKey;
         int guestRequestKey;
         int orderKey;
-        Enums.Status status;
+        Status status;
         DateTime createDate;
         DateTime orderDate;
 
@@ -23,8 +23,8 @@ namespace BE
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
         public int GuestRequestKey { get => guestRequestKey; set => guestRequestKey = value; }
         public int OrderKey { get => orderKey; set => orderKey = value; }
-        public Enums.Status Status { get => status; set => status = value; }
         public DateTime CreateDate { get => createDate; set => createDate = value; }
         public DateTime OrderDate { get => orderDate; set => orderDate = value; }
+        public Status Status { get => status; set => status = value; }
     }
 }

@@ -8,5 +8,6 @@ namespace BE
 {
     public class Configuration
     {
+        public static int HostingUnitKey_s=10000000;
     }
 }
