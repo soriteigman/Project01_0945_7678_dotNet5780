@@ -9,5 +9,10 @@ namespace BE
     public class Configuration
     {
         public static int HostingUnitKey_s=10000000;
+
+        public static int GuestRequest_s = 10000000;
+
+        public static int OrderKey_s = 10000000;
+
     }
 }

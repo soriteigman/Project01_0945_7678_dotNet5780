@@ -12,28 +12,28 @@ namespace myDAL
     {
         void AddGuestRequest(GuestRequest gr);
 
-        bool UpdateGuestRequest(GuestRequest gr);
+        void UpdateGuestRequest(GuestRequest gr);
 
 
-        bool AddHostingUnit(HostingUnit hu);
+        void AddHostingUnit(HostingUnit hu);
 
-        bool RemoveHostingUnit(HostingUnit hu);
+        void RemoveHostingUnit(HostingUnit hu);
 
-        bool UpdateHostingUnit(HostingUnit hu);
-
-
-        bool AddOrder(Order o);
-
-        bool UpdateOrder(Order o); //status update
+        void UpdateHostingUnit(HostingUnit hu);
 
 
-        List<HostingUnit> ListOfHostingUnits();
+        void AddOrder(Order o);
 
-        List<string> ListOfCustomers();
+        void UpdateOrder(Order o); //status update
 
-        List<Order> ListOfOrders();
 
-        List<BankAccount> ListOfBanks(); 
+        IEnumerable<HostingUnit> ListOfHostingUnits();
+
+        IEnumerable<GuestRequest> ListOfCustomers();
+
+        IEnumerable<Order> ListOfOrders();
+
+        IEnumerable<BankAccount> ListOfBanks(); 
 
 
     }

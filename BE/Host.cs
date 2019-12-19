@@ -27,6 +27,6 @@ namespace BE
         public int PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public string MailAddress { get => mailAddress; set => mailAddress = value; }
         public bool CollectionClearance { get => collectionClearance; set => collectionClearance = value; }
-        internal BankAccount BankAccount { get => bankAccount; set => bankAccount = value; }
+        public BankAccount BankAccount { get => bankAccount; set => bankAccount = value; }
     }
 }
