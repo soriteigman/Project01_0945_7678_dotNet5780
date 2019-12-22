@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class BankAccount
+    public class BankBranch
     {
         int bankNumber;
         string bankName;

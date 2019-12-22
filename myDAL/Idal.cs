@@ -33,7 +33,7 @@ namespace myDAL
 
         IEnumerable<Order> ListOfOrders();
 
-        IEnumerable<BankAccount> ListOfBanks(); 
+        IEnumerable<BankBranch> ListOfBanks(); 
 
 
     }

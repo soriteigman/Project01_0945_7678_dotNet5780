@@ -9,13 +9,13 @@ namespace myDAL
 {
     class DataSource
     {
-        static BankAccount B1 = new BankAccount() { BankNumber = 123, BankName = "hapoalim", BranchNumber = 290, BranchAddress = "beitar", BankAccountNumber = 123456 };
-        static BankAccount B2 = new BankAccount() { BankNumber = 456, BankName = "pagi", BranchNumber = 291, BranchAddress = "kanfei nesharim", BankAccountNumber = 78910 };
-        static BankAccount B3 = new BankAccount() { BankNumber = 789, BankName = "leumi", BranchNumber = 292, BranchAddress = "har nof", BankAccountNumber = 111213 };
-        static BankAccount B4 = new BankAccount() { BankNumber = 101, BankName = "mizrahi", BranchNumber = 293, BranchAddress = "beit hadfus", BankAccountNumber = 141516 };
-        static BankAccount B5 = new BankAccount() { BankNumber = 202, BankName = "yahav", BranchNumber = 294, BranchAddress = "arieli", BankAccountNumber = 171819 };
+        static BankBranch B1 = new BankBranch() { BankNumber = 123, BankName = "hapoalim", BranchNumber = 290, BranchAddress = "beitar", BankAccountNumber = 123456 };
+        static BankBranch B2 = new BankBranch() { BankNumber = 456, BankName = "pagi", BranchNumber = 291, BranchAddress = "kanfei nesharim", BankAccountNumber = 78910 };
+        static BankBranch B3 = new BankBranch() { BankNumber = 789, BankName = "leumi", BranchNumber = 292, BranchAddress = "har nof", BankAccountNumber = 111213 };
+        static BankBranch B4 = new BankBranch() { BankNumber = 101, BankName = "mizrahi", BranchNumber = 293, BranchAddress = "beit hadfus", BankAccountNumber = 141516 };
+        static BankBranch B5 = new BankBranch() { BankNumber = 202, BankName = "yahav", BranchNumber = 294, BranchAddress = "arieli", BankAccountNumber = 171819 };
 
-        internal static List<BankAccount> BankAccountCollection = new List<BankAccount>() { B1, B2, B3, B4, B5 };
+        internal static List<BankBranch> BankAccountCollection = new List<BankBranch>() { B1, B2, B3, B4, B5 };
 
         internal static List<GuestRequest> requestCollection = new List<GuestRequest>()
         {
@@ -26,9 +26,9 @@ namespace myDAL
 
         internal static List<Host> My_Host = new List<Host>
         {
-            new Host(){HostKey=12345678, PrivateName="Sori", FamilyName="Teigman", PhoneNumber=0548475920, MailAddress="soriteigman@gmail.com", CollectionClearance=true, BankAccount=B1 },
-            new Host(){HostKey=13679829, PrivateName="Esti", FamilyName="Burack", PhoneNumber=0537208407, MailAddress="stburack@gmail.com", CollectionClearance=false, BankAccount=B2 },
-            new Host(){HostKey=16785678, PrivateName="Ruth", FamilyName="Miller", PhoneNumber=0583295002, MailAddress="ruthmiller@gmail.com", CollectionClearance=true, BankAccount=B3 },
+            new Host(){HostKey=12345678, PrivateName="Sori", FamilyName="Teigman", PhoneNumber=0548475920, MailAddress="soriteigman@gmail.com", CollectionClearance=true, BankBranchDetails=B1, BankAccountNumber=12345678},
+            new Host(){HostKey=13679829, PrivateName="Esti", FamilyName="Burack", PhoneNumber=0537208407, MailAddress="stburack@gmail.com", CollectionClearance=false, BankBranchDetails=B2, BankAccountNumber=87654321},
+            new Host(){HostKey=16785678, PrivateName="Ruth", FamilyName="Miller", PhoneNumber=0583295002, MailAddress="ruthmiller@gmail.com", CollectionClearance=true, BankBranchDetails=B3, BankAccountNumber=91827364}
         };
 
         internal static List<HostingUnit> HostingUnitCollection = new List<HostingUnit>()

@@ -14,5 +14,9 @@ namespace BE
 
         public static int OrderKey_s = 10000000;
 
+        public static int ExpDay = 10;
+
+        public static int commission = 10;
+
     }
 }

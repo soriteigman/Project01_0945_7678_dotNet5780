@@ -13,7 +13,8 @@ namespace BE
         string familyName;
         int phoneNumber;
         string mailAddress;
-        BankAccount bankAccount;
+        BankBranch bankBranchDetails;
+        int bankAccountNumber;
         bool collectionClearance;
 
         public override string ToString()
@@ -27,6 +28,7 @@ namespace BE
         public int PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public string MailAddress { get => mailAddress; set => mailAddress = value; }
         public bool CollectionClearance { get => collectionClearance; set => collectionClearance = value; }
-        public BankAccount BankAccount { get => bankAccount; set => bankAccount = value; }
+        public BankBranch BankBranchDetails { get => bankBranchDetails; set => bankBranchDetails = value; }
+        public int BankAccountNumber { get => bankAccountNumber; set => bankAccountNumber = value; }
     }
 }

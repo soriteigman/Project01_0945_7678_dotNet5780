@@ -9,6 +9,23 @@ namespace myDAL
 {
    public class Dal_imp:Idal
    {
+        //Singleton
+        private static Dal_imp instance;
+
+        public static Dal_imp Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new Dal_imp();
+                return instance; 
+            }
+        }
+
+        private Dal_imp() { }
+
+        
+
         public void AddGuestRequest(GuestRequest gr)
         {
             try
