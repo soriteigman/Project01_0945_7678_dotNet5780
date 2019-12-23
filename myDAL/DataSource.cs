@@ -35,7 +35,7 @@ namespace myDAL
         {
             new HostingUnit(){HostingUnitKey=12345678, HostingUnitName="Esther", Owner=My_Host.First()},
             new HostingUnit(){HostingUnitKey=87654321, HostingUnitName="Sara", Owner=My_Host.First()},
-            new HostingUnit(){HostingUnitKey=18272635, HostingUnitName="Elisheva", Owner=My_Host.Last()}
+            new HostingUnit(){HostingUnitKey=18272635, HostingUnitName="Fanta Sea", Owner=My_Host.Last()}
 
         };
 

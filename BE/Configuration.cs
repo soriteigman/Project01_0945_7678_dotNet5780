@@ -18,5 +18,7 @@ namespace BE
 
         public static int commission = 10;
 
+        public static DateTime today = DateTime.Today;
+
     }
 }
