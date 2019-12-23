@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace myDAL
+namespace DAL
 {
-    class FactoryDal
+    public class FactoryDal
     {
         public static Idal getDal()
         {

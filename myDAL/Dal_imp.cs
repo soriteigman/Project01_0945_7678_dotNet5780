@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 
-namespace myDAL
+namespace DAL
 {
    public class Dal_imp:Idal
    {
@@ -170,7 +170,7 @@ namespace myDAL
                    select order.Clone();
         }
 
-        public IEnumerable<BankAccount> ListOfBanks()
+        public IEnumerable<BankBranch> ListOfBanks()
         {
             return from bankAccount in DataSource.BankAccountCollection
                    select bankAccount.Clone();

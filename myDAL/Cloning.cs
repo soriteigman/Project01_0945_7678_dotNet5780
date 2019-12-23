@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 
-namespace myDAL
+namespace DAL
 {
     public static class Cloning
     {
@@ -65,16 +65,17 @@ namespace myDAL
             target.FamilyName = original.FamilyName;
             target.PhoneNumber = original.PhoneNumber;
             target.MailAddress = original.MailAddress;
-            target.BankAccount = original.BankAccount;
+            target.BankBranchDetails = original.BankBranchDetails;
+            target.BankAccountNumber = original.BankAccountNumber;
             target.CollectionClearance = original.CollectionClearance;
 
 
             return target;
         }
 
-        public static BankAccount Clone(this BankAccount original)
+        public static BankBranch Clone(this BankBranch original)
         {
-            BankAccount target = new BankAccount();
+            BankBranch target = new BankBranch();
             target.BankAccountNumber = original.BankAccountNumber;
             target.BankName = original.BankName;
             target.BranchNumber = original.BranchNumber;
