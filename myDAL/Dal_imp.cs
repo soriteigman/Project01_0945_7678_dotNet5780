@@ -24,7 +24,8 @@ namespace DAL
 
         private Dal_imp() { }
 
-        
+        //----------------------------------------------------------------------------------------------
+
 
         public void AddGuestRequest(GuestRequest gr)
         {

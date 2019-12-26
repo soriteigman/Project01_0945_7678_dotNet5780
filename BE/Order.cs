@@ -14,6 +14,7 @@ namespace BE
         Status status;
         DateTime createDate;
         DateTime orderDate;
+        DateTime sentEmail;
 
         public override string ToString()
         {
@@ -26,5 +27,6 @@ namespace BE
         public DateTime CreateDate { get => createDate; set => createDate = value; }
         public DateTime OrderDate { get => orderDate; set => orderDate = value; }
         public Status Status { get => status; set => status = value; }
+        public DateTime SentEmail { get => sentEmail; set => sentEmail = value; }
     }
 }

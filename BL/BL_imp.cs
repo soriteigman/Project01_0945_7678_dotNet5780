@@ -11,6 +11,22 @@ namespace BL
 {
     public class BL_imp:IBL
     {
+        //Singleton
+        private static BL_imp instance;
+
+        public static BL_imp Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new BL_imp();
+                return instance;
+            }
+        }
+
+        private BL_imp() { }
+        //----------------------------------------------------------------------------------------------
+
         bool DateLengthPermission(GuestRequest gr)//checks if stay is at least one full day long
         {
             DateTime temp = gr.EntryDate.AddDays(1);
@@ -24,6 +40,7 @@ namespace BL
             if(h.CollectionClearance)//checks if there is permission to collect the money
             {
                 o.Status = Status.SentEmail;//changes the status to sent mail
+                o.SentEmail = DateTime.Now;
                 SendEmail(o);//calls the function to send an email
             }
         }
@@ -149,42 +166,99 @@ namespace BL
 
             return (endDate - startDate).Days;
         }
-        IEnumerable<Order> DaysPassedOnOrders(int numOfDays)//returns all orders that were sent a email/ created "numOfDays" ago
+        IEnumerable<Order> DaysPassedOnOrders(int numOfDays, Predicate<GuestRequest> conditions)//returns all orders that were sent a email/ created "numOfDays" ago
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
+
+            var createResult = from ord in orders //creates a list of all orders that fit the condition
+                          where ((Configuration.today-ord.CreateDate).Days>=numOfDays)
+                          select ord;//selects if available in given dates
+
+            var emailResult = from ord in orders //creates a list of all orders that fit the condition
+                         where ((Configuration.today - ord.SentEmail).Days >= numOfDays)
+                         select ord;//selects if available in given dates
+
+            return createResult;// need to fix return based on condition
 
         }
         IEnumerable<GuestRequest> AllRequestsThatMatch(Predicate<GuestRequest> conditions)//returns all requests that fullfill the conditions 
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<GuestRequest> guestRequests = dal_bl.ListOfCustomers();//gets the list of requests
 
+            var results = from request in guestRequests //creates a list of all requests that fit the condition
+                               where (conditions(request))
+                               select request;//selects if condition applies
+         
+            return results;
         }
         int NumOfSent_GR_Orders(GuestRequest gr)//returns the num of orders that were sent for that guest request
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
+            var result = from ord in orders //creates a list of all orders that fit the condition
+                               where ord.GuestRequestKey==gr.GuestRequestKey
+                               select ord;//selects if available in given dates
+
+            return result.Count();
         }
-        int NumOfSent_HU_Orders(HostingUnit hu)//returns the number of orders that were sent or booked for this hosting unit
+        int NumOfSent_HU_Orders(HostingUnit hu, Predicate<Order> conditions)//returns the number of orders that were sent or booked for this hosting unit
+        {//predicate condition is either booked or sent email
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
+
+            var result = from ord in orders //creates a list of all orders that fit the condition
+                         where conditions(ord) && ord.HostingUnitKey==hu.HostingUnitKey
+                         select ord;//selects if available in given dates
+
+            return result.Count();
+        }
+        IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea()//groups the requests by area of choice
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
+            IEnumerable<IGrouping<VacationArea, GuestRequest>> result = from req in requests
+                                                                        group req by req.Area into r1
+                                                                        select r1;
 
+            return result;
         }
-        IEnumerable<GuestRequest> Group_GR_ByArea()//groups the requests by area of choice
+        IEnumerable<IGrouping<int, GuestRequest>> GroupByNumOfGuests()//groups by number of guests
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
+            IEnumerable<IGrouping<int, GuestRequest>> result = from req in requests
+                                                                        group req by (req.Adults+req.Children) into r1
+                                                                        select r1;
 
+            return result;
         }
-        IEnumerable<GuestRequest> GroupByNumOfGuests()//groups by number of guests
+        IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits()//groups by number of hosting units the hosts own
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of requests
 
+            var result = from unit in units
+                         group unit by unit.Owner into g1
+                         select g1;
+            IEnumerable<IGrouping<int, Host>> result1 = from re in result
+                                                        group re.Key by re.Count();
+           
+            return result1;
         }
-        IEnumerable<Host> GroupByNumOfUnits()//groups by number of hosting units the hosts own
+
+        IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea()//groups the units by area of choice
         {
+            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of requests
+            IEnumerable<IGrouping<VacationArea, HostingUnit>> result = from ho in units
+                                                                        group ho by ho.Area into r1
+                                                                        select r1;
 
+            return result;
         }
 
-        IEnumerable<HostingUnit> Group_HU_ByArea()//groups the units by area of choice
-        {
-
-        }
-
-        private class Predicate
-        {
-        }
     }
 }

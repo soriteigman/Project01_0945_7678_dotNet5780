@@ -7,7 +7,7 @@ using BE;
 
 namespace BL
 {
-    interface IBL
+    public interface IBL
     {
         bool DateLengthPermission(GuestRequest gr);//checks if stay is at least one full day long
 
@@ -42,10 +42,9 @@ namespace BL
 
         int NumOfSent_HU_Orders(HostingUnit hu);//returns the number of orders that were sent or booked for this hosting unit
 
-        IEnumerable<GuestRequest> Group_GR_ByArea();//groups the requests by area of choice
-        IEnumerable<GuestRequest> GroupByNumOfGuests();//groups by number of guests
-        IEnumerable<Host> GroupByNumOfUnits();//groups by number of hosting units the hosts own
-
-        IEnumerable<HostingUnit> Group_HU_ByArea();//groups the units by area of choice
+        IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea();//groups the requests by area of choice
+        IEnumerable<IGrouping<int, GuestRequest>> GroupByNumOfGuests();//groups by number of guests
+        IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits();//groups by number of hosting units the hosts own
+        IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea();//groups the units by area of choice
     }
 }
