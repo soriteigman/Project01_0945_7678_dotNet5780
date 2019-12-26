@@ -11,7 +11,7 @@ namespace BL
 {
     public class BL_imp:IBL
     {
-        //Singleton
+        #region Singleton
         private static BL_imp instance;
 
         public static BL_imp Instance
@@ -25,6 +25,7 @@ namespace BL
         }
 
         private BL_imp() { }
+        #endregion
         //----------------------------------------------------------------------------------------------
 
         bool DateLengthPermission(GuestRequest gr)//checks if stay is at least one full day long

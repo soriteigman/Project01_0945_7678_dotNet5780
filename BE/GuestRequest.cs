@@ -22,10 +22,15 @@ namespace BE
         VacationType type;
         int adults;
         int children;
+        bool pet;
+        Choices wiFi;
+        Choices parking;
         Choices pool;
         Choices jacuzzi;
         Choices garden;
         Choices childrensAttractions;
+        Choices fitnessCenter;
+        StarRating stars;
 
         public override string ToString()
         {
@@ -52,6 +57,10 @@ namespace BE
         public Choices Jacuzzi { get => jacuzzi; set => jacuzzi = value; }
         public Choices Garden { get => garden; set => garden = value; }
         public Choices ChildrensAttractions { get => childrensAttractions; set => childrensAttractions = value; }
-
+        public bool Pet { get => pet; set => pet = value; }
+        public Choices FitnessCenter { get => fitnessCenter; set => fitnessCenter = value; }
+        public StarRating Stars { get => stars; set => stars = value; }
+        public Choices WiFi { get => wiFi; set => wiFi = value; }
+        public Choices Parking { get => parking; set => parking = value; }
     }
 }

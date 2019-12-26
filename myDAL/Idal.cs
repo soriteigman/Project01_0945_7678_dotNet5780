@@ -10,30 +10,50 @@ namespace DAL
 
     public interface Idal
     {
+
+        #region GuestRequest
         void AddGuestRequest(GuestRequest gr);
-
         void UpdateGuestRequest(GuestRequest gr);
+        IEnumerable<GuestRequest> ListOfCustomers();
+        GuestRequest searchGRbyID(int key);
+        bool GRexist(int key);
+
+        #endregion
 
 
+        #region HostingUnit
         void AddHostingUnit(HostingUnit hu);
 
         void RemoveHostingUnit(HostingUnit hu);
 
         void UpdateHostingUnit(HostingUnit hu);
 
+        IEnumerable<HostingUnit> ListOfHostingUnits();
+        HostingUnit SearchHUbyID(int key);
+        bool HUexist(int key);
 
+
+        #endregion
+
+
+        #region Order
         void AddOrder(Order o);
 
         void UpdateOrder(Order o); //status update
 
-
-        IEnumerable<HostingUnit> ListOfHostingUnits();
-
-        IEnumerable<GuestRequest> ListOfCustomers();
-
         IEnumerable<Order> ListOfOrders();
 
-        IEnumerable<BankBranch> ListOfBanks(); 
+        Order SearchOrbyID(int key);
+        bool ORexist(int key);
+
+
+        #endregion
+
+
+        #region Bank
+        IEnumerable<BankBranch> ListOfBanks();
+
+        #endregion
 
 
     }

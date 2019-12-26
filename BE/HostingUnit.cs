@@ -17,10 +17,16 @@ namespace BE
         VacationType type;
         int adults;
         int children;
-        Choices pool;
-        Choices jacuzzi;
-        Choices garden;
-        Choices childrensAttractions;
+        bool pet;
+        bool wiFi;
+        bool parking;
+        bool pool;
+        bool jacuzzi;
+        bool garden;
+        bool childrensAttractions;
+        bool fitnessCenter;
+        StarRating stars;
+
 
         public override string ToString()
         {
@@ -36,10 +42,14 @@ namespace BE
         public VacationType Type { get => type; set => type = value; }
         public int Adults { get => adults; set => adults = value; }
         public int Children { get => children; set => children = value; }
-        public Choices Pool { get => pool; set => pool = value; }
-        public Choices Jacuzzi { get => jacuzzi; set => jacuzzi = value; }
-        public Choices Garden { get => garden; set => garden = value; }
-        public Choices ChildrensAttractions { get => childrensAttractions; set => childrensAttractions = value; }
-
+        public bool Pet { get => pet; set => pet = value; }
+        public bool WiFi { get => wiFi; set => wiFi = value; }
+        public bool Parking { get => parking; set => parking = value; }
+        public bool Pool { get => pool; set => pool = value; }
+        public bool Jacuzzi { get => jacuzzi; set => jacuzzi = value; }
+        public bool Garden { get => garden; set => garden = value; }
+        public bool ChildrensAttractions { get => childrensAttractions; set => childrensAttractions = value; }
+        public bool FitnessCenter { get => fitnessCenter; set => fitnessCenter = value; }
+        public StarRating Stars { get => stars; set => stars = value; }
     }
 }

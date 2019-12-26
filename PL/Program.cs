@@ -10,8 +10,7 @@ namespace PL
     {
         static void Main(string[] args)
         {
-            BE.mybe be = new BE.mybe();
-
+            
         }
     }
 }

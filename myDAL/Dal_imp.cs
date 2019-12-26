@@ -9,7 +9,7 @@ namespace DAL
 {
    public class Dal_imp:Idal
    {
-        //Singleton
+        #region Singleton
         private static Dal_imp instance;
 
         public static Dal_imp Instance
@@ -23,15 +23,15 @@ namespace DAL
         }
 
         private Dal_imp() { }
+        #endregion
 
         //----------------------------------------------------------------------------------------------
-
-
+        #region GuestRequest
         public void AddGuestRequest(GuestRequest gr)
         {
             try
             {
-                if (!DataSource.requestCollection.Any(g => g.GuestRequestKey == gr.GuestRequestKey))
+                if (GRexist(gr.GuestRequestKey))
                     throw new DuplicateWaitObjectException("request already exists");
                 else DataSource.requestCollection.Add(gr.Clone());
             }
@@ -45,29 +45,51 @@ namespace DAL
         {
             try
             {
-
-
-                var request = from guest in DataSource.requestCollection
-                              where guest.GuestRequestKey == gr.GuestRequestKey
-                              select guest;
-
-                if (request != null)
+                GuestRequest request;
+                if (GRexist(gr.GuestRequestKey))
                 {
-                    DataSource.requestCollection.Remove(request.First());
+                    request=searchGRbyID(gr.GuestRequestKey).Clone();
+                    DataSource.requestCollection.Remove(request);
                 }
-                else throw new KeyNotFoundException("request to update doesn't exist");
+                DataSource.requestCollection.Add(gr); 
             }
             catch (KeyNotFoundException a)
             {
                 throw a;//deal with this
             }
         }
+    
+        public GuestRequest searchGRbyID(int key)
+        {
+            var request = from req in DataSource.requestCollection
+                          where req.GuestRequestKey == key
+                          select req;
+            return request.FirstOrDefault();
+        }
 
+        public bool GRexist(int key)
+        {
+            var request = from req in DataSource.requestCollection
+                          where req.GuestRequestKey == key
+                          select req;
+            return request.FirstOrDefault() != null;
+        }
+
+
+        public IEnumerable<GuestRequest> ListOfCustomers()
+        {
+            return from guestRequest in DataSource.requestCollection
+                   select guestRequest.Clone();
+        }
+        #endregion
+
+
+        #region HostingUnit
         public void AddHostingUnit(HostingUnit hu)
         {
             try
             {
-                if (!DataSource.HostingUnitCollection.Any(h => h.HostingUnitKey == hu.HostingUnitKey))
+                if (HUexist(hu.HostingUnitKey))
                     throw new DuplicateWaitObjectException("unit already exists");
                 else DataSource.HostingUnitCollection.Add(hu);
             }
@@ -79,13 +101,9 @@ namespace DAL
 
         public void RemoveHostingUnit(HostingUnit hu)
         {
-            var Unit = from unit in DataSource.HostingUnitCollection
-                          where unit.HostingUnitKey == hu.HostingUnitKey
-                          select unit;
-
-            if (Unit != null)
+            if (HUexist(hu.HostingUnitKey))
                 DataSource.HostingUnitCollection.Remove(hu);
-           
+
             else throw new KeyNotFoundException("request to remove doesn't exist");
 
         }
@@ -94,17 +112,13 @@ namespace DAL
         {
             try
             {
-
-
-                var Unit = from unit in DataSource.HostingUnitCollection
-                              where unit.HostingUnitKey == hu.HostingUnitKey
-                              select unit;
-
-                if (Unit != null)
+                HostingUnit unit;
+                if (HUexist(hu.HostingUnitKey))
                 {
-                    DataSource.HostingUnitCollection.Remove(Unit.First());
+                    unit = SearchHUbyID(hu.HostingUnitKey).Clone();
+                    DataSource.HostingUnitCollection.Remove(unit);
                 }
-                else throw new KeyNotFoundException("HostingUnit to update doesn't exist");
+                DataSource.HostingUnitCollection.Add(hu);
             }
             catch (KeyNotFoundException a)
             {
@@ -112,13 +126,40 @@ namespace DAL
             }
         }
 
+        public IEnumerable<HostingUnit> ListOfHostingUnits()
+        {
+            return from hostingUnit in DataSource.HostingUnitCollection
+                   select hostingUnit.Clone();
+
+        }
+
+        public HostingUnit SearchHUbyID(int key)
+        {
+            var units = from unit in DataSource.HostingUnitCollection
+                          where unit.HostingUnitKey == key
+                          select unit;
+            return units.FirstOrDefault();
+        }
+
+        public bool HUexist(int key)
+        {
+            var units = from unit in DataSource.HostingUnitCollection
+                        where unit.HostingUnitKey == key
+                        select unit;
+            return units.FirstOrDefault()!= null;
+        }
+
+        #endregion
+
+
+        #region Order
 
         public void AddOrder(Order o)
         {
             try
             {
 
-                if (!DataSource.OrderCollection.Any(or => or.OrderKey == o.OrderKey))
+                if (ORexist(o.OrderKey))
                     throw new DuplicateWaitObjectException("order already exists");
                 else DataSource.OrderCollection.Add(o);
             }
@@ -132,17 +173,13 @@ namespace DAL
         {
             try
             {
-
-
-                var Ord = from ord in DataSource.OrderCollection
-                              where ord.OrderKey == o.OrderKey
-                              select ord;
-
-                if (Ord != null)
+                Order ord;
+                if (ORexist(o.OrderKey))
                 {
-                    DataSource.OrderCollection.Remove(Ord.First());
+                    ord = SearchOrbyID(o.OrderKey).Clone();
+                    DataSource.OrderCollection.Remove(ord);
                 }
-                else throw new KeyNotFoundException("Order to update doesn't exist");
+                DataSource.OrderCollection.Add(o);
             }
             catch (KeyNotFoundException a)
             {
@@ -150,32 +187,36 @@ namespace DAL
             }
         }
 
-
-        public IEnumerable <HostingUnit> ListOfHostingUnits()
-        {
-            return from hostingUnit in DataSource.HostingUnitCollection
-                   select hostingUnit.Clone();
-
-        }
- 
-
-        public IEnumerable<GuestRequest> ListOfCustomers()
-        {
-            return from guestRequest in DataSource.requestCollection
-                   select guestRequest.Clone();
-        }
-
         public IEnumerable<Order> ListOfOrders()
         {
             return from order in DataSource.OrderCollection
                    select order.Clone();
         }
+        public Order SearchOrbyID(int key)
+        {
+            var orders = from order in DataSource.OrderCollection
+                        where order.OrderKey == key
+                        select order;
+            return orders.FirstOrDefault();
+        }
+        public bool ORexist(int key)
+        {
+            var orders = from order in DataSource.OrderCollection
+                         where order.OrderKey == key
+                         select order;
+            return orders.FirstOrDefault() != null;
+        }
 
+        #endregion
+
+
+        #region Bank
         public IEnumerable<BankBranch> ListOfBanks()
         {
             return from bankAccount in DataSource.BankAccountCollection
                    select bankAccount.Clone();
         }
+        #endregion
 
     }
 }
