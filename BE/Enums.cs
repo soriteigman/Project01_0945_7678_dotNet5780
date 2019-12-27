@@ -10,7 +10,7 @@ namespace BE
 
         public enum VacationArea { North, South, East, West, Center };
 
-        public enum Status { SentEmail, NoAnswer, NotAddressedYet, Closed, Active };
+        public enum Status { SentEmail, NoAnswer, NotAddressedYet, Closed, Active , Booked};
 
         public enum Choices { No, Yes , DontCare};
 

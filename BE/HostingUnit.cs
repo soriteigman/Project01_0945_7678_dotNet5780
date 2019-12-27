@@ -15,8 +15,7 @@ namespace BE
         VacationArea area;
         VacationSubArea subArea;
         VacationType type;
-        int adults;
-        int children;
+        int beds;
         bool pet;
         bool wiFi;
         bool parking;
@@ -40,8 +39,6 @@ namespace BE
         public VacationArea Area { get => area; set => area = value; }
         public VacationSubArea SubArea { get => subArea; set => subArea = value; }
         public VacationType Type { get => type; set => type = value; }
-        public int Adults { get => adults; set => adults = value; }
-        public int Children { get => children; set => children = value; }
         public bool Pet { get => pet; set => pet = value; }
         public bool WiFi { get => wiFi; set => wiFi = value; }
         public bool Parking { get => parking; set => parking = value; }
@@ -51,5 +48,6 @@ namespace BE
         public bool ChildrensAttractions { get => childrensAttractions; set => childrensAttractions = value; }
         public bool FitnessCenter { get => fitnessCenter; set => fitnessCenter = value; }
         public StarRating Stars { get => stars; set => stars = value; }
+        public int Beds { get => beds; set => beds = value; }
     }
 }
