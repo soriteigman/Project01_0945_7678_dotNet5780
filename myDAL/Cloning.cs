@@ -29,6 +29,12 @@ namespace DAL
             target.Jacuzzi = original.Jacuzzi;
             target.Garden = original.Garden;
             target.ChildrensAttractions = original.ChildrensAttractions;
+            target.Pet = original.Pet;
+            target.FitnessCenter = original.FitnessCenter;
+            target.Parking = original.Parking;
+            target.Stars = original.Stars;
+            target.WiFi = original.WiFi;
+
 
             return target;
         }
@@ -52,7 +58,7 @@ namespace DAL
             target.OrderKey = original.OrderKey;
             target.Status = original.Status;
             target.CreateDate = original.CreateDate;
-            target.OrderDate = original.OrderDate;
+            target.SentEmail = original.SentEmail;
 
             return target;
         }
@@ -76,7 +82,7 @@ namespace DAL
         public static BankBranch Clone(this BankBranch original)
         {
             BankBranch target = new BankBranch();
-            target.BankAccountNumber = original.BankAccountNumber;
+            target.BankNumber = original.BankNumber;
             target.BankName = original.BankName;
             target.BranchNumber = original.BranchNumber;
             target.BranchAddress = original.BranchAddress;

@@ -8,7 +8,7 @@ using BE;
 namespace DAL
 {
 
-    public interface Idal
+    public interface IDal
     {
 
         #region GuestRequest

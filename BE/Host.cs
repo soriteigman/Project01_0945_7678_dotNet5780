@@ -19,7 +19,8 @@ namespace BE
 
         public override string ToString()
         {
-            return "Hiiiiiiiiiii";
+            return ("Private Name: "+PrivateName+"  Family Name: "+FamilyName+
+                "\nPhone Number: "+PhoneNumber+"\nEmail Address: "+MailAddress);
         }
 
         public int HostKey { get => hostKey; set => hostKey = value; }

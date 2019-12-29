@@ -29,7 +29,8 @@ namespace BE
 
         public override string ToString()
         {
-            return "Hiiiiiiiiiii";
+            return ("Hosting Unit Key: " + HostingUnitKey + "\nOwner: "+Owner+"\nHosting Unit Name: "+HostingUnitName+
+                "\nArea: "+Area+"    SubArea: "+SubArea+"\nType: "+Type);
         }
 
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }

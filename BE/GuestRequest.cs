@@ -34,7 +34,9 @@ namespace BE
 
         public override string ToString()
         {
-            return "Hiiiiiiiiiii";
+            return("private name: "+ PrivateName+"\nfamily name: "+FamilyName+"\nemail address: "+MailAddress+
+                "\nentry date: "+EntryDate.ToString("dd/MM/yyyy")+"    release date: "+ReleaseDate.ToString("dd/MM/yyyy") + "\ntype: "+Type+"\narea: "+Area+"   subArea: "+SubArea+
+                "\nadults: "+Adults+"   children: "+Children+"\npet: "+Pet+"\netc...");
         }
 
        

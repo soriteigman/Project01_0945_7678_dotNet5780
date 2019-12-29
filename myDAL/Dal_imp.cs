@@ -7,7 +7,7 @@ using BE;
 
 namespace DAL
 {
-   public class Dal_imp:Idal
+   public class Dal_imp:IDal
    {
         #region Singleton
         private static Dal_imp instance;
@@ -31,6 +31,7 @@ namespace DAL
         {
             try
             {
+                gr.GuestRequestKey = Configuration.GuestRequest_s++;
                 if (GRexist(gr.GuestRequestKey))
                     throw new DuplicateWaitObjectException("request already exists");
                 else DataSource.requestCollection.Add(gr.Clone());
@@ -89,6 +90,7 @@ namespace DAL
         {
             try
             {
+                hu.HostingUnitKey = Configuration.HostingUnitKey_s++;
                 if (HUexist(hu.HostingUnitKey))
                     throw new DuplicateWaitObjectException("unit already exists");
                 else DataSource.HostingUnitCollection.Add(hu);
@@ -158,10 +160,9 @@ namespace DAL
         {
             try
             {
-
                 if (ORexist(o.OrderKey))
                     throw new DuplicateWaitObjectException("order already exists");
-                else DataSource.OrderCollection.Add(o);
+                else DataSource.OrderCollection.Add(o.Clone());
             }
             catch (DuplicateWaitObjectException a)
             {

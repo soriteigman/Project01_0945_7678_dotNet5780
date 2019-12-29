@@ -41,9 +41,9 @@ namespace DAL
 
         internal static List<Order> OrderCollection = new List<Order>()
         {
-            new Order(){HostingUnitKey=12345678,GuestRequestKey=12345678,OrderKey=12345678,Status=Status.Active, CreateDate=new DateTime(1963, 10, 04), OrderDate=new DateTime(2019, 10, 10), SentEmail=default(DateTime)},
-            new Order(){HostingUnitKey=98735478,GuestRequestKey=63749587,OrderKey=54637382,Status=Status.Closed, CreateDate=new DateTime(2000, 04, 16), OrderDate=new DateTime(2010, 05, 01), SentEmail=new DateTime(2019, 04, 25)},
-            new Order(){HostingUnitKey=65748493,GuestRequestKey=65740912,OrderKey=65019468,Status=Status.NoAnswer, CreateDate=new DateTime(2019, 11, 11), OrderDate=new DateTime(2019, 11, 11), SentEmail=default(DateTime)}
+            new Order(){HostingUnitKey=12345678,GuestRequestKey=12345678,OrderKey=12345678,Status=Status.Active, CreateDate=new DateTime(1963, 10, 04), SentEmail=default(DateTime)},
+            new Order(){HostingUnitKey=98735478,GuestRequestKey=63749587,OrderKey=54637382,Status=Status.Closed, CreateDate=new DateTime(2000, 04, 16),  SentEmail=new DateTime(2019, 04, 25)},
+            new Order(){HostingUnitKey=65748493,GuestRequestKey=65740912,OrderKey=65019468,Status=Status.NoAnswer, CreateDate=new DateTime(2019, 11, 11),  SentEmail=default(DateTime)}
         };
     }
 }

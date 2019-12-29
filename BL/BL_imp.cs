@@ -11,6 +11,212 @@ namespace BL
 {
     public class BL_imp:IBL
     {
+       public void addreq(GuestRequest gr)
+        {
+            try
+            {
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+
+                DateTime today = Configuration.today;
+                today = today.AddMonths(11);
+                if (today < gr.EntryDate)
+                    { }//throw
+                if (!DateLengthPermission(gr))
+                    { }//throw new 
+                if (Configuration.today > gr.EntryDate)
+                    { }  //throw
+
+                dal_bl.AddGuestRequest(gr);
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+        }
+
+        public Predicate<GuestRequest> BuildPredicate(HostingUnit hu)//based on a hosting unit builds a predicate to filter all guest requests
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<GuestRequest> guestRequests = dal_bl.ListOfCustomers();//gets the list of requests
+            Predicate<GuestRequest> pred=default(Predicate<GuestRequest>);
+            bool HasPool(GuestRequest gr) { return gr.Pool == Choices.Yes || gr.Pool == Choices.DontCare; }
+            bool NoPool(GuestRequest gr) { return gr.Pool == Choices.No || gr.Pool == Choices.DontCare; }
+            bool HasJacuzzi(GuestRequest gr) { return gr.Jacuzzi == Choices.Yes || gr.Jacuzzi == Choices.DontCare; }
+            bool NoJacuzzi(GuestRequest gr) { return gr.Jacuzzi == Choices.No || gr.Jacuzzi == Choices.DontCare; }
+            bool HasGarden(GuestRequest gr) { return gr.Garden == Choices.Yes || gr.Garden == Choices.DontCare; }
+            bool NoGarden(GuestRequest gr) { return gr.Garden == Choices.No || gr.Garden == Choices.DontCare; }
+            bool HasParking(GuestRequest gr) { return gr.Parking == Choices.Yes || gr.Parking == Choices.DontCare; }
+            bool NoParking(GuestRequest gr) { return gr.Parking == Choices.No || gr.Parking == Choices.DontCare; }
+            bool HasPet(GuestRequest gr) { return gr.Pet; }
+            bool NoPet(GuestRequest gr) { return !gr.Pet; }
+            bool HasWiFi(GuestRequest gr) { return gr.WiFi == Choices.Yes || gr.WiFi == Choices.DontCare; }
+            bool NoWiFi(GuestRequest gr) { return gr.WiFi == Choices.No || gr.WiFi == Choices.DontCare; }
+            bool HasChildrensAttractions(GuestRequest gr) { return gr.ChildrensAttractions == Choices.Yes || gr.ChildrensAttractions == Choices.DontCare; }
+            bool NoChildrensAttractions(GuestRequest gr) { return gr.ChildrensAttractions == Choices.No || gr.ChildrensAttractions == Choices.DontCare; }
+            bool HasFitnessCenter(GuestRequest gr) { return gr.FitnessCenter == Choices.Yes || gr.FitnessCenter == Choices.DontCare; }
+            bool NoFitnessCenter(GuestRequest gr) { return gr.FitnessCenter == Choices.No || gr.FitnessCenter == Choices.DontCare; }
+
+            bool VacaArea(GuestRequest gr) { return gr.Area == hu.Area; }
+            bool VacaSubArea(GuestRequest gr) { return gr.SubArea == hu.SubArea; }
+            bool VacaType(GuestRequest gr) { return gr.Pool == Choices.Yes || gr.Pool == Choices.DontCare; }
+            bool NumBeds(GuestRequest gr) { return hu.Beds==(gr.Children+gr.Adults); }
+            bool StarRating(GuestRequest gr) { return gr.Stars==hu.Stars; }
+
+
+
+            if (hu.Pool)
+                pred += HasPool;
+            else pred += NoPool;
+            if (hu.Jacuzzi)
+                pred += HasJacuzzi;
+            else pred += NoJacuzzi;
+            if (hu.Garden)
+                pred += HasGarden;
+            else pred += NoGarden;
+            if (hu.Parking)
+                pred += HasParking;
+            else pred += NoParking;
+            if (hu.Pet)
+                pred += HasPet;
+            else pred += NoPet;
+            if (hu.WiFi)
+                pred += HasWiFi;
+            else pred += NoWiFi;
+            if (hu.ChildrensAttractions)
+                pred += HasChildrensAttractions;
+            else pred += NoChildrensAttractions;
+            if (hu.FitnessCenter)
+                pred += HasFitnessCenter;
+            else pred += NoFitnessCenter;
+
+            pred += VacaArea;
+            pred += VacaSubArea;
+            pred += VacaType;
+            pred += NumBeds;
+            pred += StarRating;
+
+            return pred;
+        }
+
+        public void Updategr(GuestRequest gr)
+        {
+            try
+            {
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+
+                if (gr.Status == Status.Closed)
+                    //throw
+                dal_bl.UpdateGuestRequest(gr);
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+        }
+
+
+        public Order CreateOrder(int HUkey, int GRkey)
+        {
+            Order ord = new Order
+            {
+                GuestRequestKey = GRkey,
+                HostingUnitKey = HUkey,
+                CreateDate = Configuration.today,
+                Status = Status.Active
+            };
+            return ord;
+        }
+        public void AddHostingUnit(HostingUnit hu)
+        {
+            try
+            {
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+                dal_bl.AddHostingUnit(hu);
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+
+        }
+
+        public void RemoveHostingUnit(HostingUnit hu)
+        {
+            try
+            {
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+                if (!RemoveUnitCheck(hu))
+                    //throw
+
+                dal_bl.RemoveHostingUnit(hu);
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+        }
+
+        public void UpdateHostingUnit(HostingUnit hu)
+        {
+            try
+            {
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+                dal_bl.UpdateHostingUnit(hu);
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+        }
+
+        public void AddOrder(Order o)
+        {
+            try
+            {
+                o.OrderKey = Configuration.OrderKey_s++;
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+                if (!AvailabilityCheck(dal_bl.SearchHUbyID(o.HostingUnitKey), dal_bl.searchGRbyID(o.GuestRequestKey)))
+                { } //throw
+                if (!dal_bl.HUexist(o.HostingUnitKey))
+                { }//throw hu doesnt exist
+                if (!dal_bl.GRexist(o.GuestRequestKey))
+                { } //throw gr doesnt exist
+                 dal_bl.AddOrder(o.Clone());
+                SendEmail(o.Clone());
+                o.Status = Status.SentEmail;
+                UpdateOrder(o.Clone());
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+        }
+
+        public void UpdateOrder(Order newO) //status update
+        {
+            try
+            {
+                IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+                Order oldO = dal_bl.SearchOrbyID(newO.OrderKey);
+                if (oldO.Status == Status.Closed)
+                     { }//throw cannot update
+                int commission = CalculateComission(newO);
+                if (newO.Status == Status.Closed)
+                {
+                    ChangeRequestStatus(newO);
+                    UpdateDiary(newO);
+                }
+                if (newO.Status == Status.SentEmail)
+                    SendEmail(newO);
+
+                dal_bl.UpdateOrder(newO);
+            }
+            catch (Exception a)
+            {
+                throw a;
+            }
+        }
+
         #region Singleton
         private static BL_imp instance;
 
@@ -28,7 +234,7 @@ namespace BL
         #endregion
         //----------------------------------------------------------------------------------------------
         #region i think were done 
-        bool DateLengthPermission(GuestRequest gr)//checks if stay is at least one full day long
+        public bool DateLengthPermission(GuestRequest gr)//checks if stay is at least one full day long
         {
             DateTime temp = gr.EntryDate.AddDays(1);
             if (gr.ReleaseDate >= temp)//if theres at least one day difference between the start and end dates
@@ -36,7 +242,7 @@ namespace BL
             return false;
         }
 
-        void PermissionToCharge(Host h, Order o)//checks if client gave permission for payment
+        public void PermissionToCharge(Host h, Order o)//checks if client gave permission for payment
         {
             if (h.CollectionClearance)//checks if there is permission to collect the money
             {
@@ -46,7 +252,7 @@ namespace BL
             }
         }
 
-        bool AvailabilityCheck(HostingUnit hu, GuestRequest gr)//checks if requested dates are available
+        public bool AvailabilityCheck(HostingUnit hu, GuestRequest gr)//checks if requested dates are available
         {
             DateTime start = gr.EntryDate;
             DateTime end = gr.ReleaseDate.AddDays(-1);
@@ -60,30 +266,30 @@ namespace BL
             return true;
         }
 
-        GuestRequest FindRequest(int requestKey)//finds the guest request based on the key
-        {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
-            return dal_bl.searchGRbyID(requestKey);
-        }
 
-        int CalculateDurationOfStay(GuestRequest gr)//returns duration of stay
+        public int CalculateDurationOfStay(GuestRequest gr)//returns duration of stay
         {
             return (gr.ReleaseDate - gr.EntryDate).Days;
         }
 
-        int CalculateComission(Order o)//calculates comission
+        public int CalculateComission(Order o)//calculates comission
         {
-            GuestRequest my_req = FindRequest(o.GuestRequestKey);//finds the correct guest request
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+
+            GuestRequest my_req = dal_bl.searchGRbyID(o.GuestRequestKey);//finds the correct guest request
             int duration = CalculateDurationOfStay(my_req);//calculates the duration of stay
 
             return duration * Configuration.commission;//returns TOTAL commission
         }
 
-        void UpdateDiary(HostingUnit hu, Order o)//after the status changes to closed, mark the days in the units diary
+        public void UpdateDiary( Order o)//after the status changes to closed, mark the days in the units diary
         {
-            GuestRequest gr = FindRequest(o.GuestRequestKey);
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            HostingUnit hu = dal_bl.SearchHUbyID(o.HostingUnitKey);
+            GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey);
             DateTime start = gr.EntryDate;
             DateTime end = gr.ReleaseDate;
+
             while (start != end)//updates the dates in the diary
             {
                 hu.Diary[start.Month - 1, start.Day - 1] = true;
@@ -91,10 +297,11 @@ namespace BL
             }
         }
 
-        void ChangeRequestStatus(Order o, GuestRequest gr)//after order status changes to closed, also close to request status
+        public void ChangeRequestStatus(Order o)//after order status changes to closed, also close the request status
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
+            GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey).Clone();
 
             gr.Status = Status.Closed;
             foreach (Order item in orders)
@@ -105,9 +312,9 @@ namespace BL
 
         }
 
-        bool RemoveUnitCheck(HostingUnit hu)//checks to see if there are any active reservations for that unit before removing it
+        public bool RemoveUnitCheck(HostingUnit hu)//checks to see if there are any active reservations for that unit before removing it
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of guest requests
 
             if (orders.Any(x => x.HostingUnitKey == hu.HostingUnitKey && x.Status != Status.Closed))//checks if any orders connected to the hosting unit are not closed
@@ -115,10 +322,10 @@ namespace BL
             return true;
         }
 
-        IEnumerable<HostingUnit> AvailableUnits(DateTime startDate, int numOfDays)//returns all available hosting units for the dates requested
+        public IEnumerable<HostingUnit> AvailableUnits(DateTime startDate, int numOfDays)//returns all available hosting units for the dates requested
         {
             DateTime end = startDate.AddDays(numOfDays);
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<HostingUnit> hostingUnits = dal_bl.ListOfHostingUnits();//gets the list of hosting units
             GuestRequest temp = new GuestRequest() { EntryDate = startDate, ReleaseDate = end };
             var request = from unit in hostingUnits //creates a list of all available units
@@ -127,7 +334,7 @@ namespace BL
             return request;
         }
 
-        int NumOfDaysInBetweeen(DateTime startDate, DateTime endDate = default(DateTime))//remember if the end date is null change it to Configuration.today
+        public int NumOfDaysInBetweeen(DateTime startDate, DateTime endDate = default(DateTime))//remember if the end date is null change it to Configuration.today
         {
             if (endDate == default(DateTime))//if there was no end date given, use today as an end date
                 endDate = Configuration.today;
@@ -135,13 +342,13 @@ namespace BL
             return (endDate - startDate).Days;
         }
 
-        IEnumerable<Order> DaysPassedOnOrders(int numOfDays, Predicate<Order> conditions)//returns all orders that were sent a email/ created "numOfDays" ago
+        public IEnumerable<Order> DaysPassedOnOrders(int numOfDays, Predicate<Order> conditions)//returns all orders that were sent a email/ created "numOfDays" ago
         {
             //(Configuration.today-ord.CreateDate).Days>=numOfDays
             //(Configuration.today - ord.SentEmail).Days >= numOfDays
 
 
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
             var createResult = from ord in orders //creates a list of all orders that fit the condition
@@ -152,21 +359,32 @@ namespace BL
 
         }
 
-        IEnumerable<GuestRequest> AllRequestsThatMatch(Predicate<GuestRequest> conditions)//returns all requests that fullfill the conditions 
+        public IEnumerable<GuestRequest> AllRequestsThatMatch(Predicate<GuestRequest> conditions)//returns all requests that fullfill the conditions 
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<GuestRequest> guestRequests = dal_bl.ListOfCustomers();//gets the list of requests
 
-            var results = from request in guestRequests //creates a list of all requests that fit the condition
-                          where (conditions(request))
-                          select request;//selects if condition applies
+            List<GuestRequest> result = new List<GuestRequest>();
 
-            return results;
+            bool temp=true;
+            foreach(GuestRequest req in guestRequests)
+            {
+                foreach (Predicate<GuestRequest> item in conditions.GetInvocationList())
+                {
+                    if(!item(req))
+                         temp=false;
+                }
+                if (temp)
+                    result.Add(req);
+                temp = true;
+                    
+            }
+            return (IEnumerable<GuestRequest>)result;
         }
-
-        int NumOfSent_GR_Orders(GuestRequest gr)//returns the num of orders that were sent for that guest request
+        
+        public int NumOfSent_GR_Orders(GuestRequest gr)//returns the num of orders that were sent for that guest request
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
             var result = from ord in orders //creates a list of all orders that fit the condition
@@ -176,14 +394,14 @@ namespace BL
             return result.Count();
         }
 
-        int NumOfSent_HU_Orders(HostingUnit hu, Predicate<Order> conditions)//returns the number of orders that were sent or booked for this hosting unit
+        public int NumOfSent_HU_Orders(HostingUnit hu, Predicate<Order> conditions)//returns the number of orders that were sent or booked for this hosting unit
         {
             //predicate condition is either booked or sent email
             //ord.Status==Status.SentEmail
             //ord.Status==Status.Booked
 
 
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
             var result = from ord in orders //creates a list of all orders that fit the condition
@@ -198,9 +416,9 @@ namespace BL
 
 
         #region grouping
-        IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea()//groups the requests by area of choice
+        public IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea()//groups the requests by area of choice
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
             IEnumerable<IGrouping<VacationArea, GuestRequest>> result = from req in requests
                                                                         group req by req.Area into r1
@@ -208,9 +426,9 @@ namespace BL
 
             return result;
         }
-        IEnumerable<IGrouping<int, GuestRequest>> GroupByNumOfGuests()//groups by number of guests
+        public IEnumerable<IGrouping<int, GuestRequest>> GroupByNumOfGuests()//groups by number of guests
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
             IEnumerable<IGrouping<int, GuestRequest>> result = from req in requests
                                                                group req by (req.Adults + req.Children) into r1
@@ -218,9 +436,9 @@ namespace BL
 
             return result;
         }
-        IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits()//groups by number of hosting units the hosts own
+        public IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits()//groups by number of hosting units the hosts own
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of requests
 
             var result = from unit in units
@@ -231,9 +449,9 @@ namespace BL
 
             return result1;
         }
-        IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea()//groups the units by area of choice
+        public IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea()//groups the units by area of choice
         {
-            Idal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of requests
             IEnumerable<IGrouping<VacationArea, HostingUnit>> result = from ho in units
                                                                        group ho by ho.Area into r1
@@ -244,47 +462,39 @@ namespace BL
         #endregion
 
         #region need work
-        void FinalStatusChange(Order o)//after order status changes to closed cannot make further changes to the status
+
+        //public bool ChangeCollectionClearance(Host h)//?????
+        //{
+
+        //}
+        public void SendEmail(Order o)//sends email when order status changes to "sent mail"
         {
-            // readonly
-            // o.Status
-        }
+            Console.WriteLine("email was sent, catch it if u can!!!!");
 
-        bool ChangeCollectionClearance(Host h)//?????
-        {
+            //MailMessage mail = new MailMessage();
+            //mail.To.Add("toEmailAddress");
+            //mail.From = new MailAddress("fromEmailAddress");
+            //mail.Subject = "mailSubject";
+            //mail.Body = "mailBody";
+            //mail.IsBodyHtml = true;
+            //SmtpClient smtp = new SmtpClient();
+            //smtp.Host = "smtp.gmail.com";
 
-        }
-        void SendEmail(Order o)//sends email when order status changes to "sent mail"
-        {
-
-            MailMessage mail = new MailMessage();
-            mail.To.Add("toEmailAddress");
-            mail.From = new MailAddress("fromEmailAddress");
-            mail.Subject = "mailSubject";
-            mail.Body = "mailBody";
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-
-            smtp.Credentials = new System.Net.NetworkCredential("myGmailEmailAddress@gmail.com", "myGmailPassword");
-            smtp.EnableSsl = true;
-            try
-            {
-                smtp.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                // txtMessage.Text = ex.ToString();
-            }
+            //smtp.Credentials = new System.Net.NetworkCredential("myGmailEmailAddress@gmail.com", "myGmailPassword");
+            //smtp.EnableSsl = true;
+            //try
+            //{
+            //    smtp.Send(mail);
+            //}
+            //catch (Exception ex)
+            //{
+            //    // txtMessage.Text = ex.ToString();
+            //}
         }
 
 
         #endregion
 
-        #region dal imp
-        
-        
-        #endregion
 
 
     }
