@@ -12,6 +12,42 @@ namespace PL
     {
         static void Main(string[] args)
         {
+            Host sori = new Host
+            {
+                BankAccountNumber = 12345,
+                BankBranchDetails = new BankBranch
+                {
+                    BankName = "pagi",
+                    BankNumber = 12345,
+                    BranchAddress = "kanfei",
+                    BranchCity = "harnof",
+                    BranchNumber = 455
+                },
+                CollectionClearance = false,
+                FamilyName = "teigman",
+                HostKey = 54257570,
+                MailAddress = "soriteigman@gmail.com",
+                PhoneNumber = 0583215876,
+                PrivateName = "hello"
+            };
+            Host esti = new Host
+            {
+                BankAccountNumber = 12345,
+                BankBranchDetails = new BankBranch
+                {
+                    BankName = "pagi",
+                    BankNumber = 12345,
+                    BranchAddress = "arielli",
+                    BranchCity = "beitar",
+                    BranchNumber = 992
+                },
+                CollectionClearance = false,
+                FamilyName = "burack",
+                HostKey = 315320967,
+                MailAddress = "stburack@gmail.com",
+                PhoneNumber = 0537208407,
+                PrivateName = "esther"
+            };
             IBL ibl = FactoryBL.getBL();
             GuestRequest gr = new GuestRequest
             {
@@ -41,8 +77,8 @@ namespace PL
             GuestRequest gr1 = new GuestRequest
             {
                 //GuestRequestKey = Configuration.GuestRequest_s++,
-                PrivateName = "esti",
-                FamilyName = "burack",
+                PrivateName = "wanted",
+                FamilyName = "dead or alive",
                 RegistrationDate = Configuration.today,
                 EntryDate = new DateTime(2019, 12, 31),
                 ReleaseDate = new DateTime(2020, 01, 05),
@@ -52,7 +88,7 @@ namespace PL
                 Children = 3,
                 Pet = false,
                 Area = VacationArea.East,
-                SubArea = VacationSubArea.BatYam,
+                SubArea = VacationSubArea.Herzliya,
                 ChildrensAttractions = Choices.Yes,
                 FitnessCenter = Choices.DontCare,
                 Garden = Choices.DontCare,
@@ -63,29 +99,54 @@ namespace PL
                 Status = Status.Active,
                 WiFi = Choices.Yes
             };
+            GuestRequest gr2 = new GuestRequest
+            {
+                PrivateName = "sori",
+                FamilyName = "teigman",
+                RegistrationDate = Configuration.today,
+                EntryDate = new DateTime(2020, 01, 05),
+                ReleaseDate = new DateTime(2020, 01, 10),
+                MailAddress = "soriteigman@gmail.com",
+                Type = VacationType.BeachHouse,
+                Adults = 2,
+                Children = 1,
+                Pet = false,
+                Area = VacationArea.West,
+                SubArea = VacationSubArea.Tiberias,
+                ChildrensAttractions = Choices.No,
+                FitnessCenter = Choices.Yes,
+                Garden = Choices.No,
+                Jacuzzi = Choices.Yes,
+                Parking = Choices.Yes,
+                Pool = Choices.Yes,
+                Stars = StarRating.five_star,
+                WiFi = Choices.Yes
+            };
 
+
+            HostingUnit hu2 = new HostingUnit
+            {
+                HostingUnitName = "sleep",
+                Owner = esti,
+                Pet = false,
+                Area = VacationArea.West,
+                SubArea = VacationSubArea.Tiberias,
+                ChildrensAttractions = false,
+                FitnessCenter = true,
+                Garden = false,
+                Jacuzzi = true,
+                Parking = true,
+                Pool = true,
+                Stars = StarRating.five_star,
+                WiFi = true,
+                Beds = 3,
+                Type = VacationType.BeachHouse
+            };
             HostingUnit hu = new HostingUnit
             {
                 //HostingUnitKey = Configuration.HostingUnitKey_s++,
                 HostingUnitName = "Fanta Sea",
-                Owner = new Host
-                {
-                    BankAccountNumber = 12345,
-                    BankBranchDetails = new BankBranch
-                    {
-                        BankName = "pag",
-                        BankNumber = 12345,
-                        BranchAddress = "gda",
-                        BranchCity = "hhu",
-                        BranchNumber = 2345
-                    },
-                    CollectionClearance = false,
-                    FamilyName = "hjfyjf",
-                    HostKey = 54257570,
-                    MailAddress = "mail@mail.com",
-                    PhoneNumber = 8765432,
-                    PrivateName = "hello"
-                },
+                Owner = sori,
                 Pet = false,
                 Area = VacationArea.East,
                 SubArea = VacationSubArea.Netanya,
@@ -100,12 +161,37 @@ namespace PL
                 Beds = 5,
                 Type = VacationType.Hotel
             };
+            HostingUnit hu1 = new HostingUnit
+            {
+                //HostingUnitKey = Configuration.HostingUnitKey_s++,
+                HostingUnitName = "Fixed",
+          
+                Owner = sori,
+                Pet = false,
+                Area = VacationArea.East,
+                SubArea = VacationSubArea.Netanya,
+                ChildrensAttractions = true,
+                FitnessCenter = false,
+                Garden = true,
+                Jacuzzi = true,
+                Parking = true,
+                Pool = true,
+                Stars = StarRating.four_star,
+                WiFi = true,
+                Beds = 5,
+                Type = VacationType.Hotel
+            };
+
             try
             {
                 ibl.addreq(gr);
                 ibl.addreq(gr1);
+                ibl.addreq(gr2);
                 ibl.AddHostingUnit(hu);
-                ibl.UpdateHostingUnit(hu);
+                //hu.HostingUnitName = "fix";
+                //ibl.UpdateHostingUnit(hu);
+                ibl.AddHostingUnit(hu1);
+                ibl.AddHostingUnit(hu2);
 
             }
             catch (Exception a)
@@ -113,30 +199,21 @@ namespace PL
                 Console.WriteLine(a.Message);
             }
 
-            Host esti = new Host
+            IEnumerable<GuestRequest> myRequests;
+            IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
+            foreach (IGrouping<Host, HostingUnit> h in myUnits)
             {
-                BankAccountNumber = 12345,
-                BankBranchDetails = new BankBranch
+                foreach (HostingUnit hUnit in h)
                 {
-                    BankName = "pag",
-                    BankNumber = 12345,
-                    BranchAddress = "gda",
-                    BranchCity = "hhu",
-                    BranchNumber = 2345
-                },
-                CollectionClearance = false,
-                FamilyName = "hjfyjf",
-                HostKey = 54257570,
-                MailAddress = "mail@mail.com",
-                PhoneNumber = 8765432,
-                PrivateName = "hello"
-            };
-           
-            IEnumerable<GuestRequest> myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hu));
-            foreach(GuestRequest item in myRequests)
-            {
-                ibl.AddOrder(ibl.CreateOrder(hu.HostingUnitKey, item.GuestRequestKey));
+                    myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
+                    foreach (GuestRequest item in myRequests)
+                    {
+                        ibl.AddOrder(ibl.CreateOrder(hu.HostingUnitKey, item.GuestRequestKey));
+                    }
+                }
             }
+
+           
 
 
         }

@@ -46,7 +46,20 @@ namespace DAL
             target.Owner = original.Owner;
             target.HostingUnitName = original.HostingUnitName;
             target.Diary = original.Diary;
-
+            target.Area = original.Area;
+            target.SubArea = original.SubArea;
+            target.Type = original.Type;
+            target.Beds = original.Beds;
+            target.Pet = original.Pet;
+            target.WiFi = original.WiFi;
+            target.Parking = original.Parking;
+            target.Pool = original.Pool;
+            target.Jacuzzi = original.Jacuzzi;
+            target.Garden = original.Garden;
+            target.ChildrensAttractions = original.ChildrensAttractions;
+            target.FitnessCenter = original.FitnessCenter;
+            target.Stars = original.Stars;
+            
             return target;
         }
 

@@ -132,7 +132,6 @@ namespace DAL
         {
             return from hostingUnit in DataSource.HostingUnitCollection
                    select hostingUnit.Clone();
-
         }
 
         public HostingUnit SearchHUbyID(int key)

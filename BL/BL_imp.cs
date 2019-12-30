@@ -9,9 +9,12 @@ using System.Net.Mail;
 
 namespace BL
 {
+  
     public class BL_imp:IBL
     {
-       public void addreq(GuestRequest gr)
+
+        #region done
+        public void addreq(GuestRequest gr)
         {
             try
             {
@@ -20,25 +23,30 @@ namespace BL
                 DateTime today = Configuration.today;
                 today = today.AddMonths(11);
                 if (today < gr.EntryDate)
-                    { }//throw
+                {
+                    throw new ArgumentException("wrong date");
+                }
                 if (!DateLengthPermission(gr))
-                    { }//throw new 
+                {
+                    throw new ArgumentException("wrong date");
+                }
                 if (Configuration.today > gr.EntryDate)
-                    { }  //throw
+                {
+                    throw new ArgumentException("wrong date");
+                }
 
                 dal_bl.AddGuestRequest(gr);
             }
-            catch (Exception a)
+            catch (ArgumentException a)
             {
                 throw a;
             }
         }
-
         public Predicate<GuestRequest> BuildPredicate(HostingUnit hu)//based on a hosting unit builds a predicate to filter all guest requests
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<GuestRequest> guestRequests = dal_bl.ListOfCustomers();//gets the list of requests
-            Predicate<GuestRequest> pred=default(Predicate<GuestRequest>);
+            Predicate<GuestRequest> pred = default(Predicate<GuestRequest>);
             bool HasPool(GuestRequest gr) { return gr.Pool == Choices.Yes || gr.Pool == Choices.DontCare; }
             bool NoPool(GuestRequest gr) { return gr.Pool == Choices.No || gr.Pool == Choices.DontCare; }
             bool HasJacuzzi(GuestRequest gr) { return gr.Jacuzzi == Choices.Yes || gr.Jacuzzi == Choices.DontCare; }
@@ -59,8 +67,8 @@ namespace BL
             bool VacaArea(GuestRequest gr) { return gr.Area == hu.Area; }
             bool VacaSubArea(GuestRequest gr) { return gr.SubArea == hu.SubArea; }
             bool VacaType(GuestRequest gr) { return gr.Pool == Choices.Yes || gr.Pool == Choices.DontCare; }
-            bool NumBeds(GuestRequest gr) { return hu.Beds==(gr.Children+gr.Adults); }
-            bool StarRating(GuestRequest gr) { return gr.Stars==hu.Stars; }
+            bool NumBeds(GuestRequest gr) { return hu.Beds >= (gr.Children + gr.Adults); }
+            bool StarRating(GuestRequest gr) { return gr.Stars == hu.Stars; }
 
 
 
@@ -97,7 +105,6 @@ namespace BL
 
             return pred;
         }
-
         public void Updategr(GuestRequest gr)
         {
             try
@@ -105,17 +112,15 @@ namespace BL
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
 
                 if (gr.Status == Status.Closed)
-                    //throw
+                    throw new InvalidOperationException("cannot change status of closed order");
                 dal_bl.UpdateGuestRequest(gr);
             }
-            catch (Exception a)
+            catch (InvalidOperationException a)
             {
                 throw a;
             }
         }
-
-
-        public Order CreateOrder(int HUkey, int GRkey)
+        public Order CreateOrder(int HUkey, int GRkey)//in case of gr and hu matching creates an order for them
         {
             Order ord = new Order
             {
@@ -126,6 +131,11 @@ namespace BL
             };
             return ord;
         }
+
+        #endregion
+
+
+
         public void AddHostingUnit(HostingUnit hu)
         {
             try
@@ -146,7 +156,7 @@ namespace BL
             {
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
                 if (!RemoveUnitCheck(hu))
-                    //throw
+                    throw new InvalidOperationException("cannot delete this hosting unit, there are active orders connected to it");
 
                 dal_bl.RemoveHostingUnit(hu);
             }
@@ -182,7 +192,7 @@ namespace BL
                 if (!dal_bl.GRexist(o.GuestRequestKey))
                 { } //throw gr doesnt exist
                  dal_bl.AddOrder(o.Clone());
-                SendEmail(o.Clone());
+                //SendEmail(o.Clone());
                 o.Status = Status.SentEmail;
                 UpdateOrder(o.Clone());
             }
@@ -434,6 +444,16 @@ namespace BL
                                                                group req by (req.Adults + req.Children) into r1
                                                                select r1;
 
+            return result;
+        }
+        public IEnumerable<IGrouping<Host , HostingUnit>> GroupHUByHosts()
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of units
+
+            IEnumerable<IGrouping<Host, HostingUnit>> result = from unit in units
+                                                               group unit by unit.Owner into g1
+                                                               select g1;
             return result;
         }
         public IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits()//groups by number of hosting units the hosts own

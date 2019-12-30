@@ -55,6 +55,7 @@ namespace BL
 
         IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea();//groups the requests by area of choice
         IEnumerable<IGrouping<int, GuestRequest>> GroupByNumOfGuests();//groups by number of guests
+        IEnumerable<IGrouping<Host, HostingUnit>> GroupHUByHosts();//groups units by hosts
         IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits();//groups by number of hosting units the hosts own
         IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea();//groups the units by area of choice
     }

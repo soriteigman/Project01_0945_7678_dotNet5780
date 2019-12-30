@@ -26,10 +26,43 @@ namespace DAL
 
         internal static List<Host> My_Host = new List<Host>
         {
-            new Host(){HostKey=12345678, PrivateName="Sori", FamilyName="Teigman", PhoneNumber=0548475920, MailAddress="soriteigman@gmail.com", CollectionClearance=true, BankBranchDetails=B1, BankAccountNumber=12345678},
-            new Host(){HostKey=13679829, PrivateName="Esti", FamilyName="Burack", PhoneNumber=0537208407, MailAddress="stburack@gmail.com", CollectionClearance=false, BankBranchDetails=B2, BankAccountNumber=87654321},
-            new Host(){HostKey=16785678, PrivateName="Ruth", FamilyName="Miller", PhoneNumber=0583295002, MailAddress="ruthmiller@gmail.com", CollectionClearance=true, BankBranchDetails=B3, BankAccountNumber=91827364}
-        };
+           new Host
+            {
+                BankAccountNumber = 12345,
+                BankBranchDetails = new BankBranch
+                {
+                    BankName = "leumi",
+                    BankNumber = 5432,
+                    BranchAddress = "arlozorov",
+                    BranchCity = "telaviv",
+                    BranchNumber = 455
+                },
+                CollectionClearance = false,
+                FamilyName = "stark",
+                HostKey = 876543,
+                MailAddress = "stark@gmail.com",
+                PhoneNumber = 0583215877,
+                PrivateName = "goodbye"
+            },
+        new Host
+        {
+            BankAccountNumber = 12345,
+            BankBranchDetails = new BankBranch
+            {
+                BankName = "pagi",
+                BankNumber = 12345,
+                BranchAddress = "arielli",
+                BranchCity = "beitar",
+                BranchNumber = 992
+            },
+            CollectionClearance = false,
+            FamilyName = "levi",
+            HostKey = 67584021,
+            MailAddress = "levi@gmail.com",
+            PhoneNumber = 0537208407,
+            PrivateName = "tom"
+        }
+    };
 
         internal static List<HostingUnit> HostingUnitCollection = new List<HostingUnit>()
         {

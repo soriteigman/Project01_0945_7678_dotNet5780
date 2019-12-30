@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Host
+    public class Host:IComparable
     {
         int hostKey;
         string privateName;
@@ -21,6 +21,11 @@ namespace BE
         {
             return ("Private Name: "+PrivateName+"  Family Name: "+FamilyName+
                 "\nPhone Number: "+PhoneNumber+"\nEmail Address: "+MailAddress);
+        }
+
+        public int CompareTo(object obj)
+        {
+            return HostKey.CompareTo(obj);
         }
 
         public int HostKey { get => hostKey; set => hostKey = value; }
