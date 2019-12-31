@@ -12,6 +12,12 @@ namespace PL
     {
         static void Main(string[] args)
         {
+            Creator us = new Creator
+            {
+                Username = "st",
+                Password="vip123",
+                TotalCommission=0
+            };
             Host sori = new Host
             {
                 BankAccountNumber = 12345,
@@ -23,12 +29,13 @@ namespace PL
                     BranchCity = "harnof",
                     BranchNumber = 455
                 },
-                CollectionClearance = false,
+                CollectionClearance = true,
                 FamilyName = "teigman",
                 HostKey = 54257570,
                 MailAddress = "soriteigman@gmail.com",
                 PhoneNumber = 0583215876,
-                PrivateName = "hello"
+                PrivateName = "sori"
+     
             };
             Host esti = new Host
             {
@@ -199,8 +206,6 @@ namespace PL
                 Console.WriteLine(a.Message);
             }
 
-            try
-            {
                 IEnumerable<GuestRequest> myRequests;
                 IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
                 foreach (IGrouping<Host, HostingUnit> h in myUnits)
@@ -210,19 +215,17 @@ namespace PL
                         myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
                         foreach (GuestRequest item in myRequests)
                         {
-                            ibl.AddOrder(ibl.CreateOrder(hu.HostingUnitKey, item.GuestRequestKey));
+                            try
+                            {
+                                ibl.AddOrder(ibl.CreateOrder(hUnit.HostingUnitKey, item.GuestRequestKey));
+                            }
+                            catch (Exception A)
+                            {
+                                Console.WriteLine(A.Message);
+                            }
                         }
                     }
                 }
             }
-            catch(Exception A)
-            {
-                Console.WriteLine(A);
-            }
-
-           
-
-
-        }
     }
 }

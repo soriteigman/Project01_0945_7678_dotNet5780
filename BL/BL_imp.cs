@@ -229,7 +229,12 @@ namespace BL
             return false;
         }
 
+        public int TotalCommissionCalculator(Creator c)//calculates total commission from all the bookings on the website
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
 
+        }
         public bool AvailabilityCheck(HostingUnit hu, GuestRequest gr)//checks if requested dates are available
         {
             DateTime start = gr.EntryDate;
@@ -243,8 +248,6 @@ namespace BL
             }
             return true;
         }
-
-
         public int CalculateDurationOfStay(GuestRequest gr)//returns duration of stay
         {
             return (gr.ReleaseDate - gr.EntryDate).Days;
@@ -259,7 +262,6 @@ namespace BL
 
             return duration * Configuration.commission;//returns TOTAL commission
         }
-
         public void UpdateDiary(Order o)//after the status changes to closed, mark the days in the units diary
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
@@ -274,17 +276,29 @@ namespace BL
                 start = start.AddDays(1);
             }
         }
-
-        public void ChangeRequestStatus(Order o)//after order status changes to closed, also close the request status
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public void ChangeRequestStatus(Order o)//to change order status to booked, other orders connected are closed, also the request status is changed to booked
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
             GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey).Clone();
 
-            gr.Status = Status.Closed;
+            o.Status = Status.Booked;
+            gr.Status = Status.Booked;
             foreach (Order item in orders)
             {
-                if (item.GuestRequestKey == gr.GuestRequestKey)
+                if (item.GuestRequestKey == gr.GuestRequestKey && item.OrderKey!=o.OrderKey)
                     item.Status = Status.Closed;
             }
 
@@ -299,7 +313,6 @@ namespace BL
                 return false;
             return true;
         }
-
         public IEnumerable<HostingUnit> AvailableUnits(DateTime startDate, int numOfDays)//returns all available hosting units for the dates requested
         {
             DateTime end = startDate.AddDays(numOfDays);
@@ -311,7 +324,6 @@ namespace BL
                           select unit;//selects if available in given dates
             return request;
         }
-
         public int NumOfDaysInBetweeen(DateTime startDate, DateTime endDate = default(DateTime))//remember if the end date is null change it to Configuration.today
         {
             if (endDate == default(DateTime))//if there was no end date given, use today as an end date
@@ -319,7 +331,6 @@ namespace BL
 
             return (endDate - startDate).Days;
         }
-
         public IEnumerable<Order> DaysPassedOnOrders(int numOfDays, Predicate<Order> conditions)//returns all orders that were sent a email/ created "numOfDays" ago
         {
             //(Configuration.today-ord.CreateDate).Days>=numOfDays
@@ -336,7 +347,6 @@ namespace BL
             return createResult;
 
         }
-
         public IEnumerable<GuestRequest> AllRequestsThatMatch(Predicate<GuestRequest> conditions)//returns all requests that fullfill the conditions 
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
@@ -359,7 +369,6 @@ namespace BL
             }
             return (IEnumerable<GuestRequest>)result;
         }
-
         public int NumOfSent_GR_Orders(GuestRequest gr)//returns the num of orders that were sent for that guest request
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
@@ -371,7 +380,6 @@ namespace BL
 
             return result.Count();
         }
-
         public int NumOfSent_HU_Orders(HostingUnit hu, Predicate<Order> conditions)//returns the number of orders that were sent or booked for this hosting unit
         {
             //predicate condition is either booked or sent email
@@ -391,6 +399,14 @@ namespace BL
 
         public void SendEmail(Order o)//sends email when order status changes to "sent mail"
         {
+            try
+            {
+                IsValidEmail("ESTI");
+            }
+            catch
+            {
+
+            }
             Console.WriteLine("email was sent, catch it if u can!!!!");
 
             //MailMessage mail = new MailMessage();

@@ -15,9 +15,9 @@ namespace BE
      * sentEmail=email was sent, no answer yet
      * noAnswer= email sent but too many days passed so order was cancelled
      * notAddressedYet=order was created but no email was sent
-     * closed= done with this order
+     * closed= closed because no answer from guest
      * active= still dealing with order
-     * booked= ??
+     * booked= closed and booked
      
          */
 

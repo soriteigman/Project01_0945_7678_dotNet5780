@@ -24,9 +24,12 @@ namespace BL
 
         bool DateLengthPermission(GuestRequest gr);//checks if stay is at least one full day long
 
+        int TotalCommissionCalculator(Creator c);//calculates total commission from all the bookings on the website
+
         //void PermissionToCharge(Host h, Order o);//checks if client gave permission for payment
         Order CreateOrder(int HUkey, int GRkey);//create a order
 
+        bool IsValidEmail(string email);
 
         bool AvailabilityCheck(HostingUnit hu, GuestRequest gr);//checks if requested dates are available
         int CalculateDurationOfStay(GuestRequest gr);//returns duration of stay

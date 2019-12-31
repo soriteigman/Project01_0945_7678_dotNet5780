@@ -37,7 +37,7 @@ namespace DAL
                     BranchCity = "telaviv",
                     BranchNumber = 455
                 },
-                CollectionClearance = false,
+                CollectionClearance = true,
                 FamilyName = "stark",
                 HostKey = 876543,
                 MailAddress = "stark@gmail.com",
@@ -55,7 +55,7 @@ namespace DAL
                 BranchCity = "beitar",
                 BranchNumber = 992
             },
-            CollectionClearance = false,
+            CollectionClearance = true,
             FamilyName = "levi",
             HostKey = 67584021,
             MailAddress = "levi@gmail.com",

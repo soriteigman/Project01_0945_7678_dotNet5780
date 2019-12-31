@@ -50,7 +50,7 @@ namespace DAL
                 if (GRexist(gr.GuestRequestKey))
                 {
                     request=searchGRbyID(gr.GuestRequestKey).Clone();
-                    DataSource.requestCollection.Remove(request);
+                    DataSource.requestCollection.Remove(request.Clone());//
                 }
                 DataSource.requestCollection.Add(gr); 
             }
