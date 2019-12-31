@@ -26,11 +26,32 @@ namespace BE
         bool fitnessCenter;
         StarRating stars;
 
-
+        private static string PrintDiary(bool[,] Diary)//returns a string of all the booked days in current diary
+        {
+            string booked = null;
+            DateTime start = new DateTime(2019, 1, 1);//beginning of the year
+            DateTime end = new DateTime(2019, 12, 31);//end of the year
+            while (start != end)//going ove rthe whole year
+            {
+                if (Diary[start.Month - 1, start.Day - 1])//when we reach the first day of booked days
+                {
+                    DateTime saved_start = start;//save the date to print
+                    while (Diary[start.Month - 1, start.Day - 1])//until we find the next unbooked day
+                    {
+                        start = start.AddDays(1);//add a day
+                    }
+                    DateTime saved_end = start.AddDays(1);//save end date
+                    booked += ("start day:  " + saved_start.ToString("dd-MM-yyyy") + "    end day:    " + saved_end.ToString("dd-MM-yyyy") + "\n");//catonates the dates to one string
+                }
+                if (start != end)// in case it already left the last loop at the end of the year 
+                    start = start.AddDays(1);
+            }
+            return booked;
+        }
         public override string ToString()
         {
             return ("Hosting Unit Key: " + HostingUnitKey + "\nOwner: "+Owner+"\nHosting Unit Name: "+HostingUnitName+
-                "\nArea: "+Area+"    SubArea: "+SubArea+"\nType: "+Type);
+                "\nArea: "+Area+"    SubArea: "+SubArea+"\nType: "+Type+"\ndiary: "+PrintDiary(diary));
         }
 
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }

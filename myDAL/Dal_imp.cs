@@ -176,7 +176,7 @@ namespace DAL
                 Order ord;
                 if (ORexist(o.OrderKey))
                 {
-                    ord = SearchOrbyID(o.OrderKey).Clone();
+                    ord = SearchOrbyID(o.OrderKey);//.Clone();//cant do it with clone because order isnt icomparible
                     DataSource.OrderCollection.Remove(ord);
                 }
                 DataSource.OrderCollection.Add(o);
@@ -189,8 +189,11 @@ namespace DAL
 
         public IEnumerable<Order> ListOfOrders()
         {
-            return from order in DataSource.OrderCollection
-                   select order.Clone();
+            IEnumerable<Order>  o= DataSource.OrderCollection.Select(item => (Order)item.Clone()).ToList();
+            return o;
+            //IEnumerable<Order>  o= from order in DataSource.OrderCollection
+            //                       select order.Clone();
+            //return o;
         }
         public Order SearchOrbyID(int key)
         {

@@ -15,8 +15,8 @@ namespace PL
             Creator us = new Creator
             {
                 Username = "st",
-                Password="vip123",
-                TotalCommission=0
+                Password = "vip123",
+                TotalCommission = 0
             };
             Host sori = new Host
             {
@@ -35,7 +35,7 @@ namespace PL
                 MailAddress = "soriteigman@gmail.com",
                 PhoneNumber = 0583215876,
                 PrivateName = "sori"
-     
+
             };
             Host esti = new Host
             {
@@ -48,7 +48,7 @@ namespace PL
                     BranchCity = "beitar",
                     BranchNumber = 992
                 },
-                CollectionClearance = false,
+                CollectionClearance = true,
                 FamilyName = "burack",
                 HostKey = 315320967,
                 MailAddress = "stburack@gmail.com",
@@ -131,7 +131,7 @@ namespace PL
             };
 
 
-            HostingUnit hu2 = new HostingUnit
+            HostingUnit hu = new HostingUnit
             {
                 HostingUnitName = "sleep",
                 Owner = esti,
@@ -149,7 +149,7 @@ namespace PL
                 Beds = 3,
                 Type = VacationType.BeachHouse
             };
-            HostingUnit hu = new HostingUnit
+            HostingUnit hu1 = new HostingUnit
             {
                 //HostingUnitKey = Configuration.HostingUnitKey_s++,
                 HostingUnitName = "Fanta Sea",
@@ -168,11 +168,11 @@ namespace PL
                 Beds = 5,
                 Type = VacationType.Hotel
             };
-            HostingUnit hu1 = new HostingUnit
+            HostingUnit hu2 = new HostingUnit
             {
                 //HostingUnitKey = Configuration.HostingUnitKey_s++,
                 HostingUnitName = "Fixed",
-          
+
                 Owner = sori,
                 Pet = false,
                 Area = VacationArea.East,
@@ -206,26 +206,39 @@ namespace PL
                 Console.WriteLine(a.Message);
             }
 
-                IEnumerable<GuestRequest> myRequests;
-                IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
-                foreach (IGrouping<Host, HostingUnit> h in myUnits)
+            IEnumerable<GuestRequest> myRequests;
+            IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
+            foreach (IGrouping<Host, HostingUnit> h in myUnits)
+            {
+                foreach (HostingUnit hUnit in h)
                 {
-                    foreach (HostingUnit hUnit in h)
+                    myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
+                    foreach (GuestRequest item in myRequests)
                     {
-                        myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
-                        foreach (GuestRequest item in myRequests)
+                        try
                         {
-                            try
-                            {
-                                ibl.AddOrder(ibl.CreateOrder(hUnit.HostingUnitKey, item.GuestRequestKey));
-                            }
-                            catch (Exception A)
-                            {
-                                Console.WriteLine(A.Message);
-                            }
+                            ibl.AddOrder(ibl.CreateOrder(hUnit.HostingUnitKey, item.GuestRequestKey));
+                        }
+                        catch (Exception A)
+                        {
+                            Console.WriteLine(A.Message);
                         }
                     }
                 }
             }
+            IEnumerable<Order> orders = ibl.GetsOpenOrders();
+            ibl.ChangeRequestStatus(orders.Last());
+            IEnumerable<Order> orders2 = ibl.GetsOpenOrders();
+            Console.WriteLine("\n");
+            foreach (Order item in orders2)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine("\n");
+            }
+
+            ibl.TotalCommissionCalculator(us);
+            Console.WriteLine(us.TotalCommission);
+            //ibl.GroupByNumOfUnits();
+        }
     }
 }

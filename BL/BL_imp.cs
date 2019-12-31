@@ -9,8 +9,8 @@ using System.Net.Mail;
 
 namespace BL
 {
-  
-    public class BL_imp:IBL
+
+    public class BL_imp : IBL
     {
 
         #region done
@@ -122,6 +122,10 @@ namespace BL
         }
         public Order CreateOrder(int HUkey, int GRkey)//in case of gr and hu matching creates an order for them
         {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+
+            if (!AvailabilityCheck(dal_bl.SearchHUbyID(HUkey), dal_bl.searchGRbyID(GRkey)))
+                throw new InvalidOperationException("unit not available for this request");
             Order ord = new Order
             {
                 GuestRequestKey = GRkey,
@@ -201,20 +205,22 @@ namespace BL
                 if (oldO.Status == Status.Closed)
                     throw new InvalidOperationException("cannot change status");
                 Host h = dal_bl.SearchHUbyID(newO.HostingUnitKey).Owner;
-                //h.ToPayOwner+= CalculateComission(newO);
-                if (newO.Status == Status.Closed)
+                if (newO.Status == Status.Booked)
                 {
-                    ChangeRequestStatus(newO);
-                    UpdateDiary(newO);
+                    
+                    UpdateDiary(newO.Clone());
                 }
-                if (h.CollectionClearance)
+                if (newO.Status == Status.SentEmail)
                 {
-                    if (newO.Status == Status.SentEmail)
-                        SendEmail(newO);
+                    if (h.CollectionClearance)
+                    {
+                        newO.SentEmail = Configuration.today;
+                        SendEmail(newO.Clone());
+                    }
+                    else throw new InvalidOperationException("cannot send email without permission to charge");
+                }
+                dal_bl.UpdateOrder(newO.Clone());
 
-                    dal_bl.UpdateOrder(newO);
-                }
-                else throw new InvalidOperationException("cannot send email without permission to charge");
             }
             catch (Exception a)
             {
@@ -229,11 +235,17 @@ namespace BL
             return false;
         }
 
-        public int TotalCommissionCalculator(Creator c)//calculates total commission from all the bookings on the website
+        public void TotalCommissionCalculator(Creator c)//calculates total commission from all the bookings on the website (each time its called it calculates for now)
         {
+            c.TotalCommission = 0;
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
 
+            foreach (GuestRequest req in requests)
+            {
+                if(req.Status==Status.Booked)
+                    c.TotalCommission += CalculateComission(req);
+            }
         }
         public bool AvailabilityCheck(HostingUnit hu, GuestRequest gr)//checks if requested dates are available
         {
@@ -253,12 +265,12 @@ namespace BL
             return (gr.ReleaseDate - gr.EntryDate).Days;
         }
 
-        public int CalculateComission(Order o)//calculates comission
+        public int CalculateComission(GuestRequest gr)//calculates comission
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
 
-            GuestRequest my_req = dal_bl.searchGRbyID(o.GuestRequestKey);//finds the correct guest request
-            int duration = CalculateDurationOfStay(my_req);//calculates the duration of stay
+
+            int duration = CalculateDurationOfStay(gr);//calculates the duration of stay
 
             return duration * Configuration.commission;//returns TOTAL commission
         }
@@ -285,7 +297,7 @@ namespace BL
             }
             catch
             {
-                return false;
+                throw new InvalidOperationException("invalid email address");
             }
         }
         public void ChangeRequestStatus(Order o)//to change order status to booked, other orders connected are closed, also the request status is changed to booked
@@ -295,12 +307,24 @@ namespace BL
             GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey).Clone();
 
             o.Status = Status.Booked;
+            UpdateOrder(o.Clone());
             gr.Status = Status.Booked;
+            Updategr(gr.Clone());
+            CalculateComission(gr.Clone());
+
+
             foreach (Order item in orders)
             {
-                if (item.GuestRequestKey == gr.GuestRequestKey && item.OrderKey!=o.OrderKey)
+                if (item.GuestRequestKey == gr.GuestRequestKey && item.OrderKey != o.OrderKey)
+                {
                     item.Status = Status.Closed;
+                    UpdateOrder(item);
+                }
             }
+
+            HostingUnit hu = dal_bl.SearchHUbyID(o.HostingUnitKey);
+            Console.WriteLine(hu);
+         
 
         }
 
@@ -380,7 +404,7 @@ namespace BL
 
             return result.Count();
         }
-        public int NumOfSent_HU_Orders(HostingUnit hu, Predicate<Order> conditions)//returns the number of orders that were sent or booked for this hosting unit
+        public int NumOfSent_HU_Orders(HostingUnit hu, Predicate<Order> conditions)//returns the number of orders that were sent email or booked for this hosting unit
         {
             //predicate condition is either booked or sent email
             //ord.Status==Status.SentEmail
@@ -391,43 +415,50 @@ namespace BL
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
             var result = from ord in orders //creates a list of all orders that fit the condition
+                         let closed = ord.Status == Status.Booked
                          where conditions(ord) && ord.HostingUnitKey == hu.HostingUnitKey
                          select ord;
 
             return result.Count();
         }
-
+      
         public void SendEmail(Order o)//sends email when order status changes to "sent mail"
         {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            
+            GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey);
+            Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
+         
             try
             {
-                IsValidEmail("ESTI");
+                IsValidEmail(gr.MailAddress);
+                IsValidEmail(h.MailAddress);
             }
-            catch
+            catch(InvalidOperationException a)
             {
-
+                throw a;
             }
             Console.WriteLine("email was sent, catch it if u can!!!!");
 
-            //MailMessage mail = new MailMessage();
-            //mail.To.Add("toEmailAddress");
-            //mail.From = new MailAddress("fromEmailAddress");
-            //mail.Subject = "mailSubject";
-            //mail.Body = "mailBody";
-            //mail.IsBodyHtml = true;
-            //SmtpClient smtp = new SmtpClient();
-            //smtp.Host = "smtp.gmail.com";
+            MailMessage mail = new MailMessage();
+            mail.To.Add("stminiproject@gmail.com");
+            mail.From = new MailAddress(h.MailAddress);
+            mail.Subject = "vacation home offer";
+            mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? ";
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
 
-            //smtp.Credentials = new System.Net.NetworkCredential("myGmailEmailAddress@gmail.com", "myGmailPassword");
-            //smtp.EnableSsl = true;
-            //try
-            //{
-            //    smtp.Send(mail);
-            //}
-            //catch (Exception ex)
-            //{
-            //    // txtMessage.Text = ex.ToString();
-            //}
+            smtp.Credentials = new System.Net.NetworkCredential("stminiproject@gmail.com", "stmini123");
+            smtp.EnableSsl = true;
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion
@@ -518,10 +549,17 @@ namespace BL
         //{
 
         //}
-       
+
 
 
         #endregion
+
+
+        public IEnumerable<Order> GetsOpenOrders()
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            return dal_bl.ListOfOrders();//returns the list of orders
+        }
 
 
 

@@ -24,23 +24,22 @@ namespace BL
 
         bool DateLengthPermission(GuestRequest gr);//checks if stay is at least one full day long
 
-        int TotalCommissionCalculator(Creator c);//calculates total commission from all the bookings on the website
+        void TotalCommissionCalculator(Creator c);//calculates total commission from all the bookings on the website
 
-        //void PermissionToCharge(Host h, Order o);//checks if client gave permission for payment
         Order CreateOrder(int HUkey, int GRkey);//create a order
 
         bool IsValidEmail(string email);
 
         bool AvailabilityCheck(HostingUnit hu, GuestRequest gr);//checks if requested dates are available
         int CalculateDurationOfStay(GuestRequest gr);//returns duration of stay
-        int CalculateComission(Order o);//calculates comission
+        int CalculateComission(GuestRequest gr);//calculates comission
         void UpdateDiary(Order o);//after the status changes to closed, mark the days in the units diary
 
         void ChangeRequestStatus(Order o);//after order status changes to closed, also close to request status
 
         bool RemoveUnitCheck(HostingUnit hu);//checks to see if there are any active reservations for that unit before removing it
 
-        //bool ChangeCollectionClearance(Host h);//?????
+        //bool ChangeCollectionClearance(Host h);//
 
         void SendEmail(Order o);//sends email when order status changes to "sent mail"
 
@@ -61,5 +60,8 @@ namespace BL
         IEnumerable<IGrouping<Host, HostingUnit>> GroupHUByHosts();//groups units by hosts
         IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits();//groups by number of hosting units the hosts own
         IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea();//groups the units by area of choice
+
+
+        IEnumerable<Order> GetsOpenOrders(); 
     }
 }

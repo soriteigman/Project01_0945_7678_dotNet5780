@@ -21,6 +21,7 @@ namespace BE
                 "\nStatus: "+Status+"\nCreate Date: "+CreateDate+"  Order Email Date: "+SentEmail);
         }
 
+
         public int HostingUnitKey { get => hostingUnitKey; set => hostingUnitKey = value; }
         public int GuestRequestKey { get => guestRequestKey; set => guestRequestKey = value; }
         public int OrderKey { get => orderKey; set => orderKey = value; }
