@@ -24,7 +24,7 @@ namespace BL
 
         bool DateLengthPermission(GuestRequest gr);//checks if stay is at least one full day long
 
-        void PermissionToCharge(Host h, Order o);//checks if client gave permission for payment
+        //void PermissionToCharge(Host h, Order o);//checks if client gave permission for payment
         Order CreateOrder(int HUkey, int GRkey);//create a order
 
 

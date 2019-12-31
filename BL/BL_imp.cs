@@ -131,11 +131,6 @@ namespace BL
             };
             return ord;
         }
-
-        #endregion
-
-
-
         public void AddHostingUnit(HostingUnit hu)
         {
             try
@@ -143,13 +138,12 @@ namespace BL
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
                 dal_bl.AddHostingUnit(hu);
             }
-            catch (Exception a)
+            catch (DuplicateWaitObjectException a)
             {
                 throw a;
             }
 
         }
-
         public void RemoveHostingUnit(HostingUnit hu)
         {
             try
@@ -160,12 +154,11 @@ namespace BL
 
                 dal_bl.RemoveHostingUnit(hu);
             }
-            catch (Exception a)
+            catch (InvalidOperationException a)
             {
                 throw a;
             }
         }
-
         public void UpdateHostingUnit(HostingUnit hu)
         {
             try
@@ -173,12 +166,11 @@ namespace BL
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
                 dal_bl.UpdateHostingUnit(hu);
             }
-            catch (Exception a)
+            catch (KeyNotFoundException a)
             {
                 throw a;
             }
         }
-
         public void AddOrder(Order o)
         {
             try
@@ -186,13 +178,12 @@ namespace BL
                 o.OrderKey = Configuration.OrderKey_s++;
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
                 if (!AvailabilityCheck(dal_bl.SearchHUbyID(o.HostingUnitKey), dal_bl.searchGRbyID(o.GuestRequestKey)))
-                { } //throw
+                    throw new InvalidOperationException("unit not available for this request");
                 if (!dal_bl.HUexist(o.HostingUnitKey))
-                { }//throw hu doesnt exist
+                    throw new KeyNotFoundException("unit doesnt exist");
                 if (!dal_bl.GRexist(o.GuestRequestKey))
-                { } //throw gr doesnt exist
-                 dal_bl.AddOrder(o.Clone());
-                //SendEmail(o.Clone());
+                    throw new KeyNotFoundException("request doesnt exist");
+                dal_bl.AddOrder(o.Clone());
                 o.Status = Status.SentEmail;
                 UpdateOrder(o.Clone());
             }
@@ -201,7 +192,6 @@ namespace BL
                 throw a;
             }
         }
-
         public void UpdateOrder(Order newO) //status update
         {
             try
@@ -209,41 +199,28 @@ namespace BL
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
                 Order oldO = dal_bl.SearchOrbyID(newO.OrderKey);
                 if (oldO.Status == Status.Closed)
-                     { }//throw cannot update
-                int commission = CalculateComission(newO);
+                    throw new InvalidOperationException("cannot change status");
+                Host h = dal_bl.SearchHUbyID(newO.HostingUnitKey).Owner;
+                //h.ToPayOwner+= CalculateComission(newO);
                 if (newO.Status == Status.Closed)
                 {
                     ChangeRequestStatus(newO);
                     UpdateDiary(newO);
                 }
-                if (newO.Status == Status.SentEmail)
-                    SendEmail(newO);
+                if (h.CollectionClearance)
+                {
+                    if (newO.Status == Status.SentEmail)
+                        SendEmail(newO);
 
-                dal_bl.UpdateOrder(newO);
+                    dal_bl.UpdateOrder(newO);
+                }
+                else throw new InvalidOperationException("cannot send email without permission to charge");
             }
             catch (Exception a)
             {
                 throw a;
             }
         }
-
-        #region Singleton
-        private static BL_imp instance;
-
-        public static BL_imp Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new BL_imp();
-                return instance;
-            }
-        }
-
-        private BL_imp() { }
-        #endregion
-        //----------------------------------------------------------------------------------------------
-        #region i think were done 
         public bool DateLengthPermission(GuestRequest gr)//checks if stay is at least one full day long
         {
             DateTime temp = gr.EntryDate.AddDays(1);
@@ -252,15 +229,6 @@ namespace BL
             return false;
         }
 
-        public void PermissionToCharge(Host h, Order o)//checks if client gave permission for payment
-        {
-            if (h.CollectionClearance)//checks if there is permission to collect the money
-            {
-                o.Status = Status.SentEmail;//changes the status to sent mail
-                o.SentEmail = DateTime.Now;
-                SendEmail(o);//calls the function to send an email
-            }
-        }
 
         public bool AvailabilityCheck(HostingUnit hu, GuestRequest gr)//checks if requested dates are available
         {
@@ -292,7 +260,7 @@ namespace BL
             return duration * Configuration.commission;//returns TOTAL commission
         }
 
-        public void UpdateDiary( Order o)//after the status changes to closed, mark the days in the units diary
+        public void UpdateDiary(Order o)//after the status changes to closed, mark the days in the units diary
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             HostingUnit hu = dal_bl.SearchHUbyID(o.HostingUnitKey);
@@ -376,22 +344,22 @@ namespace BL
 
             List<GuestRequest> result = new List<GuestRequest>();
 
-            bool temp=true;
-            foreach(GuestRequest req in guestRequests)
+            bool temp = true;
+            foreach (GuestRequest req in guestRequests)
             {
                 foreach (Predicate<GuestRequest> item in conditions.GetInvocationList())
                 {
-                    if(!item(req))
-                         temp=false;
+                    if (!item(req))
+                        temp = false;
                 }
                 if (temp)
                     result.Add(req);
                 temp = true;
-                    
+
             }
             return (IEnumerable<GuestRequest>)result;
         }
-        
+
         public int NumOfSent_GR_Orders(GuestRequest gr)//returns the num of orders that were sent for that guest request
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
@@ -421,10 +389,57 @@ namespace BL
             return result.Count();
         }
 
+        public void SendEmail(Order o)//sends email when order status changes to "sent mail"
+        {
+            Console.WriteLine("email was sent, catch it if u can!!!!");
+
+            //MailMessage mail = new MailMessage();
+            //mail.To.Add("toEmailAddress");
+            //mail.From = new MailAddress("fromEmailAddress");
+            //mail.Subject = "mailSubject";
+            //mail.Body = "mailBody";
+            //mail.IsBodyHtml = true;
+            //SmtpClient smtp = new SmtpClient();
+            //smtp.Host = "smtp.gmail.com";
+
+            //smtp.Credentials = new System.Net.NetworkCredential("myGmailEmailAddress@gmail.com", "myGmailPassword");
+            //smtp.EnableSsl = true;
+            //try
+            //{
+            //    smtp.Send(mail);
+            //}
+            //catch (Exception ex)
+            //{
+            //    // txtMessage.Text = ex.ToString();
+            //}
+        }
 
         #endregion
 
 
+
+
+
+
+
+
+        #region Singleton
+        private static BL_imp instance;
+
+        public static BL_imp Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new BL_imp();
+                return instance;
+            }
+        }
+
+        private BL_imp() { }
+        #endregion
+        //----------------------------------------------------------------------------------------------
+      
         #region grouping
         public IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea()//groups the requests by area of choice
         {
@@ -487,30 +502,7 @@ namespace BL
         //{
 
         //}
-        public void SendEmail(Order o)//sends email when order status changes to "sent mail"
-        {
-            Console.WriteLine("email was sent, catch it if u can!!!!");
-
-            //MailMessage mail = new MailMessage();
-            //mail.To.Add("toEmailAddress");
-            //mail.From = new MailAddress("fromEmailAddress");
-            //mail.Subject = "mailSubject";
-            //mail.Body = "mailBody";
-            //mail.IsBodyHtml = true;
-            //SmtpClient smtp = new SmtpClient();
-            //smtp.Host = "smtp.gmail.com";
-
-            //smtp.Credentials = new System.Net.NetworkCredential("myGmailEmailAddress@gmail.com", "myGmailPassword");
-            //smtp.EnableSsl = true;
-            //try
-            //{
-            //    smtp.Send(mail);
-            //}
-            //catch (Exception ex)
-            //{
-            //    // txtMessage.Text = ex.ToString();
-            //}
-        }
+       
 
 
         #endregion

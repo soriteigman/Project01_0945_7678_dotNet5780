@@ -124,7 +124,7 @@ namespace DAL
             }
             catch (KeyNotFoundException a)
             {
-                throw a;//deal with this
+                throw a;
             }
         }
 

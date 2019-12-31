@@ -199,18 +199,25 @@ namespace PL
                 Console.WriteLine(a.Message);
             }
 
-            IEnumerable<GuestRequest> myRequests;
-            IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
-            foreach (IGrouping<Host, HostingUnit> h in myUnits)
+            try
             {
-                foreach (HostingUnit hUnit in h)
+                IEnumerable<GuestRequest> myRequests;
+                IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
+                foreach (IGrouping<Host, HostingUnit> h in myUnits)
                 {
-                    myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
-                    foreach (GuestRequest item in myRequests)
+                    foreach (HostingUnit hUnit in h)
                     {
-                        ibl.AddOrder(ibl.CreateOrder(hu.HostingUnitKey, item.GuestRequestKey));
+                        myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
+                        foreach (GuestRequest item in myRequests)
+                        {
+                            ibl.AddOrder(ibl.CreateOrder(hu.HostingUnitKey, item.GuestRequestKey));
+                        }
                     }
                 }
+            }
+            catch(Exception A)
+            {
+                Console.WriteLine(A);
             }
 
            

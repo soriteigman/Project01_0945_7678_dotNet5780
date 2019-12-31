@@ -16,6 +16,7 @@ namespace BE
         BankBranch bankBranchDetails;
         int bankAccountNumber;
         bool collectionClearance;
+        int toPayOwner;
 
         public override string ToString()
         {
@@ -36,5 +37,6 @@ namespace BE
         public bool CollectionClearance { get => collectionClearance; set => collectionClearance = value; }
         public BankBranch BankBranchDetails { get => bankBranchDetails; set => bankBranchDetails = value; }
         public int BankAccountNumber { get => bankAccountNumber; set => bankAccountNumber = value; }
+        public int ToPayOwner { get => toPayOwner; set => toPayOwner = value; }
     }
 }
