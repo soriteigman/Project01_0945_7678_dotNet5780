@@ -328,6 +328,19 @@ namespace BL
 
         }
 
+        public bool HExists(int id)
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of guest units
+
+            var result = from unit in units
+                         where unit.Owner.HostKey == id
+                         select unit;
+            if (result.Count() == 0)
+                return false;
+            return true;// if there is at least one unit with that host returns true
+        }
+
         public bool RemoveUnitCheck(HostingUnit hu)//checks to see if there are any active reservations for that unit before removing it
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
@@ -441,10 +454,10 @@ namespace BL
             Console.WriteLine("email was sent, catch it if u can!!!!");
 
             MailMessage mail = new MailMessage();
-            mail.To.Add("stminiproject@gmail.com");
-            mail.From = new MailAddress(h.MailAddress);
+            mail.To.Add("soriteigman@gmail.com");
+            mail.From = new MailAddress("stburack@gmail.com");
             mail.Subject = "vacation home offer";
-            mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? ";
+            mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? if so please contact me at "+h.MailAddress;
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
