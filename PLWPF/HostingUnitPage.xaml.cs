@@ -33,6 +33,11 @@ namespace PLWPF
 
         }
 
+        private void ID_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (ID.Text == "Enter your ID")
+                ID.Clear();
+        }
         private void Add_HU_Button_MouseEnter(object sender, MouseEventArgs e)
         {
             HU_Button.Foreground = Brushes.Blue;

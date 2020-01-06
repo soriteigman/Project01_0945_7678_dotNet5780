@@ -29,5 +29,11 @@ namespace PLWPF
         {
 
         }
+
+        private void CbHostingUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.NavigationService.Navigate(new HostingUnitPage());
+
+        }
     }
 }

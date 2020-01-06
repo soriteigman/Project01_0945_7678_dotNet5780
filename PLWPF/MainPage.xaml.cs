@@ -13,16 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Project01_0945_7678_dotNet5780
+namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainPage : Page
     {
-        public MainWindow()
+        public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void HU_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new HostingUnitPage());
+
         }
     }
 }
