@@ -23,7 +23,7 @@ namespace PLWPF
         public AddHostingUnit()
         {
             InitializeComponent();
-            //cbArea.DataSource = Enum.GetNames(typeof(VacationArea));
+            //cbArea.DataContext = System.Enum.GetValues(typeof(BE.VacationArea));
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -34,6 +34,20 @@ namespace PLWPF
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void fillCBArea_Click(object sender, RoutedEventArgs e)
+        {
+            cbArea.DataSource = Enum.GetValues(typeof(Weekdays));
+            ComboBox c=new ComboBox
+            {
+                dat
+            }
+        }
+
+        private void comBox_FilledWithEnumeration_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            lbl_EnumerationValue.Text = "Selected day is: " + comBox_FilledWithEnumeration.SelectedValue.ToString();
         }
     }
 }
