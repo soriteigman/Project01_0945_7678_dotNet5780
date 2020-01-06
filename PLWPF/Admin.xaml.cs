@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,12 +23,20 @@ namespace PLWPF
     /// </summary>
     public partial class Admin : Page
     {
+        private IEnumerable<Order> units { get; set; }
+
         public Admin()
         {
             InitializeComponent();
+
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
-            DataContext = _bl.GroupHUByHosts();
+
+            units = _bl.GetsOpenOrders();
+            DataContext = _bl.GetsOpenOrders();
         }
 
     }
+
+
+
 }

@@ -12,7 +12,7 @@
                    BorderThickness="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="39,10,10,58"  >
             <TabItem
                 Header="Guest requests"  Name="GRTab" TabIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
-                <DataGrid Margin="-2,0,-3,0"/>
+                <DataGrid ItemsSource="{Binding Path= units}" Margin="-2,0,-3,0"/>
 
             </TabItem>
 
