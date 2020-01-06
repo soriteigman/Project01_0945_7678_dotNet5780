@@ -39,9 +39,16 @@
                 </TabItem.Header>
                 <Grid>
                     <TextBox Text="Give Your Property a Name " BorderBrush="Black" FontSize="20" Margin="211,31,211,304.667" />
+                    <Button Name="fillCBArea" Margin="422,93,273,238.667" Click="fillCBArea_Click" >
+                        
+                    </Button>
                     <ComboBox x:Name="cbArea"  Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,97,384,238.667" SelectionChanged="ComboBox_SelectionChanged" >
+                        
                         <ComboBox.DataContext>
-                            <BE:VacationArea>North</BE:VacationArea>
+                            <BE:VacationArea>
+                                North,
+                                South
+                            </BE:VacationArea>
                         </ComboBox.DataContext>
                     </ComboBox>
                     <ComboBox Text="Enter Your Property Location" BorderBrush="Black" FontSize="18" Margin="33,190,384,145.667" >
