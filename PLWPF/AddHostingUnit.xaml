@@ -18,16 +18,16 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TextBox Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,52,384,283.667" />
-                    <TextBox Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Margin="33,121,384,214.667" />
-                    <TextBox Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Margin="33,190,384,145.667" />
-                    <TextBox Text="Enter Your Phone Number" BorderBrush="Black" FontSize="18" Margin="33,254,384,81.667" />
-                    <TextBox Text="Enter Your Email Address" BorderBrush="Black" FontSize="18" Margin="33,325,384,10.667" />
-                    <TextBox Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="395,52,27,283.667" />
-                    <TextBox Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="395,121,27,214.667" />
-                    <TextBox Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="395,190,27,145.667" />
-                    <TextBox Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="395,254,27,81.667" />
-                    <TextBox Text="Enter the City your Branch is Located in " BorderBrush="Black" FontSize="18" Margin="395,325,27,10.667" />
+                    <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,52,384,283.667" PreviewMouseDown="id_PreviewMouseDown" />
+                    <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Margin="33,121,384,214.667" PreviewMouseDown="Fname_PreviewMouseDown" />
+                    <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Margin="33,190,384,145.667" PreviewMouseDown="Lname_PreviewMouseDown"/>
+                    <TextBox Name="Phonenum" Text="Enter Your Phone Number" BorderBrush="Black" FontSize="18" Margin="33,254,384,81.667" PreviewMouseDown="Phonenum_PreviewMouseDown"/>
+                    <TextBox Name="Email" Text="Enter Your Email Address" BorderBrush="Black" FontSize="18" Margin="33,325,384,10.667" PreviewMouseDown="Email_PreviewMouseDown"/>
+                    <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="395,52,27,283.667" PreviewMouseDown="Bankname_PreviewMouseDown"/>
+                    <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="395,121,27,214.667" PreviewMouseDown="Banknum_PreviewMouseDown"/>
+                    <TextBox Name="Branchnum" Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="395,190,27,145.667" PreviewMouseDown="BankBranch_PreviewMouseDown"/>
+                    <TextBox Name="Bankaddress" Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="395,254,27,81.667" PreviewMouseDown="BankAddress_PreviewMouseDown"/>
+                    <TextBox Name="Bankcity" Text="Enter the City your Branch is Located in" BorderBrush="Black" FontSize="18" Margin="395,325,27,10.667" PreviewMouseDown="Bankcity_PreviewMouseDown"/>
 
                 </Grid>
             </TabItem>
@@ -39,10 +39,10 @@
                 </TabItem.Header>
                 <Grid>
                     <TextBox Text="Give Your Property a Name " BorderBrush="Black" FontSize="20" Margin="211,31,211,304.667" />
-                    <Button Name="fillCBArea" Margin="422,93,273,238.667" Click="fillCBArea_Click" >
+                    <Button Name="fillCBArea" Margin="422,93,273,238.667"  >
                         
                     </Button>
-                    <ComboBox x:Name="cbArea"  Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,97,384,238.667" SelectionChanged="ComboBox_SelectionChanged" >
+                    <ComboBox x:Name="cbArea" Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,97,384,238.667" SelectionChanged="ComboBox_SelectionChanged" >
                         
                         <ComboBox.DataContext>
                             <BE:VacationArea>

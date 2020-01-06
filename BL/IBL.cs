@@ -9,6 +9,9 @@ namespace BL
 {
     public interface IBL
     {
+        IEnumerable<HostingUnit> listHU();
+
+        IEnumerable<GuestRequest> listGR();
         void addreq(GuestRequest gr);
         void Updategr(GuestRequest gr);
         void AddHostingUnit(HostingUnit hu);

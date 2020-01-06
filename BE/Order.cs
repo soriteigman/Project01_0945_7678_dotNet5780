@@ -17,8 +17,15 @@ namespace BE
 
         public override string ToString()
         {
+            if(sentEmail==default(DateTime))
+            {
+                return ("Hosting Unit Key: " + HostingUnitKey + "\nGuest Request Key: " + GuestRequestKey + "\nOrder Key: " + OrderKey +
+                "\nStatus: " + Status + "\nCreate Date: "
+                + CreateDate.ToString("dd/MM/yyyy") + "  Order Email Date: didnt send yet");
+            }
             return ("Hosting Unit Key: "+HostingUnitKey+"\nGuest Request Key: "+GuestRequestKey+"\nOrder Key: "+OrderKey+
-                "\nStatus: "+Status+"\nCreate Date: "+CreateDate+"  Order Email Date: "+SentEmail);
+                "\nStatus: "+Status+"\nCreate Date: "
+                +CreateDate.ToString("dd/MM/yyyy") + "  Order Email Date: "+SentEmail.ToString("dd/MM/yyyy"));
         }
 
 

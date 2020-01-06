@@ -39,7 +39,7 @@ namespace DAL
                 },
                 CollectionClearance = true,
                 FamilyName = "stark",
-                HostKey = 876543,
+                HostKey = 315320945,
                 MailAddress = "stark@gmail.com",
                 PhoneNumber = 0583215877,
                 PrivateName = "goodbye"
@@ -66,7 +66,7 @@ namespace DAL
 
         internal static List<HostingUnit> HostingUnitCollection = new List<HostingUnit>()
         {
-            new HostingUnit(){HostingUnitKey=12345678, HostingUnitName="Esther", Owner=My_Host.First(), WiFi=true, Stars=StarRating.three_star, FitnessCenter=false, Area=VacationArea.East, Beds=6, ChildrensAttractions=true, Garden=true,Jacuzzi=true, Parking=true, Pet=false, SubArea=VacationSubArea.Jerusalem, Pool=true, Type=VacationType.Hotel},
+            new HostingUnit(){HostingUnitKey=123456789, HostingUnitName="Esther", Owner=My_Host.First(), WiFi=true, Stars=StarRating.three_star, FitnessCenter=false, Area=VacationArea.East, Beds=6, ChildrensAttractions=true, Garden=true,Jacuzzi=true, Parking=true, Pet=false, SubArea=VacationSubArea.Jerusalem, Pool=true, Type=VacationType.Hotel},
             new HostingUnit(){HostingUnitKey=87654321, HostingUnitName="Sara", Owner=My_Host.First(), WiFi=true, Stars=StarRating.five_star, FitnessCenter=true, Area=VacationArea.North, Beds=5, ChildrensAttractions=true, Garden=true, Jacuzzi=true, Parking=true, Pet=true, SubArea=VacationSubArea.Netanya, Pool=true, Type=VacationType.BeachHouse},
             new HostingUnit(){HostingUnitKey=18272635, HostingUnitName="Fanta Sea", Owner=My_Host.Last(), WiFi=false, Stars=StarRating.three_star, FitnessCenter=false, Area=VacationArea.Center, Beds=9, ChildrensAttractions=false, Garden=false, Jacuzzi=false, Parking=false, SubArea=VacationSubArea.TelAviv, Pool=false, Type=VacationType.Tent, Pet=true}
 

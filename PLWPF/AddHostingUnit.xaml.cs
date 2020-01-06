@@ -36,18 +36,59 @@ namespace PLWPF
 
         }
 
-        private void fillCBArea_Click(object sender, RoutedEventArgs e)
+
+
+ 
+        private void id_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
         {
-            cbArea.DataSource = Enum.GetValues(typeof(Weekdays));
-            ComboBox c=new ComboBox
-            {
-                dat
-            }
+            if (ID.Text == "Enter Your ID")
+                ID.Clear();
+        }
+        private void Fname_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Fname.Text == "Enter Your First Name")
+                Fname.Clear();
+        }
+        private void Lname_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Lname.Text == "Enter Your Last Name")
+                Lname.Clear();
+        }
+        private void Phonenum_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Phonenum.Text == "Enter Your Phone Number")
+                Phonenum.Clear();
+        }
+        private void Email_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Email.Text == "Enter Your Email Address")
+                Email.Clear();
+        }
+        private void Bankname_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Bankname.Text == "Enter Your Bank Name")
+                Bankname.Clear();
+        }
+        private void Banknum_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Banknum.Text == "Enter Your Bank's Number")
+                Banknum.Clear();
+        }
+        private void BankBranch_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Branchnum.Text == "Enter Your Branch's Number")
+                Branchnum.Clear();
+        }
+        private void BankAddress_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Bankaddress.Text == "Enter Your Branch's Address")
+                Bankaddress.Clear();
+        }
+        private void Bankcity_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
+        {
+            if (Bankcity.Text == "Enter the City your Branch is Located in")
+                Bankcity.Clear();
         }
 
-        private void comBox_FilledWithEnumeration_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            lbl_EnumerationValue.Text = "Selected day is: " + comBox_FilledWithEnumeration.SelectedValue.ToString();
-        }
     }
 }

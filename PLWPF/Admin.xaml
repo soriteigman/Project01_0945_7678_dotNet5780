@@ -11,20 +11,20 @@
         <TabControl x:Name="tabs" BorderBrush="CornflowerBlue" 
                    BorderThickness="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="39,10,10,58"  >
             <TabItem
-                Header="Guest requests"  Name="GRTab" TabIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
-                <DataGrid ItemsSource="{Binding Path= units}" Margin="-2,0,-3,0"/>
+                Header="Orders"  Name="GRTab" TabIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
+                <DataGrid Name="ListOfOrders" ItemsSource="{Binding Path= units}" Margin="-2,0,-3,0"/>
 
             </TabItem>
 
             <TabItem
-                Header="Hosting Units"  Name="HUTab" TabIndex="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
-                <DataGrid Margin="-2,0,-3,0"/>
+                Header="Hosting Units" Name="ListOfHU" TabIndex="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
+                <DataGrid Name="hostingunit" ItemsSource="{Binding Path= units}" Margin="-2,0,-3,0"/>
 
             </TabItem>
 
             <TabItem
-                Header="Orders"  Name="OTab" TabIndex="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
-                <DataGrid Margin="-2,0,-3,0"/>
+                Header="Guest requests"  Name="ListOfGR" TabIndex="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
+                <DataGrid Name="guestreq" ItemsSource="{Binding Path= gr}" Margin="-2,0,-3,0"/>
 
             </TabItem>
 

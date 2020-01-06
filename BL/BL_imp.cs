@@ -573,7 +573,18 @@ namespace BL
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             return dal_bl.ListOfOrders();//returns the list of orders
         }
-        //hello
+
+        public IEnumerable<HostingUnit> listHU()
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            return dal_bl.ListOfHostingUnits();//returns the list of orders
+        }
+
+        public IEnumerable<GuestRequest> listGR()
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            return dal_bl.ListOfCustomers();//returns the list of orders
+        }
 
 
     }
