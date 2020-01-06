@@ -30,6 +30,7 @@ namespace PLWPF
 
         private void Add_HU_Button_Click(object sender, RoutedEventArgs e)
         {
+            this.NavigationService.Navigate(new AddHostingUnit());
 
         }
 

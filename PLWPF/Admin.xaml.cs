@@ -12,29 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for Admin.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class Admin : Page
     {
-        public MainPage()
+        public Admin()
         {
             InitializeComponent();
+            IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
+            DataContext = _bl.GroupHUByHosts();
         }
 
-        private void HU_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new HostingUnitPage());
-
-        }
-
-        private void OWNER_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Admin());
-
-        }
     }
 }
