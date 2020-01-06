@@ -9,7 +9,7 @@
       Title="ManagingPage">
 
     <Grid>
-        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="116,80,0,0" VerticalAlignment="Top" Width="122">
+        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="116,80,0,0" VerticalAlignment="Top" Width="122" SelectionChanged="CbHostingUnit_SelectionChanged">
             <ComboBoxItem Name="UpdateHostingUnit" Content="Update Hosting Unit" Height="31" Margin="0,0,-2,0"/>
             <ComboBoxItem Name="RemoveHostingUnit" Content="Remove Hosting Unit" Height="31" Margin="0,0,-2,0"/>
         </ComboBox>

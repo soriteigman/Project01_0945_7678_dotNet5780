@@ -23,14 +23,7 @@ namespace PLWPF
         public MainWindow()
         {
             InitializeComponent();
-            _NavigationFrame.Navigate(new ManagingPage());
-            this._NavigationFrame.NavigationService.Navigate(new Uri("ManagingPage.xaml", UriKind.Relative));
-        }
-
-       
-        private void _NavigationFrame_Navigated(object sender, NavigationEventArgs e)
-        {
-
+            _NavigationFrame.NavigationService.Navigate(new MainPage());
         }
     }
 }

@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <DockPanel>
-            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Navigated="_NavigationFrame_Navigated" />
+            <Frame x:Name="_NavigationFrame" Content="_NavigationFrame" FlowDirection="RightToLeft" Height="auto" Width="auto"/>
         </DockPanel>
     </Grid>
 </Window>
