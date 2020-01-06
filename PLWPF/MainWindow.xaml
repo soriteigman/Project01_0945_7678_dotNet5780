@@ -7,13 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="116,80,0,0" VerticalAlignment="Top" Width="122">
-            <ComboBoxItem Name="UpdateHostingUnit" Content="Update Hosting Unit" Height="31" Margin="0,0,-2,0"/>
-            <ComboBoxItem Name="RemoveHostingUnit" Content="Remove Hosting Unit" Height="31" Margin="0,0,-2,0"/>
-        </ComboBox>
-        <Label Content="What would You like to do?" HorizontalAlignment="Left" Margin="117,60,0,0" VerticalAlignment="Top" Width="121" Height="22" FontSize="8"/>
-
-
-
+        <DockPanel>
+            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Navigated="_NavigationFrame_Navigated" />
+        </DockPanel>
     </Grid>
 </Window>
