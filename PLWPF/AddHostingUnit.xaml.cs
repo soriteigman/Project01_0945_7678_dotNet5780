@@ -23,9 +23,15 @@ namespace PLWPF
         public AddHostingUnit()
         {
             InitializeComponent();
+            //cbArea.DataSource = Enum.GetNames(typeof(VacationArea));
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
