@@ -1,0 +1,45 @@
+﻿<Page x:Class="PLWPF.AddHostingUnit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PLWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddHostingUnit">
+
+    <Grid Name="addHUgrid">
+        <TabControl HorizontalAlignment="Left" Height="403" Margin="24,23,0,0" VerticalAlignment="Top" Width="750" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/WpfTutorialSamples;component/Images/bullet_blue.png" />
+                        <TextBlock Text="Owner Details" Foreground="Blue" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <TextBox Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,52,384,283.667" />
+                    <TextBox Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Margin="33,121,384,214.667" />
+                    <TextBox Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Margin="33,190,384,145.667" />
+                    <TextBox Text="Enter Your Phone Number" BorderBrush="Black" FontSize="18" Margin="33,254,384,81.667" />
+                    <TextBox Text="Enter Your Email Address" BorderBrush="Black" FontSize="18" Margin="33,325,384,10.667" />
+                    <TextBox Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="395,52,27,283.667" />
+                    <TextBox Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="395,121,27,214.667" />
+                    <TextBox Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="395,190,27,145.667" />
+                    <TextBox Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="395,254,27,81.667" />
+                    <TextBox Text="Enter the City your Branch is Located in " BorderBrush="Black" FontSize="18" Margin="395,325,27,10.667" />
+
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/WpfTutorialSamples;component/Images/bullet_red.png" />
+                        <TextBlock Text="PropertyDetails" Foreground="Red" />
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Page>

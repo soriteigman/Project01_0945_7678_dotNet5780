@@ -15,7 +15,7 @@ namespace BE
         string branchCity;
         public override string ToString()
         {
-            return "Hiiiiiiiiiii";
+            return "Bank Name: "+BankName+" Bank Number: "+BankNumber+" Branch Number: "+BranchNumber+" Branch Address: "+BranchAddress+"   Branch City: "+BranchCity;
         }
 
 
