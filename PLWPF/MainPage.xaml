@@ -8,10 +8,25 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
-    <Grid>
-        <Button Name="GR"  Content="GR" HorizontalAlignment="Left" Margin="156,173,0,0" VerticalAlignment="Top" Width="75" Click="GR_Click"/>
-        <Button Name="HU"  Content="HU" HorizontalAlignment="Left" Margin="380,173,0,0" VerticalAlignment="Top" Width="75" Click="HU_Click"/>
-        <Button Name="OWNER"  Content="OWNER" HorizontalAlignment="Left" Margin="617,173,0,0" VerticalAlignment="Top" Width="75" Click="OWNER_Click"/>
+    <Grid HorizontalAlignment="Left" Width="822" Margin="0,0,-22,0">
+        <Button Name="GR"  HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="White" Margin="4,127,0,0" VerticalAlignment="Top" Width="250" Click="GR_Click" Height="187">
+            <StackPanel Width="250">
+                <TextBlock Text="Start Your Vacation Right" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
+                <Image Source="Resources/vacation.PNG" Height="100" Margin="55,0,57,0"/>
+            </StackPanel>
+        </Button>
+        <Button Name="HU" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="White" FontSize="40" VerticalContentAlignment="Center" Margin="270,127,0,0" VerticalAlignment="Top" Width="250" Click="HU_Click" Height="187">
+            <StackPanel Width="216">
+                <TextBlock Text="Manage Property Listings" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
+                <Image Source="Resources/house.PNG" Height="100" Margin="55,0,57,0"/>
+            </StackPanel>
+        </Button>
+        <Button Name="OWNER" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="White" Margin="532,127,0,0" VerticalAlignment="Top" Width="250" Click="OWNER_Click" Height="187">
+            <StackPanel Width="216">
+                <TextBlock Text="Administrator......" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
+                <Image Source="Resources/admin.PNG" Height="100" Margin="55,0,57,0"/>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Page>
