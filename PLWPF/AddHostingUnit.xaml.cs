@@ -90,5 +90,62 @@ namespace PLWPF
                 Bankcity.Clear();
         }
 
+        private void ID_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (ID.Text == "")
+                ID.Text = "Enter Your ID";
+        }
+        private void Fname_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Fname.Text == "")
+                Fname.Text = "Enter Your First Name";
+        }
+        private void Lname_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Lname.Text == "")
+                Lname.Text = "Enter Your Last Name";
+        }
+
+        private void Phonenum_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Phonenum.Text == "")
+                Phonenum.Text = "Enter Your Phone Number";
+        }
+
+        private void Email_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Email.Text == "")
+                Email.Text = "Enter Your Email Address";
+        }
+
+        private void Bankname_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Bankname.Text == "")
+                Bankname.Text = "Enter Your Bank Name";
+        }
+
+        private void Banknum_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Banknum.Text == "")
+                Banknum.Text = "Enter Your Bank's Number";
+        }
+
+        private void Branchnum_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Branchnum.Text == "")
+                Branchnum.Text = "Enter Your Branch's Number";
+        }
+
+        private void Bankaddress_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Bankaddress.Text == "")
+                Bankaddress.Text = "Enter Your Branch's Address";
+        }
+
+        private void Bankcity_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Bankcity.Text == "")
+                Bankcity.Text = "Enter the City your Branch is Located in";
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace PLWPF
                     
                 }
                 else
-                    MessageBox.Show("אנא הכנס תעודת זהות 9 מספרים");
+                    MessageBox.Show("please enter a 9 digit ID");
             }
             catch (KeyNotFoundException a)
             {
