@@ -40,9 +40,10 @@
                     <ComboBox x:Name="cbArea" Padding="2" Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,97,369,239" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" BorderBrush="Black" FontSize="18" Margin="33,156,369,180" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <ComboBox Name="cbType" Padding="2" Text="Enter the Type of Property you have" BorderBrush="Black" FontSize="18" Margin="33,216,369,120" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
-                    <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="395,155,22,180"/>
-                    <CheckBox Name="Wifi" Content="Do you have Wifi?" Margin="395,200,22,135"/>
-                    <CheckBox Name="Parking" Content="Do you have Parking?" Margin="395,243,22,92"/>
+                    <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="395,155,211,180"/>
+                    <CheckBox Name="Wifi" Content="Do you have Wifi?" Margin="538,155,68,180"/>
+                    <CheckBox Name="Parking" Content="Do you have Parking?" Margin="395,195,211,140"/>
+                    <CheckBox Name="Pool" Content="Do you have a Pool?" Margin="538,195,68,140"/>
 
 
 
