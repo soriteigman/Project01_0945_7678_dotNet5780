@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
@@ -23,13 +25,26 @@ namespace PLWPF
         public GuestReq()
         {
             InitializeComponent();
+
             startday.BlackoutDates.AddDatesInPast();
-            startday.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddMonths(11)));
+            startday.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddMonths(11),DateTime.Now.AddYears(100)));
             endday.BlackoutDates.AddDatesInPast();
-            endday.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddMonths(11)));
+
+        }
+        private void Startday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        { 
+            DateTime from = startday.SelectedDate.Value.Date;
+            endday.BlackoutDates.Clear();
+            endday.BlackoutDates.AddDatesInPast();
+            endday.BlackoutDates.Add((new CalendarDateRange(DateTime.Now,from)));
 
         }
 
-    
+        private void Endday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        
     }
 }
