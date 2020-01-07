@@ -23,6 +23,11 @@ namespace PLWPF
         public GuestReq()
         {
             InitializeComponent();
+            startday.BlackoutDates.AddDatesInPast();
+            startday.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddMonths(11)));
+            endday.BlackoutDates.AddDatesInPast();
+            endday.BlackoutDates.Add(new CalendarDateRange(DateTime.Now, DateTime.Now.AddMonths(11)));
+
         }
 
     
