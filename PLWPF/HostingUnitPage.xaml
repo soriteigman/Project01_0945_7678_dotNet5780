@@ -12,8 +12,8 @@
         <Label  x:Name="label" Content="Sign in to Manage Your Properties" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Margin="48,9,38,0" Height="58" RenderTransformOrigin="0.5,0.5"/>
         <TextBox x:Name="ID" Height="46" Margin="26,122,26,0"  TextWrapping="Wrap" 
               FontSize="24"  Foreground="Gray" MaxLength="9" Text="Enter your ID" VerticalAlignment="Top" PreviewMouseDown="ID_PreviewMouseDown"/>
-        <GroupBox x:Name="groupBox" FlowDirection="LeftToRight" BorderBrush="Black" BorderThickness="3" Header="Enter ID" Margin="10,87,8,261" FontWeight="Bold"/>
-        <Button Name="HU_Button" Content="Add Properties Here" FontSize="24" HorizontalAlignment="Center" Margin="129,324,107,0" VerticalAlignment="Top" Width="564" Height="77" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" Click="Add_HU_Button_Click" MouseEnter="Add_HU_Button_MouseEnter" MouseLeave="Add_HU_Button_MouseLeave" Foreground="Black"/>
+        <GroupBox x:Name="groupBox" FlowDirection="LeftToRight" BorderBrush="Black" BorderThickness="3" Header="Enter ID" Margin="10,101,10,212" FontWeight="Bold"/>
+        <Button Name="HU_Button" Content="Add Properties Here" FontSize="24" HorizontalAlignment="Center" Margin="408,300,162,0" VerticalAlignment="Top" Width="230" Height="56" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" Click="Add_HU_Button_Click" MouseEnter="Add_HU_Button_MouseEnter" MouseLeave="Add_HU_Button_MouseLeave" Foreground="Black"/>
         <Button Name="ID_Button" FontSize="25" Content="Next" HorizontalAlignment="Left" Margin="319,213,0,0" VerticalAlignment="Top" Width="115" Height="44" Click="ID_Button_Click"/>
     </Grid>
 </Page>

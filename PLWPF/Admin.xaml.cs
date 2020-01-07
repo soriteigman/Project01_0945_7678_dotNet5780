@@ -49,7 +49,6 @@ namespace PLWPF
             hostingunit.DisplayMemberPath = "hostingunit";
             hostingunit.SelectedIndex = 0;
 
-            //DataContext = _bl.GetsOpenOrders();
         }
 
     }
