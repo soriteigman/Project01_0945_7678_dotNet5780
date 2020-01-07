@@ -166,7 +166,6 @@ namespace PLWPF
                 Bankcity.Text = "Enter the City your Branch is Located in";
         }
 
-<<<<<<< HEAD
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
@@ -178,19 +177,17 @@ namespace PLWPF
             h.MailAddress = Email.Text;
 
             //_bl.AddHostingUnit();
-
-=======
-        private void HUname_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (HUname.Text == "")
-                HUname.Text = "Enter the City your Branch is Located in";
         }
+            private void HUname_MouseLeave(object sender, MouseEventArgs e)
+            {
+                if (HUname.Text == "")
+                    HUname.Text = "Enter the City your Branch is Located in";
+            }
 
-        private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
+            private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
         {
             if (BankAcctNum.Text == "")
                 BankAcctNum.Text = "Enter the City your Branch is Located in";
->>>>>>> 4e3e44a4d3563cbe5e4cdc76f282537698eeb4d4
         }
     }
 }
