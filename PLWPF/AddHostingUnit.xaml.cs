@@ -23,7 +23,11 @@ namespace PLWPF
         public AddHostingUnit()
         {
             InitializeComponent();
-            //cbArea.DataContext = System.Enum.GetValues(typeof(BE.VacationArea));
+
+            this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
+            this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.VacationSubArea));
+            this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -90,6 +94,18 @@ namespace PLWPF
                 Bankcity.Clear();
         }
 
+        private void HUname_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (HUname.Text == "Give Your Property a Name ")
+                HUname.Clear();
+        }
+
+        private void BankAcctNum_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (BankAcctNum.Text == "Enter Your Bank Account Number")
+                BankAcctNum.Clear();
+        }
+
         private void ID_MouseLeave(object sender, MouseEventArgs e)
         {
             if (ID.Text == "")
@@ -146,6 +162,18 @@ namespace PLWPF
         {
             if (Bankcity.Text == "")
                 Bankcity.Text = "Enter the City your Branch is Located in";
+        }
+
+        private void HUname_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (HUname.Text == "")
+                HUname.Text = "Enter the City your Branch is Located in";
+        }
+
+        private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (BankAcctNum.Text == "")
+                BankAcctNum.Text = "Enter the City your Branch is Located in";
         }
     }
 }
