@@ -25,6 +25,7 @@ namespace PLWPF
         int intRate = 0;
         int intCount = 1;
         int Rate = 0;
+
         public AddHostingUnit()
         {
             InitializeComponent();
@@ -58,7 +59,7 @@ namespace PLWPF
                 img.Stretch = Stretch.UniformToFill;
                 img.Height = 25;
                 img.Width = 25;
-                img.Source = new BitmapImage(new Uri(@"\Resources\MinusRate.png", UriKind.Relative));
+                img.Source = new BitmapImage(new Uri(@"\Images\MinusRate.png", UriKind.Relative));
                 img.MouseEnter += imgRateMinus_MouseEnter;
                 pnlMinus.Children.Add(img);
 
@@ -68,7 +69,7 @@ namespace PLWPF
                 img1.Height = 25;
                 img1.Width = 25;
                 img1.Visibility = Visibility.Hidden;
-                img1.Source = new BitmapImage(new Uri(@"\Resources\PlusRate.png", UriKind.Relative));
+                img1.Source = new BitmapImage(new Uri(@"\Images\PlusRate.png", UriKind.Relative));
                 img1.MouseEnter += imgRatePlus_MouseEnter;
                 img1.MouseLeave += imgRatePlus_MouseLeave;
                 img1.MouseLeftButtonUp += imgRatePlus_MouseLeftButtonUp;
@@ -184,7 +185,7 @@ namespace PLWPF
 
         private void HUname_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (HUname.Text == "Give Your Property a Name ")
+            if (HUname.Text == "Give Your Property a Name")
                 HUname.Clear();
         }
 
@@ -192,6 +193,12 @@ namespace PLWPF
         {
             if (BankAcctNum.Text == "Enter Your Bank Account Number")
                 BankAcctNum.Clear();
+        }
+
+        private void Beds_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Beds.Text == "Amount of Beds Your Property has")
+                Beds.Clear();
         }
 
         private void ID_MouseLeave(object sender, MouseEventArgs e)
@@ -264,16 +271,38 @@ namespace PLWPF
 
             //_bl.AddHostingUnit();
         }
-            private void HUname_MouseLeave(object sender, MouseEventArgs e)
-            {
-                if (HUname.Text == "")
-                    HUname.Text = "Enter the City your Branch is Located in";
-            }
+        private void HUname_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (HUname.Text == "")
+                HUname.Text = "Give Your Property a Name";
+        }
 
-            private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
+        private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
         {
             if (BankAcctNum.Text == "")
                 BankAcctNum.Text = "Enter the City your Branch is Located in";
+        }
+
+        private void Beds_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Beds.Text == "")
+                Beds.Text = "Amount of Beds Your Property has";
+        }
+
+        private void next_Click(object sender, RoutedEventArgs e)
+        {
+            int newIndex = TC.SelectedIndex + 1;
+            if (newIndex >= TC.Items.Count)
+                newIndex = 0;
+            TC.SelectedIndex = newIndex;
+        }
+
+        private void prev_Click(object sender, RoutedEventArgs e)
+        {
+            int newIndex = TC.SelectedIndex - 1;
+            if (newIndex < 0)
+                newIndex = TC.Items.Count - 1;
+            TC.SelectedIndex = newIndex;
         }
     }
 }
