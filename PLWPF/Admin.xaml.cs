@@ -34,18 +34,18 @@ namespace PLWPF
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
 
             orders = _bl.GetsOpenOrders();
-            ListOfOrders.ItemsSource = orders; ;
+            ListOfOrders.ItemsSource = orders; 
             ListOfOrders.DisplayMemberPath = "orders";
             ListOfOrders.SelectedIndex = 0;
 
             gr = _bl.listGR();
-            guestreq.ItemsSource = gr; ;
+            guestreq.ItemsSource = gr; 
             guestreq.DisplayMemberPath = "guestrequest";
             guestreq.SelectedIndex = 0;
 
 
             hu = _bl.listHU();
-            hostingunit.ItemsSource = hu; ;
+            hostingunit.ItemsSource = hu; 
             hostingunit.DisplayMemberPath = "hostingunit";
             hostingunit.SelectedIndex = 0;
 
