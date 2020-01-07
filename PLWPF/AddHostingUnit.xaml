@@ -58,7 +58,6 @@
                     <ComboBox Name="cbType" Padding="2" Text="Enter the Type of Property you have" BorderBrush="Black" FontSize="18" Margin="33,216,369,120" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="395,155,22,180"/>
                     <CheckBox Name="Wifi" Content="Do you have Wifi?" Margin="395,200,22,135"/>
-                    <CheckBox Name="Parking" Content="Do you have Parking?" Margin="395,243,22,92"/>
 
 
 
