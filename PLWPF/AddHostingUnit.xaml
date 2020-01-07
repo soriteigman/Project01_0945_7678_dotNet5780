@@ -40,11 +40,28 @@
                     <ComboBox x:Name="cbArea" Padding="2" Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,97,369,239" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" BorderBrush="Black" FontSize="18" Margin="33,156,369,180" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <ComboBox Name="cbType" Padding="2" Text="Enter the Type of Property you have" BorderBrush="Black" FontSize="18" Margin="33,216,369,120" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
-                    <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="395,155,22,180"/>
-                    <CheckBox Name="Wifi" Content="Do you have Wifi?" Margin="395,200,22,135"/>
-                    <CheckBox Name="Parking" Content="Do you have Parking?" Margin="395,243,22,92"/>
 
-
+                    <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="395,155,211,180"/>
+                    <CheckBox Name="Wifi" Content="Do you have Wifi?" Margin="395,200,211,135"/>
+                    <CheckBox Name="Parking" Content="Do you have Parking?" Margin="395,243,211,92"/>
+                    <CheckBox Name="Pool" Content="Do you have a Pool?" Margin="556,156,50,179"/>
+                    <CheckBox Name="Jacuzzi" Content="Do you have a Jacuzzi?" Margin="556,196,50,139"/>
+                    <CheckBox Name="Garden" Content="Do you have a Garden?" Margin="556,243,50,92"/>
+                    <CheckBox Name="chiAttract" Content="Do you have Chidrens Attractions nearby?" Margin="395,283,211,52"/>
+                    <CheckBox Name="FitnessCenter" Content="Do you have a Fitness Center?" Margin="556,283,50,52"/>
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Margin="556,9,67,294">
+                        <StackPanel>
+                            <Grid x:Name="gdRating" Margin="10" MouseLeave="gdRating_MouseLeave">
+                                <WrapPanel x:Name="pnlMinus"/>
+                                <WrapPanel x:Name="pnlPlus"/>
+                            </Grid>
+                            <Separator Margin="0,10,0,10"/>
+                            <WrapPanel Margin="5,0,5,5">
+                                <TextBlock x:Name="lblRating" FontSize="18" Text="" />
+                                <TextBlock x:Name="lblCaption" FontSize="18" Text="Your Rating - " />
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
 
                 </Grid>
             </TabItem>
