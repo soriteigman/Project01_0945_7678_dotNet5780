@@ -10,7 +10,7 @@
       Title="AddHostingUnit">
 
     <Grid x:Name="addHUgrid">
-        <TabControl HorizontalAlignment="Left" Height="403" Margin="24,23,0,0" VerticalAlignment="Top" Width="750" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Height="393" Margin="24,23,73,0" VerticalAlignment="Top" SelectionChanged="TabControl_SelectionChanged">
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -18,12 +18,21 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,52,384,283.667" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5"/>
-                    <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Margin="33,121,384,214.667" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Opacity="0.5"/>
-                    <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Margin="33,190,384,145.667" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Opacity="0.5"/>
-                    <TextBox Name="Phonenum" Text="Enter Your Phone Number" BorderBrush="Black" FontSize="18" Margin="33,254,384,81.667" PreviewMouseDown="Phonenum_PreviewMouseDown" MouseLeave="Phonenum_MouseLeave" Opacity="0.5"/>
-                    <TextBox Name="Email" Text="Enter Your Email Address" BorderBrush="Black" FontSize="18" Margin="33,325,384,10.667" PreviewMouseDown="Email_PreviewMouseDown" MouseLeave="Email_MouseLeave" Opacity="0.5"/>
-                    <TextBox Name="BankAcctNum" Text="Enter Your Bank Account Number" BorderBrush="Black" FontSize="18" Margin="386,52,31,283" Opacity="0.5" PreviewMouseDown="BankAcctNum_PreviewMouseDown" MouseLeave="BankAcctNum_MouseLeave"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="149*"/>
+                        <ColumnDefinition Width="595*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,52,588,284" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Grid.ColumnSpan="2"/>
+                    <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Margin="33,121,518,215" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Grid.ColumnSpan="2"/>
+                    <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Margin="33,190,384,145" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Grid.ColumnSpan="2"/>
+                    <TextBox Name="Phonenum" Text="Enter Your Phone Number" BorderBrush="Black" FontSize="18" Margin="33,254,384,81" PreviewMouseDown="Phonenum_PreviewMouseDown" MouseLeave="Phonenum_MouseLeave" Grid.ColumnSpan="2"/>
+                    <TextBox Name="Email" Text="Enter Your Email Address" BorderBrush="Black" FontSize="18" Margin="33,325,384,10" PreviewMouseDown="Email_PreviewMouseDown" MouseLeave="Email_MouseLeave" Grid.ColumnSpan="2"/>
+                    <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="245.837,52,27,283" PreviewMouseDown="Bankname_PreviewMouseDown" MouseLeave="Bankname_MouseLeave" Grid.Column="1"/>
+                    <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="245.837,121,27,214" PreviewMouseDown="Banknum_PreviewMouseDown" MouseLeave="Banknum_MouseLeave" Grid.Column="1"/>
+                    <TextBox Name="Branchnum" Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="245.837,190,27,145" PreviewMouseDown="BankBranch_PreviewMouseDown" MouseLeave="Branchnum_MouseLeave" Grid.Column="1"/>
+                    <TextBox Name="Bankaddress" Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="245.837,254,27,81" PreviewMouseDown="BankAddress_PreviewMouseDown" MouseLeave="Bankaddress_MouseLeave" Grid.Column="1"/>
+                    <TextBox Name="Bankcity" Text="Enter the City your Branch is Located in" BorderBrush="Black" FontSize="18" Margin="245.837,325,27,10" PreviewMouseDown="Bankcity_PreviewMouseDown" MouseLeave="Bankcity_MouseLeave" Grid.Column="1"/>
+                    <Button Content="ADD" Click="Button_Click" Margin="184.837,132,384,195" Grid.Column="1"/>
                     <CheckBox Name="CollectionClearance" Content="Clearance to charge Your Account with commission" Margin="386,120,31,215"/>
                 </Grid>
             </TabItem>
@@ -34,6 +43,13 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="343*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="Give Your Property a Name " BorderBrush="Black" FontSize="20" Margin="152.535,31,211,304" Grid.Column="1" />
+                    <Button Name="fillCBArea" Margin="363.535,93,273,239" Grid.Column="1"  >
+                    </Button>
                     <TextBox Name="HUname" Text="Give Your Property a Name " BorderBrush="Black" FontSize="20" Margin="211,31,211,304.667" PreviewMouseDown="HUname_PreviewMouseDown" MouseLeave="HUname_MouseLeave" Opacity="0.5" />
                     <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="395,97,27,238" Opacity="0.5" />
 
@@ -53,18 +69,7 @@
                         <TextBlock Text="Bank Details" Foreground="Green" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*"/>
-                        <ColumnDefinition Width="85*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="331.244,52,27,284" PreviewMouseDown="Bankname_PreviewMouseDown" MouseLeave="Bankname_MouseLeave" Opacity="0.5" Grid.Column="1"/>
-                    <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="331.244,121,27,214" PreviewMouseDown="Banknum_PreviewMouseDown" MouseLeave="Banknum_MouseLeave" Opacity="0.5" Grid.Column="1"/>
-                    <TextBox Name="Branchnum" Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="331.244,190,27,145" PreviewMouseDown="BankBranch_PreviewMouseDown" MouseLeave="Branchnum_MouseLeave" Opacity="0.5" Grid.Column="1"/>
-                    <TextBox Name="Bankaddress" Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="331.244,254,27,81" PreviewMouseDown="BankAddress_PreviewMouseDown" MouseLeave="Bankaddress_MouseLeave" Opacity="0.5" Grid.Column="1"/>
-                    <TextBox Name="Bankcity" Text="Enter the City your Branch is Located in" BorderBrush="Black" FontSize="18" Margin="331.244,325,27,10" PreviewMouseDown="Bankcity_PreviewMouseDown" MouseLeave="Bankcity_MouseLeave" Opacity="0.5" Grid.Column="1"/>
-
-                </Grid>
+  
             </TabItem>
         </TabControl>
 

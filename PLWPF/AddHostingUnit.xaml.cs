@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
@@ -164,6 +166,20 @@ namespace PLWPF
                 Bankcity.Text = "Enter the City your Branch is Located in";
         }
 
+<<<<<<< HEAD
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
+            HostingUnit hu = new HostingUnit();
+            Host h = new Host();
+            h.PrivateName = Fname.Text;
+            h.FamilyName = Lname.Text;
+            h.PhoneNumber = Convert.ToInt32(Phonenum.Text);
+            h.MailAddress = Email.Text;
+
+            //_bl.AddHostingUnit();
+
+=======
         private void HUname_MouseLeave(object sender, MouseEventArgs e)
         {
             if (HUname.Text == "")
@@ -174,6 +190,7 @@ namespace PLWPF
         {
             if (BankAcctNum.Text == "")
                 BankAcctNum.Text = "Enter the City your Branch is Located in";
+>>>>>>> 4e3e44a4d3563cbe5e4cdc76f282537698eeb4d4
         }
     }
 }
