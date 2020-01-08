@@ -53,7 +53,7 @@
                     <CheckBox Name="Jacuzzi" Content="Do you have a Jacuzzi?" Margin="556,217,50,117.667"/>
                     <CheckBox Name="Garden" Content="Do you have a Garden?" Margin="556,245,27,89.667"/>
                     <CheckBox Name="chiAttract" Content="Do you have Childrens Attractions nearby?" Margin="264,217,225,117.667"/>
-                    <CheckBox Name="FitnessCenter" Content="Do you have a Fitness Center?" Margin="264,301,342,33.667" RenderTransformOrigin="0.86,0.667"/>
+                    <CheckBox Name="FitnessCenter" Content="Do you have a Fitness Center?" Margin="264,301,286,34" RenderTransformOrigin="0.86,0.667"/>
                     <Border HorizontalAlignment="Left" Margin="49,224,0,43.667" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Height="107" Width="166" >
                         <StackPanel>
                             <Grid Name="gdRating" Margin="10" MouseLeave="gdRating_MouseLeave">
