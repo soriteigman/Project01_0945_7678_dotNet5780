@@ -9,6 +9,7 @@ namespace BE
         public enum VacationType { Hotel, Bungalow, Tent, Hut, LogCabin, BeachHouse };
     //public enum VacationSubArea{};
 
+        public enum num { Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen, Fourteen };
 
         public enum VacationArea {All, DeadSea, Eilat, Jerusalem, North, South, Center };
         public enum DeadSea { All, EnGedi, DeadSea }
