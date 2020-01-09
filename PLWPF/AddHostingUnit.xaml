@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:PLWPF"
       xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddHostingUnit"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddHostingUnit">
+      d:DesignHeight="539.562" d:DesignWidth="806.091"
+      Title="AddHostingUnit" >
 
-    <Grid x:Name="addHUgrid">
+    <Grid x:Name="addHUgrid" HorizontalAlignment="Center" VerticalAlignment="Center">
         <TabControl Name="TC" HorizontalAlignment="Left" Height="403" Margin="24,23,0,0" VerticalAlignment="Top" Width="750" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Name="tab1">
                 <TabItem.Header>
@@ -43,8 +43,8 @@
 
                     <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="395,161,27,173.667" Opacity="0.5" PreviewMouseDown="Beds_PreviewMouseDown" MouseLeave="Beds_MouseLeave" />
 
-                    <ComboBox x:Name="cbArea" Padding="2" Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,110,369,225.667" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
-                    <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" BorderBrush="Black" FontSize="18" Margin="33,161,369,174.667" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
+                    <ComboBox x:Name="cbArea" Padding="2" SelectedValue="Content" Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,110,369,225.667" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" SelectionChanged="cbArea_SelectionChanged"/>
+                    <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" BorderBrush="Black" FontSize="18" Margin="33,161,369,174.667" Visibility="Hidden" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <ComboBox Name="cbType" Padding="2" Text="Enter the Type of Property you have" BorderBrush="Black" FontSize="18" Margin="392,110,10,225.667" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
 
                     <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="556,274,50,60.667"/>
