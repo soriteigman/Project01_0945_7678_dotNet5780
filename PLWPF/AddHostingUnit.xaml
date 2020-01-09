@@ -19,7 +19,7 @@
                 </TabItem.Header>
                 <Grid>
                     <Label Content="Please fill out your Personal info here" FontSize="20" Margin="196,10,203,325.667"/>
-                    <Button Name="next" Content="NEXT" FontSize="25" Margin="599,10,31,325.667" Click="next_Click"/>
+                    <Button Name="next" Content="NEXT" FontSize="25" Margin="580,27,50,308.667" Click="next_Click"/>
                     <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,89,384,246.667" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Margin="33,158,384,177.667" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Margin="33,228,384,107.667" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Opacity="0.5"/>
@@ -27,6 +27,7 @@
                     <TextBox Name="Email" Text="Enter Your Email Address" BorderBrush="Black" FontSize="18" Margin="386,158,31,177.667" PreviewMouseDown="Email_PreviewMouseDown" MouseLeave="Email_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="BankAcctNum" Text="Enter Your Bank Account Number" BorderBrush="Black" FontSize="18" Margin="386,227,31,107.667" Opacity="0.5" PreviewMouseDown="BankAcctNum_PreviewMouseDown" MouseLeave="BankAcctNum_MouseLeave"/>
                     <CheckBox Name="CollectionClearance" Content="Clearance to charge Your Account with commission" Margin="214,302,203,32.667"/>
+                    <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -69,6 +70,7 @@
                             </WrapPanel>
                         </StackPanel>
                     </Border>
+                    <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
 
                 </Grid>
             </TabItem>
@@ -82,13 +84,14 @@
                     <Label Content="Please fill out your Bank info here" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="168,27,169,308.667"/>
 
                     <Button Name="prev2" Content="PREV" FontSize="25" Margin="49,27,581,308.667" Click="prev_Click" />
-                    <Button Name="done" Content="DONE" FontSize="25" Margin="580,27,50,308.667"/>
+                    <Button Name="done" Content="DONE" FontSize="25" Margin="580,27,50,308.667" Click="done_Click"/>
 
                     <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="49,151,381,184.667" PreviewMouseDown="Bankname_PreviewMouseDown" MouseLeave="Bankname_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="49,209,381,125.667" PreviewMouseDown="Banknum_PreviewMouseDown" MouseLeave="Banknum_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="Branchnum" Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="403,151,27,183.667" PreviewMouseDown="BankBranch_PreviewMouseDown" MouseLeave="Branchnum_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="Bankaddress" Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="403,209,27,125.667" PreviewMouseDown="BankAddress_PreviewMouseDown" MouseLeave="Bankaddress_MouseLeave" Opacity="0.5"/>
                     <TextBox Name="Bankcity" Text="Enter the City your Branch is Located in" BorderBrush="Black" FontSize="18" Margin="198,276,160,58.667" PreviewMouseDown="Bankcity_PreviewMouseDown" MouseLeave="Bankcity_MouseLeave" Opacity="0.5"/>
+                    <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
 
                 </Grid>
             </TabItem>

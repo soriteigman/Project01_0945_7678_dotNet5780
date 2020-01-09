@@ -304,5 +304,10 @@ namespace PLWPF
                 newIndex = TC.Items.Count - 1;
             TC.SelectedIndex = newIndex;
         }
+
+        private void done_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
