@@ -35,5 +35,24 @@ namespace PLWPF
             this.NavigationService.Navigate(new HostingUnitPage());
 
         }
+
+        private void go_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbHostingUnit.SelectedValue.ToString() == "Update Hosting Unit")
+                ;//this.NavigationService.Navigate(new update());
+            //else remove property with key of remove text box
+        }
+
+        private void removeID_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (removeID.Text == "Enter the Key Code of the Property you would like to Remove")
+                removeID.Clear();
+        }
+
+        private void removeID_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (removeID.Text == "")
+                removeID.Text = "Enter the Key Code of the Property you would like to Remove";
+        }
     }
 }
