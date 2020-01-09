@@ -17,7 +17,7 @@
                         <TextBlock Text="Owner Details" Foreground="Blue" />
                     </StackPanel>
                 </TabItem.Header>
-                <Grid>
+                <Grid >
                     <Label Content="Please fill out your Personal info here" FontSize="20" Margin="196,10,203,325.667"/>
                     <Button Name="next" Content="NEXT" FontSize="25" Margin="580,27,50,308.667" Click="next_Click"/>
                     <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Margin="33,89,384,246.667" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5"/>

@@ -15,7 +15,7 @@
                 <GradientStop Color="#FFFD9A56"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Name="GR"  HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="White" Margin="4,127,0,0" VerticalAlignment="Top" Width="250" Click="GR_Click" Height="187">
+        <Button Name="GR" Background="Green"  HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="White" Margin="4,127,0,0" VerticalAlignment="Top" Width="250" Click="GR_Click" Height="187">
             <StackPanel Width="250">
                 <TextBlock Text="Start Your Vacation Right" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
                 <Image Source="Resources/vacation.PNG" Height="100" Margin="55,0,57,0"/>
@@ -33,6 +33,6 @@
                 <Image Source="Resources/admin.PNG" Height="100" Margin="55,0,57,0"/>
             </StackPanel>
         </Button>
-
+        <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
     </Grid>
 </Page>
