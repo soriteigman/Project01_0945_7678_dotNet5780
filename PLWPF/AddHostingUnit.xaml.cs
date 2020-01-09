@@ -305,8 +305,29 @@ namespace PLWPF
             TC.SelectedIndex = newIndex;
         }
 
-        private void done_Click(object sender, RoutedEventArgs e)
+        private void done_Click(object sender, RoutedEventArgs e)//creates a hosting unit out of the owners info
         {
+            IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
+            HostingUnit hu = new HostingUnit();
+            Host h = new Host();
+            BankBranch b = new BankBranch();
+
+            b.BankNumber = Convert.ToInt32(Banknum.Text);
+            b.BankName = Bankname.Text;
+            b.BranchNumber = Convert.ToInt32(Branchnum.Text);
+            b.BranchAddress = Bankaddress.Text;
+            b.BranchCity = Bankcity.Text;
+
+            h.HostKey = Convert.ToInt32(ID.Text);
+            h.PrivateName = Fname.Text;
+            h.FamilyName = Lname.Text;
+            h.PhoneNumber = Convert.ToInt32(Phonenum.Text);
+            h.MailAddress = Email.Text;
+            h.BankBranchDetails = b;
+
+            //hosting unit details
+
+            
 
         }
     }
