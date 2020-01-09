@@ -307,39 +307,169 @@ namespace PLWPF
         private void done_Click(object sender, RoutedEventArgs e)//creates a hosting unit out of the owners info
         {
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
-            HostingUnit hu = new HostingUnit();
-            Host h = new Host();
-            BankBranch b = new BankBranch();
 
-            b.BankNumber = Convert.ToInt32(Banknum.Text);
-            b.BankName = Bankname.Text;
-            b.BranchNumber = Convert.ToInt32(Branchnum.Text);
-            b.BranchAddress = Bankaddress.Text;
-            b.BranchCity = Bankcity.Text;
 
-            h.HostKey = Convert.ToInt32(ID.Text);
-            h.PrivateName = Fname.Text;
-            h.FamilyName = Lname.Text;
-            h.PhoneNumber = Convert.ToInt32(Phonenum.Text);
-            h.MailAddress = Email.Text;
-            h.BankBranchDetails = b;
+            bool flag = true;
+            bool email_flag = true;
+            try
+            {
+                email_flag = _bl.IsValidEmail(Email.Text);
+            }
+            catch (Exception a)
+            {
+                Email.Clear();
+                Email.Text = "Enter Your Email Address";
+                Email.Foreground = Brushes.Red;
+                flag = false;
+                email_flag = false;
+            }
 
-            hu.HostingUnitName = HUname.Text;
-            hu.Area = (VacationArea)Enum.Parse(typeof(VacationArea), cbArea.SelectedValue.ToString(), true);
-            hu.SubArea = cbSubArea.SelectedValue.ToString();
-            hu.Type = (VacationType)Enum.Parse(typeof(VacationType), cbType.SelectedValue.ToString(), true);
-            hu.Beds = Convert.ToInt32(Beds.Text);
-            hu.Pet = (bool)Pets.IsChecked;
-            hu.WiFi = (bool)Wifi.IsChecked;
-            hu.Parking = (bool)Parking.IsChecked;
-            hu.Pool = (bool)Pool.IsChecked;
-            hu.Jacuzzi = (bool)Jacuzzi.IsChecked;
-            hu.Garden = (bool)Garden.IsChecked;
-            hu.ChildrensAttractions = (bool)chiAttract.IsChecked;
-            hu.FitnessCenter = (bool)FitnessCenter.IsChecked;
-            hu.Stars= (StarRating)Enum.Parse(typeof(StarRating), lblRating.Text.ToString(), true);
+            if (ID.Text == "Enter Your ID")
+            {
+                flag = false;
+                ID.Foreground = Brushes.Red;
+            }
 
-            _bl.AddHostingUnit(hu);
+            if (Fname.Text == "Enter Your First Name")
+            {
+                flag = false;
+                Fname.Foreground = Brushes.Red;
+            }
+
+            if (Lname.Text == "Enter Your Last Name")
+            {
+                flag = false;
+                Lname.Foreground = Brushes.Red;
+            }
+
+            if (HUname.Text == "Give Your Property a Name")
+            {
+                flag = false;
+                HUname.Foreground = Brushes.Red;
+            }
+
+
+            if (cbSubArea.SelectedValue == null)
+            {
+                flag = false;
+                cbSubArea.Foreground = Brushes.Red;
+            }
+
+
+            if (cbArea.SelectedValue == null)
+            {
+                flag = false;
+                cbArea.Foreground = Brushes.Red;
+            }
+
+
+            if (Beds.Text == "Amount of Beds Your Property has")
+            {
+                flag = false;
+                Beds.Foreground = Brushes.Red;
+            }
+
+            if (Phonenum.Text == "Enter Your Phone Number")
+            {
+                flag = false;
+                Phonenum.Foreground = Brushes.Red;
+            }
+
+            if (BankAcctNum.Text == "Enter Your Bank Account Number")
+            {
+                flag = false;
+                BankAcctNum.Foreground = Brushes.Red;
+            }
+
+            if (cbType.SelectedValue == null)
+            {
+                flag = false;
+                cbType.Foreground = Brushes.Red;
+            }
+
+            if (Bankname.Text == "Enter Your Bank Name")
+            {
+                flag = false;
+                Bankname.Foreground = Brushes.Red;
+            }
+
+            if (Banknum.Text == "Enter Your Bank's Number")
+            {
+                flag = false;
+                Banknum.Foreground = Brushes.Red;
+            }
+
+            if (Branchnum.Text == "Enter Your Branch's Number")
+            {
+                flag = false;
+                Branchnum.Foreground = Brushes.Red;
+            }
+
+            if (Bankaddress.Text == "Enter Your Branch's Address")
+            {
+                flag = false;
+                Bankaddress.Foreground = Brushes.Red;
+            }
+
+            if (Bankcity.Text == "Enter the City your Branch is Located in")
+            {
+                flag = false;
+                Bankcity.Foreground = Brushes.Red;
+            }
+
+
+            if (lblRating.Text.ToString() == "0")
+            {
+                flag = false;
+                errorStars.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errorStars.Visibility = Visibility.Hidden;
+            }
+
+            
+
+
+            if (flag)
+            {
+                HostingUnit hu = new HostingUnit();
+                Host h = new Host();
+                BankBranch b = new BankBranch
+                {
+                    BankNumber = Convert.ToInt32(Banknum.Text),
+                    BankName = Bankname.Text,
+                    BranchNumber = Convert.ToInt32(Branchnum.Text),
+                    BranchAddress = Bankaddress.Text,
+                    BranchCity = Bankcity.Text
+                };
+
+                h.HostKey = Convert.ToInt32(ID.Text);
+                h.PrivateName = Fname.Text;
+                h.FamilyName = Lname.Text;
+                h.PhoneNumber = Convert.ToInt32(Phonenum.Text);
+                h.MailAddress = Email.Text;
+                h.BankBranchDetails = b;
+
+                hu.HostingUnitName = HUname.Text;
+                hu.Area = (VacationArea)Enum.Parse(typeof(VacationArea), cbArea.SelectedValue.ToString(), true);
+                hu.SubArea = cbSubArea.SelectedValue.ToString();
+                hu.Type = (VacationType)Enum.Parse(typeof(VacationType), cbType.SelectedValue.ToString(), true);
+                hu.Beds = Convert.ToInt32(Beds.Text);
+                hu.Pet = (bool)Pets.IsChecked;
+                hu.WiFi = (bool)Wifi.IsChecked;
+                hu.Parking = (bool)Parking.IsChecked;
+                hu.Pool = (bool)Pool.IsChecked;
+                hu.Jacuzzi = (bool)Jacuzzi.IsChecked;
+                hu.Garden = (bool)Garden.IsChecked;
+                hu.ChildrensAttractions = (bool)chiAttract.IsChecked;
+                hu.FitnessCenter = (bool)FitnessCenter.IsChecked;
+                hu.Stars = (StarRating)Enum.Parse(typeof(StarRating), lblRating.Text.ToString(), true);
+
+                _bl.AddHostingUnit(hu);
+                MessageBox.Show("Here is your new property key code. Please save for future reference.\n Key: "+ hu.HostingUnitKey, "Important Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.NavigationService.Navigate(new MainPage());
+            }
 
         }
 
@@ -347,6 +477,7 @@ namespace PLWPF
         {
             cbSubArea.Visibility = Visibility.Visible;
             string val = cbArea.SelectedValue.ToString();
+            cbArea.Foreground = Brushes.Black;
 
             if (val == "DeadSea")
             {
@@ -387,6 +518,86 @@ namespace PLWPF
 
         }
 
-        
+        private void done_MouseEnter(object sender, MouseEventArgs e)//will enable the button if all info is filled in
+        {
+            IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
+        }
+
+        private void Fname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Fname.Foreground = Brushes.Black;
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Email.Foreground = Brushes.Black;
+
+        }
+
+        private void cbSubArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbSubArea.Foreground = Brushes.Black;
+        }
+
+        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbType.Foreground = Brushes.Black;
+        }
+
+        private void ID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ID.Foreground = Brushes.Black;
+        }
+
+        private void Lname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Lname.Foreground = Brushes.Black;
+        }
+
+        private void Phonenum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Phonenum.Foreground = Brushes.Black;
+        }
+
+        private void BankAcctNum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BankAcctNum.Foreground = Brushes.Black;
+        }
+
+        private void Beds_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Beds.Foreground = Brushes.Black;
+        }
+
+        private void Bankname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Bankname.Foreground = Brushes.Black;
+        }
+
+        private void Banknum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Banknum.Foreground = Brushes.Black;
+        }
+
+        private void Bankcity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Bankcity.Foreground = Brushes.Black;
+        }
+
+        private void Branchnum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Branchnum.Foreground = Brushes.Black;
+        }
+
+        private void Bankaddress_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Bankaddress.Foreground = Brushes.Black;
+        }
+
+        private void HUname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            HUname.Foreground = Brushes.Black;
+
+        }
     }
 }

@@ -341,6 +341,15 @@ namespace BL
             return true;// if there is at least one unit with that host returns true
         }
 
+        public HostingUnit SearchHUbyID_bl(int key)//finds hosting unit by its key
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            HostingUnit hu = new HostingUnit();
+            hu = dal_bl.SearchHUbyID(key);
+
+            return hu;
+        }
+
         public bool RemoveUnitCheck(HostingUnit hu)//checks to see if there are any active reservations for that unit before removing it
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal

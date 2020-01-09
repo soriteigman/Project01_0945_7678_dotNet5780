@@ -33,6 +33,8 @@ namespace BL
 
         bool HExists(int id);//checks to see if any hosting units have a host with this ID
 
+        HostingUnit SearchHUbyID_bl(int key);//finds hosting unit by its key
+
         bool IsValidEmail(string email);
 
         bool AvailabilityCheck(HostingUnit hu, GuestRequest gr);//checks if requested dates are available

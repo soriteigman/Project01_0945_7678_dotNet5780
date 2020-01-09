@@ -77,25 +77,29 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </Page.Resources>
 
     <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="104*"/>
+            <RowDefinition Height="121*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="White" Offset="1"/>
                 <GradientStop Color="#FFFD9A56"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="117,109,0,0" VerticalAlignment="Top" Width="255" SelectionChanged="CbHostingUnit_SelectionChanged" Height="42">
+        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="117,109,0,0" VerticalAlignment="Top" Width="255" Height="42">
             <ComboBoxItem Name="UpdateHostingUnit" Content="Update Hosting Unit" Height="31" Margin="0,0,-2,0"/>
             <ComboBoxItem Name="RemoveHostingUnit" Content="Remove Hosting Unit" Height="31" Margin="0,0,-2,0"/>
         </ComboBox>
         <Label Content="What would You like to do?" HorizontalAlignment="Left" Margin="117,60,0,0" VerticalAlignment="Top" Width="255" Height="44" FontSize="20"/>
-        <Button Name="go" Content="GO" Style="{DynamicResource RoundCorner}" Margin="411,109,298,299" Click="go_Click"/>
-        <TextBox Name="removeID" Text="Enter the Key Code of the Property you would like to Remove" VerticalContentAlignment="Center" BorderBrush="Black" FontSize="20" Margin="27,254,213,154" Opacity="0.5" PreviewMouseDown="removeID_PreviewMouseDown" MouseLeave="removeID_MouseLeave"/>
-        <Button Name="remove" Content="REMOVE" Style="{DynamicResource RoundCorner}" Margin="634,254,75,154" Click="go_Click"/>
-        <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
+        <Button Name="go" Content="GO" Style="{DynamicResource RoundCorner}" Margin="411,109,298,59" Click="go_Click" RenderTransformOrigin="0.502,0.5"/>
+        <TextBox Name="removeID" Visibility="Hidden" Text="Enter the Key Code of the Property you would like to Remove" VerticalContentAlignment="Center" BorderBrush="Black" FontSize="20" Margin="20,47,220,151" Opacity="0.5" PreviewMouseDown="removeID_PreviewMouseDown" MouseLeave="removeID_MouseLeave" Grid.Row="1"/>
+        <Button Name="remove"  Visibility="Hidden" Content="REMOVE" Style="{DynamicResource RoundCorner}" Margin="637,50,72,148" Click="remove_Click" Grid.Row="1"/>
+        <Image Source="Resources/logoOption2.2.png" Margin="580,91,-24,-12" Grid.Row="1"/>
 
     </Grid>
 </Page>

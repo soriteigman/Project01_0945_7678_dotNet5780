@@ -21,7 +21,7 @@ namespace BE
         public override string ToString()
         {
             return ("Private Name: "+PrivateName+"  Family Name: "+FamilyName+
-                "\nPhone Number: "+PhoneNumber+"\nEmail Address: "+MailAddress);
+                "\nPhone Number: "+PhoneNumber+"\nEmail Address: "+MailAddress+"\nCollection Clearance: "+CollectionClearance);
         }
 
 

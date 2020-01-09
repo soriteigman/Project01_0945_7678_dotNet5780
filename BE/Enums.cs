@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-        public enum VacationType { Hotel, Bungalow, Tent, Hut, LogCabin, BeachHouse };
+        public enum VacationType { Any, Hotel, Bungalow, Tent, Hut, LogCabin, BeachHouse };
     //public enum VacationSubArea{};
 
         public enum num { Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen, Fourteen };

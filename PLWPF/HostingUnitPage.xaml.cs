@@ -41,8 +41,7 @@ namespace PLWPF
         }
         private void Add_HU_Button_MouseEnter(object sender, MouseEventArgs e)
         {
-            HU_Button.Foreground = Brushes.Blue;
-            //HU_Button.
+            HU_Button.Foreground = Brushes.Red;
         }
 
         private void Add_HU_Button_MouseLeave(object sender, MouseEventArgs e)
@@ -58,7 +57,7 @@ namespace PLWPF
                 {
                     if (myBL.HExists(int.Parse(ID.Text)))
                     {
-                        this.NavigationService.Navigate(new ManagingPage(int.Parse(ID.Text)));
+                        this.NavigationService.Navigate(new ManagingPage(/*int.Parse(ID.Text)*/));
                     }
                     else
                     {
@@ -78,6 +77,12 @@ namespace PLWPF
             //{
             //    MessageBox.Show(a.Message);
             //}
+        }
+
+        private void ID_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (ID.Text == "")
+                ID.Text = "Enter your ID";
         }
     }
 }

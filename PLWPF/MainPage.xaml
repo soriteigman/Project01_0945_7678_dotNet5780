@@ -69,7 +69,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="790" Margin="0,10,10,0" Height="440">
+    <Grid >
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="White" Offset="1"/>
