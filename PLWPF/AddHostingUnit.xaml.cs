@@ -34,7 +34,7 @@ namespace PLWPF
             lblRating.Text = intRate.ToString();
 
             this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
-            this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.VacationSubArea));
+            //this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.VacationSubArea));
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
 
         }

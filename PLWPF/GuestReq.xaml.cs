@@ -25,6 +25,9 @@ namespace PLWPF
         public GuestReq()
         {
             InitializeComponent();
+            this.type.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+
+
 
             startday.BlackoutDates.AddDatesInPast();
             startday.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddMonths(11),DateTime.Now.AddYears(100)));
@@ -42,9 +45,14 @@ namespace PLWPF
 
         private void Endday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            IBL _bl = BL.FactoryBL.getBL();//creates an instance of dal
 
+            DateTime from = startday.SelectedDate.Value.Date;
+            DateTime to = endday.SelectedDate.Value.Date;
+            int numdays= (to - from).Days;
+            numofday.Content = numdays-1 + "-night stay";
         }
 
-        
+ 
     }
 }
