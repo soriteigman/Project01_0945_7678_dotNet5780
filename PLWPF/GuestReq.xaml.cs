@@ -96,5 +96,13 @@ namespace PLWPF
                 this.subareacb.ItemsSource = Enum.GetValues(typeof(BE.All));
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (PName.Text == "")
+            {
+
+            }
+        }
     }
 }
