@@ -7,14 +7,21 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagingPage">
+    
 
-    <Grid>
-        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="116,80,0,0" VerticalAlignment="Top" Width="122" SelectionChanged="CbHostingUnit_SelectionChanged">
+    <Grid >
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="1"/>
+                <GradientStop Color="#FFFD9A56"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="117,109,0,0" VerticalAlignment="Top" Width="255" SelectionChanged="CbHostingUnit_SelectionChanged" Height="42">
             <ComboBoxItem Name="UpdateHostingUnit" Content="Update Hosting Unit" Height="31" Margin="0,0,-2,0"/>
             <ComboBoxItem Name="RemoveHostingUnit" Content="Remove Hosting Unit" Height="31" Margin="0,0,-2,0"/>
         </ComboBox>
-        <Label Content="What would You like to do?" HorizontalAlignment="Left" Margin="117,60,0,0" VerticalAlignment="Top" Width="121" Height="22" FontSize="8"/>
-
+        <Label Content="What would You like to do?" HorizontalAlignment="Left" Margin="117,60,0,0" VerticalAlignment="Top" Width="255" Height="44" FontSize="20"/>
+        <Button Name="go" Content="GO" Margin="411,109,298,299"/>
 
     </Grid>
 </Page>

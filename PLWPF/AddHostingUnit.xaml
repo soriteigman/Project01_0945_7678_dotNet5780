@@ -10,7 +10,7 @@
       Title="AddHostingUnit" >
 
     <Grid x:Name="addHUgrid" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TabControl Name="TC" HorizontalAlignment="Left" Height="403" Margin="24,23,0,0" VerticalAlignment="Top" Width="750" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Name="TC" HorizontalAlignment="Center" Height="403" Margin="24,23,0,0" VerticalAlignment="Center" Width="750" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Name="tab1">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -41,7 +41,7 @@
                     <Button Name="next1" Content="NEXT" FontSize="25" Margin="580,27,50,308.667" Click="next_Click"/>
                     <Button Name="prev1" Content="PREV" FontSize="25" Margin="49,27,581,308.667" Click="prev_Click" />
 
-                    <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="395,161,27,173.667" Opacity="0.5" PreviewMouseDown="Beds_PreviewMouseDown" MouseLeave="Beds_MouseLeave" />
+                    <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="395,161,10,173.667" Opacity="0.5" PreviewMouseDown="Beds_PreviewMouseDown" MouseLeave="Beds_MouseLeave" />
 
                     <ComboBox x:Name="cbArea" Padding="2" SelectedValue="Content" Text="Enter the General Area of your Property" BorderBrush="Black" FontSize="18" Margin="33,110,369,225.667" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" SelectionChanged="cbArea_SelectionChanged"/>
                     <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" BorderBrush="Black" FontSize="18" Margin="33,161,369,174.667" Visibility="Hidden" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>

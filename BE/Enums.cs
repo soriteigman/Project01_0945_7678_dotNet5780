@@ -37,7 +37,7 @@ namespace BE
 
         public enum Choices { DontCare, No, Yes};
 
-        public enum StarRating { unrated, two_star, three_star, four_star, five_star }
+        public enum StarRating { dontCare, one_star, two_star, three_star, four_star, five_star  }
 
        
 }
