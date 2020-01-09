@@ -18,7 +18,7 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for AddHostingUnit.xaml
+    /// Interaction logic for AddHostingUnit.xaml..
     /// </summary>
     public partial class AddHostingUnit : Page
     {
