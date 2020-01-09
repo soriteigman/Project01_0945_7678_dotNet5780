@@ -18,7 +18,7 @@ namespace BE
         DateTime entryDate;
         DateTime releaseDate;
         VacationArea area;
-        VacationSubArea subArea;
+        string subArea;
         VacationType type;
         int adults;
         int children;
@@ -51,7 +51,6 @@ namespace BE
         public DateTime EntryDate { get => entryDate; set => entryDate = value; }
         public DateTime ReleaseDate { get => releaseDate; set => releaseDate = value; }
         public VacationArea Area { get => area; set => area = value; }
-        public VacationSubArea SubArea { get => subArea; set => subArea = value; }
         public VacationType Type { get => type; set => type = value; }
         public int Adults { get => adults; set => adults = value; }
         public int Children { get => children; set => children = value; }
@@ -64,5 +63,6 @@ namespace BE
         public StarRating Stars { get => stars; set => stars = value; }
         public Choices WiFi { get => wiFi; set => wiFi = value; }
         public Choices Parking { get => parking; set => parking = value; }
+        public string SubArea { get => subArea; set => subArea = value; }
     }
 }

@@ -12,7 +12,13 @@
     <Grid x:Name="addReq">
 
         <Grid Background="#FFFDF9F9">
-            <Grid HorizontalAlignment="Left" Height="378" Margin="72,32,0,0" VerticalAlignment="Top" Width="452" RenderTransformOrigin="0.5,0.5" OpacityMask="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" ShowGridLines="True" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}">
+            <Grid HorizontalAlignment="Left" Height="378" Margin="68,32,0,0" VerticalAlignment="Top" Width="452" RenderTransformOrigin="0.5,0.5" OpacityMask="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" ShowGridLines="True">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFFD9A56"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
                 <TextBox Name="area" Text="area"  HorizontalAlignment="Left" Height="24" Margin="57,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.588,2.479" />
                 <GroupBox x:Name="subareabox" FlowDirection="LeftToRight" BorderBrush="Black" BorderThickness="1" Header="Sub area" Margin="252,64,80,269" FontWeight="Bold"/>
                 <GroupBox x:Name="areabox" FlowDirection="LeftToRight" BorderBrush="Black" BorderThickness="1" Header="Destination Area" Margin="57,64,275,269" FontWeight="Bold"/>

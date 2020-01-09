@@ -13,7 +13,7 @@ namespace BE
         string hostingUnitName;
         private bool[,] diary = new bool[12, 31];
         VacationArea area;
-        VacationSubArea subArea;
+        string subArea;
         VacationType type;
         int beds;
         bool pet;
@@ -59,7 +59,6 @@ namespace BE
         public bool[,] Diary { get => diary; set => diary = value; }
         public Host Owner { get => owner; set => owner = value; }
         public VacationArea Area { get => area; set => area = value; }
-        public VacationSubArea SubArea { get => subArea; set => subArea = value; }
         public VacationType Type { get => type; set => type = value; }
         public bool Pet { get => pet; set => pet = value; }
         public bool WiFi { get => wiFi; set => wiFi = value; }
@@ -71,5 +70,6 @@ namespace BE
         public bool FitnessCenter { get => fitnessCenter; set => fitnessCenter = value; }
         public StarRating Stars { get => stars; set => stars = value; }
         public int Beds { get => beds; set => beds = value; }
+        public string SubArea { get => subArea; set => subArea = value; }
     }
 }
