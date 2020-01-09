@@ -34,7 +34,6 @@ namespace PLWPF
             lblRating.Text = intRate.ToString();
 
             this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
-            this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.VacationSubArea));
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
 
         }
@@ -325,9 +324,66 @@ namespace PLWPF
             h.MailAddress = Email.Text;
             h.BankBranchDetails = b;
 
-            //hosting unit details
+            hu.HostingUnitName = HUname.Text;
+            hu.Area = (VacationArea)Enum.Parse(typeof(VacationArea), cbArea.SelectedValue.ToString(), true);
+            hu.SubArea = cbSubArea.SelectedValue.ToString();
+            hu.Type = (VacationType)Enum.Parse(typeof(VacationType), cbType.SelectedValue.ToString(), true);
+            hu.Beds = Convert.ToInt32(Beds.Text);
+            hu.Pet = (bool)Pets.IsChecked;
+            hu.WiFi = (bool)Wifi.IsChecked;
+            hu.Parking = (bool)Parking.IsChecked;
+            hu.Pool = (bool)Pool.IsChecked;
+            hu.Jacuzzi = (bool)Jacuzzi.IsChecked;
+            hu.Garden = (bool)Garden.IsChecked;
+            hu.ChildrensAttractions = (bool)chiAttract.IsChecked;
+            hu.FitnessCenter = (bool)FitnessCenter.IsChecked;
+            hu.Stars= (StarRating)Enum.Parse(typeof(StarRating), lblRating.Text.ToString(), true);
 
-            
+            _bl.AddHostingUnit(hu);
+
+        }
+
+        private void cbArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbSubArea.Visibility = Visibility.Visible;
+            string val = cbArea.SelectedValue.ToString();
+
+            if (val == "DeadSea")
+            {
+                cbSubArea.SelectedItem = "{Binding Path=DeadSea,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.DeadSea));
+            }
+            else if (val == "Eilat")
+            {
+                cbSubArea.SelectedItem = "{Binding Path=Eilat,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.Eilat));
+            }
+            else if (val == "Jerusalem")
+            {
+                cbSubArea.SelectedItem = "{Binding Path=Jerusalem,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.Jerusalem));
+            }
+            else if (val == "North")
+            {
+                cbSubArea.SelectedItem = "{Binding Path=North,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.North));
+            }
+            else if (val == "South")
+            {
+                cbSubArea.SelectedItem = "{Binding Path=South,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.South));
+            }
+            else if (val == "Center")
+            {
+                cbSubArea.SelectedItem = "{Binding Path=Center,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.Center));
+            }
+            else
+            {
+                cbSubArea.SelectedItem = "{Binding Path=All,Mode=TwoWay}";
+                this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.All));
+            }
+
 
         }
     }

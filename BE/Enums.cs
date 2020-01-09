@@ -10,14 +10,19 @@ namespace BE
     //public enum VacationSubArea{};
 
 
-        public enum VacationArea {all, DeadSea, Eilat, Jerusalem, North, South, Center };
-        public enum deadcity {All, EnGedi,  }
-        public enum eilat { All, Eilat }
+        public enum VacationArea {All, DeadSea, Eilat, Jerusalem, North, South, Center };
+        public enum DeadSea { All, EnGedi, DeadSea }
+        public enum Eilat { All, Eilat }
         public enum Jerusalem {All, Jerusalem , BeitShemesh, Beitar, }
         public enum North {All, Tiberias, Ẕefat, RishonLeẔiyon, Afula, Akko , BetSheʾan , Caesarea, Haifa, Karmiʾel , Nahariya, Nazareth, QiryatShemona, }
-        public enum south {All, Ashdod, Ashqelon, Beersheba , Meron , Netanya, Dimona, Arad, H̱adera , KefarSava }
+        public enum South {All, Ashdod, Ashqelon, Beersheba , Meron , Netanya, Dimona, Arad, H̱adera , KefarSava }
         public enum Center {All, BneiBrak, TelAviv, RamatGan , PetaẖTikva ,BatYam, GivatHayim, Herzliya, H̱olon, Lod, Ramla , Reẖovot }
-
+        public enum All
+        {
+                Afula, Akko, Arad, Ashdod, Ashqelon, BatYam, Beersheba, BetSheʾan, BetSheʿarim, BneiBrak, Caesarea, Dimona,
+            Eilat, EnGedi, GivatHayim, H̱adera, Haifa, Herzliya, H̱olon, Jerusalem, Karmiʾel, KefarSava, Lod, Meron, Nahariya, Nazareth, Netanya,
+            PetaẖTikva, QiryatShemona, RamatGan, Ramla, Reẖovot, RishonLeẔiyon, TelAviv, Tiberias, Ẕefat
+        };
 
     public enum Status { Active ,SentEmail, NoAnswer, NotAddressedYet, Closed , Booked};
     /*
