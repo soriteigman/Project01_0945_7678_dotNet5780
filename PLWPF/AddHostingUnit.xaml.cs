@@ -465,10 +465,18 @@ namespace PLWPF
                 hu.ChildrensAttractions = (bool)chiAttract.IsChecked;
                 hu.FitnessCenter = (bool)FitnessCenter.IsChecked;
                 hu.Stars = (StarRating)Enum.Parse(typeof(StarRating), lblRating.Text.ToString(), true);
+                try
+                {
 
-                _bl.AddHostingUnit(hu);
-                MessageBox.Show("Here is your new property key code. Please save for future reference.\n Key: "+ hu.HostingUnitKey, "Important Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.NavigationService.Navigate(new MainPage());
+                    _bl.AddHostingUnit(hu);
+                    MessageBox.Show("Here is your new property key code. Please save for future reference.\n Your Key: " + hu.HostingUnitKey, "Important Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.NavigationService.Navigate(new MainPage());
+                }
+                catch(Exception a)
+                {
+                    MessageBox.Show(a.Message , "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
             }
 
         }
