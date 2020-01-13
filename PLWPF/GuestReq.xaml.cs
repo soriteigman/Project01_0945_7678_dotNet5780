@@ -30,7 +30,6 @@ namespace PLWPF
             this.type.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
             this.areacb.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
             this.numadult.ItemsSource = Enum.GetValues(typeof(BE.num));
-            this.numkid.ItemsSource = Enum.GetValues(typeof(BE.num));
             this.starcb.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
 
 
@@ -240,46 +239,46 @@ namespace PLWPF
                 gr.RegistrationDate = DateTime.Today;
                 gr.Pet = (bool)pet.IsChecked;
 
-                if(((bool)Nwifi.IsChecked && (bool)ywifi.IsChecked)|| !(bool)Nwifi.IsChecked&& !(bool)ywifi.IsChecked)
+                if(((bool)Nwifi.IsChecked && (bool)ywifi.IsChecked)|| !((bool)Nwifi.IsChecked)&& (!(bool)ywifi.IsChecked))
                     gr.WiFi = Choices.DontCare;
                 else if ((bool)Nwifi.IsChecked)
                     gr.WiFi = Choices.No;
                 else if ((bool)ywifi.IsChecked)
                     gr.WiFi = Choices.Yes;
 
-                if (((bool)Nparking.IsChecked && (bool)yparking.IsChecked) || !(bool)Nparking.IsChecked && !(bool)yparking.IsChecked)
+                if (((bool)Nparking.IsChecked && (bool)yparking.IsChecked) || !((bool)Nparking.IsChecked) && (!(bool)yparking.IsChecked))
                     gr.Parking = Choices.DontCare;
-                else if ((bool)Nwifi.IsChecked)
+                else if ((bool)Nparking.IsChecked)
                     gr.Parking = Choices.No;
-                else if ((bool)ywifi.IsChecked)
+                else if ((bool)yparking.IsChecked)
                     gr.Parking = Choices.Yes;
 
-                if (((bool)Npool.IsChecked && (bool)ypool.IsChecked) || !(bool)Npool.IsChecked && !(bool)ypool.IsChecked)
+                if (((bool)Npool.IsChecked && (bool)ypool.IsChecked) || (!(bool)Npool.IsChecked) && (!(bool)ypool.IsChecked))
                     gr.Pool = Choices.DontCare;
                 else if ((bool)Npool.IsChecked)
                     gr.Pool = Choices.No;
                 else if ((bool)ypool.IsChecked)
                     gr.Pool = Choices.Yes;
 
-                if (((bool)Nfitness.IsChecked && (bool)yfitness.IsChecked) || !(bool)Nfitness.IsChecked && !(bool)yfitness.IsChecked)
+                if (((bool)Nfitness.IsChecked && (bool)yfitness.IsChecked) || (!(bool)Nfitness.IsChecked) && (!(bool)yfitness.IsChecked))
                     gr.FitnessCenter = Choices.DontCare;
-                else if ((bool)Njacuzzi.IsChecked)
+                else if ((bool)Nfitness.IsChecked)
                     gr.FitnessCenter = Choices.No;
-                else if ((bool)yjacuzzi.IsChecked)
+                else if ((bool)yfitness.IsChecked)
                     gr.FitnessCenter = Choices.Yes;
 
                 if (((bool)Ngarden.IsChecked && (bool)ygarden.IsChecked) || !(bool)Ngarden.IsChecked && !(bool)ygarden.IsChecked)
                     gr.Garden = Choices.DontCare;
-                else if ((bool)Njacuzzi.IsChecked)
+                else if ((bool)Ngarden.IsChecked)
                     gr.Garden = Choices.No;
-                else if ((bool)yjacuzzi.IsChecked)
+                else if ((bool)ygarden.IsChecked)
                     gr.Garden = Choices.Yes;
 
                 if (((bool)NChildatt.IsChecked && (bool)yChildatt.IsChecked) || !(bool)NChildatt.IsChecked && !(bool)yChildatt.IsChecked)
                     gr.ChildrensAttractions = Choices.DontCare;
-                else if ((bool)Njacuzzi.IsChecked)
+                else if ((bool)NChildatt.IsChecked)
                     gr.ChildrensAttractions = Choices.No;
-                else if ((bool)yjacuzzi.IsChecked)
+                else if ((bool)yChildatt.IsChecked)
                     gr.ChildrensAttractions = Choices.Yes;
 
                 if (((bool)Njacuzzi.IsChecked && (bool)yjacuzzi.IsChecked) || !(bool)Njacuzzi.IsChecked && !(bool)yjacuzzi.IsChecked)
@@ -290,7 +289,18 @@ namespace PLWPF
                     gr.Jacuzzi = Choices.Yes;
 
 
-                _bl.addreq(gr);
+                try
+                {
+
+                    _bl.addreq(gr);
+                    MessageBox.Show("Hi "+gr.PrivateName+".\nThank You for your interest in our properties! Your request was succesfully added into our system. We will be in touch with you shortly. " , "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.NavigationService.Navigate(new MainPage());
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
             }
             
 
@@ -307,6 +317,27 @@ namespace PLWPF
             {
                 ErrorEmail.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void lessadult_Click(object sender, RoutedEventArgs e)
+        {
+            adultTB.Text = (Convert.ToInt32(adultTB.Text) - 1).ToString();
+            numkid.Text = adultTB.Text;
+            if (adultTB.Text == "0")
+                lessadult.IsEnabled = false;          
+        }
+
+        private void addadult_Click(object sender, RoutedEventArgs e)
+        {
+            adultTB.Text = (Convert.ToInt32(adultTB.Text) + 1).ToString();
+            numkid.Text=adultTB.Text;
+            if (adultTB.Text != "0")
+                lessadult.IsEnabled = true;
+        }
+
+        private void numkid_DropDownClosed(object sender, EventArgs e)
+        {
+            numkid.Text = adultTB.Text;
         }
     }
 }
