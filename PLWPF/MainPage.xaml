@@ -27,8 +27,8 @@
                                                 <TranslateTransform X="0.02" Y="0.3"/>
                                             </TransformGroup>
                                         </RadialGradientBrush.RelativeTransform>
-                                        <GradientStop Offset="1" Color="#00000000"/>
-                                        <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
+                                        <GradientStop Offset="1" Color="#FFF99470"/>
+                                        <GradientStop Offset="0.5" Color="#FFFFFFFF"/>
                                     </RadialGradientBrush>
                                 </Border.Background>
                                 <ContentPresenter HorizontalAlignment="Center"
@@ -49,8 +49,8 @@
                                                     <TranslateTransform X="0.02" Y="0.3"/>
                                                 </TransformGroup>
                                             </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                            <GradientStop Color="#FFF99470" Offset="1"/>
+                                            <GradientStop Color="#FFFFFFFF" Offset="0.5"/>
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
@@ -69,26 +69,20 @@
         </Style>
     </Page.Resources>
 
-    <Grid HorizontalAlignment="Center" Height="440" Margin="10,0,0,0" VerticalAlignment="Center" Width="780" RenderTransformOrigin="0.5,0.5">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFFD9A56"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button Name="GR" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="Black" Margin="4,127,0,0" VerticalAlignment="Top" Width="250" Click="GR_Click" Height="187">
-            <StackPanel Width="250">
+    <Grid HorizontalAlignment="Center" Height="430" Margin="10" VerticalAlignment="Center" Width="780" RenderTransformOrigin="0.5,0.5" Background="#FFF9E8E2">
+        <Button Name="GR" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Foreground="Black" Margin="10,127,0,0" VerticalAlignment="Top" Width="250" Click="GR_Click" Height="187">
+            <StackPanel Width="216" Height="131">
                 <TextBlock Text="Start Your Vacation Right" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
                 <Image Source="Resources/vacation.PNG" Height="100" Margin="55,0,57,0"/>
             </StackPanel>
         </Button>
-        <Button Name="HU" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Style="{DynamicResource RoundCorner}" BorderBrush="Transparent" Background="White" Foreground="Black" FontSize="40" VerticalContentAlignment="Center" Margin="270,127,0,0" VerticalAlignment="Top" Width="250" Click="HU_Click" Height="187">
+        <Button Name="HU" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Style="{DynamicResource RoundCorner}" BorderBrush="Transparent" Background="White" Foreground="Black" FontSize="40" VerticalContentAlignment="Center" Margin="266,127,0,0" VerticalAlignment="Top" Width="250" Click="HU_Click" Height="187">
             <StackPanel Width="216">
                 <TextBlock Text="Manage Property Listings" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
                 <Image Source="Resources/house.PNG" Height="100" Margin="55,0,57,0"/>
             </StackPanel>
         </Button>
-        <Button Name="OWNER" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Style="{DynamicResource RoundCorner}" Foreground="Black" Margin="532,127,0,0" VerticalAlignment="Top" Width="250" Click="OWNER_Click" Height="187">
+        <Button Name="OWNER" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Style="{DynamicResource RoundCorner}" Foreground="Black" Margin="522,127,0,0" VerticalAlignment="Top" Width="250" Click="OWNER_Click" Height="187">
             <StackPanel Width="216">
                 <TextBlock Text="Administrator......" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="206" Margin="0,5,10,0"/>
                 <Image Source="Resources/admin.PNG" Height="100" Margin="55,0,57,0"/>
