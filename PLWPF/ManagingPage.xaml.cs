@@ -27,18 +27,15 @@ namespace PLWPF
         {
             InitializeComponent();
         }
-
-        public ManagingPage(int ID)
-        {
-
-        }
-
-
         private void go_Click(object sender, RoutedEventArgs e)
         {
-            if (cbHostingUnit.SelectedValue.ToString() == "Update Hosting Unit")
+            if (cbHostingUnit.Text == "Update Hosting Unit")
             {
                 //this.NavigationService.Navigate(new update());
+            }
+            if (cbHostingUnit.Text == "Create and view orders")
+            {
+                this.NavigationService.Navigate(new Orders());
             }
             else 
             {

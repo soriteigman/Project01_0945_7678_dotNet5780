@@ -94,6 +94,7 @@
         <ComboBox Name="cbHostingUnit" HorizontalAlignment="Left" Margin="117,109,0,0" VerticalAlignment="Top" Width="255" Height="42">
             <ComboBoxItem Name="UpdateHostingUnit" Content="Update Hosting Unit" Height="31" Margin="0,0,-2,0"/>
             <ComboBoxItem Name="RemoveHostingUnit" Content="Remove Hosting Unit" Height="31" Margin="0,0,-2,0"/>
+            <ComboBoxItem Name="Orders" Content="Create and view orders" Height="31" Margin="0,0,-2,0"/>
         </ComboBox>
         <Label Content="What would You like to do?" HorizontalAlignment="Left" Margin="117,60,0,0" VerticalAlignment="Top" Width="255" Height="44" FontSize="20"/>
         <Button Name="go" Content="GO" Style="{DynamicResource RoundCorner}" Margin="411,109,298,59" Click="go_Click" RenderTransformOrigin="0.502,0.5"/>

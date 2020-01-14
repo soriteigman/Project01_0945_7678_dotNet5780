@@ -19,28 +19,43 @@ namespace BL
             try
             {
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
-
-                DateTime today = Configuration.today;
-                today = today.AddMonths(11);
-                if (today < gr.EntryDate)
+                if(!DateOK(gr.EntryDate, gr.ReleaseDate))
                 {
-                    throw new ArgumentException("wrong date");
+                    throw new ArgumentException("Dates not ok");
                 }
-                if (!DateLengthPermission(gr))
-                {
-                    throw new ArgumentException("wrong date");
-                }
-                if (Configuration.today > gr.EntryDate)
-                {
-                    throw new ArgumentException("wrong date");
-                }
-
                 dal_bl.AddGuestRequest(gr);
             }
             catch (ArgumentException a)
             {
                 throw a;
             }
+        }
+
+        public bool DateOK(DateTime start, DateTime end)
+        {
+            try
+            {
+                DateTime today = Configuration.today;
+                today = today.AddMonths(11);
+                if (today < start)
+                {
+                    throw new ArgumentException("wrong date");
+                }
+                if (!DateLengthPermission(start, end))
+                {
+                    throw new ArgumentException("wrong date");
+                }
+                if (Configuration.today > start)
+                {
+                    throw new ArgumentException("wrong date");
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
         public Predicate<GuestRequest> BuildPredicate(HostingUnit hu)//based on a hosting unit builds a predicate to filter all guest requests
         {
@@ -227,10 +242,9 @@ namespace BL
                 throw a;
             }
         }
-        public bool DateLengthPermission(GuestRequest gr)//checks if stay is at least one full day long
+        public bool DateLengthPermission(DateTime start, DateTime end)//checks if stay is at least one full day long
         {
-            DateTime temp = gr.EntryDate.AddDays(1);
-            if (gr.ReleaseDate >= temp)//if theres at least one day difference between the start and end dates
+            if (end>start)//if theres at least one day difference between the start and end dates
                 return true;
             return false;
         }
@@ -530,14 +544,14 @@ namespace BL
 
             return result;
         }
-        public IEnumerable<IGrouping<Host , HostingUnit>> GroupHUByHosts()
+        public IEnumerable<IGrouping<int , HostingUnit>> GroupHUByHosts()
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<HostingUnit> units = dal_bl.ListOfHostingUnits();//gets the list of units
 
-            IEnumerable<IGrouping<Host, HostingUnit>> result = from unit in units
-                                                               group unit by unit.Owner into g1
-                                                               select g1;
+            var result = from unit in units
+                         group unit by unit.Owner.HostKey into g1
+                         select g1;
             return result;
         }
         public IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits()//groups by number of hosting units the hosts own

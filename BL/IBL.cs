@@ -20,12 +20,12 @@ namespace BL
 
         void UpdateHostingUnit(HostingUnit hu);
         void AddOrder(Order o);
-
+        bool DateOK(DateTime start, DateTime end);
         void UpdateOrder(Order o); //status update
 
         Predicate<GuestRequest> BuildPredicate(HostingUnit hu);//based on a hosting unit builds a predicate to filter all guest requests
 
-        bool DateLengthPermission(GuestRequest gr);//checks if stay is at least one full day long
+        bool DateLengthPermission(DateTime s, DateTime e);//checks if stay is at least one full day long
 
         void TotalCommissionCalculator(Creator c);//calculates total commission from all the bookings on the website
 
@@ -64,7 +64,7 @@ namespace BL
 
         IEnumerable<IGrouping<VacationArea, GuestRequest>> Group_GR_ByArea();//groups the requests by area of choice
         IEnumerable<IGrouping<int, GuestRequest>> GroupByNumOfGuests();//groups by number of guests
-        IEnumerable<IGrouping<Host, HostingUnit>> GroupHUByHosts();//groups units by hosts
+        IEnumerable<IGrouping<int, HostingUnit>> GroupHUByHosts();//groups units by hosts
         IEnumerable<IGrouping<int, Host>> GroupByNumOfUnits();//groups by number of hosting units the hosts own
         IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea();//groups the units by area of choice
 

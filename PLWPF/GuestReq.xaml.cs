@@ -29,7 +29,6 @@ namespace PLWPF
             InitializeComponent();
             this.type.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
             this.areacb.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
-            this.numadult.ItemsSource = Enum.GetValues(typeof(BE.num));
             this.starcb.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
 
 
@@ -39,6 +38,7 @@ namespace PLWPF
             endday.BlackoutDates.AddDatesInPast();
 
         }
+
         private void Startday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             endday.Visibility = Visibility.Visible;
@@ -173,7 +173,7 @@ namespace PLWPF
                 Errorarea.Visibility = Visibility.Hidden;
             }
 
-            if (numkid.SelectedValue == null)
+            if (numkid.Text== null)
             {
                 flag = false;
                 ErrorKids.Visibility = Visibility.Visible;
@@ -183,7 +183,7 @@ namespace PLWPF
                 ErrorKids.Visibility = Visibility.Hidden;
             }
 
-            if (numadult.SelectedValue == null)
+            if (numadult.Text == null)
             {
                 flag = false;
                 Erroradult.Visibility = Visibility.Visible;
@@ -212,16 +212,27 @@ namespace PLWPF
             {
                 Errorstar.Visibility = Visibility.Hidden;
             }
+            if (endday.SelectedDate != null && startday.SelectedDate != null)//if both dates were selected, make sure they are valid
+            {
+                if(flag)//if there is no a problem in the input yet, then check
+                {
+                    flag = _bl.DateOK(startday.SelectedDate.Value.Date, endday.SelectedDate.Value.Date);
+                    if(!flag)//if dates arent valid
+                    {
+                        Errordates.Visibility = Visibility.Visible;
+                        Errordates.Content="Please select valid dates";
+                    }
+                    else Errordates.Visibility = Visibility.Hidden;
+                }
+            }
 
-            if (endday.SelectedDate == null||startday.SelectedDate==null)
+            if (endday.SelectedDate == null||startday.SelectedDate==null)//if didnt select both dates
             {
                 flag = false;
                 Errordates.Visibility = Visibility.Visible;
+                Errordates.Content = "Please select dates";
             }
-            else
-            {
-                Errordates.Visibility = Visibility.Hidden;
-            }
+            else Errordates.Visibility = Visibility.Hidden;
             if(flag)
             {
                 GuestRequest gr = new GuestRequest();
@@ -230,8 +241,8 @@ namespace PLWPF
                 gr.FamilyName = Lname.Text;
                 gr.Area = (VacationArea)Enum.Parse(typeof(VacationArea), areacb.SelectedValue.ToString(), true);
                 gr.SubArea = subareacb.SelectedValue.ToString();
-                gr.Children = (int)numkid.SelectedValue;
-                gr.Adults = (int)numadult.SelectedValue;
+                gr.Children = Convert.ToInt32(numkid.Text);
+                gr.Adults = Convert.ToInt32(numadult.Text);
                 gr.Type = (VacationType)Enum.Parse(typeof(VacationType), type.SelectedValue.ToString(), true);
                 gr.Stars = (StarRating)Enum.Parse(typeof(StarRating), starcb.SelectedValue.ToString(), true);
                 gr.EntryDate= startday.SelectedDate.Value.Date;
@@ -322,7 +333,7 @@ namespace PLWPF
         private void lessadult_Click(object sender, RoutedEventArgs e)
         {
             adultTB.Text = (Convert.ToInt32(adultTB.Text) - 1).ToString();
-            numkid.Text = adultTB.Text;
+            numadult.Text = adultTB.Text;
             if (adultTB.Text == "0")
                 lessadult.IsEnabled = false;          
         }
@@ -330,14 +341,35 @@ namespace PLWPF
         private void addadult_Click(object sender, RoutedEventArgs e)
         {
             adultTB.Text = (Convert.ToInt32(adultTB.Text) + 1).ToString();
-            numkid.Text=adultTB.Text;
+            numadult.Text=adultTB.Text;
             if (adultTB.Text != "0")
                 lessadult.IsEnabled = true;
         }
 
         private void numkid_DropDownClosed(object sender, EventArgs e)
         {
-            numkid.Text = adultTB.Text;
+            numkid.Text = kidTB.Text;
+        }
+
+        private void numadult_DropDownClosed(object sender, EventArgs e)
+        {
+            numadult.Text = adultTB.Text;
+        }
+
+        private void lesskid_Click(object sender, RoutedEventArgs e)
+        {
+            kidTB.Text = (Convert.ToInt32(kidTB.Text) - 1).ToString();
+            numkid.Text = kidTB.Text;
+            if (kidTB.Text == "0")
+                lesskid.IsEnabled = false;
+        }
+
+        private void addkid_Click(object sender, RoutedEventArgs e)
+        {
+            kidTB.Text = (Convert.ToInt32(kidTB.Text) + 1).ToString();
+            numkid.Text = kidTB.Text;
+            if (kidTB.Text != "0")
+                lesskid.IsEnabled = true;
         }
     }
 }
