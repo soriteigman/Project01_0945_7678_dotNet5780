@@ -26,6 +26,10 @@ namespace PLWPF
 
         private void login_Click(object sender, RoutedEventArgs e)
         {
+            bool flag = true;
+            if (usernameBox.Password.ToString() != "Estiburack" || usernameBox.Password.ToString() != "estiburack" || usernameBox.Password.ToString() != "Soriteigman" || usernameBox.Password.ToString() != "soriteigman")
+                flag = false;
+
 
         }
     }
