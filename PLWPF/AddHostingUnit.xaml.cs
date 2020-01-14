@@ -38,15 +38,6 @@ namespace PLWPF
 
         }
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         #region rating
         private void LoadImages()
@@ -120,6 +111,8 @@ namespace PLWPF
             GetRating(sender as Image);
             Rate = intRate;
             lblRating.Text = intRate.ToString();
+            if (intRate > 0)
+                errorStars.Visibility = Visibility.Hidden;
         }
 
         private void GetRating(Image Img)
@@ -315,11 +308,11 @@ namespace PLWPF
             {
                 email_flag = _bl.IsValidEmail(Email.Text);
             }
-            catch (Exception a)
+            catch// (Exception a)
             {
                 Email.Clear();
                 Email.Text = "Enter Your Email Address";
-                Email.Foreground = Brushes.Red;
+                Email.BorderBrush = Brushes.Red;
                 flag = false;
                 email_flag = false;
             }
@@ -327,25 +320,25 @@ namespace PLWPF
             if (ID.Text == "Enter Your ID")
             {
                 flag = false;
-                ID.Foreground = Brushes.Red;
+                ID.BorderBrush = Brushes.Red;
             }
 
             if (Fname.Text == "Enter Your First Name")
             {
                 flag = false;
-                Fname.Foreground = Brushes.Red;
+                Fname.BorderBrush = Brushes.Red;
             }
 
             if (Lname.Text == "Enter Your Last Name")
             {
                 flag = false;
-                Lname.Foreground = Brushes.Red;
+                Lname.BorderBrush = Brushes.Red;
             }
 
             if (HUname.Text == "Give Your Property a Name")
             {
                 flag = false;
-                HUname.Foreground = Brushes.Red;
+                HUname.BorderBrush = Brushes.Red;
             }
 
 
@@ -366,19 +359,19 @@ namespace PLWPF
             if (Beds.Text == "Amount of Beds Your Property has")
             {
                 flag = false;
-                Beds.Foreground = Brushes.Red;
+                Beds.BorderBrush = Brushes.Red;
             }
 
             if (Phonenum.Text == "Enter Your Phone Number")
             {
                 flag = false;
-                Phonenum.Foreground = Brushes.Red;
+                Phonenum.BorderBrush = Brushes.Red;
             }
 
             if (BankAcctNum.Text == "Enter Your Bank Account Number")
             {
                 flag = false;
-                BankAcctNum.Foreground = Brushes.Red;
+                BankAcctNum.BorderBrush = Brushes.Red;
             }
 
             if (cbType.SelectedValue == null)
@@ -390,31 +383,31 @@ namespace PLWPF
             if (Bankname.Text == "Enter Your Bank Name")
             {
                 flag = false;
-                Bankname.Foreground = Brushes.Red;
+                Bankname.BorderBrush = Brushes.Red;
             }
 
             if (Banknum.Text == "Enter Your Bank's Number")
             {
                 flag = false;
-                Banknum.Foreground = Brushes.Red;
+                Banknum.BorderBrush = Brushes.Red;
             }
 
             if (Branchnum.Text == "Enter Your Branch's Number")
             {
                 flag = false;
-                Branchnum.Foreground = Brushes.Red;
+                Branchnum.BorderBrush = Brushes.Red;
             }
 
             if (Bankaddress.Text == "Enter Your Branch's Address")
             {
                 flag = false;
-                Bankaddress.Foreground = Brushes.Red;
+                Bankaddress.BorderBrush = Brushes.Red;
             }
 
             if (Bankcity.Text == "Enter the City your Branch is Located in")
             {
                 flag = false;
-                Bankcity.Foreground = Brushes.Red;
+                Bankcity.BorderBrush = Brushes.Red;
             }
 
 
@@ -429,7 +422,6 @@ namespace PLWPF
             }
 
             
-
 
             if (flag)
             {
@@ -533,79 +525,85 @@ namespace PLWPF
 
         private void Fname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Fname.Foreground = Brushes.Black;
+            Fname.BorderBrush = Brushes.Black;
         }
 
         private void Email_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Email.Foreground = Brushes.Black;
+            Email.BorderBrush = Brushes.Black;
 
         }
-
-        private void cbSubArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            cbSubArea.Foreground = Brushes.Black;
-        }
-
-        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            cbType.Foreground = Brushes.Black;
-        }
-
+        
         private void ID_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ID.Foreground = Brushes.Black;
+            ID.BorderBrush = Brushes.Black;
         }
 
         private void Lname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Lname.Foreground = Brushes.Black;
+            Lname.BorderBrush = Brushes.Black;
         }
 
         private void Phonenum_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Phonenum.Foreground = Brushes.Black;
+            Phonenum.BorderBrush = Brushes.Black;
         }
 
         private void BankAcctNum_TextChanged(object sender, TextChangedEventArgs e)
         {
-            BankAcctNum.Foreground = Brushes.Black;
+            BankAcctNum.BorderBrush = Brushes.Black;
         }
 
         private void Beds_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Beds.Foreground = Brushes.Black;
+            Beds.BorderBrush = Brushes.Black;
         }
 
         private void Bankname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Bankname.Foreground = Brushes.Black;
+            Bankname.BorderBrush = Brushes.Black;
         }
 
         private void Banknum_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Banknum.Foreground = Brushes.Black;
+            Banknum.BorderBrush = Brushes.Black;
         }
 
         private void Bankcity_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Bankcity.Foreground = Brushes.Black;
+            Bankcity.BorderBrush = Brushes.Black;
         }
 
         private void Branchnum_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Branchnum.Foreground = Brushes.Black;
+            Branchnum.BorderBrush = Brushes.Black;
         }
 
         private void Bankaddress_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Bankaddress.Foreground = Brushes.Black;
+            Bankaddress.BorderBrush = Brushes.Black;
         }
 
         private void HUname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            HUname.Foreground = Brushes.Black;
+            HUname.BorderBrush = Brushes.Black;
 
+        }
+
+        private void cbArea_DropDownOpened(object sender, EventArgs e)
+        {
+            cbArea.Foreground = Brushes.Black;
+
+        }
+
+        private void cbType_DropDownOpened(object sender, EventArgs e)
+        {
+            cbType.Foreground = Brushes.Black;
+        }
+
+        private void cbSubArea_DropDownOpened(object sender, EventArgs e)
+        {
+            cbSubArea.Foreground = Brushes.Black;
         }
     }
 }

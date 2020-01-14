@@ -33,7 +33,8 @@ namespace PLWPF
 
         private void OWNER_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Admin());
+            //this.NavigationService.Navigate(new Admin());
+            MessageBox.Show("Please Enter Admin Password", "This Page is Private", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
         }
 
