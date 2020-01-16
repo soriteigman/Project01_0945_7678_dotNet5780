@@ -466,7 +466,7 @@ namespace PLWPF
                 }
                 catch(Exception a)
                 {
-                    MessageBox.Show(a.Message , "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(a.Message , "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
             }
@@ -518,10 +518,6 @@ namespace PLWPF
 
         }
 
-        private void done_MouseEnter(object sender, MouseEventArgs e)//will enable the button if all info is filled in
-        {
-            IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
-        }
 
         private void Fname_TextChanged(object sender, TextChangedEventArgs e)
         {

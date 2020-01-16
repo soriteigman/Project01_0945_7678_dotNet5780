@@ -31,7 +31,7 @@ namespace PLWPF
         {
             if (cbHostingUnit.Text == "Update Hosting Unit")
             {
-                //this.NavigationService.Navigate(new update());
+                this.NavigationService.Navigate(new UpdateHuPage());
             }
             if (cbHostingUnit.Text == "Create and view orders")
             {
@@ -59,12 +59,21 @@ namespace PLWPF
         private void remove_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult mbResult;
-            mbResult = MessageBox.Show("Are you sure you want to delete this property? This action is irreversible.", "", MessageBoxButton.YesNo, MessageBoxImage.None, MessageBoxResult.No);
+            mbResult = MessageBox.Show("Are you sure you want to delete this property? This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
 
-            if (mbResult == MessageBoxResult.Yes)
+            try
             {
-                myBL.RemoveHostingUnit(myBL.SearchHUbyID_bl(Convert.ToInt32(removeID.Text)));
+                if (mbResult == MessageBoxResult.Yes)
+                {
+                    myBL.RemoveHostingUnit(myBL.SearchHUbyID_bl(Convert.ToInt32(removeID.Text)));
+                }
+            }
+            catch(Exception a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+       
     }
 }
