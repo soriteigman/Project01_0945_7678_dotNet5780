@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BL;
+using BE;
 
 namespace PLWPF
 {
@@ -59,14 +60,17 @@ namespace PLWPF
 
         private void remove_Click(object sender, RoutedEventArgs e)
         {
+            HostingUnit myunit = myBL.SearchHUbyID_bl(Convert.ToInt32(removeID.Text));
             MessageBoxResult mbResult;
-            mbResult = MessageBox.Show("Are you sure you want to delete this property? This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+            mbResult = MessageBox.Show("Are you sure you want to delete the following property:" +
+                "Name: " + myunit.HostingUnitName + "   Key:\n " + myunit.HostingUnitKey+ 
+                " This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
 
             try
             {
                 if (mbResult == MessageBoxResult.Yes)
                 {
-                    myBL.RemoveHostingUnit(myBL.SearchHUbyID_bl(Convert.ToInt32(removeID.Text)));
+                    myBL.RemoveHostingUnit(myunit);
                 }
             }
             catch(Exception a)

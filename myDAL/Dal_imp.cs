@@ -7,8 +7,8 @@ using BE;
 
 namespace DAL
 {
-   public class Dal_imp:IDal
-   {
+    public class Dal_imp : IDal
+    {
         #region Singleton
         private static Dal_imp instance;
 
@@ -18,7 +18,7 @@ namespace DAL
             {
                 if (instance == null)
                     instance = new Dal_imp();
-                return instance; 
+                return instance;
             }
         }
 
@@ -49,17 +49,17 @@ namespace DAL
                 GuestRequest request;
                 if (GRexist(gr.GuestRequestKey))
                 {
-                    request=searchGRbyID(gr.GuestRequestKey).Clone();
+                    request = searchGRbyID(gr.GuestRequestKey).Clone();
                     DataSource.requestCollection.Remove(request.Clone());//
                 }
-                DataSource.requestCollection.Add(gr); 
+                DataSource.requestCollection.Add(gr);
             }
             catch (KeyNotFoundException a)
             {
                 throw a;//deal with this
             }
         }
-    
+
         public GuestRequest searchGRbyID(int key)
         {
             var request = from req in DataSource.requestCollection
@@ -137,8 +137,8 @@ namespace DAL
         public HostingUnit SearchHUbyID(int key)
         {
             var units = from unit in DataSource.HostingUnitCollection
-                          where unit.HostingUnitKey == key
-                          select unit;
+                        where unit.HostingUnitKey == key
+                        select unit;
             return units.FirstOrDefault();
         }
 
@@ -147,7 +147,7 @@ namespace DAL
             var units = from unit in DataSource.HostingUnitCollection
                         where unit.HostingUnitKey == key
                         select unit;
-            return units.FirstOrDefault()!= null;
+            return units.FirstOrDefault() != null;
         }
 
         #endregion
@@ -189,11 +189,15 @@ namespace DAL
 
         public IEnumerable<Order> ListOfOrders()
         {
-            IEnumerable<Order>  o= DataSource.OrderCollection.Select(item => (Order)item.Clone()).ToList();
+            IEnumerable<Order> o = DataSource.OrderCollection.Select(item => (Order)item.Clone()).ToList();
             return o;
-            //IEnumerable<Order>  o= from order in DataSource.OrderCollection
-            //                       select order.Clone();
-            //return o;
+        }
+        public IEnumerable<BE.Order> GetAllOrders(Func<BE.Order, bool> predicate = null)
+        {
+            IEnumerable<Order> ord = ListOfOrders();
+            if (predicate == null)
+                return ord.AsEnumerable().Select(t => t.Clone());
+            return ord.Where(predicate).Select(t => t.Clone());
         }
         public Order SearchOrbyID(int key)
         {

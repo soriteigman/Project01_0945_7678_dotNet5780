@@ -46,6 +46,7 @@ namespace DAL
         Order SearchOrbyID(int key);
         bool ORexist(int key);
 
+        IEnumerable<BE.Order> GetAllOrders(Func<BE.Order, bool> predicate = null);
 
         #endregion
 

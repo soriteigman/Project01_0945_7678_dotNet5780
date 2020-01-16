@@ -7,8 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Orders">
-
-    <Grid>
-        <local:DataGridUserControl x:Name="ordegrid" Loaded="Ordegrid_Loaded"/>
-    </Grid>
+    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
+        <TabItem Header="Orders">
+            <local:OrderUserControl1 x:Name="OrdersTabUserControl" />
+        </TabItem>
+    </TabControl>
 </Page>
