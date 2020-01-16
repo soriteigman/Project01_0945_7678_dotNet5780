@@ -10,6 +10,7 @@ namespace BL
     public interface IBL
     {
         IEnumerable<HostingUnit> listHU();
+        IEnumerable<HostingUnit> searchHUbyOwner(int key);//filters from all orders based on parameters recieved
 
         IEnumerable<GuestRequest> listGR();
         void addreq(GuestRequest gr);
