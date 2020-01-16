@@ -442,6 +442,8 @@ namespace PLWPF
                 h.PhoneNumber = Convert.ToInt32(Phonenum.Text);
                 h.MailAddress = Email.Text;
                 h.BankBranchDetails = b;
+                h.CollectionClearance = (bool)CollectionClearance.IsChecked;
+                h.BankAccountNumber = Convert.ToInt32(BankAcctNum.Text);
 
                 hu.HostingUnitName = HUname.Text;
                 hu.Owner = h;
