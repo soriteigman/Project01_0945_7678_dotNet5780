@@ -444,6 +444,7 @@ namespace PLWPF
                 h.BankBranchDetails = b;
 
                 hu.HostingUnitName = HUname.Text;
+                hu.Owner = h;
                 hu.Area = (VacationArea)Enum.Parse(typeof(VacationArea), cbArea.SelectedValue.ToString(), true);
                 hu.SubArea = cbSubArea.SelectedValue.ToString();
                 hu.Type = (VacationType)Enum.Parse(typeof(VacationType), cbType.SelectedValue.ToString(), true);

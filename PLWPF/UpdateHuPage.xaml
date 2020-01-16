@@ -9,6 +9,6 @@
       Title="UpdateHuPage">
 
     <Grid>
-        <local:DataGridUserControl x:Name="UpdateHUGrid" Loaded="UpdateHUGrid_Loaded" />
+        <local:DataGridUserControl x:Name="UpdateHUGrid"/>
     </Grid>
 </Page>

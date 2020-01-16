@@ -50,8 +50,8 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Label Content="search by name" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-588,15,601,39" Grid.RowSpan="2" />
-                <TextBox x:Name="SearchTextBox" Grid.Column="0" Width="100" TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-588,6,594,16"  Grid.Row="1"  />
+                <Label Content="search by name:" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-685,15,698,39" Grid.RowSpan="2" />
+                <TextBox x:Name="SearchTextBox" Grid.Column="0" Width="100" TextWrapping="Wrap" Text="" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-660,6,666,16"  Grid.Row="1"  />
 
                 <Label x:Name="timeLabel" Content="זמן" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" Visibility="Collapsed"/>
                 <ComboBox x:Name="timeComboBox" Grid.Column="1" Width="85" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed">
@@ -61,12 +61,12 @@
                     <ComboBoxItem Content="בחודש הבא"/>
                 </ComboBox>
 
-                <Button x:Name="ResetFiltersButton" Content="X" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-626,6,712,15" Width="20" Height="19" RenderTransformOrigin="-0.998,0.686"/>
+                <Button x:Name="ResetFiltersButton" Content="X" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-685,6,771,15" Width="20" Height="19" RenderTransformOrigin="-0.998,0.686"/>
             </Grid>
 
         </Grid>
 
-        <DataGrid x:Name="DataGrid" AutoGenerateColumns="True" Grid.Row="1" IsReadOnly="True" FlowDirection="RightToLeft" />
+        <DataGrid x:Name="DataGrid" AutoGenerateColumns="True" Grid.Row="1" IsReadOnly="True" FlowDirection="RightToLeft"/>
 
         <Grid Grid.Row="2" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"  Background="Honeydew" >
             <Grid.ColumnDefinitions>
