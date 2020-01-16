@@ -32,21 +32,21 @@ namespace PLWPF
 
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
 
-            orders = _bl.GetsOpenOrders();
-            ListOfOrders.ItemsSource = orders;
-            ListOfOrders.DisplayMemberPath = "orders";
-            ListOfOrders.SelectedIndex = 0;
+            //orders = _bl.GetsOpenOrders();
+            //UpdateHUGrid.DataGrid.ItemsSource = orders;
+            //UpdateHUGrid.DataGrid.DisplayMemberPath = "orders";
+            //UpdateHUGrid.DataGrid.SelectedIndex = 0;
 
-            gr = _bl.listGR();
-            guestreq.ItemsSource = gr;
-            guestreq.DisplayMemberPath = "guestrequest";
-            guestreq.SelectedIndex = 0;
+            //gr = _bl.listGR();
+            //guestreq.ItemsSource = gr;
+            //guestreq.DisplayMemberPath = "guestrequest";
+            //guestreq.SelectedIndex = 0;
 
 
             hu = _bl.listHU();
-            hostingunit.ItemsSource = hu;
-            hostingunit.DisplayMemberPath = "hostingunit";
-            hostingunit.SelectedIndex = 0;
+            UpdateHUGrid.DataGrid.ItemsSource = hu;
+            UpdateHUGrid.DataGrid.DisplayMemberPath = "hostingunit";
+            UpdateHUGrid.DataGrid.SelectedIndex = 0;
         }
 
 
