@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataGridUserControl.xaml.cs">
+      <DependentUpon>DataGridUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateHuPage.xaml.cs">
       <DependentUpon>UpdateHuPage.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataGridUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
