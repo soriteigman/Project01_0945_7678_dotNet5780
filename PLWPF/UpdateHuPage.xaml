@@ -1,21 +1,14 @@
-﻿<Page
+﻿<Page x:Class="PLWPF.UpdateHuPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLWPF"
-      xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddHostingUnit"
       mc:Ignorable="d" 
-      d:DesignHeight="539.562" d:DesignWidth="806.091"
-      Title="AddHostingUnit" >
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UpdateHuPage">
 
-    <Grid x:Name="addHUgrid" HorizontalAlignment="Center" VerticalAlignment="Center" >
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFFD9A56"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid>
         <TabControl Name="TC" Margin="10,13,14,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="750" Height="403">
             <TabItem>
                 <TabItem.Header>
@@ -26,12 +19,12 @@
                 <Grid >
                     <Label Content="Please fill out your Personal info here" FontSize="25" Margin="194,10,188,306"/>
                     <Button Name="next" Content="NEXT" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
-                    <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,85,375,245" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5" TextChanged="ID_TextChanged"/>
-                    <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,156,375,174" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Opacity="0.5" TextChanged="Fname_TextChanged"/>
-                    <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,224,375,106" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Opacity="0.5" TextChanged="Lname_TextChanged"/>
-                    <TextBox Name="Phonenum" Text="Enter Your Phone Number" BorderBrush="Black" Height="45" FontSize="18" Width="325" Margin="390,85,29,245" PreviewMouseDown="Phonenum_PreviewMouseDown" MouseLeave="Phonenum_MouseLeave" Opacity="0.5" TextChanged="Phonenum_TextChanged"/>
-                    <TextBox Name="Email" Text="Enter Your Email Address" BorderBrush="Black" Height="45" FontSize="18" Width="325" Margin="390,156,29,174" PreviewMouseDown="Email_PreviewMouseDown" MouseLeave="Email_MouseLeave" Opacity="0.5" TextChanged="Email_TextChanged"/>
-                    <TextBox Name="BankAcctNum" Text="Enter Your Bank Account Number" BorderBrush="Black" Height="45" Width="325" FontSize="18" Margin="390,224,29,106" Opacity="0.5" PreviewMouseDown="BankAcctNum_PreviewMouseDown" MouseLeave="BankAcctNum_MouseLeave" TextChanged="BankAcctNum_TextChanged"/>
+                    <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,85,375,245" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5"/>
+                    <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,156,375,174" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Opacity="0.5"/>
+                    <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,224,375,106" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Opacity="0.5"/>
+                    <TextBox Name="Phonenum" Text="Enter Your Phone Number" BorderBrush="Black" Height="45" FontSize="18" Width="325" Margin="390,85,29,245" PreviewMouseDown="Phonenum_PreviewMouseDown" MouseLeave="Phonenum_MouseLeave" Opacity="0.5"/>
+                    <TextBox Name="Email" Text="Enter Your Email Address" BorderBrush="Black" Height="45" FontSize="18" Width="325" Margin="390,156,29,174" PreviewMouseDown="Email_PreviewMouseDown" MouseLeave="Email_MouseLeave" Opacity="0.5" />
+                    <TextBox Name="BankAcctNum" Text="Enter Your Bank Account Number" BorderBrush="Black" Height="45" Width="325" FontSize="18" Margin="390,224,29,106" Opacity="0.5" PreviewMouseDown="BankAcctNum_PreviewMouseDown" MouseLeave="BankAcctNum_MouseLeave"/>
                     <CheckBox Name="CollectionClearance" Content="Clearance to charge Your Account with commission" Width="325" Margin="214,302,203,32.667"/>
                     <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
                 </Grid>
@@ -43,15 +36,15 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <TextBox Name="HUname" Text="Give Your Property a Name" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Black" FontSize="25" Margin="208,10,207,292.667" PreviewMouseDown="HUname_PreviewMouseDown" MouseLeave="HUname_MouseLeave" Opacity="0.5" TextChanged="HUname_TextChanged" />
+                    <TextBox Name="HUname" Text="Give Your Property a Name" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Black" FontSize="25" Margin="208,10,207,292.667" PreviewMouseDown="HUname_PreviewMouseDown" MouseLeave="HUname_MouseLeave" Opacity="0.5"/>
                     <Button Name="next1" Content="NEXT" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
                     <Button Name="prev1" Content="PREV" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
 
-                    <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="389,161,16,173" Opacity="0.5" PreviewMouseDown="Beds_PreviewMouseDown" MouseLeave="Beds_MouseLeave" TextChanged="Beds_TextChanged" />
+                    <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="389,161,16,173" Opacity="0.5" PreviewMouseDown="Beds_PreviewMouseDown" MouseLeave="Beds_MouseLeave"/>
 
-                    <ComboBox x:Name="cbArea" Text="Enter the General Area of your Property" Foreground="Black" FontSize="18" Margin="22,107,380,229" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" SelectionChanged="cbArea_SelectionChanged" Background="#FFD81C1C" DropDownOpened="cbArea_DropDownOpened" />
-                    <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" Foreground="Black" FontSize="18" Margin="22,163,380,173" Visibility="Hidden" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" DropDownOpened="cbSubArea_DropDownOpened"/>
-                    <ComboBox Name="cbType" Padding="2" Text="Enter the Type of Property you have" Foreground="Black" FontSize="18" Margin="389,107,13,229" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" DropDownOpened="cbType_DropDownOpened"/>
+                    <ComboBox x:Name="cbArea" Text="Enter the General Area of your Property" Foreground="Black" FontSize="18" Margin="22,107,380,229" SelectedItem="{Binding Path=VacationArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" Background="#FFD81C1C"/>
+                    <ComboBox Name="cbSubArea" Padding="2" Text="Enter Your Property Location" Foreground="Black" FontSize="18" Margin="22,163,380,173" Visibility="Hidden" SelectedItem="{Binding Path=VacationSubArea,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
+                    <ComboBox Name="cbType" Padding="2" Text="Enter the Type of Property you have" Foreground="Black" FontSize="18" Margin="389,107,13,229" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True"/>
                     <CheckBox Name="Pets" Content="Do you Allow Pets?" Margin="556,274,50,60.667" Height="20"/>
                     <CheckBox Name="Wifi" Content="Do you have Wifi?" Margin="264,245,342,89.667" RenderTransformOrigin="0.174,0.467" Height="20"/>
                     <CheckBox Name="Parking" Content="Do you have Parking?" Margin="264,273,342,61.667" Height="20"/>
@@ -90,7 +83,7 @@
                     <Label Content="Please fill out your Bank info here" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="168,27,169,308.667"/>
 
                     <Button Name="prev2" Content="PREV" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
-                    <Button Name="done" Content="DONE" FontSize="25"  Margin="595,21,42,315" Click="done_Click" />
+                    <Button Name="done" Content="DONE" FontSize="25"  Margin="595,21,42,315" Click="done_Click" MouseEnter="done_MouseEnter" />
 
                     <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="49,131,381,204" PreviewMouseDown="Bankname_PreviewMouseDown" MouseLeave="Bankname_MouseLeave" Opacity="0.5" TextChanged="Bankname_TextChanged"/>
                     <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="49,199,381,135" PreviewMouseDown="Banknum_PreviewMouseDown" MouseLeave="Banknum_MouseLeave" Opacity="0.5" TextChanged="Banknum_TextChanged"/>
@@ -102,6 +95,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Page>

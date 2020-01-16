@@ -106,7 +106,7 @@ namespace DAL
             if (HUexist(hu.HostingUnitKey))
                 DataSource.HostingUnitCollection.Remove(hu);
 
-            else throw new KeyNotFoundException("request to remove doesn't exist");
+            else throw new KeyNotFoundException("Property to remove doesn't exist");
 
         }
 
