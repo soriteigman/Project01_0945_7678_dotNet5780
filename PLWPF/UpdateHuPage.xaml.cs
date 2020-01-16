@@ -20,6 +20,9 @@ namespace PLWPF
     /// </summary>
     public partial class UpdateHuPage : Page
     {
+        int intRate = 0;
+        int intCount = 1;
+        int Rate = 0;
         public UpdateHuPage()
         {
             InitializeComponent();
