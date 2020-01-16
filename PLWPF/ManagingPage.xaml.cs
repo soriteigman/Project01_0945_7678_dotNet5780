@@ -22,9 +22,10 @@ namespace PLWPF
     public partial class ManagingPage : Page
     {
         IBL myBL = BL.FactoryBL.getBL();
-
-        public ManagingPage()
+        int ID;
+        public ManagingPage(int id)
         {
+            ID = id;
             InitializeComponent();
         }
         private void go_Click(object sender, RoutedEventArgs e)
@@ -35,7 +36,7 @@ namespace PLWPF
             }
             if (cbHostingUnit.Text == "Create and view orders")
             {
-                this.NavigationService.Navigate(new Orders());
+                this.NavigationService.Navigate(new Orders(ID));
             }
             else 
             {
