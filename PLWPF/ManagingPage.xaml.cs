@@ -33,10 +33,12 @@ namespace PLWPF
         {
             if (cbHostingUnit.Text == "Update Hosting Unit")
             {
+                cbHostingUnit.Text = null;
                 this.NavigationService.Navigate(new UpdateHuPage());
             }
             if (cbHostingUnit.Text == "Create and view orders")
             {
+                cbHostingUnit.Text = null;
                 this.NavigationService.Navigate(new Orders(ID));
             }
             else 
@@ -62,8 +64,8 @@ namespace PLWPF
         {
             HostingUnit myunit = myBL.SearchHUbyID_bl(Convert.ToInt32(removeID.Text));
             MessageBoxResult mbResult;
-            mbResult = MessageBox.Show("Are you sure you want to delete the following property:" +
-                "Name: " + myunit.HostingUnitName + "   Key:\n " + myunit.HostingUnitKey+ 
+            mbResult = MessageBox.Show("Are you sure you want to delete the following property:\n" +
+                "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey+ 
                 " This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
 
             try
@@ -71,6 +73,10 @@ namespace PLWPF
                 if (mbResult == MessageBoxResult.Yes)
                 {
                     myBL.RemoveHostingUnit(myunit);
+                    removeID.Visibility = Visibility.Hidden;
+                    remove.Visibility = Visibility.Hidden;
+                    cbHostingUnit.Text = null;
+                    this.NavigationService.Navigate(new ManagingPage(ID));
                 }
             }
             catch(Exception a)
