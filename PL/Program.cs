@@ -31,7 +31,7 @@ namespace PL
                 },
                 CollectionClearance = true,
                 FamilyName = "teigman",
-                HostKey = 54257570,
+                HostKey = 0537208407,
                 MailAddress = "soriteigman@gmail.com",
                 PhoneNumber = 0583215876,
                 PrivateName = "sori"
@@ -50,7 +50,7 @@ namespace PL
                 },
                 CollectionClearance = true,
                 FamilyName = "burack",
-                HostKey = 315320967,
+                HostKey = 315320945,
                 MailAddress = "stburack@gmail.com",
                 PhoneNumber = 0537208407,
                 PrivateName = "esther"
@@ -62,8 +62,8 @@ namespace PL
                 PrivateName = "wanted",
                 FamilyName = "dead or alive",
                 RegistrationDate = Configuration.today,
-                EntryDate = new DateTime(2020, 01, 03),
-                ReleaseDate = new DateTime(2020, 01, 07),
+                EntryDate = new DateTime(2020, 7, 03),
+                ReleaseDate = new DateTime(2020, 7, 07),
                 MailAddress = "stburack@gmail.com",
                 Type = VacationType.Hotel,
                 Adults = 2,
@@ -87,8 +87,8 @@ namespace PL
                 PrivateName = "wanted",
                 FamilyName = "dead or alive",
                 RegistrationDate = Configuration.today,
-                EntryDate = new DateTime(2020, 01, 03),
-                ReleaseDate = new DateTime(2020, 01, 05),
+                EntryDate = new DateTime(2020, 8, 03),
+                ReleaseDate = new DateTime(2020, 8, 05),
                 MailAddress = "stburack@gmail.com",
                 Type = VacationType.Hotel,
                 Adults = 2,
@@ -111,8 +111,8 @@ namespace PL
                 PrivateName = "sori",
                 FamilyName = "teigman",
                 RegistrationDate = Configuration.today,
-                EntryDate = new DateTime(2020, 01, 05),
-                ReleaseDate = new DateTime(2020, 01, 10),
+                EntryDate = new DateTime(2020, 9, 05),
+                ReleaseDate = new DateTime(2020, 9, 10),
                 MailAddress = "soriteigman@gmail.com",
                 Type = VacationType.BeachHouse,
                 Adults = 2,
@@ -206,27 +206,27 @@ namespace PL
             }
 
             IEnumerable<GuestRequest> myRequests;
-            //IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
-            foreach (IGrouping<Host, HostingUnit> h in myUnits)
-            {
-                foreach (HostingUnit hUnit in h)
-                {
-                    myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
-                    foreach (GuestRequest item in myRequests)
-                    {
-                        try
-                        {
-                            ibl.AddOrder(ibl.CreateOrder(hUnit.HostingUnitKey, item.GuestRequestKey));
-                        }
-                        catch (Exception A)
-                        {
-                            Console.WriteLine(A.Message);
-                        }
-                    }
-                }
-            }
+            //IEnumerable<IGrouping<int, HostingUnit>> myUnits = ibl.GroupHUByHosts();
+            //foreach (IGrouping<int, HostingUnit> h in myUnits)
+            //{
+            //    foreach (HostingUnit hUnit in h)
+            //    {
+            //        myRequests = ibl.AllRequestsThatMatch(ibl.BuildPredicate(hUnit));
+            //        foreach (GuestRequest item in myRequests)
+            //        {
+            //            try
+            //            {
+            //                ibl.AddOrder(ibl.CreateOrder(hUnit.HostingUnitKey, item.GuestRequestKey));
+            //            }
+            //            catch (Exception A)
+            //            {
+            //                Console.WriteLine(A.Message);
+            //            }
+            //        }
+            //    }
+            //}
             IEnumerable<Order> orders = ibl.GetsOpenOrders();
-            ibl.ChangeRequestStatus(orders.Last());
+            //ibl.ChangeRequestStatus(orders.Last());
             IEnumerable<Order> orders2 = ibl.GetsOpenOrders();
             Console.WriteLine("\n");
             foreach (Order item in orders2)
@@ -238,7 +238,8 @@ namespace PL
             ibl.TotalCommissionCalculator(us);
             Console.WriteLine(us.TotalCommission);
             //ibl.GroupByNumOfUnits();
-            IEnumerable<HostingUnit> li=ibl.searchHUbyOwner(hu.Owner.HostKey);
+            IEnumerable<HostingUnit> li=ibl.searchHUbyOwner(esti.HostKey);
+            Console.WriteLine( "hi\n");
             foreach (HostingUnit item in li)
             {
                 Console.WriteLine(item);

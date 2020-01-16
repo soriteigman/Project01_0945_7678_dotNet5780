@@ -57,7 +57,7 @@ namespace PLWPF
                 {
                     if (myBL.HExists(int.Parse(ID.Text)))
                     {
-                        this.NavigationService.Navigate(new ManagingPage(/*int.Parse(ID.Text)*/));
+                        this.NavigationService.Navigate(new ManagingPage(int.Parse(ID.Text)));
                     }
                     else
                     {

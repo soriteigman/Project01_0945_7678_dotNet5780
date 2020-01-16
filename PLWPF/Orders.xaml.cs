@@ -23,11 +23,26 @@ namespace PLWPF
     public partial class Orders : Page
     {
         IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
-        public IEnumerable<IGrouping<int, HostingUnit>> orders { get; set; }
-        public Orders()
+        public IEnumerable<HostingUnit> units { get; set; }
+        int id;
+        public Orders(int ID)
         {
+            id = ID;
             InitializeComponent();
-            orders = _bl.GroupHUByHosts();
+            this.ordegrid.updateButton.Content = "craete order";
+            units = _bl.searchHUbyOwner(id);
+            IEnumerable<GuestRequest> req = null;
+            List<int> keys = null;
+            foreach (HostingUnit hu in units)
+            {
+                else keys.Add(hu.HostingUnitKey);
+                if(_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)).Count()>0)
+                    req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)));
+            }
+
         }
+
+
+
     }
 }
