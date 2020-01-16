@@ -62,7 +62,7 @@
                             <ColumnDefinition Width="50*"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="addkid" Content="+" Grid.Column="0" HorizontalAlignment="Right" Width="15" Click="addkid_Click"/>
-                        <Button x:Name="lesskid" Content="-" Grid.Column="2" HorizontalAlignment="Left" Margin="47.987,0,-38.974,0" Width="15" Click="lesskid_Click"/>
+                        <Button x:Name="lesskid" Content="-" Grid.Column="2" IsEnabled="False" HorizontalAlignment="Left" Margin="47.987,0,-38.974,0" Width="15" Click="lesskid_Click"/>
                         <TextBox x:Name="kidTB" Text="0" TextAlignment="Center" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="11,0,-15,0" Width="28"/>
                     </Grid>
                 </ComboBoxItem>

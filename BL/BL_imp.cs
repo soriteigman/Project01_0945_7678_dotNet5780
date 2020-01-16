@@ -12,6 +12,26 @@ namespace BL
 
     public class BL_imp : IBL
     {
+        public IEnumerable<HostingUnit> searchHUbyOwner(int key)//filters from all orders based on parameters recieved
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+            IEnumerable<HostingUnit> hostingUnits = dal_bl.ListOfHostingUnits();
+            Func<HostingUnit, bool> condition = null;//conditions to filter with
+            IEnumerable<HostingUnit> huToReturn = null;//list of filtered orders
+
+            condition = hu => hu.Owner.HostKey == key;
+            huToReturn = from hu in hostingUnits
+                         let p = condition(hu)
+                         where p
+                         select hu;
+            return huToReturn.ToList();
+        }
+
+
+
+
+
+
 
         #region done
         public void addreq(GuestRequest gr)

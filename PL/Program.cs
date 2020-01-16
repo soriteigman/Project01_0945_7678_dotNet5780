@@ -69,8 +69,8 @@ namespace PL
                 Adults = 2,
                 Children = 3,
                 Pet = false,
-                Area = VacationArea.East,
-                SubArea = VacationSubArea.Netanya,
+                Area = VacationArea.Center,
+                SubArea = "beitar",
                 ChildrensAttractions = Choices.Yes,
                 FitnessCenter = Choices.DontCare,
                 Garden = Choices.DontCare,
@@ -94,8 +94,8 @@ namespace PL
                 Adults = 2,
                 Children = 3,
                 Pet = false,
-                Area = VacationArea.East,
-                SubArea = VacationSubArea.Herzliya,
+                Area = VacationArea.South,
+                SubArea = "Herzliya",
                 ChildrensAttractions = Choices.Yes,
                 FitnessCenter = Choices.DontCare,
                 Garden = Choices.DontCare,
@@ -118,8 +118,8 @@ namespace PL
                 Adults = 2,
                 Children = 1,
                 Pet = false,
-                Area = VacationArea.West,
-                SubArea = VacationSubArea.Tiberias,
+                Area = VacationArea.Jerusalem,
+                SubArea = "Tiberias",
                 ChildrensAttractions = Choices.No,
                 FitnessCenter = Choices.Yes,
                 Garden = Choices.No,
@@ -136,8 +136,8 @@ namespace PL
                 HostingUnitName = "sleep",
                 Owner = esti,
                 Pet = false,
-                Area = VacationArea.West,
-                SubArea = VacationSubArea.Tiberias,
+                Area = VacationArea.Center,
+                SubArea = "Tiberias",
                 ChildrensAttractions = false,
                 FitnessCenter = true,
                 Garden = false,
@@ -155,8 +155,8 @@ namespace PL
                 HostingUnitName = "Fanta Sea",
                 Owner = sori,
                 Pet = false,
-                Area = VacationArea.East,
-                SubArea = VacationSubArea.Netanya,
+                Area = VacationArea.South,
+                SubArea = "Netanya",
                 ChildrensAttractions = true,
                 FitnessCenter = false,
                 Garden = true,
@@ -170,13 +170,12 @@ namespace PL
             };
             HostingUnit hu2 = new HostingUnit
             {
-                //HostingUnitKey = Configuration.HostingUnitKey_s++,
                 HostingUnitName = "Fixed",
 
                 Owner = sori,
                 Pet = false,
-                Area = VacationArea.East,
-                SubArea = VacationSubArea.Netanya,
+                Area = VacationArea.North,
+                SubArea = "Netanya",
                 ChildrensAttractions = true,
                 FitnessCenter = false,
                 Garden = true,
@@ -207,7 +206,7 @@ namespace PL
             }
 
             IEnumerable<GuestRequest> myRequests;
-            IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
+            //IEnumerable<IGrouping<Host, HostingUnit>> myUnits = ibl.GroupHUByHosts();
             foreach (IGrouping<Host, HostingUnit> h in myUnits)
             {
                 foreach (HostingUnit hUnit in h)
@@ -239,6 +238,12 @@ namespace PL
             ibl.TotalCommissionCalculator(us);
             Console.WriteLine(us.TotalCommission);
             //ibl.GroupByNumOfUnits();
+            IEnumerable<HostingUnit> li=ibl.searchHUbyOwner(hu.Owner.HostKey);
+            foreach (HostingUnit item in li)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine("\n");
+            }
         }
     }
 }
