@@ -58,7 +58,6 @@ namespace PL
             IBL ibl = FactoryBL.getBL();
             GuestRequest gr = new GuestRequest
             {
-                //GuestRequestKey = Configuration.GuestRequest_s++,
                 PrivateName = "wanted",
                 FamilyName = "dead or alive",
                 RegistrationDate = Configuration.today,
@@ -83,7 +82,6 @@ namespace PL
             };
             GuestRequest gr1 = new GuestRequest
             {
-                //GuestRequestKey = Configuration.GuestRequest_s++,
                 PrivateName = "wanted",
                 FamilyName = "dead or alive",
                 RegistrationDate = Configuration.today,

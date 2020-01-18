@@ -12,21 +12,12 @@ namespace BL
 
     public class BL_imp : IBL
     {
-        public bool INTcontain(int x, int num)
-        {
-            while (x > 0)
-            {
-                if (x % 10 == num)
-                    return true;
-                x = x / 10;
-            }
-            return false;
-        }
-        public IEnumerable<Order> GetAllOrders(string searchString, BE.Status? status)
+
+        public IEnumerable<Order> GetAllOrders(int searchString, BE.Status? status)
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             return dal_bl.GetAllOrders(t =>
-                (INTcontain(t.HostingUnitKey, Convert.ToInt32(searchString)) && (status == null || status == t.Status)));
+                (searchString==t.HostingUnitKey) && (status == null || status == t.Status));
         }
         public IEnumerable<HostingUnit> searchHUbyOwner(int key)//filters from all orders based on parameters recieved
         {

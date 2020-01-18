@@ -24,38 +24,64 @@ namespace PLWPF
     {
         IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
         public IEnumerable<HostingUnit> units { get; set; }
+        IEnumerable<GuestRequest> req;//list of all requests that match any of the units
+        IEnumerable<Order> ord;
+        IList<Order> myOrders = new List<Order>();
         int id;
         public Orders(int ID)
         {
             id = ID;
             InitializeComponent();
-            this.OrdersTabUserControl.StatusCB.SelectionChanged += ApplyFiltering;
-            this.OrdersTabUserControl.SearchTextBox.TextChanged += ApplyFiltering;
-            this.OrdersTabUserControl.ResetFiltersButton.Click += ResetFilters;
+            IList<int> keys = new List<int>();
+            units = _bl.searchHUbyOwner(id);//list of all units for this host
+            ord = _bl.GetsOpenOrders();
+            foreach (HostingUnit hu in units)
+            {
+                keys.Add(hu.HostingUnitKey);
+                if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)).Count() > 0)
+                    if (req == null)
+                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(hu));
+                    else req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)));
+            }
+            foreach(int key in keys)
+            {
+                foreach(Order o in ord)
+                {
+                    if (o.HostingUnitKey == key)
+                        myOrders.Add(o);
+
+                }
+            }
+
+
+
+            this.OrdersTabUserControl.SearchBox.ItemsSource = keys;
+            this.OrdersTabUserControl.StatusCB.SelectedItem = "{Binding Path=OrderStatus,Mode=TwoWay}";
             this.OrdersTabUserControl.StatusCB.ItemsSource = Enum.GetValues(typeof(BE.Status));
 
+            this.OrdersTabUserControl.StatusCB.SelectionChanged += ApplyFiltering;
+            this.OrdersTabUserControl.SearchBox.SelectionChanged += ApplyFiltering;
+            this.OrdersTabUserControl.ResetFiltersButton.Click += ResetFilters;
+            this.OrdersTabUserControl.AddButton.Click += Addorder;
+            this.OrdersTabUserControl.StatusCB.ItemsSource = Enum.GetValues(typeof(BE.Status));
 
-            units = _bl.searchHUbyOwner(id);//list of all units for this host
-            this.OrdersTabUserControl.DataGrid.ItemsSource = units;
+            
+
+            this.OrdersTabUserControl.DataGrid.ItemsSource = myOrders;
             this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "orders";
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
 
 
-            IEnumerable<GuestRequest> req = null;//list of all requests that match any of the units
-            //List<string> keys = null;//list of all names of host
-            foreach (HostingUnit hu in units)
-            {
-                //if (keys == null)
-                //    keys[0] = hu.HostingUnitName;
-                //keys.Add(hu.HostingUnitName);
-                if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)).Count() > 0)
-                    req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)));
-            }
+
+        }
+        private void Addorder(object sender, RoutedEventArgs e)
+        {
+
         }
         private void ResetFilters(object sender, RoutedEventArgs e)
         {
-            this.OrdersTabUserControl.SearchTextBox.Text = null;
-            this.OrdersTabUserControl.SearchTextBox.Text = null;
+            this.OrdersTabUserControl.SearchBox.Text = null;
+            this.OrdersTabUserControl.SearchBox.Text = null;
             this.OrdersTabUserControl.StatusCB.SelectedItem = null;
             ApplyFiltering(this, new RoutedEventArgs());
         }
@@ -65,7 +91,7 @@ namespace PLWPF
             try
             {
                 this.OrdersTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllOrders(
-                      this.OrdersTabUserControl.SearchTextBox.Text,
+                      Convert.ToInt32(this.OrdersTabUserControl.SearchBox.Text),
                       this.OrdersTabUserControl.StatusCB.SelectedItem as BE.Status?
                       )
                       orderby item.HostingUnitKey

@@ -31,7 +31,7 @@
                 <Label x:Name="Status" Content="Status" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Width="75"/>
                 <Button x:Name="ResetFiltersButton" Content="Reset Filters" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="75"/>
                 <ComboBox x:Name="StatusCB" Text="Choose Status" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="80" Height="30"/>
-                <TextBox x:Name="SearchTextBox" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="85" Height="30" TextWrapping="Wrap" Text="" />
+                <ComboBox x:Name="SearchBox" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Width="85" Height="30" Text="" />
                 <Grid Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10*"/>

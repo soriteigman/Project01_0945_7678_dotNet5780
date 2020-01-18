@@ -9,10 +9,9 @@ namespace BL
 {
     public interface IBL
     {
-        bool INTcontain(int x, int num);
         IEnumerable<HostingUnit> listHU();
         IEnumerable<HostingUnit> searchHUbyOwner(int key);//filters from all orders based on parameters recieved
-        IEnumerable<Order> GetAllOrders(string searchString, BE.Status? status);
+        IEnumerable<Order> GetAllOrders(int searchString, BE.Status? status);
         IEnumerable<GuestRequest> listGR();
         void addreq(GuestRequest gr);
         void Updategr(GuestRequest gr);
