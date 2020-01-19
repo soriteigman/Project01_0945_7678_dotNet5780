@@ -12,6 +12,22 @@ namespace BL
 
     public class BL_imp : IBL
     {
+        IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+
+        public IEnumerable<HostingUnit> GetAllTUnits(string searchString, object key, StarRating?
+                                         star, VacationArea? area, VacationType? type)
+        {
+            return dal_bl.GetAllUnits(t =>
+                (t.HostingUnitName.Contains(searchString)
+                && (key == null || key.ToString() == t.HostingUnitKey.ToString())
+
+                && (star == null || star == t.Stars)
+
+                && (area == null || area == t.Area)
+
+                && (type == null || t.Type == type)));
+        }
+
 
         public IEnumerable<Order> GetAllOrders(int searchString, BE.Status? status)
         {

@@ -22,6 +22,8 @@ namespace DAL
 
 
         #region HostingUnit
+        IEnumerable<BE.HostingUnit> GetAllUnits(Func<BE.HostingUnit, bool> predicate = null);
+
         void AddHostingUnit(HostingUnit hu);
 
         void RemoveHostingUnit(HostingUnit hu);

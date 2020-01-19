@@ -128,17 +128,17 @@ namespace PLWPF
         }
                 */
 
-         private void UpdateButton_Click(object sender, RoutedEventArgs e)
-         {
-             if (!BE.Tools.IsInternetAvailable())
-                MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-             else
-             {
-                if (new UpdateTrainee().ShowDialog() == true)
-                        AddNotification("התלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName + " עודכן בהצלחה");
-                ApplyTraineesFiltering(this, new RoutedEventArgs());
-             }
-        }
+        // private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        // {
+        //     if (!BE.Tools.IsInternetAvailable())
+        //        MessageBox.Show("בדוק את החיבור שלך לרשת", "אין חיבור לרשת", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+        //     else
+        //     {
+        //        if (new UpdateTrainee().ShowDialog() == true)
+        //                AddNotification("התלמיד " + selectedTrainees[0].FirstName + ' ' + selectedTrainees[0].LastName + " עודכן בהצלחה");
+        //        ApplyTraineesFiltering(this, new RoutedEventArgs());
+        //     }
+        //}
         }
     }
 }

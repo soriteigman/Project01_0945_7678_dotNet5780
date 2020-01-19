@@ -86,6 +86,13 @@ namespace DAL
 
 
         #region HostingUnit
+        public IEnumerable<BE.HostingUnit> GetAllUnits(Func<BE.HostingUnit, bool> predicate = null)
+        {
+            IEnumerable<HostingUnit> LHu = ListOfHostingUnits();
+            if (predicate == null)
+                return LHu.Select(t => t.Clone());
+            return LHu.Where(predicate).Select(t => t.Clone());
+        }
         public void AddHostingUnit(HostingUnit hu)
         {
             try
