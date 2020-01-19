@@ -21,60 +21,75 @@ namespace PLWPF
     /// </summary>
     public partial class UpdateHuWindow : Window
     {
+        IBL myBL = FactoryBL.getBL();
+        HostingUnit hu1 = new HostingUnit();
+
         public UpdateHuWindow(HostingUnit hu )
         {
             InitializeComponent();
-
+            hu1 = hu;
             this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
-            //if (cbArea.SelectedItem.ToString() == "DeadSea")
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=DeadSea,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.DeadSea));
-            //}
-            //else if (cbArea.SelectedItem.ToString() == "Eilat")
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=Eilat,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.Eilat));
-            //}
-            //else if (cbArea.SelectedItem.ToString() == "Jerusalem")
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=Jerusalem,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.Jerusalem));
-            //}
-            //else if (cbArea.SelectedItem.ToString() == "North")
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=North,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.North));
-            //}
-            //else if (cbArea.SelectedItem.ToString() == "South")
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=South,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.South));
-            //}
-            //else if (cbArea.SelectedItem.ToString() == "Center")
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=Center,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.Center));
-            //}
-            //else
-            //{
-            //    cbSubArea.SelectedItem = "{Binding Path=All,Mode=TwoWay}";
-            //    this.cbSubArea.ItemsSource = Enum.GetValues(typeof(BE.All));
-            //}
 
            this.DataContext = hu;
-           ID.Text = (hu.Owner.HostKey).ToString();
-           Fname.Text = (hu.Owner.PrivateName).ToString();
-           Lname.Text = (hu.Owner.FamilyName).ToString();
-           Fname.Text = (hu.Owner.PrivateName).ToString();
-           Phonenum.Text = (hu.Owner.PhoneNumber).ToString();
-           Email.Text = (hu.Owner.MailAddress).ToString();
-           BankAcctNum.Text = (hu.Owner.BankAccountNumber).ToString(); 
 
-            cbArea.SelectedValue = hu.Area;
         }
 
-        
+        private void update_Click(object sender, RoutedEventArgs e)
+        {
+            HostingUnit hu2 = new HostingUnit();
+            hu2 = hu1;
+            bool flag = true;
+            bool email_flag = true;
+            try
+            {
+                email_flag = myBL.IsValidEmail(Email.Text);
+            }
+            catch// (Exception a)
+            {
+                Email.Clear();
+                Email.Text = "Enter Your Email Address";
+                Email.BorderBrush = Brushes.Red;
+                flag = false;
+                email_flag = false;
+            }
+            //if(Convert.ToInt32(Beds)<=0)
+            //{
+            //    flag = false;
+            //    Beds.BorderBrush = Brushes.Red;
+            //}
+
+            if (flag)
+            {
+                hu2.Owner.PhoneNumber = Convert.ToInt32(Phonenum.Text);
+                hu2.Owner.MailAddress = Email.Text;
+                hu2.Owner.BankAccountNumber = Convert.ToInt32(BankAcctNum.Text);
+                hu2.Owner.CollectionClearance = (bool)CollectionClearance.IsChecked;
+                //hu2.Owner.BankBranchDetails=(BankBranch)cbBank.SelectedItem;
+                hu2.HostingUnitName = HUname.Text;
+                hu2.Beds = Convert.ToInt32(Beds.Text);
+                hu2.Pet = (bool)Pets.IsChecked;
+                hu2.WiFi = (bool)Wifi.IsChecked;
+                hu2.Parking = (bool)Parking.IsChecked;
+                hu2.Pool = (bool)Pool.IsChecked;
+                hu2.Jacuzzi = (bool)Jacuzzi.IsChecked;
+                hu2.Garden = (bool)Garden.IsChecked;
+                hu2.ChildrensAttractions = (bool)chiAttract.IsChecked;
+                hu2.FitnessCenter = (bool)FitnessCenter.IsChecked;
+
+                try
+                {
+                    myBL.UpdateHostingUnit(hu2);
+                    Close();
+                }
+                catch(Exception a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+
+            }
+
+        }
     }
 }
