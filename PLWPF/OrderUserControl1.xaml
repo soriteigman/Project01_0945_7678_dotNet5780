@@ -77,6 +77,10 @@
                     Width="120" Height="30" BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"
                     ToolTipService.ShowOnDisabled="True" ToolTip="Add order">
                 </Button>
+                <Button x:Name="RemoveButton"  Content="Remove Unit" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Width="120" Height="30" BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"
+                    ToolTipService.ShowOnDisabled="True" ToolTip="Add order">
+                </Button>
             </Grid>
         </Grid>
     </Grid>

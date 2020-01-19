@@ -50,6 +50,7 @@ namespace BL
         bool RemoveUnitCheck(HostingUnit hu);//checks to see if there are any active reservations for that unit before removing it
 
         //bool ChangeCollectionClearance(Host h);//
+        HostingUnit SearchHUbyID(int key);
 
         void SendEmail(Order o);//sends email when order status changes to "sent mail"
 

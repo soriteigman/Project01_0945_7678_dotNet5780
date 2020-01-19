@@ -60,6 +60,10 @@ namespace PLWPF
             this.OrdersTabUserControl.FilterArea.SelectionChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterType.SelectionChanged += ApplyFiltering;
             this.OrdersTabUserControl.ResetFiltersButton.Click += ResetFilters;
+            this.OrdersTabUserControl.DataGrid.SelectionChanged += ShowButtons;
+            this.OrdersTabUserControl.AddButton.Click += addOrder;
+
+
 
             this.OrdersTabUserControl.FilterKey.ItemsSource = keys;
             this.OrdersTabUserControl.FilterKey.SelectedItem = "{Binding Path=UnitKey,Mode=TwoWay}";
@@ -79,6 +83,30 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
 
         }
+        private void addOrder(object sender, RoutedEventArgs e)
+        {
+                this.NavigationService.Navigate(new NewOrderPage(((HostingUnit)this.OrdersTabUserControl.DataGrid.CurrentItem).HostingUnitKey));
+        }
+        private void ShowButtons(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.OrdersTabUserControl.DataGrid.CurrentItem != null)//something was selected
+            {
+                this.OrdersTabUserControl.updateButton.IsEnabled = true;//allows button clicks
+                this.OrdersTabUserControl.RemoveButton.IsEnabled = true;
+                if (((HostingUnit)this.OrdersTabUserControl.DataGrid.CurrentItem).Owner.CollectionClearance)//if he has collection clearance
+                    this.OrdersTabUserControl.AddButton.IsEnabled = true;
+                else
+                {
+                    //let him kmow why he cant create a order
+                }
+            }
+            else
+            {
+                this.OrdersTabUserControl.AddButton.IsEnabled = false;//otherwise disables them
+                this.OrdersTabUserControl.updateButton.IsEnabled = false;
+                this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
+            }
+        }
 
         private void ResetFilters(object sender, RoutedEventArgs e)
         {
@@ -91,6 +119,7 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
         }
+
 
         private void ApplyFiltering(object sender, RoutedEventArgs e)
         {
