@@ -13,7 +13,7 @@
             <PasswordBox x:Name="passwordBox" Background="White" PasswordChar="*" Opacity="0.5" Margin="121,103,32,68" />
             <TextBox x:Name="usernameBox" Background="White" Opacity="0.5" Margin="121,38,32,136" />
             <Label Content="Username:" Margin="33,38,262,122" />
-            <Button Name="login" Content="LOGIN" Margin="203,151,114,25" RenderTransformOrigin="0.5,0.5" Click="login_Click"/>
+            <Button Name="login" IsDefault="True" Content="LOGIN" Margin="203,151,114,25" RenderTransformOrigin="0.5,0.5" Click="login_Click"/>
         </Grid>
     </Grid>
 </Window>

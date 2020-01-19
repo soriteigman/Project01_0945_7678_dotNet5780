@@ -50,6 +50,66 @@ namespace PLWPF
             hostingunit.SelectedIndex = 0;
 
         }
+        private void WayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "HostingUnitKey":
+                    e.Column.Header = "Property Key";
+                    break;
+                case "Owner":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    break;
+                case "Area":
+                    e.Column.Header = "Area";
+                    break;
+                case "SubArea":
+                    e.Column.Header = "Sub Area";
+                    break;
+                case "Type":
+                    e.Column.Header = "Property Type";
+                    break;
+                case "Pet":
+                    e.Column.Header = "Pet";
+                    break;
+                case "WiFi":
+                    e.Column.Header = "Wifi";
+                    break;
+                case "Parking":
+                    e.Column.Header = "Parking";
+                    break;
+                case "Pool":
+                    e.Column.Header = "Pool";
+                    break;
+                case "Jacuzzi":
+                    e.Column.Header = "Jacuzzi";
+                    break;
+                case "Garden":
+                    e.Column.Header = "Garden";
+                    break;
+                case "ChildrensAttractions":
+                    e.Column.Header = "Childrens\n Attractions";
+                    break;
+                case "FitnessCenter":
+                    e.Column.Header = "Fitness Center";
+                    break;
+                case "Stars":
+                    e.Column.Header = "Rating";
+                    break;
+                case "Beds":
+                    e.Column.Header = "Beds";
+                    break;
+                case "Diary":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
+        }
 
     }
 

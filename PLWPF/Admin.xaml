@@ -18,7 +18,8 @@
 
             <TabItem
                 Header="Hosting Units" Name="ListOfHU" TabIndex="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
-                <DataGrid Name="hostingunit" ItemsSource="{Binding Path= units}" Margin="-2,0,-3,0"/>
+                <DataGrid Name="hostingunit" ItemsSource="{Binding Path= units}" Margin="-2,0,-3,0" AutoGeneratingColumn ="WayOfView"
+/>
 
             </TabItem>
 
