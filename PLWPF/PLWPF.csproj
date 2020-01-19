@@ -65,6 +65,9 @@
     <Compile Include="UpdateHuPage.xaml.cs">
       <DependentUpon>UpdateHuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateHuWindow.xaml.cs">
+      <DependentUpon>UpdateHuWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddHostingUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateHuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateHuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

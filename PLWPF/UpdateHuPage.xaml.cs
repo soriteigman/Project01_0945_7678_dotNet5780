@@ -97,36 +97,37 @@ namespace PLWPF
                 default:
                     break;
             }
-
-            /* private void ApplyTestersFiltering(object sender, RoutedEventArgs e)
-        {
-            this.TestersTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTesters(
-                                        this.TestersTabUserControl.SearchTextBox.Text,
-                                        this.TestersTabUserControl.genderComboBox.SelectedItem as BE.Gender?,
-                                        this.TestersTabUserControl.gearBoxTypeComboBox.SelectedItem as BE.GearBoxType?,
-                                        this.TestersTabUserControl.vehicleComboBox.SelectedItem as BE.Vehicle?,
-                                        this.TestersTabUserControl.FromTimeDatePicker.SelectedDate,
-                                        this.TestersTabUserControl.ToTimeDatePicker.SelectedDate)
-                                                              orderby item.FirstName, item.LastName
-                                                              select new
-                                                              {
-                                                                  item.FirstName,
-                                                                  item.LastName,
-                                                                  item.ID,
-                                                                  item.Gender,
-                                                                  BirthDate = item.BirthDate.ToShortDateString(),
-                                                                  item.PhoneNumber,
-                                                                  item.Address,
-                                                                  item.MailAddress,
-                                                                  item.Vehicle,
-                                                                  item.GearBoxType,
-                                                                  item.Experience,
-                                                                  item.MaxTestsInWeek,
-                                                                  item.WorkHours,
-                                                                  item.MaxDistanceInMeters
-                                                              };
         }
-                */
+
+        /* private void ApplyTestersFiltering(object sender, RoutedEventArgs e)
+    {
+        this.TestersTabUserControl.DataGrid.ItemsSource = from item in bl.GetAllTesters(
+                                    this.TestersTabUserControl.SearchTextBox.Text,
+                                    this.TestersTabUserControl.genderComboBox.SelectedItem as BE.Gender?,
+                                    this.TestersTabUserControl.gearBoxTypeComboBox.SelectedItem as BE.GearBoxType?,
+                                    this.TestersTabUserControl.vehicleComboBox.SelectedItem as BE.Vehicle?,
+                                    this.TestersTabUserControl.FromTimeDatePicker.SelectedDate,
+                                    this.TestersTabUserControl.ToTimeDatePicker.SelectedDate)
+                                                          orderby item.FirstName, item.LastName
+                                                          select new
+                                                          {
+                                                              item.FirstName,
+                                                              item.LastName,
+                                                              item.ID,
+                                                              item.Gender,
+                                                              BirthDate = item.BirthDate.ToShortDateString(),
+                                                              item.PhoneNumber,
+                                                              item.Address,
+                                                              item.MailAddress,
+                                                              item.Vehicle,
+                                                              item.GearBoxType,
+                                                              item.Experience,
+                                                              item.MaxTestsInWeek,
+                                                              item.WorkHours,
+                                                              item.MaxDistanceInMeters
+                                                          };
+    }
+            */
 
         // private void UpdateButton_Click(object sender, RoutedEventArgs e)
         // {
@@ -139,6 +140,16 @@ namespace PLWPF
         //        ApplyTraineesFiltering(this, new RoutedEventArgs());
         //     }
         //}
-        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (UpdateHUGrid.DataGrid.SelectedItem != null && UpdateHUGrid.DataGrid.SelectedItem is HostingUnit)
+            {
+                new UpdateHuWindow((HostingUnit)UpdateHUGrid.DataGrid.SelectedItem).Show();
+                //closeOpenMain = false;//don't open main after closing
+                //this.Close();
+            }
+        }//sends to unit information with data of current row to bind to
+        
     }
 }
