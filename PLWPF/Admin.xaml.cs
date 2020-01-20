@@ -38,15 +38,24 @@ namespace PLWPF
             this.MyOrderstab.DataGrid.ItemsSource = orders;
             this.MyOrderstab.DataGrid.DisplayMemberPath = "orders";
             this.MyOrderstab.DataGrid.SelectedIndex = 0;
-            this.MyOrderstab.DataGrid.DisplayMemberPath = "guestrequest";
-            this.MyOrderstab.DataGrid.SelectedIndex = 0;
-            this.MyOrderstab.FilterName.TextChanged += OApplyFiltering;
-            this.MyOrderstab.FilterKey.SelectionChanged += OApplyFiltering;
-            this.MyOrderstab.FilterStar.SelectionChanged += OApplyFiltering;
-            this.MyOrderstab.FilterArea.SelectionChanged += OApplyFiltering;
+            this.MyOrderstab.Larea.Visibility = Visibility.Hidden;
+            this.MyOrderstab.Lkey.Visibility = Visibility.Hidden;
+            this.MyOrderstab.Lname.Visibility = Visibility.Hidden;
+            this.MyOrderstab.Lstar.Visibility = Visibility.Hidden;
+            this.MyOrderstab.AddButton.Visibility = Visibility.Hidden;
+            this.MyOrderstab.updateButton.Visibility = Visibility.Hidden;
+            this.MyOrderstab.RemoveButton.Visibility = Visibility.Hidden;
+            this.MyOrderstab.FilterName.Visibility=Visibility.Hidden;
+            this.MyOrderstab.FilterKey.Visibility = Visibility.Hidden;
+            this.MyOrderstab.FilterStar.Visibility = Visibility.Hidden;
+            this.MyOrderstab.FilterArea.Visibility = Visibility.Hidden;
             this.MyOrderstab.FilterType.SelectionChanged += OApplyFiltering;
             this.MyOrderstab.ResetFiltersButton.Click += OResetFilters;
             this.MyOrderstab.DataGrid.AutoGeneratingColumn += OWayOfView;
+
+            this.MyOrderstab.Ltype.Content = "Filter Status";
+            this.MyOrderstab.FilterType.ItemsSource = Enum.GetValues(typeof(BE.Status));
+            this.MyOrderstab.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
             #endregion
 
             #region gr
@@ -54,6 +63,11 @@ namespace PLWPF
             this.MyRequeststab.DataGrid.ItemsSource = gr;
             this.MyRequeststab.DataGrid.DisplayMemberPath = "guestrequest";
             this.MyRequeststab.DataGrid.SelectedIndex = 0;
+            this.MyRequeststab.AddButton.Visibility = Visibility.Hidden;
+            this.MyRequeststab.updateButton.Visibility = Visibility.Hidden;
+            this.MyRequeststab.RemoveButton.Visibility = Visibility.Hidden;
+            this.MyRequeststab.Lkey.Visibility = Visibility.Hidden;
+            this.MyRequeststab.FilterKey.Visibility = Visibility.Hidden;
             this.MyRequeststab.FilterName.TextChanged += GRApplyFiltering;
             this.MyRequeststab.FilterKey.SelectionChanged += GRApplyFiltering;
             this.MyRequeststab.FilterStar.SelectionChanged += GRApplyFiltering;
@@ -61,6 +75,16 @@ namespace PLWPF
             this.MyRequeststab.FilterType.SelectionChanged += GRApplyFiltering;
             this.MyRequeststab.ResetFiltersButton.Click += GRResetFilters;
             this.MyRequeststab.DataGrid.AutoGeneratingColumn += GRWayOfView;
+
+
+            this.MyRequeststab.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
+            this.MyRequeststab.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
+
+            this.MyRequeststab.FilterArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
+            this.MyRequeststab.FilterArea.SelectedItem = "{Binding Path=UnitArea,Mode=TwoWay}";
+
+            this.MyRequeststab.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+            this.MyRequeststab.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
             #endregion
 
             #region hu
@@ -68,15 +92,28 @@ namespace PLWPF
             this.MyUnitstab.DataGrid.ItemsSource = hu;
             this.MyUnitstab.DataGrid.DisplayMemberPath = "hostingunit";
             this.MyUnitstab.DataGrid.SelectedIndex = 0;
-
-
+            this.MyUnitstab.AddButton.Visibility = Visibility.Hidden;
+            this.MyUnitstab.updateButton.Visibility = Visibility.Hidden;
+            this.MyUnitstab.RemoveButton.Visibility = Visibility.Hidden;
             this.MyUnitstab.FilterName.TextChanged += HUApplyFiltering;
+            this.MyUnitstab.Lkey.Visibility = Visibility.Hidden;
+            this.MyUnitstab.FilterKey.Visibility = Visibility.Hidden;
             this.MyUnitstab.FilterKey.SelectionChanged += HUApplyFiltering;
             this.MyUnitstab.FilterStar.SelectionChanged += HUApplyFiltering;
             this.MyUnitstab.FilterArea.SelectionChanged += HUApplyFiltering;
             this.MyUnitstab.FilterType.SelectionChanged += HUApplyFiltering;
             this.MyUnitstab.ResetFiltersButton.Click += HUResetFilters;
             this.MyUnitstab.DataGrid.AutoGeneratingColumn += HUWayOfView;
+
+
+            this.MyUnitstab.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
+            this.MyUnitstab.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
+
+            this.MyUnitstab.FilterArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
+            this.MyUnitstab.FilterArea.SelectedItem = "{Binding Path=UnitArea,Mode=TwoWay}";
+
+            this.MyUnitstab.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+            this.MyUnitstab.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
             #endregion
 
         }
@@ -232,25 +269,25 @@ namespace PLWPF
         {
             switch (e.PropertyName)
             {
-                case "guestRequestKey":
+                case "GuestRequestKey":
                     e.Column.Header = "guest Request Key";
                     break;
-                case "privateName":
+                case "PrivateName":
                     e.Column.Header = "First Name";
                     break;
                 case "FamilyName":
                     e.Column.Header = "Last Name";
                     break;
-                case "mailAddress":
+                case "MailAddress":
                     e.Column.Header = "Email";
                     break;
-                case "registrationDate":
+                case "RegistrationDate":
                     e.Column.Header = "Registration Date";
                     break;
-                case "entryDate":
+                case "EntryDate":
                     e.Column.Header = "Entry Date";
                     break;
-                case "releaseDate":
+                case "ReleaseDate":
                     e.Column.Header = "Release Date";
                     break;
                 case "Area":
@@ -303,7 +340,7 @@ namespace PLWPF
         {
             this.MyOrderstab.DataGrid.ItemsSource = from item in _bl.GetAllOrders(
                                                                         0,
-                                                    this.MyUnitstab.FilterType.SelectedItem as BE.Status?)
+                                                    this.MyOrderstab.FilterType.SelectedItem as BE.Status?)
                                                    orderby item.CreateDate, item.Status
                                                    select new
                                                    {
@@ -327,19 +364,19 @@ namespace PLWPF
         {
             switch (e.PropertyName)
             {
-                case "guestRequestKey":
+                case "GuestRequestKey":
                     e.Column.Header = "guest Request Key";
                     break;
-                case "privateName":
+                case "PrivateName":
                     e.Column.Header = "First Name";
                     break;
                 case "FamilyName":
                     e.Column.Header = "Last Name";
                     break;
-                case "mailAddress":
+                case "MailAddress":
                     e.Column.Header = "Email";
                     break;
-                case "registrationDate":
+                case "RegistrationDate":
                     e.Column.Header = "Registration Date";
                     break;
                 case "entryDate":
