@@ -119,7 +119,7 @@ namespace PLWPF
             HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
-            this.NavigationService.Navigate(new NewOrderPage(HU));
+           // this.NavigationService.Navigate(new NewOrderPage(HU));
         }
 
         private void updateHu(object sender, RoutedEventArgs e)
@@ -286,6 +286,27 @@ namespace PLWPF
                 this.newOrderTabUserControl.AddButton.IsEnabled = false;//otherwise disables them
                 this.newOrderTabUserControl.updateButton.IsEnabled = false;
                 this.newOrderTabUserControl.RemoveButton.IsEnabled = false;
+            }
+        }
+
+        private void remove_Click(object sender, RoutedEventArgs e)
+        {
+            HostingUnit myunit = _bl.SearchHUbyID_bl(((HostingUnit)this.OrdersTabUserControl.DataGrid.CurrentItem).HostingUnitKey);
+            MessageBoxResult mbResult;
+            mbResult = MessageBox.Show("Are you sure you want to delete the following property:\n" +
+                "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey +
+                " This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+
+            try
+            {
+                if (mbResult == MessageBoxResult.Yes)
+                {
+                    _bl.RemoveHostingUnit(myunit);
+                }
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
