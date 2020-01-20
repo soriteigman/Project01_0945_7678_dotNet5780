@@ -27,7 +27,6 @@ namespace PLWPF
         IEnumerable<GuestRequest> req;//list of all requests that match any of the units
         IEnumerable<Order> ord;//all his orders
         IList<int> keys = new List<int>();//all his keys
-        IList<int> grkeys = new List<int>();//all gr keys
         IList<Order> myOrders = new List<Order>();
         int id;
         public Orders(int ID)
@@ -111,36 +110,30 @@ namespace PLWPF
 
             #region requests
 
-            foreach(GuestRequest g in req)
-            {
-                grkeys.add(g.key)
-            }
-
+         
             this.newOrderTabUserControl.FilterName.TextChanged += ApplyFilteringgr;
-            this.newOrderTabUserControl.FilterKey.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterKey.Visibility=Visibility.Hidden;
             this.newOrderTabUserControl.FilterStar.SelectionChanged += ApplyFilteringgr;
             this.newOrderTabUserControl.FilterArea.SelectionChanged += ApplyFilteringgr;
             this.newOrderTabUserControl.FilterType.SelectionChanged += ApplyFilteringgr;
             this.newOrderTabUserControl.ResetFiltersButton.Click += ResetFiltersgr;
-            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsgr;
+            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
             this.newOrderTabUserControl.AddButton.Click += createOrder;
 
 
 
-            this.newOrderTabUserControl.FilterKey.ItemsSource = keys;
-            this.newOrderTabUserControl.FilterKey.SelectedItem = "{Binding Path=UnitKey,Mode=TwoWay}";
-
+            
             this.newOrderTabUserControl.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
-            this.OrdersTabUserControl.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
+            this.newOrderTabUserControl.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
 
-            this.OrdersTabUserControl.FilterArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
-            this.OrdersTabUserControl.FilterArea.SelectedItem = "{Binding Path=UnitArea,Mode=TwoWay}";
+            this.newOrderTabUserControl.FilterArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
+            this.newOrderTabUserControl.FilterArea.SelectedItem = "{Binding Path=UnitArea,Mode=TwoWay}";
 
-            this.OrdersTabUserControl.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
-            this.OrdersTabUserControl.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
+            this.newOrderTabUserControl.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+            this.newOrderTabUserControl.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
 
-            this.OrdersTabUserControl.DataGrid.ItemsSource = units;
-            this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
+            this.OrdersTabUserControl.DataGrid.ItemsSource = gr;
+            this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "myreq";
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
             this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
             this.OrdersTabUserControl.DataGrid.UnselectAll();
@@ -157,7 +150,7 @@ namespace PLWPF
             HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
-            this.NavigationService.Navigate(new NewOrderPage(HU));
+           // this.NavigationService.Navigate(new NewOrderPage(HU));
         }
 
         private void updateHu(object sender, RoutedEventArgs e)
@@ -326,8 +319,22 @@ namespace PLWPF
                 this.newOrderTabUserControl.RemoveButton.IsEnabled = false;
             }
         }
+        private void ApplyFilteringgr(object sender, RoutedEventArgs e)
+        {
 
+        }
+        private void ShowButtonsreq(object sender, RoutedEventArgs e)
+        {
 
+        }
+        private void ResetFiltersgr(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void createOrder(object sender, RoutedEventArgs e)
+        {
+
+        }
         #endregion
 
     }
