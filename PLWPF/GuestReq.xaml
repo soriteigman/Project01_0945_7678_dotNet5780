@@ -69,7 +69,7 @@
     </Page.Resources>
 
     <Grid x:Name="addReq" Background="#FFF9E8E2" HorizontalAlignment="Center" Height="440" Margin="10,0,0,0" VerticalAlignment="Center" Width="780" RenderTransformOrigin="0.5,0.5" OpacityMask="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" ShowGridLines="True">
-        
+
         <GroupBox x:Name="Email" FlowDirection="LeftToRight" BorderBrush="Black" BorderThickness="1" Header="Email" Margin="292,189,374,207" FontWeight="Bold">
             <TextBox x:Name="Emailtb"   HorizontalAlignment="Left" Height="24" Margin="0,0,-2,-2" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" RenderTransformOrigin="0.588,2.479" />
         </GroupBox>
@@ -109,7 +109,7 @@
         </GroupBox>
         <GroupBox x:Name="kidsbox" FlowDirection="LeftToRight" BorderBrush="Black" BorderThickness="1" Header="Children" Margin="151,196,515,201" FontWeight="Bold">
             <ComboBox Name="numkid"  Padding="2" Text="0" Height="20" HorizontalAlignment="Center" Width="101" IsDropDownOpen="False"  IsEditable="True" DropDownClosed="numkid_DropDownClosed">
-            <ComboBoxItem>
+                <ComboBoxItem>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50*"/>
@@ -139,9 +139,9 @@
                 </ComboBoxItem>
             </ComboBox>
         </GroupBox>
-        <Label Name="mainquestion" Content="Fill in your request" HorizontalAlignment="Left" Margin="164,29,0,0" VerticalAlignment="Top" Width="220" FontFamily="Verdana Pro Black" FontSize="18" Height="31"/>
+        <Label Name="mainquestion" Content="Fill in your request:" HorizontalAlignment="Left" Margin="164,29,0,0" VerticalAlignment="Top" Width="220" FontFamily="Verdana Pro Black" FontSize="18" Height="31" FontWeight="Bold"/>
         <CheckBox Name="pet" Content="Do you have a pet?" HorizontalAlignment="Left" Margin="21,343,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.486,3.267" FontWeight="Bold"/>
-        <Button Name="next" Content="next" HorizontalAlignment="Left" Height="29" Margin="491,381,0,0" VerticalAlignment="Top" Width="68" Background="#FF8D91DE" Click="Button_Click"/>
+        <Button Name="next" Content="create request" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Height="38" Margin="412,358,0,0" VerticalAlignment="Top" Width="104" Background="#FF8D91DE" Click="Button_Click"/>
         <Label Name="numofday" Content="number of nights" Visibility="Hidden" HorizontalAlignment="Left" Margin="21,181,0,0" VerticalAlignment="Top" Width="108" Height="22" FontSize="8"/>
         <Label Name="option" Content="Are you interested in:" Visibility="Hidden" HorizontalAlignment="Left" Margin="556,28,0,0" VerticalAlignment="Top" Height="39" Width="214" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black"/>
         <Label Name="Errorpname" Content="Please insert a name"  Visibility="Hidden" HorizontalAlignment="Left" Margin="298,175,0,0" VerticalAlignment="Top" Width="108" Height="23" FontSize="8" Foreground="Red"/>

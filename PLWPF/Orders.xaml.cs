@@ -28,6 +28,7 @@ namespace PLWPF
         public IEnumerable<HostingUnit> units { get; set; }//all his units
         IEnumerable<GuestRequest> req;//list of all requests that match any of the units
         IEnumerable<Order> ord;//all his orders
+        //List<Order> myOrds;
         IList<int> keys = new List<int>();//all his hukeys
         IList<Order> myOrders = new List<Order>();
         int id;
@@ -36,7 +37,8 @@ namespace PLWPF
             id = ID;
             InitializeComponent();
             units = _bl.searchHUbyOwner(id);//list of all units for this host
-            ord = _bl.GetsOpenOrders();
+            ord = _bl.GetsOpenOrders().ToList();
+            //myOrds = ord.ToList();
             #region איתחול
             foreach (HostingUnit h in units)
             {
@@ -121,6 +123,12 @@ namespace PLWPF
 
             #region all requests
             this.AllRequeststab.DataGrid.ItemsSource = req;
+            #endregion
+
+            #region my orders
+           // myOrds.RemoveAll(o => _bl.SearchHUbyID_bl(o.HostingUnitKey).Owner.HostKey != id);//removes all orders not connected to current host
+            this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+
             #endregion
         }
         #region units
@@ -409,6 +417,19 @@ namespace PLWPF
         {
             GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
             _bl.AddOrder(_bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey));
+
+            ord = _bl.GetsOpenOrders().ToList();
+            myOrders.Clear();
+            foreach (int key in keys)
+            {
+                foreach (Order o in ord)
+                {
+                    if (o.HostingUnitKey == key)
+                        myOrders.Add(o);
+                }
+            }
+            this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+
         }
         private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//to do
         {
