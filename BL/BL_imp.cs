@@ -281,7 +281,9 @@ namespace BL
                 Host h = dal_bl.SearchHUbyID(newO.HostingUnitKey).Owner;
                 if (newO.Status == Status.Booked)
                 {
-                    Updategr(dal_bl.searchGRbyID(newO.GuestRequestKey));
+                    GuestRequest g = dal_bl.searchGRbyID(newO.GuestRequestKey);
+                    g.Status = Status.Closed;
+                    Updategr(g.Clone());
                     UpdateDiary(newO.Clone());
                 }
                 if (newO.Status == Status.SentEmail)
@@ -290,6 +292,7 @@ namespace BL
                     {
                         newO.SentEmail = Configuration.today;
                         SendEmail(newO.Clone());
+
                     }
                     else throw new InvalidOperationException("cannot send email without permission to charge");
                 }
@@ -536,7 +539,7 @@ namespace BL
             Console.WriteLine("email was sent, catch it if u can!!!!");
 
             MailMessage mail = new MailMessage();
-            mail.To.Add("soriteigman@gmail.com");
+            mail.To.Add(gr.MailAddress);
             mail.From = new MailAddress("stburack@gmail.com");
             mail.Subject = "vacation home offer";
             mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? if so please contact me at "+h.MailAddress;
