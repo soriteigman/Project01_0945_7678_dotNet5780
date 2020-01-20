@@ -8,14 +8,69 @@
       mc:Ignorable="d" 
       d:DesignHeight="539.562" d:DesignWidth="806.091"
       Title="AddHostingUnit" >
+    <Page.Resources>
+        <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
+                                <Border.Background>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" 
+                                                        ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.3"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="1" Color="#FFF99470"/>
+                                        <GradientStop Offset="0.5" Color="#FFFFFFFF"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Bold">
+                                </ContentPresenter>
+                            </Border>
 
-    <Grid x:Name="addHUgrid" HorizontalAlignment="Center" VerticalAlignment="Center" >
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFFD9A56"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#FFF99470" Offset="1"/>
+                                            <GradientStop Color="#FFFFFFFF" Offset="0.5"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="addHUgrid" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFF9E8E2" >
+        
         <TabControl Name="TC" Margin="10,13,14,10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="750" Height="403">
             <TabItem>
                 <TabItem.Header>
@@ -25,7 +80,7 @@
                 </TabItem.Header>
                 <Grid >
                     <Label Content="Please fill out your Personal info here" FontSize="25" Margin="194,10,188,306"/>
-                    <Button Name="next" Content="NEXT" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
+                    <Button Name="next" Content="NEXT" Style="{DynamicResource RoundCorner}" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
                     <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,85,375,245" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5" TextChanged="ID_TextChanged"/>
                     <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,156,375,174" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Opacity="0.5" TextChanged="Fname_TextChanged"/>
                     <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,224,375,106" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Opacity="0.5" TextChanged="Lname_TextChanged"/>
@@ -44,8 +99,8 @@
                 </TabItem.Header>
                 <Grid>
                     <TextBox Name="HUname" Text="Give Your Property a Name" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Black" FontSize="25" Margin="208,10,207,292.667" PreviewMouseDown="HUname_PreviewMouseDown" MouseLeave="HUname_MouseLeave" Opacity="0.5" TextChanged="HUname_TextChanged" />
-                    <Button Name="next1" Content="NEXT" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
-                    <Button Name="prev1" Content="PREV" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
+                    <Button Name="next1" Style="{DynamicResource RoundCorner}" Content="NEXT" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
+                    <Button Name="prev1" Style="{DynamicResource RoundCorner}" Content="PREV" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
 
                     <TextBox Name="Beds" Text="Amount of Beds Your Property has" BorderBrush="Black" FontSize="20" Margin="389,161,16,173" Opacity="0.5" PreviewMouseDown="Beds_PreviewMouseDown" MouseLeave="Beds_MouseLeave" TextChanged="Beds_TextChanged" />
 
@@ -89,8 +144,8 @@
                 <Grid>
                     <Label Content="Please fill out your Bank info here" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="168,27,169,308.667"/>
 
-                    <Button Name="prev2" Content="PREV" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
-                    <Button Name="done" Content="DONE" FontSize="25"  Margin="595,21,42,315" Click="done_Click" />
+                    <Button Name="prev2" Content="PREV" Style="{DynamicResource RoundCorner}" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
+                    <Button Name="done" Content="DONE" Style="{DynamicResource RoundCorner}" FontSize="25"  Margin="595,21,42,315" Click="done_Click" />
 
                     <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="49,131,381,204" PreviewMouseDown="Bankname_PreviewMouseDown" MouseLeave="Bankname_MouseLeave" Opacity="0.5" TextChanged="Bankname_TextChanged"/>
                     <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="49,199,381,135" PreviewMouseDown="Banknum_PreviewMouseDown" MouseLeave="Banknum_MouseLeave" Opacity="0.5" TextChanged="Banknum_TextChanged"/>

@@ -27,8 +27,8 @@
                                                 <TranslateTransform X="0.02" Y="0.3"/>
                                             </TransformGroup>
                                         </RadialGradientBrush.RelativeTransform>
-                                        <GradientStop Offset="1" Color="#00000000"/>
-                                        <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
+                                        <GradientStop Offset="1" Color="#FFF99470"/>
+                                        <GradientStop Offset="0.5" Color="#FFFFFFFF"/>
                                     </RadialGradientBrush>
                                 </Border.Background>
                                 <ContentPresenter HorizontalAlignment="Center"
@@ -49,8 +49,8 @@
                                                     <TranslateTransform X="0.02" Y="0.3"/>
                                                 </TransformGroup>
                                             </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                            <GradientStop Color="#FFF99470" Offset="1"/>
+                                            <GradientStop Color="#FFFFFFFF" Offset="0.5"/>
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
@@ -69,7 +69,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" >
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Background="#FFF9E8E2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="103*"/>
             <ColumnDefinition Width="27*"/>
@@ -81,12 +81,7 @@
             <RowDefinition Height="16*"/>
             <RowDefinition Height="41*"/>
         </Grid.RowDefinitions>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="White" Offset="1"/>
-                <GradientStop Color="#FFFD9A56"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+        
         <Label  x:Name="label" Content="Sign in to Manage Your Properties" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Margin="48,9,38,0" Height="58" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
         <GroupBox Name="groupBox" FlowDirection="LeftToRight"  BorderBrush="Black" BorderThickness="3" Header="Enter ID" Margin="5,27,15,37" FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2">
             <TextBox x:Name="ID" Height="54" Margin="29,10,23,0"  TextWrapping="Wrap" FontSize="24"  Foreground="Gray" MaxLength="9" Text="Enter your ID" VerticalAlignment="Top" PreviewMouseDown="ID_PreviewMouseDown" MouseLeave="ID_MouseLeave" />

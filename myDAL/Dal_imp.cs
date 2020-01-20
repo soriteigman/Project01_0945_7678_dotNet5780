@@ -121,11 +121,15 @@ namespace DAL
         {
             try
             {
-                HostingUnit unit;
+                HostingUnit unit=new HostingUnit();
                 if (HUexist(hu.HostingUnitKey))
                 {
-                    unit = SearchHUbyID(hu.HostingUnitKey).Clone();
+                    unit = SearchHUbyID(hu.HostingUnitKey);
                     DataSource.HostingUnitCollection.Remove(unit);
+                }
+                else
+                {
+                    throw new KeyNotFoundException("property to update does not exist");
                 }
                 DataSource.HostingUnitCollection.Add(hu);
             }
