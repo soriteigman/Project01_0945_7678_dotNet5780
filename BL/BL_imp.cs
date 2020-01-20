@@ -130,7 +130,7 @@ namespace BL
             bool VacaType(GuestRequest gr) { return gr.Pool == Choices.Yes || gr.Pool == Choices.DontCare; }
             bool NumBeds(GuestRequest gr) { return hu.Beds >= (gr.Children + gr.Adults); }
             bool StarRating(GuestRequest gr) { return gr.Stars == hu.Stars; }
-
+            bool Status(GuestRequest gr) { return gr.Status != BE.Status.Closed; }
 
 
             if (hu.Pool)
@@ -163,6 +163,7 @@ namespace BL
             pred += VacaType;
             pred += NumBeds;
             pred += StarRating;
+            pred += Status;
 
             return pred;
         }

@@ -146,6 +146,7 @@
                 <Image Source="Resources/logoOption2.2.png" Grid.Column="4" Margin="67.667,-22,-35,-35" Grid.ColumnSpan="2"/>
 
             </Grid>
+            <Label x:Name="empty" Visibility="Hidden" Content="Nothing New :(" HorizontalAlignment="Left" Margin="161,36,0,0" Grid.Row="1" VerticalAlignment="Top" Height="41" Width="439"/>
         </Grid>
     </Grid>
 </UserControl>

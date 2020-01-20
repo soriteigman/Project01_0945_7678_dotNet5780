@@ -54,6 +54,8 @@ namespace PLWPF
             }
             #endregion
 
+            #region units
+
             this.OrdersTabUserControl.FilterName.TextChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterKey.SelectionChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterStar.SelectionChanged += ApplyFiltering;
@@ -84,12 +86,40 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
             this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
             this.OrdersTabUserControl.DataGrid.UnselectAll();
+            #endregion
 
+            #region my req
+            HostingUnit hu = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
+            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
+            this.newOrderTabUserControl.RemoveButton.Visibility = Visibility.Hidden;
+            this.newOrderTabUserControl.updateButton.Visibility = Visibility.Hidden;
+            IEnumerable<GuestRequest> gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(hu));
+            if (gr.Count() == 0)
+            {
+                this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.empty.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
+                this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "GuestReq";
+                this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
+                this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
+            }
+            #endregion
+
+            #region requests
+            //this.MyRequeststab.DataGrid
+            #endregion
 
         }
+        #region units
         private void addOrder(object sender, RoutedEventArgs e)
         {
-                this.NavigationService.Navigate(new NewOrderPage(((HostingUnit)this.OrdersTabUserControl.DataGrid.CurrentItem).HostingUnitKey));
+            HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
+            if (HU == null)
+                return;
+            this.NavigationService.Navigate(new NewOrderPage(HU));
         }
 
         private void updateHu(object sender, RoutedEventArgs e)
@@ -233,8 +263,35 @@ namespace PLWPF
 
 
 
-
         }
+        #endregion
+
+        #region myreq
+        private void ShowButtonsreq(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.newOrderTabUserControl.DataGrid.CurrentItem != null)//something was selected
+            {
+                this.newOrderTabUserControl.updateButton.IsEnabled = true;//allows button clicks
+                this.newOrderTabUserControl.RemoveButton.IsEnabled = true;
+                if (((GuestRequest)this.newOrderTabUserControl.DataGrid.CurrentItem).Status != Status.Closed)//if he has collection clearance
+                    this.newOrderTabUserControl.AddButton.IsEnabled = true;
+                else
+                {
+                    this.newOrderTabUserControl.AddButton.IsEnabled = false;//otherwise disables them
+                    MessageBox.Show("Cannot create orders with a closed request", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                this.newOrderTabUserControl.AddButton.IsEnabled = false;//otherwise disables them
+                this.newOrderTabUserControl.updateButton.IsEnabled = false;
+                this.newOrderTabUserControl.RemoveButton.IsEnabled = false;
+            }
+        }
+
+
+        #endregion
+
     }
 }
 
