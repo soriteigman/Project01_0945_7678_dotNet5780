@@ -107,6 +107,24 @@ namespace DAL
                     BranchCity = "telaviv",
                     BranchNumber = 455
                 },
+                CollectionClearance = false,
+                FamilyName = "stark",
+                HostKey = 315320945,
+                MailAddress = "stark@gmail.com",
+                PhoneNumber = 0583215877,
+                PrivateName = "goodbye"
+            },
+           new Host
+            {
+                BankAccountNumber = 12345,
+                BankBranchDetails = new BankBranch
+                {
+                    BankName = "leumi",
+                    BankNumber = 5432,
+                    BranchAddress = "arlozorov",
+                    BranchCity = "telaviv",
+                    BranchNumber = 455
+                },
                 CollectionClearance = true,
                 FamilyName = "stark",
                 HostKey = 315320945,
@@ -137,9 +155,9 @@ namespace DAL
         internal static List<HostingUnit> HostingUnitCollection = new List<HostingUnit>()
         {
             new HostingUnit(){HostingUnitKey=123456789, HostingUnitName="Esther", Owner=My_Host.First(), WiFi=true, Stars=StarRating.three_star, FitnessCenter=false, Area=VacationArea.Jerusalem, Beds=6, ChildrensAttractions=true, Garden=true,Jacuzzi=true, Parking=true, Pet=false, SubArea="Jerusalem", Pool=true, Type=VacationType.Hotel},
-            new HostingUnit(){HostingUnitKey=87654321, HostingUnitName="Sara", Owner=My_Host.First(), WiFi=true, Stars=StarRating.five_star, FitnessCenter=true, Area=VacationArea.North, Beds=5, ChildrensAttractions=true, Garden=true, Jacuzzi=true, Parking=true, Pet=true, SubArea="Netanya", Pool=true, Type=VacationType.BeachHouse},
+            new HostingUnit(){HostingUnitKey=87654321, HostingUnitName="Sara", Owner=My_Host[1], WiFi=true, Stars=StarRating.five_star, FitnessCenter=true, Area=VacationArea.North, Beds=5, ChildrensAttractions=true, Garden=true, Jacuzzi=true, Parking=true, Pet=true, SubArea="Netanya", Pool=true, Type=VacationType.BeachHouse},
             new HostingUnit(){HostingUnitKey=18272635, HostingUnitName="Fanta Sea", Owner=My_Host.Last(), WiFi=false, Stars=StarRating.three_star, FitnessCenter=false, Area=VacationArea.Center, Beds=9, ChildrensAttractions=false, Garden=false, Jacuzzi=false, Parking=false, SubArea="TelAviv", Pool=false, Type=VacationType.Tent, Pet=true},
-            new HostingUnit(){HostingUnitKey=20000000, HostingUnitName="thisone", Owner=My_Host.First(), WiFi=false, Area=VacationArea.North, SubArea="Tiberias",Beds=9, ChildrensAttractions=false, FitnessCenter=false, Garden=true, Jacuzzi=true, Parking=true, Pet=false, Pool=true, Stars=StarRating.four_star, Type=VacationType.Hotel}
+            new HostingUnit(){HostingUnitKey=20000000, HostingUnitName="thisone", Owner=My_Host[1], WiFi=false, Area=VacationArea.North, SubArea="Tiberias",Beds=9, ChildrensAttractions=false, FitnessCenter=false, Garden=true, Jacuzzi=true, Parking=true, Pet=false, Pool=true, Stars=StarRating.four_star, Type=VacationType.Hotel}
 
         };
 

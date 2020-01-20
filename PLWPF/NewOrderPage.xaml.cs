@@ -22,17 +22,10 @@ namespace PLWPF
     /// </summary>
     public partial class NewOrderPage : Page
     {
-        int key;
         IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
-        public NewOrderPage(int K)
+        public NewOrderPage(HostingUnit hu)
         {
-            key = K;
             InitializeComponent();
-            IEnumerable<GuestRequest> gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(_bl.SearchHUbyID(key)));
-            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
-            this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "GuestReq";
-            this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
-            this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
 
         }
         private void WayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -112,6 +105,6 @@ namespace PLWPF
                     break;
             }
         }
-
-    }
+       
+        }
 }
