@@ -300,7 +300,7 @@ namespace PLWPF
         private void done_Click(object sender, RoutedEventArgs e)//creates a hosting unit out of the owners info
         {
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
-
+            int temp;
 
             bool flag = true;
             bool email_flag = true;
@@ -318,6 +318,11 @@ namespace PLWPF
             }
 
             if (ID.Text == "Enter Your ID")
+            {
+                flag = false;
+                ID.BorderBrush = Brushes.Red;
+            }
+            else if(!Int32.TryParse(ID.Text,out temp))
             {
                 flag = false;
                 ID.BorderBrush = Brushes.Red;
@@ -361,14 +366,29 @@ namespace PLWPF
                 flag = false;
                 Beds.BorderBrush = Brushes.Red;
             }
+            else if (!Int32.TryParse(Beds.Text, out temp))
+            {
+                flag = false;
+                Beds.BorderBrush = Brushes.Red;
+            }
 
             if (Phonenum.Text == "Enter Your Phone Number")
             {
                 flag = false;
                 Phonenum.BorderBrush = Brushes.Red;
             }
+            else if (!Int32.TryParse(Phonenum.Text, out temp))
+            {
+                flag = false;
+                Phonenum.BorderBrush = Brushes.Red;
+            }
 
             if (BankAcctNum.Text == "Enter Your Bank Account Number")
+            {
+                flag = false;
+                BankAcctNum.BorderBrush = Brushes.Red;
+            }
+            else if (!Int32.TryParse(BankAcctNum.Text, out temp))
             {
                 flag = false;
                 BankAcctNum.BorderBrush = Brushes.Red;
@@ -391,8 +411,18 @@ namespace PLWPF
                 flag = false;
                 Banknum.BorderBrush = Brushes.Red;
             }
+            else if (!Int32.TryParse(Banknum.Text, out temp))
+            {
+                flag = false;
+                Banknum.BorderBrush = Brushes.Red;
+            }
 
             if (Branchnum.Text == "Enter Your Branch's Number")
+            {
+                flag = false;
+                Branchnum.BorderBrush = Brushes.Red;
+            }
+            else if (!Int32.TryParse(Branchnum.Text, out temp))
             {
                 flag = false;
                 Branchnum.BorderBrush = Brushes.Red;
@@ -421,7 +451,6 @@ namespace PLWPF
                 errorStars.Visibility = Visibility.Hidden;
             }
 
-            
 
             if (flag)
             {
@@ -472,6 +501,11 @@ namespace PLWPF
                     MessageBox.Show(a.Message , "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
+            }
+            else
+            {
+                MessageBox.Show("Missing important information, please fill everything out to continue.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
 
         }

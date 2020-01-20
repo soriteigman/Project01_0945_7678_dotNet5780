@@ -68,12 +68,12 @@
         </Style>
     </Page.Resources>
     
-    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
+    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight">
         <TabItem Header="My Units">
-            <local:OrderUserControl1 x:Name="OrdersTabUserControl" />
+            <local:OrderUserControl1 x:Name="OrdersTabUserControl"/>
         </TabItem>
         
-        <TabItem Header="Orders">
+        <TabItem Header="Orders" Visibility="Hidden">
             <local:OrderUserControl1 x:Name="Addordertab" Visibility="Hidden" IsEnabled="False"/>
         </TabItem>
     </TabControl>

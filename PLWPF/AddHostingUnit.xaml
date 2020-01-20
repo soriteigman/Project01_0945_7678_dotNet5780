@@ -81,7 +81,7 @@
                 <Grid >
                     <Label Content="Please fill out your Personal info here" FontSize="25" Margin="194,10,188,306"/>
                     <Button Name="next" Content="NEXT" Style="{DynamicResource RoundCorner}" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
-                    <TextBox Name="ID" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,85,375,245" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5" TextChanged="ID_TextChanged"/>
+                    <TextBox Name="ID" MaxLength="9" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,85,375,245" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5" TextChanged="ID_TextChanged"/>
                     <TextBox Name="Fname" Text="Enter Your First Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,156,375,174" PreviewMouseDown="Fname_PreviewMouseDown" MouseLeave="Fname_MouseLeave" Opacity="0.5" TextChanged="Fname_TextChanged"/>
                     <TextBox Name="Lname" Text="Enter Your Last Name" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,224,375,106" PreviewMouseDown="Lname_PreviewMouseDown" MouseLeave="Lname_MouseLeave" Opacity="0.5" TextChanged="Lname_TextChanged"/>
                     <TextBox Name="Phonenum" Text="Enter Your Phone Number" BorderBrush="Black" Height="45" FontSize="18" Width="325" Margin="390,85,29,245" PreviewMouseDown="Phonenum_PreviewMouseDown" MouseLeave="Phonenum_MouseLeave" Opacity="0.5" TextChanged="Phonenum_TextChanged"/>

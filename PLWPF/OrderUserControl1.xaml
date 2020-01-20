@@ -66,7 +66,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  FlowDirection="LeftToRight">
             <Grid.RowDefinitions>
@@ -120,7 +120,8 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </Grid>
-            <DataGrid x:Name="DataGrid" AutoGenerateColumns="True" Grid.Row="1" IsReadOnly="True" FlowDirection="LeftToRight"/>
+            <DataGrid x:Name="DataGrid" AutoGenerateColumns="True" Grid.Row="1" IsReadOnly="True" FlowDirection="LeftToRight" Margin="0,10,0,0" ColumnHeaderHeight="2"/>
+
             <Grid Grid.Row="2" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"  Background="#FFF9E8E2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
@@ -142,6 +143,8 @@
                     Width="120" Height="30" BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False"
                     ToolTipService.ShowOnDisabled="True" ToolTip="Add order">
                 </Button>
+                <Image Source="Resources/logoOption2.2.png" Grid.Column="4" Margin="67.667,-22,-35,-35" Grid.ColumnSpan="2"/>
+
             </Grid>
         </Grid>
     </Grid>

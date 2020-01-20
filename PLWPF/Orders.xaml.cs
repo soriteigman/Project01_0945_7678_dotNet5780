@@ -33,6 +33,8 @@ namespace PLWPF
         {
             id = ID;
             InitializeComponent();
+            this.OrdersTabUserControl.DataGrid.UnselectAllCells();
+           // this.OrdersTabUserControl.DataGrid.SelectedItem = null;
             units = _bl.searchHUbyOwner(id);//list of all units for this host
             ord = _bl.GetsOpenOrders();
             #region איתחול
@@ -62,6 +64,8 @@ namespace PLWPF
             this.OrdersTabUserControl.ResetFiltersButton.Click += ResetFilters;
             this.OrdersTabUserControl.DataGrid.SelectionChanged += ShowButtons;
             this.OrdersTabUserControl.AddButton.Click += addOrder;
+            this.OrdersTabUserControl.updateButton.Click += updateHu;
+            this.OrdersTabUserControl.DataGrid.MouseDoubleClick += DataGridRow_MouseDoubleClick;
 
 
 
@@ -87,6 +91,27 @@ namespace PLWPF
         {
                 this.NavigationService.Navigate(new NewOrderPage(((HostingUnit)this.OrdersTabUserControl.DataGrid.CurrentItem).HostingUnitKey));
         }
+
+        private void updateHu(object sender, RoutedEventArgs e)
+        {
+            if (OrdersTabUserControl.DataGrid.SelectedItem != null && OrdersTabUserControl.DataGrid.SelectedItem is HostingUnit)
+            {
+                new UpdateHuWindow((HostingUnit)OrdersTabUserControl.DataGrid.SelectedItem).Show();
+                //closeOpenMain = false;//don't open main after closing
+                //this.Close();
+            }
+        }//sends to unit information with data of current row to bind to
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (OrdersTabUserControl.DataGrid.SelectedItem != null && OrdersTabUserControl.DataGrid.SelectedItem is HostingUnit)
+            {
+                new UpdateHuWindow((HostingUnit)OrdersTabUserControl.DataGrid.SelectedItem).Show();
+                //closeOpenMain = false;//don't open main after closing
+                //this.Close();
+            }
+        }//sends to unit information with data of current row to bind to
+
         private void ShowButtons(object sender, SelectionChangedEventArgs e)
         {
             if (this.OrdersTabUserControl.DataGrid.CurrentItem != null)//something was selected
@@ -97,7 +122,7 @@ namespace PLWPF
                     this.OrdersTabUserControl.AddButton.IsEnabled = true;
                 else
                 {
-                    //let him kmow why he cant create a order
+                    MessageBox.Show("Cannot create orders without collection clearance.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else

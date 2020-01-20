@@ -173,7 +173,7 @@ namespace BL
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
 
                 if (gr.Status == Status.Closed)
-                    throw new InvalidOperationException("cannot change status of closed order");
+                    throw new InvalidOperationException("cannot change status of closed request");
                 dal_bl.UpdateGuestRequest(gr);
             }
             catch (InvalidOperationException a)
