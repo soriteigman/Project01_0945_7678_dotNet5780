@@ -91,5 +91,12 @@ namespace PLWPF
             }
 
         }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult myResult= MessageBox.Show("Do you want to save changes before you leave?", "", MessageBoxButton.YesNoCancel, MessageBoxImage.Error);
+            if (myResult == MessageBoxResult.Yes)
+                
+        }
     }
 }

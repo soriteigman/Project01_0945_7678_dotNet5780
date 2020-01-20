@@ -33,8 +33,6 @@ namespace PLWPF
         {
             id = ID;
             InitializeComponent();
-            this.OrdersTabUserControl.DataGrid.UnselectAllCells();
-           // this.OrdersTabUserControl.DataGrid.SelectedItem = null;
             units = _bl.searchHUbyOwner(id);//list of all units for this host
             ord = _bl.GetsOpenOrders();
             #region איתחול
@@ -85,6 +83,8 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
             this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
+            this.OrdersTabUserControl.DataGrid.UnselectAll();
+
 
         }
         private void addOrder(object sender, RoutedEventArgs e)
@@ -122,6 +122,7 @@ namespace PLWPF
                     this.OrdersTabUserControl.AddButton.IsEnabled = true;
                 else
                 {
+                    this.OrdersTabUserControl.AddButton.IsEnabled = false;//otherwise disables them
                     MessageBox.Show("Cannot create orders without collection clearance.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
