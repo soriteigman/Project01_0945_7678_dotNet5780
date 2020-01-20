@@ -339,7 +339,6 @@ namespace PLWPF
         private void OApplyFiltering(object sender, RoutedEventArgs e)
         {
             this.MyOrderstab.DataGrid.ItemsSource = from item in _bl.GetAllOrders(
-                                                                        0,
                                                     this.MyOrderstab.FilterType.SelectedItem as BE.Status?)
                                                    orderby item.CreateDate, item.Status
                                                    select new
@@ -430,8 +429,6 @@ namespace PLWPF
 
 
         #endregion
-
-
     }
 
 
