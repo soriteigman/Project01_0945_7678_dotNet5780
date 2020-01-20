@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,6 +24,7 @@ namespace PLWPF
     {
         IBL myBL = FactoryBL.getBL();
         HostingUnit hu1 = new HostingUnit();
+        bool updated = false;
 
         public UpdateHuWindow(HostingUnit hu )
         {
@@ -31,7 +33,8 @@ namespace PLWPF
             this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
 
-           this.DataContext = hu;
+            this.DataContext = hu;
+            this.Closing += Window_Closing;
 
         }
 
@@ -79,7 +82,42 @@ namespace PLWPF
 
                 try
                 {
+                    // explicit update of each property of the hosting unit
+                    BindingExpression be = HUname.GetBindingExpression(TextBox.TextProperty);
+                    be.UpdateSource();
+                    be = Phonenum.GetBindingExpression(TextBox.TextProperty);
+                    be.UpdateSource();
+                    be = BankAcctNum.GetBindingExpression(TextBox.TextProperty);
+                    be.UpdateSource();
+                    be = Email.GetBindingExpression(TextBox.TextProperty);
+                    be.UpdateSource();
+                    be = Beds.GetBindingExpression(TextBox.TextProperty);
+                    be.UpdateSource();
+
+                    //be = cbBank.GetBindingExpression(ComboBox.ContextMenuProperty);
+                    //be.UpdateSource();
+
+                    be = Pool.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = Jacuzzi.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = Pets.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = Garden.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = Parking.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = Wifi.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = chiAttract.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = FitnessCenter.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+                    be = CollectionClearance.GetBindingExpression(CheckBox.IsCheckedProperty);
+                    be.UpdateSource();
+
                     myBL.UpdateHostingUnit(hu2);
+                    updated = true;
                     Close();
                 }
                 catch(Exception a)
@@ -96,7 +134,27 @@ namespace PLWPF
         {
             MessageBoxResult myResult= MessageBox.Show("Do you want to save changes before you leave?", "", MessageBoxButton.YesNoCancel, MessageBoxImage.Error);
             if (myResult == MessageBoxResult.Yes)
-                
+            {
+                update_Click(sender, e);
+            }
+            if (myResult == MessageBoxResult.No)
+            {
+                Close();
+            }
+
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!updated)
+            {
+                MessageBoxResult myResult = MessageBox.Show("Are you sure you want to quit without saving changes?", "", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (myResult == MessageBoxResult.No)
+                    e.Cancel = true;
+                if (myResult == MessageBoxResult.Yes)
+                    this.Closing -= Window_Closing;
+                updated = false;
+            }
+
         }
     }
 }

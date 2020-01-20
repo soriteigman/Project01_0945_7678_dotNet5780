@@ -98,9 +98,9 @@
             <TextBox Name="ID" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Owner.HostKey, Mode=TwoWay}" IsEnabled="False" VerticalContentAlignment="Center" BorderBrush="Black" FontSize="18" Margin="196,3,0.333,30.333" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <TextBox Name="Fname" Text="{Binding Owner.PrivateName, Mode=TwoWay}" IsEnabled="False" VerticalContentAlignment="Center" BorderBrush="Black" FontSize="18" Margin="0.333,1.667,0.333,0.333" Grid.Row="2" Grid.Column="1"/>
             <TextBox Name="Lname" Text="{Binding Owner.FamilyName, Mode=TwoWay}" IsEnabled="False" VerticalContentAlignment="Center" BorderBrush="Black" FontSize="18" Margin="0.333,0.667,0.333,33.667" Grid.Row="3" Grid.RowSpan="2" Grid.Column="1"/>
-            <TextBox Name="Phonenum" Text="{Binding Owner.PhoneNumber, Mode=TwoWay}" BorderBrush="Black" VerticalContentAlignment="Center" FontSize="18" Margin="0.333,0.333,-0.667,30.333" Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" />
-            <TextBox Name="Email" Text="{Binding Owner.MailAddress, Mode=TwoWay}" BorderBrush="Black" FontSize="18" VerticalContentAlignment="Center" Margin="0.333,0,-0.667,0.333" Grid.Column="1" Grid.Row="5"/>
-            <TextBox Name="BankAcctNum" Text="{Binding Owner.BankAccountNumber, Mode=TwoWay}" BorderBrush="Black" FontSize="18" VerticalContentAlignment="Center" Margin="0.333,1.667,-0.667,31.667" Grid.Column="1" Grid.RowSpan="2" Grid.Row="6"/>
+            <TextBox Name="Phonenum" Text="{Binding Owner.PhoneNumber, Mode=TwoWay,UpdateSourceTrigger=Explicit,ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" BorderBrush="Black" VerticalContentAlignment="Center" FontSize="18" Margin="0.333,0.333,-0.667,30.333" Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" />
+            <TextBox Name="Email" Text="{Binding Owner.MailAddress, Mode=TwoWay,UpdateSourceTrigger=Explicit, ValidatesOnDataErrors=True, NotifyOnValidationError=true, ValidatesOnExceptions=true}" BorderBrush="Black" FontSize="18" VerticalContentAlignment="Center" Margin="0.333,0,-0.667,0.333" Grid.Column="1" Grid.Row="5"/>
+            <TextBox Name="BankAcctNum" Text="{Binding Owner.BankAccountNumber, Mode=TwoWay,UpdateSourceTrigger=Explicit}" BorderBrush="Black" FontSize="18" VerticalContentAlignment="Center" Margin="0.333,1.667,-0.667,31.667" Grid.Column="1" Grid.RowSpan="2" Grid.Row="6"/>
             <Label Name="huKey" Content="Hosting Unit Key:" Grid.Column="0" Grid.Row="0" Margin="0.333,0,0,0.333"/>
             <Label Name="id" Content="ID:" Grid.Column="0" Grid.Row="1" Margin="0.333,0,0,0.333"/>
             <Label Name="fname" Content="First Name::" Margin="1,0.667,0.667,2.333" Grid.RowSpan="1" Grid.Row="2"/>
@@ -109,16 +109,16 @@
             <Label Name="email" Content="Email Address:" Grid.Column="0" Grid.Row="5" Margin="1,0.333,271,0" Grid.ColumnSpan="2"/>
             <Label Name="bancAcct" Content="Bank Account Number:" Grid.Column="0" Grid.Row="6" Margin="0,2,0.667,28.333" Grid.RowSpan="2"/>
 
-            <CheckBox Name="CollectionClearance" IsChecked="{Binding Owner.CollectionClearance, Mode=TwoWay}" Content="Collection Clearance" Margin="-2,31.667,1.667,-1.333" Grid.Row="16" Grid.Column="0" Grid.RowSpan="2"/>
-            <Button Name="update" Content="Update" FontSize="20" Grid.Row="17" Grid.Column="1" FontWeight="Bold" Click="update_Click" Margin="109.333,0.667,1.333,-0.333"/>
+            <CheckBox Name="CollectionClearance" IsChecked="{Binding Owner.CollectionClearance, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Content="Collection Clearance" Margin="-2,31.667,1.667,-1.333" Grid.Row="16" Grid.Column="0" Grid.RowSpan="2"/>
+            <Button Name="update" Content="Update" FontSize="20" Grid.Row="17" Grid.Column="1" FontWeight="Bold" Click="update_Click" Margin="109.333,0.667,1.333,-1.333"/>
             <Button x:Name="cancel" Content="Cancel" FontSize="20" FontWeight="Bold" Margin="1.333,1.667,99.333,-1.333" Grid.Row="17" Grid.Column="1" Click="cancel_Click"/>
 
-            <TextBox Name="HUname" Text="{Binding HostingUnitName,Mode=TwoWay}" IsEnabled="true" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="Black" FontSize="18" Margin="0.333,0.333,-0.667,31.667" Grid.Column="1" Grid.Row="7" Grid.RowSpan="2" />
-            <TextBox Name="Beds" Text="{Binding Beds, Mode=TwoWay}" BorderBrush="Black" FontSize="18" Margin="0.333,0.333,-0.667,31.667" Grid.Column="1" Grid.Row="8" Grid.RowSpan="2"  />
-            <ComboBox x:Name="cbArea"  SelectedItem="{Binding Area, Mode=TwoWay}" Text="Enter the General Area of your Property" Foreground="Black" FontSize="18" Margin="0.333,0.333,0.333,0.667" IsDropDownOpen="False" IsEnabled="False" IsEditable="False" Background="#FFD81C1C" Grid.Row="9" Grid.Column="1"  />
-            <TextBlock Name="SubArea" Padding="2" Background="LightGray" Text="{Binding SubArea,Mode=TwoWay}" Foreground="Black" FontSize="18" Margin="1.333,0.333,0.333,31" Visibility="Visible" IsEnabled="False" Grid.Row="10" Grid.Column="1" Grid.RowSpan="2" />
-            <ComboBox Name="cbType" Padding="2" SelectedItem="{Binding Type, Mode=TwoWay}" Foreground="Black" FontSize="18" Margin="0.333,0.333,0.333,0" IsDropDownOpen="False" IsEnabled="False" IsEditable="False" Grid.Column="1" Grid.Row="11"/>
-            <ComboBox Name="cbBank" Padding="2" FontSize="18" Text="Bank Account" Foreground="Black" Margin="0.333,0" SelectedItem="{Binding Path=VacationType,Mode=TwoWay}" IsDropDownOpen="False" IsEditable="True" Grid.Column="1" Grid.Row="12"/>
+            <TextBox Name="HUname" Text="{Binding HostingUnitName,Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=Explicit, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="true" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="Black" FontSize="18" Margin="0.333,0.333,-0.667,31.667" Grid.Column="1" Grid.Row="7" Grid.RowSpan="2" />
+            <TextBox Name="Beds" Text="{Binding Beds, Mode=TwoWay,UpdateSourceTrigger=Explicit}" BorderBrush="Black" FontSize="18" Margin="0.333,0.333,-0.667,31.667" Grid.Column="1" Grid.Row="8" Grid.RowSpan="2"  />
+            <ComboBox x:Name="cbArea"  SelectedItem="{Binding Area, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Text="Enter the General Area of your Property" Foreground="Black" FontSize="18" Margin="0.333,0.333,0.333,0.667" IsDropDownOpen="False" IsEnabled="False" IsEditable="False" Background="#FFD81C1C" Grid.Row="9" Grid.Column="1"  />
+            <TextBlock Name="SubArea" Padding="2" Background="LightGray" Text="{Binding SubArea,Mode=TwoWay,UpdateSourceTrigger=Explicit}" Foreground="Black" FontSize="18" Margin="1.333,0.333,0.333,31" Visibility="Visible" IsEnabled="False" Grid.Row="10" Grid.Column="1" Grid.RowSpan="2" />
+            <ComboBox Name="cbType" Padding="2" SelectedItem="{Binding Type, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Foreground="Black" FontSize="18" Margin="0.333,0.333,0.333,0" IsDropDownOpen="False" IsEnabled="False" IsEditable="False" Grid.Column="1" Grid.Row="11"/>
+            <ComboBox Name="cbBank" Padding="2" FontSize="18" Text="Bank Account" Foreground="Black" Margin="0.333,0" SelectedItem="{Binding Path=VacationType,Mode=TwoWay,UpdateSourceTrigger=Explicit}" IsDropDownOpen="False" IsEditable="True" Grid.Column="1" Grid.Row="12"/>
             <Label Name="name" Content="Property Name:" Grid.Column="0" Grid.Row="7" Margin="1,0.333,4.667,39.667" Grid.RowSpan="2"/>
             <Label Name="beds" Content="Amount of Beds:" Grid.Column="0" Grid.Row="8" Margin="1,3.667,4.667,33.667" Grid.RowSpan="2"/>
             <Label Name="area" Content="Property Area:" Grid.Column="0" Grid.Row="9" Margin="1,2.333,0.667,2.333"/>
@@ -126,14 +126,14 @@
             <Label Name="type" Content="Property Type:" Grid.Column="0" Grid.Row="11" Margin="1,2.333,0.667,2.333"/>
             <Label Name="bank" Content="Bank Account:" Grid.Column="0" Grid.Row="12" Margin="1,3.667,4.667,1.333"/>
 
-            <CheckBox Name="Pets" Content="Pets" IsChecked="{Binding Pets, Mode=OneWayToSource}" Margin="1.333,4.667,-0.667,0.667" Grid.Column="1" Grid.Row="16"/>
-            <CheckBox Name="Wifi" Content="WiFi" Margin="-2,33,0.667,33.667" IsChecked="{Binding WiFi, Mode=OneWayToSource}" RenderTransformOrigin="0.174,0.467" Grid.Row="14" Grid.RowSpan="3"/>
-            <CheckBox Name="Parking" Content="Parking" Margin="0,0.667,0.667,33" IsChecked="{Binding Parking, Mode=OneWayToSource}" Grid.Row="13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
-            <CheckBox Name="Pool" Content="Pool" Margin="0.333,4.667,0.333,0" IsChecked="{Binding Pool, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="13" Grid.RowSpan="2" Height="29" VerticalAlignment="Top"/>
-            <CheckBox Name="Jacuzzi" Content="Jacuzzi" Margin="0,0.333,8.667,0" IsChecked="{Binding Jacuzzi, Mode=OneWayToSource}" Grid.Row="14"/>
-            <CheckBox Name="Garden" Content="Garden" Margin="0.333,5.333,-2.667,28.333" IsChecked="{Binding Garden, Mode=OneWayToSource}" Grid.Column="1" Grid.Row="14" Grid.RowSpan="2"/>
-            <CheckBox Name="chiAttract" Content="Childrens Attractions" Margin="-2,0,9.667,32.667" IsChecked="{Binding ChildrensAttractions, Mode=OneWayToSource}" Grid.Row="16" Grid.RowSpan="2"/>
-            <CheckBox Name="FitnessCenter" Content="Fitness Center" Margin="196,5,1.333,26.667" IsChecked="{Binding FitnessCenter, Mode=OneWayToSource}" RenderTransformOrigin="0.86,0.667" Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <CheckBox Name="Pets" Content="Pets" IsChecked="{Binding Pets, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Margin="1.333,4.667,-0.667,0.667" Grid.Column="1" Grid.Row="16"/>
+            <CheckBox Name="Wifi" Content="WiFi" Margin="-2,33,0.667,33.667" IsChecked="{Binding WiFi, Mode=TwoWay,UpdateSourceTrigger=Explicit}" RenderTransformOrigin="0.174,0.467" Grid.Row="14" Grid.RowSpan="3"/>
+            <CheckBox Name="Parking" Content="Parking" Margin="0,0.667,0.667,33" IsChecked="{Binding Parking, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Row="13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
+            <CheckBox Name="Pool" Content="Pool" Margin="0.333,4.667,0.333,0" IsChecked="{Binding Pool, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="13" Grid.RowSpan="2" Height="29" VerticalAlignment="Top"/>
+            <CheckBox Name="Jacuzzi" Content="Jacuzzi" Margin="0,0.333,8.667,0" IsChecked="{Binding Jacuzzi, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Row="14"/>
+            <CheckBox Name="Garden" Content="Garden" Margin="0.333,5.333,-2.667,28.333" IsChecked="{Binding Garden, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="14" Grid.RowSpan="2"/>
+            <CheckBox Name="chiAttract" Content="Childrens Attractions" Margin="-2,0,9.667,32.667" IsChecked="{Binding ChildrensAttractions, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Row="16" Grid.RowSpan="2"/>
+            <CheckBox Name="FitnessCenter" Content="Fitness Center" Margin="196,5,1.333,26.667" IsChecked="{Binding FitnessCenter, Mode=TwoWay,UpdateSourceTrigger=Explicit}" RenderTransformOrigin="0.86,0.667" Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
         </Grid>
     </Grid>
