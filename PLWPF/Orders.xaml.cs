@@ -23,6 +23,7 @@ namespace PLWPF
     public partial class Orders : Page
     {
         IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
+        IEnumerable<GuestRequest> gr;
         public IEnumerable<HostingUnit> units { get; set; }//all his units
         IEnumerable<GuestRequest> req;//list of all requests that match any of the units
         IEnumerable<Order> ord;//all his orders
@@ -90,10 +91,17 @@ namespace PLWPF
 
             #region my req
             HostingUnit hu = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
-            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
             this.newOrderTabUserControl.RemoveButton.Visibility = Visibility.Hidden;
             this.newOrderTabUserControl.updateButton.Visibility = Visibility.Hidden;
-            IEnumerable<GuestRequest> gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(hu));
+            this.newOrderTabUserControl.FilterName.TextChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterKey.Visibility = Visibility.Hidden;
+            this.newOrderTabUserControl.FilterStar.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterArea.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterType.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.ResetFiltersButton.Click += ResetFiltersgr;
+            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
+            this.newOrderTabUserControl.AddButton.Click += createOrder;
+            #region אתחול
             if (gr.Count() == 0)
             {
                 this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Hidden;
@@ -107,22 +115,6 @@ namespace PLWPF
                 this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
             }
             #endregion
-            //
-            #region requests
-
-         
-            this.newOrderTabUserControl.FilterName.TextChanged += ApplyFilteringgr;
-            this.newOrderTabUserControl.FilterKey.Visibility=Visibility.Hidden;
-            this.newOrderTabUserControl.FilterStar.SelectionChanged += ApplyFilteringgr;
-            this.newOrderTabUserControl.FilterArea.SelectionChanged += ApplyFilteringgr;
-            this.newOrderTabUserControl.FilterType.SelectionChanged += ApplyFilteringgr;
-            this.newOrderTabUserControl.ResetFiltersButton.Click += ResetFiltersgr;
-            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
-            this.newOrderTabUserControl.AddButton.Click += createOrder;
-
-
-
-            
             this.newOrderTabUserControl.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
             this.newOrderTabUserControl.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
 
@@ -137,9 +129,7 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
             this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
             this.OrdersTabUserControl.DataGrid.UnselectAll();
-
             #endregion
-
         }
         #region units
         private void addOrder(object sender, RoutedEventArgs e)
@@ -147,6 +137,9 @@ namespace PLWPF
             HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
+            IEnumerable<GuestRequest> gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(HU));
+
+            
            // this.NavigationService.Navigate(new NewOrderPage(HU));
         }
 
@@ -318,7 +311,31 @@ namespace PLWPF
         }
         private void ApplyFilteringgr(object sender, RoutedEventArgs e)
         {
-
+            this.newOrderTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllTUnits(
+                                                    this.OrdersTabUserControl.FilterName.Text,
+                                                    this.OrdersTabUserControl.FilterKey.SelectedItem,
+                                                    this.OrdersTabUserControl.FilterStar.SelectedItem as BE.StarRating?,
+                                                    this.OrdersTabUserControl.FilterArea.SelectedItem as BE.VacationArea?,
+                                                    this.OrdersTabUserControl.FilterType.SelectedItem as BE.VacationType?)
+                                                             orderby item.HostingUnitName, item.HostingUnitKey
+                                                             select new
+                                                             {
+                                                                 item.HostingUnitKey,
+                                                                 item.HostingUnitName,
+                                                                 item.Area,
+                                                                 item.SubArea,
+                                                                 item.Type,
+                                                                 item.Pet,
+                                                                 item.WiFi,
+                                                                 item.Parking,
+                                                                 item.Pool,
+                                                                 item.Jacuzzi,
+                                                                 item.Garden,
+                                                                 item.ChildrensAttractions,
+                                                                 item.FitnessCenter,
+                                                                 item.Stars,
+                                                                 item.Beds,
+                                                             };
         }
         private void ShowButtonsreq(object sender, RoutedEventArgs e)
         {
