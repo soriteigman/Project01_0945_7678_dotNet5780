@@ -82,7 +82,7 @@
         <Label Content="What would You like to do?" HorizontalAlignment="Left" Margin="117,60,0,0" VerticalAlignment="Top" Width="255" Height="44" FontSize="20"/>
         <Button Name="go" Content="GO" IsDefault="True" Style="{DynamicResource RoundCorner}" Margin="411,109,298,59" Click="go_Click" RenderTransformOrigin="0.502,0.5"/>
         <TextBox Name="removeID" Visibility="Hidden" Text="Enter the Key Code of the Property you would like to Remove" VerticalContentAlignment="Center" BorderBrush="Black" FontSize="20" Margin="20,47,220,151" Opacity="0.5" PreviewMouseDown="removeID_PreviewMouseDown" MouseLeave="removeID_MouseLeave" Grid.Row="1"/>
-        <Button Name="remove"  Visibility="Hidden" Content="REMOVE" Style="{DynamicResource RoundCorner}" Margin="637,50,72,148" Click="remove_Click" Grid.Row="1"/>
+        <Button Name="remove"  Visibility="Visible" Content="REMOVE" Style="{DynamicResource RoundCorner}" Margin="637,50,72,148" Click="remove_Click" Grid.Row="1"/>
         <Image Source="Resources/logoOption2.2.png" Margin="580,91,-24,-12" Grid.Row="1"/>
 
     </Grid>
