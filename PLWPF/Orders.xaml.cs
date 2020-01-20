@@ -67,6 +67,8 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.SelectionChanged += ShowButtons;
             this.OrdersTabUserControl.AddButton.Click += addOrder;
             this.OrdersTabUserControl.updateButton.Click += updateHu;
+            this.OrdersTabUserControl.RemoveButton.Click += remove_Click;
+
             this.OrdersTabUserControl.DataGrid.MouseDoubleClick += DataGridRow_MouseDoubleClick;
 
 
@@ -115,6 +117,10 @@ namespace PLWPF
             this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "myreq";
             this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
             this.newOrderTabUserControl.DataGrid.UnselectAll();
+            #endregion
+
+            #region all requests
+            this.AllRequeststab.DataGrid.ItemsSource = req;
             #endregion
         }
         #region units
@@ -200,6 +206,32 @@ namespace PLWPF
                 this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
             }
         }
+
+        private void remove_Click(object sender, RoutedEventArgs e)
+        {
+            HostingUnit myunit = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
+            int id = myunit.Owner.HostKey;
+            MessageBoxResult mbResult;
+            mbResult = MessageBox.Show("Are you sure you want to delete the following property:\n" +
+                "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey +
+                " This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+            if (myunit == null)
+                return;
+            try
+            {
+                if (mbResult == MessageBoxResult.Yes)
+                {
+                    _bl.RemoveHostingUnit(myunit);
+                    units = _bl.searchHUbyOwner(id);//list of all units for this host
+                    this.OrdersTabUserControl.DataGrid.ItemsSource = units;
+                }
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void ResetFilters(object sender, RoutedEventArgs e)
         {
             this.OrdersTabUserControl.FilterName.Text = "";
@@ -322,6 +354,7 @@ namespace PLWPF
                 this.newOrderTabUserControl.RemoveButton.IsEnabled = false;
             }
         }
+
         private void ApplyFilteringgr(object sender, RoutedEventArgs e)
         {
             this.newOrderTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllReq(
@@ -365,6 +398,7 @@ namespace PLWPF
             this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "my req";
             this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
         }
+
         private void createOrder(object sender, RoutedEventArgs e)//to do
         {
             GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
