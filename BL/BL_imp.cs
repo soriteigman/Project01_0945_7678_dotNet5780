@@ -43,11 +43,10 @@ namespace BL
         }
 
 
-        public IEnumerable<Order> GetAllOrders(int searchString, BE.Status? status)
+        public IEnumerable<Order> GetAllOrders(BE.Status? status)
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
-            return dal_bl.GetAllOrders(t =>
-                (searchString!=t.HostingUnitKey) && (status == null || status == t.Status));
+            return dal_bl.GetAllOrders(t =>(status == null || status == t.Status));
         }
         public IEnumerable<HostingUnit> searchHUbyOwner(int key)//filters from all orders based on parameters recieved
         {
