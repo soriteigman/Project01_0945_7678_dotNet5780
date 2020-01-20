@@ -47,7 +47,7 @@ namespace BL
         {
             IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             return dal_bl.GetAllOrders(t =>
-                (searchString==t.HostingUnitKey) && (status == null || status == t.Status));
+                (searchString!=t.HostingUnitKey) && (status == null || status == t.Status));
         }
         public IEnumerable<HostingUnit> searchHUbyOwner(int key)//filters from all orders based on parameters recieved
         {
