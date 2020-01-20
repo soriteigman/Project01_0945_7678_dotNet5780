@@ -17,7 +17,21 @@ namespace BL
         {
             return dal_bl.SearchHUbyID(key);
         }
-        public IEnumerable<HostingUnit> GetAllTUnits(string searchString, object key, StarRating?
+        public IEnumerable<HostingUnit> GetAllUnits(string searchString, object key, StarRating?
+                                         star, VacationArea? area, VacationType? type)
+        {
+            return dal_bl.GetAllUnits(t =>
+                (t.HostingUnitName.Contains(searchString)
+                && (key == null || key.ToString() == t.HostingUnitKey.ToString())
+
+                && (star == null || star == t.Stars)
+
+                && (area == null || area == t.Area)
+
+                && (type == null || t.Type == type)));
+        }
+
+        public IEnumerable<HostingUnit> GetAllReq(string searchString, object key, StarRating?
                                          star, VacationArea? area, VacationType? type)
         {
             return dal_bl.GetAllUnits(t =>

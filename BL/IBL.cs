@@ -9,7 +9,9 @@ namespace BL
 {
     public interface IBL
     {
-        IEnumerable<HostingUnit> GetAllTUnits(string searchString, object key, StarRating?
+        IEnumerable<HostingUnit> GetAllUnits(string searchString, object key, StarRating?
+                                         star, VacationArea? area, VacationType? type);
+        IEnumerable<HostingUnit> GetAllReq(string searchString, StarRating?
                                          star, VacationArea? area, VacationType? type);
         IEnumerable<HostingUnit> listHU();
         IEnumerable<HostingUnit> searchHUbyOwner(int key);//filters from all orders based on parameters recieved
