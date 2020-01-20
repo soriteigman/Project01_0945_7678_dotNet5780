@@ -30,14 +30,11 @@ namespace BL
 
                 && (type == null || t.Type == type)));
         }
-
-        public IEnumerable<HostingUnit> GetAllReq(string searchString, object key, StarRating?
+        public IEnumerable<GuestRequest> GetAllReq(string searchString, StarRating?
                                          star, VacationArea? area, VacationType? type)
         {
-            return dal_bl.GetAllUnits(t =>
-                (t.HostingUnitName.Contains(searchString)
-                && (key == null || key.ToString() == t.HostingUnitKey.ToString())
-
+            return dal_bl.GetAllRequests(t =>((t.FamilyName.Contains(searchString)||(t.PrivateName.Contains(searchString))
+            ||((t.FamilyName+t.PrivateName).Contains(searchString))|| ((t.PrivateName + t.FamilyName).Contains(searchString)))
                 && (star == null || star == t.Stars)
 
                 && (area == null || area == t.Area)

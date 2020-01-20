@@ -102,7 +102,7 @@ namespace PLWPF
             this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
             this.newOrderTabUserControl.AddButton.Click += createOrder;
             #region אתחול
-            if (gr.Count() == 0)
+            if (gr==null || gr.Count() == 0)
             {
                 this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Hidden;
                 this.newOrderTabUserControl.empty.Visibility = Visibility.Visible;
@@ -124,11 +124,11 @@ namespace PLWPF
             this.newOrderTabUserControl.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
             this.newOrderTabUserControl.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
 
-            this.OrdersTabUserControl.DataGrid.ItemsSource = gr;
-            this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "myreq";
-            this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
-            this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
-            this.OrdersTabUserControl.DataGrid.UnselectAll();
+            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
+            this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "myreq";
+            this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
+            this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
+            this.newOrderTabUserControl.DataGrid.UnselectAll();
             #endregion
         }
         #region units
@@ -197,7 +197,7 @@ namespace PLWPF
 
         private void ApplyFiltering(object sender, RoutedEventArgs e)
         {
-            this.OrdersTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllTUnits(
+            this.OrdersTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllUnits(
                                                     this.OrdersTabUserControl.FilterName.Text,
                                                     this.OrdersTabUserControl.FilterKey.SelectedItem,
                                                     this.OrdersTabUserControl.FilterStar.SelectedItem as BE.StarRating?,
@@ -308,30 +308,34 @@ namespace PLWPF
         }
         private void ApplyFilteringgr(object sender, RoutedEventArgs e)
         {
-            this.newOrderTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllTUnits(
+            this.newOrderTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllReq(
                                                     this.OrdersTabUserControl.FilterName.Text,
-                                                    this.OrdersTabUserControl.FilterKey.SelectedItem,
                                                     this.OrdersTabUserControl.FilterStar.SelectedItem as BE.StarRating?,
                                                     this.OrdersTabUserControl.FilterArea.SelectedItem as BE.VacationArea?,
                                                     this.OrdersTabUserControl.FilterType.SelectedItem as BE.VacationType?)
-                                                             orderby item.HostingUnitName, item.HostingUnitKey
+                                                             orderby item.PrivateName, item.FamilyName
                                                              select new
-                                                             {
-                                                                 item.HostingUnitKey,
-                                                                 item.HostingUnitName,
-                                                                 item.Area,
-                                                                 item.SubArea,
-                                                                 item.Type,
-                                                                 item.Pet,
-                                                                 item.WiFi,
-                                                                 item.Parking,
-                                                                 item.Pool,
-                                                                 item.Jacuzzi,
-                                                                 item.Garden,
-                                                                 item.ChildrensAttractions,
-                                                                 item.FitnessCenter,
-                                                                 item.Stars,
-                                                                 item.Beds,
+                                                             {item.PrivateName,
+                                                             item.FamilyName,
+                                                             item.MailAddress,
+                                                             item.Status,
+                                                             item.RegistrationDate,
+                                                             item.EntryDate,
+                                                             item.ReleaseDate,
+                                                             item.Area,
+                                                             item.SubArea,
+                                                             item.Type,
+                                                             item.Adults,
+                                                             item.Children,
+                                                             item.Pet,
+                                                             item.WiFi,
+                                                             item.Parking,
+                                                             item.Pool,
+                                                             item.Jacuzzi,
+                                                             item.Garden,
+                                                             item.ChildrensAttractions,
+                                                             item.FitnessCenter,
+                                                             item.Stars,
                                                              };
         }
         private void ShowButtonsreq(object sender, RoutedEventArgs e)

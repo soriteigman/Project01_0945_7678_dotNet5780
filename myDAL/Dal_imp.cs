@@ -27,6 +27,13 @@ namespace DAL
 
         //----------------------------------------------------------------------------------------------
         #region GuestRequest
+        public IEnumerable<BE.GuestRequest> GetAllRequests(Func<BE.GuestRequest, bool> predicate = null)
+        {
+            IEnumerable<GuestRequest> LHu = ListOfCustomers();
+            if (predicate == null)
+                return LHu.Select(t => t.Clone());
+            return LHu.Where(predicate).Select(t => t.Clone());
+        }
         public void AddGuestRequest(GuestRequest gr)
         {
             try

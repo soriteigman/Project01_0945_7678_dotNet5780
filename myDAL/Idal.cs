@@ -12,6 +12,8 @@ namespace DAL
     {
 
         #region GuestRequest
+        IEnumerable<BE.GuestRequest> GetAllRequests(Func<BE.GuestRequest, bool> predicate = null);
+
         void AddGuestRequest(GuestRequest gr);
         void UpdateGuestRequest(GuestRequest gr);
         IEnumerable<GuestRequest> ListOfCustomers();
