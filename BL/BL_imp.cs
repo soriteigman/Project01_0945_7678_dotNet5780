@@ -215,10 +215,6 @@ namespace BL
                     throw new InvalidOperationException("cannot delete this hosting unit, there are active orders connected to it");
 
                 dal_bl.RemoveHostingUnit(hu);
-                if(HExists(hu.HostingUnitKey))
-                {
-                    int g;
-                }
             }
             catch (InvalidOperationException a)
             {

@@ -118,8 +118,9 @@ namespace DAL
         public void RemoveHostingUnit(HostingUnit hu)
         {
             if (HUexist(hu.HostingUnitKey))
-                DataSource.HostingUnitCollection.Remove(hu);
-
+            {
+                DataSource.HostingUnitCollection.RemoveAll(h => h.HostingUnitKey == hu.HostingUnitKey);//removes all occurances of unit with hu.key(will remove one unit only)
+            }
             else throw new KeyNotFoundException("Property to remove doesn't exist");
 
         }

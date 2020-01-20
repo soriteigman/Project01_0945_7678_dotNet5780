@@ -209,21 +209,27 @@ namespace PLWPF
 
         private void remove_Click(object sender, RoutedEventArgs e)
         {
-            HostingUnit myunit = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
+            HostingUnit myunit = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;//gets selected row of the datagrid
             int id = myunit.Owner.HostKey;
+            int key = myunit.HostingUnitKey;
             MessageBoxResult mbResult;
             mbResult = MessageBox.Show("Are you sure you want to delete the following property:\n" +
                 "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey +
-                " This action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                " \nThis action cannot be undone.", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
             if (myunit == null)
                 return;
             try
             {
                 if (mbResult == MessageBoxResult.Yes)
                 {
-                    _bl.RemoveHostingUnit(myunit);
+                    _bl.RemoveHostingUnit(myunit);//remove unit
                     units = _bl.searchHUbyOwner(id);//list of all units for this host
                     this.OrdersTabUserControl.DataGrid.ItemsSource = units;
+                    if(!_bl.HExists(key))
+                    {
+                        MessageBox.Show("You have successfully removed property\n" +
+                        "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey, "Successfulyy removed", MessageBoxButton.OK,MessageBoxImage.Information);
+                    }
                 }
             }
             catch (Exception a)
