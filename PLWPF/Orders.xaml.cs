@@ -107,7 +107,7 @@ namespace PLWPF
                 this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
             }
             #endregion
-
+            //
             #region requests
 
          
@@ -138,9 +138,6 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
             this.OrdersTabUserControl.DataGrid.UnselectAll();
 
-            /*
-             ShowButtonsreq
-             */
             #endregion
 
         }
