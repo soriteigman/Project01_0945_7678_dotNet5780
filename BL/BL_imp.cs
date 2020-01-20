@@ -193,21 +193,6 @@ namespace BL
                 throw a;
             }
         }
-        public Order CreateOrder(int HUkey, int GRkey)//in case of gr and hu matching creates an order for them
-        {
-            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
-
-            if (!AvailabilityCheck(dal_bl.SearchHUbyID(HUkey), dal_bl.searchGRbyID(GRkey)))
-                throw new InvalidOperationException("unit not available for this request");
-            Order ord = new Order
-            {
-                GuestRequestKey = GRkey,
-                HostingUnitKey = HUkey,
-                CreateDate = Configuration.today,
-                Status = Status.Active
-            };
-            return ord;
-        }
         public void AddHostingUnit(HostingUnit hu)
         {
             try
@@ -248,6 +233,22 @@ namespace BL
                 throw a;
             }
         }
+        public Order CreateOrder(int HUkey, int GRkey)//in case of gr and hu matching creates an order for them
+        {
+            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
+
+            if (!AvailabilityCheck(dal_bl.SearchHUbyID(HUkey), dal_bl.searchGRbyID(GRkey)))
+                throw new InvalidOperationException("unit not available for this request");
+            Order ord = new Order
+            {
+                GuestRequestKey = GRkey,
+                HostingUnitKey = HUkey,
+                CreateDate = Configuration.today,
+                Status = Status.Active
+            };
+            return ord;
+        }
+
         public void AddOrder(Order o)
         {
             try
@@ -280,7 +281,7 @@ namespace BL
                 Host h = dal_bl.SearchHUbyID(newO.HostingUnitKey).Owner;
                 if (newO.Status == Status.Booked)
                 {
-                    
+                    Updategr(dal_bl.searchGRbyID(newO.GuestRequestKey));
                     UpdateDiary(newO.Clone());
                 }
                 if (newO.Status == Status.SentEmail)

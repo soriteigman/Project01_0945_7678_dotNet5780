@@ -73,13 +73,13 @@
             <local:OrderUserControl1 x:Name="OrdersTabUserControl"/>
         </TabItem>
         <TabItem Header="My Orders">
-            <local:OrderUserControl1 x:Name="newOrderTabUserControl" IsEnabled="False"/>
+            <local:OrderUserControl1 x:Name="newOrderTabUserControl"/>
         </TabItem>
         <TabItem Header="All Requests">
-            <local:OrderUserControl1 x:Name="AllRequeststab" IsEnabled="False"/>
+            <local:OrderUserControl1 x:Name="AllRequeststab"/>
         </TabItem>
         <TabItem Header="Unit Requests">
-            <local:OrderUserControl1 x:Name="MyRequeststab" IsEnabled="False"/>
+            <local:OrderUserControl1 x:Name="MyRequeststab"/>
         </TabItem>
     </TabControl>
 </Page>
