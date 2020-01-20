@@ -102,7 +102,7 @@ namespace PLWPF
             this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsreq;
             this.newOrderTabUserControl.AddButton.Click += createOrder;
             #region אתחול
-            if (gr==null || gr.Count() == 0)
+            if (gr == null || gr.Count() == 0)
             {
                 this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Hidden;
                 this.newOrderTabUserControl.empty.Visibility = Visibility.Visible;
@@ -127,7 +127,7 @@ namespace PLWPF
             this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
             this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "myreq";
             this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
-            this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
+            this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfViewgr;
             this.newOrderTabUserControl.DataGrid.UnselectAll();
             #endregion
         }
@@ -137,9 +137,8 @@ namespace PLWPF
             HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
-           // this.NavigationService.Navigate(new NewOrderPage(HU));
+            // this.NavigationService.Navigate(new NewOrderPage(HU));
         }
-
         private void updateHu(object sender, RoutedEventArgs e)
         {
             if (OrdersTabUserControl.DataGrid.SelectedItem != null && OrdersTabUserControl.DataGrid.SelectedItem is HostingUnit)
@@ -149,7 +148,6 @@ namespace PLWPF
                 //this.Close();
             }
         }//sends to unit information with data of current row to bind to
-
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (OrdersTabUserControl.DataGrid.SelectedItem != null && OrdersTabUserControl.DataGrid.SelectedItem is HostingUnit)
@@ -159,7 +157,6 @@ namespace PLWPF
                 //this.Close();
             }
         }//sends to unit information with data of current row to bind to
-
         private void ShowButtons(object sender, SelectionChangedEventArgs e)
         {
             if (this.OrdersTabUserControl.DataGrid.CurrentItem != null)//something was selected
@@ -181,7 +178,6 @@ namespace PLWPF
                 this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
             }
         }
-
         private void ResetFilters(object sender, RoutedEventArgs e)
         {
             this.OrdersTabUserControl.FilterName.Text = "";
@@ -193,8 +189,6 @@ namespace PLWPF
             this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
             this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
         }
-
-
         private void ApplyFiltering(object sender, RoutedEventArgs e)
         {
             this.OrdersTabUserControl.DataGrid.ItemsSource = from item in _bl.GetAllUnits(
@@ -313,45 +307,104 @@ namespace PLWPF
                                                     this.OrdersTabUserControl.FilterStar.SelectedItem as BE.StarRating?,
                                                     this.OrdersTabUserControl.FilterArea.SelectedItem as BE.VacationArea?,
                                                     this.OrdersTabUserControl.FilterType.SelectedItem as BE.VacationType?)
-                                                             orderby item.PrivateName, item.FamilyName
-                                                             select new
-                                                             {item.PrivateName,
-                                                             item.FamilyName,
-                                                             item.MailAddress,
-                                                             item.Status,
-                                                             item.RegistrationDate,
-                                                             item.EntryDate,
-                                                             item.ReleaseDate,
-                                                             item.Area,
-                                                             item.SubArea,
-                                                             item.Type,
-                                                             item.Adults,
-                                                             item.Children,
-                                                             item.Pet,
-                                                             item.WiFi,
-                                                             item.Parking,
-                                                             item.Pool,
-                                                             item.Jacuzzi,
-                                                             item.Garden,
-                                                             item.ChildrensAttractions,
-                                                             item.FitnessCenter,
-                                                             item.Stars,
-                                                             };
-        }
-        private void ShowButtonsreq(object sender, RoutedEventArgs e)
-        {
-
+                                                               orderby item.PrivateName, item.FamilyName
+                                                               select new
+                                                               {
+                                                                   item.PrivateName,
+                                                                   item.FamilyName,
+                                                                   item.MailAddress,
+                                                                   item.Status,
+                                                                   item.RegistrationDate,
+                                                                   item.EntryDate,
+                                                                   item.ReleaseDate,
+                                                                   item.Area,
+                                                                   item.SubArea,
+                                                                   item.Type,
+                                                                   item.Adults,
+                                                                   item.Children,
+                                                                   item.Pet,
+                                                                   item.WiFi,
+                                                                   item.Parking,
+                                                                   item.Pool,
+                                                                   item.Jacuzzi,
+                                                                   item.Garden,
+                                                                   item.ChildrensAttractions,
+                                                                   item.FitnessCenter,
+                                                                   item.Stars,
+                                                               };
         }
         private void ResetFiltersgr(object sender, RoutedEventArgs e)
         {
-
+            this.newOrderTabUserControl.FilterName.Text = "";
+            this.newOrderTabUserControl.FilterStar.SelectedItem = null;
+            this.newOrderTabUserControl.FilterArea.SelectedItem = null;
+            this.newOrderTabUserControl.FilterType.SelectedItem = null;
+            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
+            this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "my req";
+            this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
         }
-        private void createOrder(object sender, RoutedEventArgs e)
+        private void createOrder(object sender, RoutedEventArgs e)//to do
         {
 
         }
-        #endregion
+        private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//to do
+        {
+            switch (e.PropertyName)
+            {
+                case "HostingUnitKey":
+                    e.Column.Header = "Property Key";
+                    break;
+                case "Owner":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    break;
+                case "Area":
+                    e.Column.Header = "Area";
+                    break;
+                case "SubArea":
+                    e.Column.Header = "Sub Area";
+                    break;
+                case "Type":
+                    e.Column.Header = "Property Type";
+                    break;
+                case "Pet":
+                    e.Column.Header = "Pet";
+                    break;
+                case "WiFi":
+                    e.Column.Header = "Wifi";
+                    break;
+                case "Parking":
+                    e.Column.Header = "Parking";
+                    break;
+                case "Pool":
+                    e.Column.Header = "Pool";
+                    break;
+                case "Jacuzzi":
+                    e.Column.Header = "Jacuzzi";
+                    break;
+                case "Garden":
+                    e.Column.Header = "Garden";
+                    break;
+                case "ChildrensAttractions":
+                    e.Column.Header = "Childrens\n Attractions";
+                    break;
+                case "FitnessCenter":
+                    e.Column.Header = "Fitness Center";
+                    break;
+                case "Stars":
+                    e.Column.Header = "Rating";
+                    break;
+                case "Beds":
+                    e.Column.Header = "Beds";
+                    break;
+                case "Diary":
+                    e.Column.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    break;
 
+            }
+        }
+        #endregion
     }
 }
 
