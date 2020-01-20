@@ -27,6 +27,7 @@ namespace PLWPF
         IEnumerable<GuestRequest> req;//list of all requests that match any of the units
         IEnumerable<Order> ord;//all his orders
         IList<int> keys = new List<int>();//all his keys
+        IList<int> grkeys = new List<int>();//all gr keys
         IList<Order> myOrders = new List<Order>();
         int id;
         public Orders(int ID)
@@ -36,13 +37,13 @@ namespace PLWPF
             units = _bl.searchHUbyOwner(id);//list of all units for this host
             ord = _bl.GetsOpenOrders();
             #region איתחול
-            foreach (HostingUnit hu in units)
+            foreach (HostingUnit h in units)
             {
-                keys.Add(hu.HostingUnitKey);
-                if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)).Count() > 0)
+                keys.Add(h.HostingUnitKey);
+                if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)).Count() > 0)
                     if (req == null)
-                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(hu));
-                    else req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(hu)));
+                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(h));
+                    else req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)));
             }
             foreach (int key in keys)
             {
@@ -109,7 +110,44 @@ namespace PLWPF
             #endregion
 
             #region requests
-            //this.MyRequeststab.DataGrid
+
+            foreach(GuestRequest g in req)
+            {
+                grkeys.add(g.key)
+            }
+
+            this.newOrderTabUserControl.FilterName.TextChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterKey.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterStar.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterArea.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.FilterType.SelectionChanged += ApplyFilteringgr;
+            this.newOrderTabUserControl.ResetFiltersButton.Click += ResetFiltersgr;
+            this.newOrderTabUserControl.DataGrid.SelectionChanged += ShowButtonsgr;
+            this.newOrderTabUserControl.AddButton.Click += createOrder;
+
+
+
+            this.newOrderTabUserControl.FilterKey.ItemsSource = keys;
+            this.newOrderTabUserControl.FilterKey.SelectedItem = "{Binding Path=UnitKey,Mode=TwoWay}";
+
+            this.newOrderTabUserControl.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
+            this.OrdersTabUserControl.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
+
+            this.OrdersTabUserControl.FilterArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
+            this.OrdersTabUserControl.FilterArea.SelectedItem = "{Binding Path=UnitArea,Mode=TwoWay}";
+
+            this.OrdersTabUserControl.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+            this.OrdersTabUserControl.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
+
+            this.OrdersTabUserControl.DataGrid.ItemsSource = units;
+            this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
+            this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
+            this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
+            this.OrdersTabUserControl.DataGrid.UnselectAll();
+
+            /*
+             ShowButtonsreq
+             */
             #endregion
 
         }
