@@ -137,7 +137,7 @@ namespace PLWPF
             HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
-            // this.NavigationService.Navigate(new NewOrderPage(HU));
+            TC.SelectedIndex = 1;
         }
         private void updateHu(object sender, RoutedEventArgs e)
         {
