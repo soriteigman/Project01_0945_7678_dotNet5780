@@ -137,9 +137,6 @@ namespace PLWPF
             HostingUnit HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
-            IEnumerable<GuestRequest> gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(HU));
-
-            
            // this.NavigationService.Navigate(new NewOrderPage(HU));
         }
 
