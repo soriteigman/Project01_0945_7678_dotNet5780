@@ -57,7 +57,7 @@ namespace PLWPF
                 {
                     if (myBL.HExists(int.Parse(ID.Text)))
                     {
-                        this.NavigationService.Navigate(new ManagingPage(int.Parse(ID.Text)));
+                        this.NavigationService.Navigate(new Orders(int.Parse(ID.Text)));
                     }
                     else
                     {
@@ -73,10 +73,7 @@ namespace PLWPF
                 MessageBox.Show(a.Message);
                 ID.Clear();
             }
-            //catch (Exception a)
-            //{
-            //    MessageBox.Show(a.Message);
-            //}
+           
         }
 
         private void ID_MouseLeave(object sender, MouseEventArgs e)
