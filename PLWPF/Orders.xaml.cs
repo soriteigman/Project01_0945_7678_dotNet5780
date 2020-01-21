@@ -139,7 +139,7 @@ namespace PLWPF
         #region units
         private bool Condition(int k)//removes requests that were delt with
         {
-            foreach(Order o in myOrders)
+            foreach (Order o in myOrders)
             {
                 if (o.GuestRequestKey == k)
                     return true;
@@ -185,13 +185,13 @@ namespace PLWPF
             this.myRequests.Visibility = Visibility.Visible;
             TC.SelectedIndex = 3;
             List<GuestRequest> list = new List<GuestRequest>();
-            foreach(GuestRequest i in gr )
+            foreach (GuestRequest i in gr)
             {
                 list.Add(i);
             }
             list.RemoveAll(g => Condition(g.GuestRequestKey));
             gr.Clear();
-            foreach(GuestRequest guest in list)
+            foreach (GuestRequest guest in list)
             {
                 gr.Add(guest);
             }
@@ -448,7 +448,7 @@ namespace PLWPF
             GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
             Order newOrd = _bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey);
             _bl.AddOrder(newOrd);
-            MessageBox.Show("Order created succesfully,\nyour new order key is: "+newOrd.OrderKey, "Order", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Order created succesfully,\nyour new order key is: " + newOrd.OrderKey, "Order", MessageBoxButton.OK, MessageBoxImage.Information);
             ord = _bl.GetsOpenOrders().ToList();
             myOrders.Clear();
             foreach (int key in keys)
@@ -583,11 +583,34 @@ namespace PLWPF
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem);
+            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this);
             uo.Show();
+
+
         }
 
+        //public void UpdateOrderList()
+        //{
+
+        //    ord = _bl.GetsOpenOrders().ToList();
+        //    myOrders.Clear();
+        //    foreach (int key in keys)
+        //    {
+        //        foreach (Order o in ord)
+        //        {
+        //            if (o.HostingUnitKey == key)
+        //                myOrders.Add(o);
+        //        }
+        //    }
+        //    this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+
+        //}
+        //Orders or = new Orders(1);
+
+        //public delegate void del();
+        //public del deleg = new del(or.UpdateOrderList);
+
         #endregion
-    }    
+    }   
 }
 
