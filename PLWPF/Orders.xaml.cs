@@ -491,7 +491,7 @@ namespace PLWPF
                     return true;
             }
             return false;
-        }
+        }//
         private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//gr header display
         {
             if (e.PropertyType == typeof(System.DateTime))
