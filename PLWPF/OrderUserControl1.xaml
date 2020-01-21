@@ -144,6 +144,9 @@
                     ToolTipService.ShowOnDisabled="True" ToolTip="Add order">
                 </Button>
                 <Image Source="Resources/logoOption2.2.png" Grid.Column="4" Margin="67.667,-22,-35,-35" Grid.ColumnSpan="2"/>
+                <Button Name="refreshButton" Background="White" BorderBrush="Black" Grid.Column="3" HorizontalAlignment="Left" Margin="24,5,0,0" VerticalAlignment="Top" Width="42" Height="30">
+                    <Image Source="Resources/refresh.PNG" Width="32" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Button>
 
             </Grid>
             <Label x:Name="empty" Visibility="Hidden" Content="Nothing New :(" HorizontalAlignment="Left" Margin="161,36,0,0" Grid.Row="1" VerticalAlignment="Top" Height="41" Width="439"/>

@@ -74,7 +74,7 @@ namespace PLWPF
 
             this.OrdersTabUserControl.DataGrid.MouseDoubleClick += DataGridRow_MouseDoubleClick;
 
-
+            this.OrdersTabUserControl.refreshButton.Visibility = Visibility.Hidden;
 
             this.OrdersTabUserControl.FilterKey.ItemsSource = keys;
             this.OrdersTabUserControl.FilterKey.SelectedItem = "{Binding Path=UnitKey,Mode=TwoWay}";
@@ -108,6 +108,8 @@ namespace PLWPF
             this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfViewgr;
             this.newOrderTabUserControl.AddButton.Click += createOrder;
 
+            this.newOrderTabUserControl.refreshButton.Visibility = Visibility.Hidden;
+
             this.newOrderTabUserControl.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
             this.newOrderTabUserControl.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
 
@@ -127,6 +129,7 @@ namespace PLWPF
             this.AllRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewgr;
             this.AllRequeststab.updateButton.Visibility = Visibility.Hidden;
             this.AllRequeststab.RemoveButton.Visibility = Visibility.Hidden;
+            this.AllRequeststab.refreshButton.Visibility = Visibility.Hidden;
 
             #endregion
 
@@ -136,6 +139,7 @@ namespace PLWPF
             this.MyRequeststab.updateButton.IsEnabled = true;
             this.MyRequeststab.updateButton.Content = "Update Order";
             this.MyRequeststab.updateButton.Click += UpdateOrder_Click;
+            this.MyRequeststab.refreshButton.Click += RefreshButton_Click;
             this.MyRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewOr;
             this.MyRequeststab.DataGrid.SelectionChanged += ShowOrderButtons;
             this.MyRequeststab.DataGrid.UnselectAll();
@@ -617,9 +621,24 @@ namespace PLWPF
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
             UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this.MyRequeststab.DataGrid,id);
+            this.MyRequeststab.DataGrid.UnselectAll();
+            this.MyRequeststab.updateButton.IsEnabled = false;
             uo.Show();
+        }
 
-
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            ord = _bl.GetsOpenOrders().ToList();
+            myOrders.Clear();
+            foreach (int key in keys)
+            {
+                foreach (Order o in ord)
+                {
+                    if (o.HostingUnitKey == key)
+                        myOrders.Add(o);
+                }
+            }
+            this.MyRequeststab.DataGrid.ItemsSource = myOrders;
         }
 
         private void ShowOrderButtons(object sender, SelectionChangedEventArgs e)
