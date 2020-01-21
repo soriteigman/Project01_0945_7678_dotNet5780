@@ -59,7 +59,7 @@ namespace PLWPF
             #endregion
 
             #region units
-
+            this.OrdersTabUserControl.AddButton.Content = "shoe requests that match this unit";
             this.OrdersTabUserControl.FilterName.TextChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterKey.SelectionChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterStar.SelectionChanged += ApplyFiltering;
