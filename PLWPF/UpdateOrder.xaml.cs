@@ -21,9 +21,15 @@ namespace PLWPF
     /// </summary>
     public partial class UpdateOrder : Window
     {
-        public UpdateOrder(Order o)
+        IBL myBL = BL.FactoryBL.getBL();//creates an instance of BL
+        Order currentOrder;
+        public Page sourcePage;
+
+        public UpdateOrder(Order o, Page source)
         {
             InitializeComponent();
+            currentOrder = o;
+            sourcePage = source;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -33,7 +39,12 @@ namespace PLWPF
 
         private void update_Click(object sender, RoutedEventArgs e)
         {
+            currentOrder.Status = Status.Closed;
+            myBL.UpdateOrder(currentOrder);
+            MessageBox.Show("Your order status was successfully updated to closed.", "Successful Update", MessageBoxButton.OK, MessageBoxImage.Information);
+            //update order list thats linked to the datagrid
 
+            Close();
         }
 
     }
