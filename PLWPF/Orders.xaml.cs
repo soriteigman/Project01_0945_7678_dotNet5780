@@ -26,11 +26,10 @@ namespace PLWPF
         HostingUnit HU = null;
         IEnumerable<GuestRequest> gr;//all his requests
         public IEnumerable<HostingUnit> units { get; set; }//all his units
-        IEnumerable<GuestRequest> req;//list of all requests that match any of the units
-        IEnumerable<Order> ord;//all his orders
-        //List<Order> myOrds;
+        IList<GuestRequest> req;//list of all requests that match any of the units
+        IEnumerable<Order> ord;//all orders
         IList<int> keys = new List<int>();//all his hukeys
-        IList<Order> myOrders = new List<Order>();
+        IList<Order> myOrders = new List<Order>();//filterd ones
         int id;
         public Orders(int ID)
         {
@@ -38,22 +37,32 @@ namespace PLWPF
             InitializeComponent();
             units = _bl.searchHUbyOwner(id);//list of all units for this host
             ord = _bl.GetsOpenOrders().ToList();
-            //myOrds = ord.ToList();
             #region איתחול
-            foreach (HostingUnit h in units)
-            {
-                keys.Add(h.HostingUnitKey);
-                if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)).Count() > 0)
-                    if (req == null)
-                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(h));
-                    else req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)));
-            }
+
             foreach (int key in keys)
             {
                 foreach (Order o in ord)
                 {
                     if (o.HostingUnitKey == key)
                         myOrders.Add(o);
+                }
+            }
+            foreach (HostingUnit h in units)
+            {
+                keys.Add(h.HostingUnitKey);
+                if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)).Count() > 0)
+                    if (req == null)
+                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(h)).ToList();
+                    else req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)));
+            }
+            foreach(GuestRequest g in req)
+            {
+                foreach(Order o in myOrders)
+                {
+                    if(o.GuestRequestKey==g.GuestRequestKey)
+                    {
+                        req.Remove(g);
+                    }
                 }
             }
             #endregion
@@ -427,17 +436,17 @@ namespace PLWPF
             _bl.AddOrder(newOrd);
             MessageBox.Show("Order created succesfully,\nyour new order key is: "+newOrd.OrderKey, "Order", MessageBoxButton.OK, MessageBoxImage.Information);
             ord = _bl.GetsOpenOrders().ToList();
-            myOrders.Clear();
-            foreach (int key in keys)
-            {
-                foreach (Order o in ord)
-                {
-                    if (o.HostingUnitKey == key)
-                        myOrders.Add(o);
-                }
-            }
+            myOrders.Add(newOrd);
+            //myOrders.Clear();
+            //foreach (int key in keys)
+            //{
+            //    foreach (Order o in ord)
+            //    {
+            //        if (o.HostingUnitKey == key)
+            //            myOrders.Add(o);
+            //    }
+            //}
             this.MyRequeststab.DataGrid.ItemsSource = myOrders;
-            this.AllRequeststab.DataGrid.ItemsSource = req;
             TC.SelectedIndex = 0;
             this.myRequests.Visibility = Visibility.Hidden;
 
