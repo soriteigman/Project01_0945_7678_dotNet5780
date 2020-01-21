@@ -123,6 +123,7 @@ namespace PLWPF
 
             #region all requests
             this.AllRequeststab.DataGrid.ItemsSource = req;
+            this.AllRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewgr;
             #endregion
 
             #region my orders
@@ -285,12 +286,17 @@ namespace PLWPF
                                                                  item.Beds,
                                                              };
         }
-        private void WayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        private void WayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)//hu header display
         {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             switch (e.PropertyName)
             {
                 case "HostingUnitKey":
                     e.Column.Header = "Property Key";
+                    break;
+                case "HostingUnitName":
+                    e.Column.Header = "Property Name";
                     break;
                 case "Owner":
                     e.Column.Visibility = Visibility.Collapsed;
@@ -299,7 +305,7 @@ namespace PLWPF
                     e.Column.Header = "Area";
                     break;
                 case "SubArea":
-                    e.Column.Header = "Sub Area";
+                    e.Column.Header = "Sub-Area";
                     break;
                 case "Type":
                     e.Column.Header = "Property Type";
@@ -323,7 +329,7 @@ namespace PLWPF
                     e.Column.Header = "Garden";
                     break;
                 case "ChildrensAttractions":
-                    e.Column.Header = "Childrens\n Attractions";
+                    e.Column.Header = "Childrens\nAttractions";
                     break;
                 case "FitnessCenter":
                     e.Column.Header = "Fitness Center";
@@ -431,24 +437,50 @@ namespace PLWPF
             this.MyRequeststab.DataGrid.ItemsSource = myOrders;
 
         }
-        private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//to do
+        private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//gr header display
         {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             switch (e.PropertyName)
             {
-                case "HostingUnitKey":
-                    e.Column.Header = "Property Key";
+                case "GuestRequestKey":
+                    e.Column.Header = "Request Key";
                     break;
-                case "Owner":
-                    e.Column.Visibility = Visibility.Collapsed;
+                case "PrivateName":
+                    e.Column.Header = "First Name";
+                    break;
+                case "FamilyName":
+                    e.Column.Header = "Last Name";
+                    break;
+                case "MailAddress":
+                    e.Column.Header = "Email Address";
+                    break;
+                case "Status":
+                    e.Column.Header = "Request Status";
+                    break;
+                case "RegistrationDate":
+                    e.Column.Header = "Registration Date";
+                    break;
+                case "EntryDate":
+                    e.Column.Header = "Entry Date";
+                    break;
+                case "ReleaseDate":
+                    e.Column.Header = "Release Date";
                     break;
                 case "Area":
                     e.Column.Header = "Area";
                     break;
                 case "SubArea":
-                    e.Column.Header = "Sub Area";
+                    e.Column.Header = "Sub-Area";
                     break;
                 case "Type":
-                    e.Column.Header = "Property Type";
+                    e.Column.Header = "Vacation Type";
+                    break;
+                case "Adults":
+                    e.Column.Header = "Adults";
+                    break;
+                case "Children":
+                    e.Column.Header = "Children";
                     break;
                 case "Pet":
                     e.Column.Header = "Pet";
@@ -469,19 +501,13 @@ namespace PLWPF
                     e.Column.Header = "Garden";
                     break;
                 case "ChildrensAttractions":
-                    e.Column.Header = "Childrens\n Attractions";
+                    e.Column.Header = "Childrens\nAttractions";
                     break;
                 case "FitnessCenter":
                     e.Column.Header = "Fitness Center";
                     break;
                 case "Stars":
                     e.Column.Header = "Rating";
-                    break;
-                case "Beds":
-                    e.Column.Header = "Beds";
-                    break;
-                case "Diary":
-                    e.Column.Visibility = Visibility.Collapsed;
                     break;
                 default:
                     break;
