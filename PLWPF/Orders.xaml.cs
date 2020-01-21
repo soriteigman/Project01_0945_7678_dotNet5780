@@ -27,7 +27,7 @@ namespace PLWPF
         HostingUnit HU = null;
         IList<GuestRequest> gr;//all his requests
         public IEnumerable<HostingUnit> units { get; set; }//all his units
-        IEnumerable<GuestRequest> req;//list of all requests that match any of the units
+        IList<GuestRequest> req;//list of all requests that match any of the units
         IEnumerable<Order> ord;//all his orders
         //List<Order> myOrds;
         IList<int> keys = new List<int>();//all his hukeys
@@ -46,7 +46,7 @@ namespace PLWPF
                 keys.Add(h.HostingUnitKey);
                 if (_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)).Count() > 0)
                     if (req == null)
-                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(h));
+                        req = _bl.AllRequestsThatMatch(_bl.BuildPredicate(h)).ToList();
                     else req.Concat(_bl.AllRequestsThatMatch(_bl.BuildPredicate(h)));
             }
             foreach (int key in keys)
@@ -136,6 +136,7 @@ namespace PLWPF
             this.MyRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewOr;
             #endregion
         }
+
         #region units
         private bool Condition(int k)//removes requests that were delt with
         {
@@ -467,9 +468,32 @@ namespace PLWPF
             this.OrdersTabUserControl.AddButton.IsEnabled = false;
             this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
             this.OrdersTabUserControl.updateButton.IsEnabled = false;
+            List<GuestRequest> list = new List<GuestRequest>();
+            foreach (GuestRequest i in req)
+            {
+                list.Add(i);
+            }
+            list.RemoveAll(g => AllCondition(g.GuestRequestKey));
+            req.Clear();
+            foreach (GuestRequest guest in list)
+            {
+                req.Add(guest);
+            }
+            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
 
 
         }
+        private bool AllCondition(int k)//removes requests that were delt with
+        {
+            ord = _bl.GetsOpenOrders().ToList();
+            foreach (Order o in ord)
+            {
+                if (o.GuestRequestKey == k)
+                    return true;
+            }
+            return false;
+        }
+
         private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//gr header display
         {
             if (e.PropertyType == typeof(System.DateTime))
@@ -589,28 +613,7 @@ namespace PLWPF
 
         }
 
-        //public void UpdateOrderList()
-        //{
-
-        //    ord = _bl.GetsOpenOrders().ToList();
-        //    myOrders.Clear();
-        //    foreach (int key in keys)
-        //    {
-        //        foreach (Order o in ord)
-        //        {
-        //            if (o.HostingUnitKey == key)
-        //                myOrders.Add(o);
-        //        }
-        //    }
-        //    this.MyRequeststab.DataGrid.ItemsSource = myOrders;
-
-        //}
-        //Orders or = new Orders(1);
-
-        //public delegate void del();
-        //public del deleg = new del(or.UpdateOrderList);
-
         #endregion
-    }   
+    }    
 }
 
