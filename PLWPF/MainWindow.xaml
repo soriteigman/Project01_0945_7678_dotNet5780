@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="MainWindow" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="800">
+        Title="Destination Paradise" Icon="Resources/palmtree.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="800">
     <Grid>
         <DockPanel>
             <Frame x:Name="_NavigationFrame" Content="_NavigationFrame" FlowDirection="RightToLeft" Height="auto" Width="auto"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace PLWPF
         IEnumerable<Order> ord;//all his orders
         //List<Order> myOrds;
         IList<int> keys = new List<int>();//all his hukeys
-        IList<Order> myOrders = new List<Order>();
+        ObservableCollection<Order> myOrders = new ObservableCollection<Order>();
         int id;
         public Orders(int ID)
         {
@@ -129,6 +130,9 @@ namespace PLWPF
             #region my orders
             // myOrds.RemoveAll(o => _bl.SearchHUbyID_bl(o.HostingUnitKey).Owner.HostKey != id);//removes all orders not connected to current host
             this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+            this.MyRequeststab.updateButton.IsEnabled = true;
+            this.MyRequeststab.updateButton.Content = "Update Order";
+            this.MyRequeststab.updateButton.Click += UpdateOrder_Click;
             this.MyRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewOr;
             #endregion
         }
@@ -171,7 +175,7 @@ namespace PLWPF
             #endregion
             this.myRequests.Visibility = Visibility.Visible;
             TC.SelectedIndex = 3;
-
+ 
             this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
             this.newOrderTabUserControl.DataGrid.UnselectAll();
 
@@ -551,6 +555,12 @@ namespace PLWPF
                     break;
 
             }
+        }
+
+        private void UpdateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem);
+            uo.Show();
         }
 
         #endregion

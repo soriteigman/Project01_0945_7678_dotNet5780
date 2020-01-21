@@ -132,7 +132,7 @@
                     <ColumnDefinition Width="8*" MinWidth="95"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="updateButton" Content="Update Property" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="96" Height="30" 
-                    BorderBrush="Gray" Background="Gray" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
+                    BorderBrush="Transparent" Background="#FFF5C220" FontFamily="Segoe UI Semibold" Cursor="Hand" IsEnabled="False" 
                    Margin="10,5">
                 </Button>
                 <Button x:Name="AddButton"  Content="Create Order" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 

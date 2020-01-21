@@ -68,6 +68,9 @@
     <Compile Include="UpdateHuWindow.xaml.cs">
       <DependentUpon>UpdateHuWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateOrder.xaml.cs">
+      <DependentUpon>UpdateOrder.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddHostingUnit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UpdateOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ManagingPage.xaml.cs">
@@ -207,6 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\logoOption2.2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\palmtree.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="233.194" Width="381.512">
+        Title="Login Window" Icon="Resources/admin.png" Height="233.194" Width="381.512">
     <Window.Resources>
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
