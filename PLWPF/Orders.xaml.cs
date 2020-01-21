@@ -127,9 +127,9 @@ namespace PLWPF
             #endregion
 
             #region my orders
-           // myOrds.RemoveAll(o => _bl.SearchHUbyID_bl(o.HostingUnitKey).Owner.HostKey != id);//removes all orders not connected to current host
+            // myOrds.RemoveAll(o => _bl.SearchHUbyID_bl(o.HostingUnitKey).Owner.HostKey != id);//removes all orders not connected to current host
             this.MyRequeststab.DataGrid.ItemsSource = myOrders;
-
+            this.MyRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewOr;
             #endregion
         }
         #region units
@@ -234,10 +234,10 @@ namespace PLWPF
                     _bl.RemoveHostingUnit(myunit);//remove unit
                     units = _bl.searchHUbyOwner(id);//list of all units for this host
                     this.OrdersTabUserControl.DataGrid.ItemsSource = units;
-                    if(!_bl.HExists(key))
+                    if (!_bl.HExists(key))
                     {
                         MessageBox.Show("You have successfully removed property\n" +
-                        "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey, "Successfulyy removed", MessageBoxButton.OK,MessageBoxImage.Information);
+                        "Name: " + myunit.HostingUnitName + "\nKey: " + myunit.HostingUnitKey, "Successfulyy removed", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
@@ -456,7 +456,7 @@ namespace PLWPF
                     e.Column.Header = "Email Address";
                     break;
                 case "Status":
-                    e.Column.Header = "Request Status";
+                    e.Column.Header = "Guest Request Status";
                     break;
                 case "RegistrationDate":
                     e.Column.Header = "Registration Date";
@@ -515,6 +515,40 @@ namespace PLWPF
             }
         }
         #endregion
-    }
+
+        #region orders
+
+        private void WayOfViewOr(object sender, DataGridAutoGeneratingColumnEventArgs e)//order header display
+        {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+            switch (e.PropertyName)
+            {
+                case "GuestRequestKey":
+                    e.Column.Header = "Guest Request Key";
+                    break;
+                case "HostingUnitKey":
+                    e.Column.Header = "Hosting Unit Key";
+                    break;
+                case "OrderKey":
+                    e.Column.Header = "Order Key";
+                    break;
+                case "Status":
+                    e.Column.Header = "Request Status";
+                    break;
+                case "CreateDate":
+                    e.Column.Header = "Create Date";
+                    break;
+                case "SentEmail":
+                    e.Column.Header = "Email Date";
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        #endregion
+    }    
 }
 
