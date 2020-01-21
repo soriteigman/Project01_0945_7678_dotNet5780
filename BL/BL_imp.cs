@@ -182,8 +182,8 @@ namespace BL
             try
             {
                 IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
-
-                if (gr.Status == Status.Closed)
+                GuestRequest g= dal_bl.searchGRbyID(gr.GuestRequestKey);
+                if (g.Status == Status.Closed)
                     throw new InvalidOperationException("cannot change status of closed request");
                 dal_bl.UpdateGuestRequest(gr);
             }
@@ -280,7 +280,7 @@ namespace BL
                 Host h = dal_bl.SearchHUbyID(newO.HostingUnitKey).Owner;
                 if (newO.Status == Status.Booked)
                 {
-                    GuestRequest g = dal_bl.searchGRbyID(newO.GuestRequestKey);
+                    GuestRequest g = dal_bl.searchGRbyID(newO.GuestRequestKey).Clone();
                     g.Status = Status.Closed;
                     Updategr(g.Clone());
                     UpdateDiary(newO.Clone());

@@ -196,7 +196,7 @@ namespace DAL
                 if (ORexist(o.OrderKey))
                 {
                     ord = SearchOrbyID(o.OrderKey);//.Clone();//cant do it with clone because order isnt icomparible
-                    DataSource.OrderCollection.Remove(ord);
+                    DataSource.OrderCollection.RemoveAll(or=>or.OrderKey==ord.OrderKey);
                 }
                 DataSource.OrderCollection.Add(o);
             }

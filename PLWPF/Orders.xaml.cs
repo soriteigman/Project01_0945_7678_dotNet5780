@@ -125,6 +125,9 @@ namespace PLWPF
             #region all requests
             this.AllRequeststab.DataGrid.ItemsSource = req;
             this.AllRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewgr;
+            this.AllRequeststab.updateButton.Visibility = Visibility.Hidden;
+            this.AllRequeststab.RemoveButton.Visibility = Visibility.Hidden;
+
             #endregion
 
             #region my orders
@@ -134,6 +137,13 @@ namespace PLWPF
             this.MyRequeststab.updateButton.Content = "Update Order";
             this.MyRequeststab.updateButton.Click += UpdateOrder_Click;
             this.MyRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewOr;
+            this.MyRequeststab.DataGrid.SelectionChanged += ShowOrderButtons;
+            this.MyRequeststab.DataGrid.UnselectAll();
+            this.MyRequeststab.updateButton.IsEnabled = false;
+            this.MyRequeststab.RemoveButton.Visibility = Visibility.Hidden;
+            this.MyRequeststab.AddButton.Visibility = Visibility.Hidden;
+
+
             #endregion
         }
 
@@ -606,10 +616,22 @@ namespace PLWPF
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this.MyRequeststab.DataGrid);
+            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this.MyRequeststab.DataGrid,id);
             uo.Show();
 
 
+        }
+
+        private void ShowOrderButtons(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.MyRequeststab.DataGrid.CurrentItem != null)//something was selected
+            {
+                this.MyRequeststab.updateButton.IsEnabled = true;//allows button clicks
+            }
+            else
+            {
+                this.OrdersTabUserControl.updateButton.IsEnabled = false;
+            }
         }
 
         #endregion
