@@ -607,7 +607,7 @@ namespace PLWPF
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this);
+            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this.MyRequeststab.DataGrid);
             uo.Show();
 
 

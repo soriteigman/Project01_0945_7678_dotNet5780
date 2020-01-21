@@ -23,13 +23,13 @@ namespace PLWPF
     {
         IBL myBL = BL.FactoryBL.getBL();//creates an instance of BL
         Order currentOrder;
-        public Page sourcePage;
+        DataGrid sourceDG;
 
-        public UpdateOrder(Order o, Page source)
+        public UpdateOrder(Order o, DataGrid dg)
         {
             InitializeComponent();
             currentOrder = o;
-            sourcePage = source;
+            sourceDG = dg;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -42,8 +42,8 @@ namespace PLWPF
             currentOrder.Status = Status.Closed;
             myBL.UpdateOrder(currentOrder);
             MessageBox.Show("Your order status was successfully updated to closed.", "Successful Update", MessageBoxButton.OK, MessageBoxImage.Information);
-            //update order list thats linked to the datagrid
-
+            //sourceDG.ItemsSource=
+            
             Close();
         }
 
