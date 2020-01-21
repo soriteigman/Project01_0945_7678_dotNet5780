@@ -169,7 +169,8 @@ namespace PLWPF
                 this.newOrderTabUserControl.DataGrid.IsEnabled = true;
             }
             #endregion
-            TC.SelectedIndex = 1;
+            this.myRequests.Visibility = Visibility.Visible;
+            TC.SelectedIndex = 3;
 
             this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
             this.newOrderTabUserControl.DataGrid.UnselectAll();

@@ -72,14 +72,14 @@
         <TabItem Header="My Units">
             <local:OrderUserControl1 x:Name="OrdersTabUserControl"/>
         </TabItem>
-        <TabItem Header="Unit Requests">
-            <local:OrderUserControl1 x:Name="newOrderTabUserControl"/>
-        </TabItem>
         <TabItem Header="All Requests">
             <local:OrderUserControl1 x:Name="AllRequeststab"/>
         </TabItem>
         <TabItem Header="My Orders">
             <local:OrderUserControl1 x:Name="MyRequeststab"/>
+        </TabItem>
+        <TabItem Header="Unit Requests" Name="myRequests" Visibility="Hidden">
+            <local:OrderUserControl1 x:Name="newOrderTabUserControl"/>
         </TabItem>
     </TabControl>
 </Page>
