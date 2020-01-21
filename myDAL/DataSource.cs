@@ -19,13 +19,37 @@ namespace DAL
 
         internal static List<GuestRequest> requestCollection = new List<GuestRequest>()
         {
-  new GuestRequest
+            new GuestRequest
             {
-                PrivateName = "wanted",
-                FamilyName = "dead or alive",
+                PrivateName = "Yossi",
+                FamilyName = "Burack",
                 RegistrationDate = Configuration.today,
-                EntryDate = new DateTime(2020, 7, 03),
-                ReleaseDate = new DateTime(2020, 7, 07),
+                EntryDate = new DateTime(2020, 8, 03),
+                ReleaseDate = new DateTime(2020, 8, 07),
+                MailAddress = "stburack@gmail.com",
+                Type = VacationType.Hut,
+                Adults = 7,
+                Children = 18,
+                Pet = true,
+                Area = VacationArea.Eilat,
+                SubArea = "Eilat",
+                ChildrensAttractions = Choices.Yes,
+                FitnessCenter = Choices.No,
+                Garden = Choices.Yes,
+                Jacuzzi = Choices.Yes,
+                Parking = Choices.Yes,
+                Pool = Choices.Yes,
+                Stars = StarRating.five_star,
+                Status = Status.Active,
+                WiFi = Choices.Yes
+            },
+            new GuestRequest
+            {
+                PrivateName = "Yehuda",
+                FamilyName = "Gross",
+                RegistrationDate = Configuration.today,
+                EntryDate = new DateTime(2020, 2, 03),
+                ReleaseDate = new DateTime(2020, 2, 07),
                 MailAddress = "stburack@gmail.com",
                 Type = VacationType.Hotel,
                 Adults = 2,
@@ -43,15 +67,89 @@ namespace DAL
                 Status = Status.Active,
                 WiFi = Choices.Yes
             },
-        new GuestRequest
+            new GuestRequest
+            {
+                PrivateName = "Tzvi",
+                FamilyName = "Fisher",
+                RegistrationDate = Configuration.today,
+                EntryDate = new DateTime(2020, 3, 03),
+                ReleaseDate = new DateTime(2020, 3, 07),
+                MailAddress = "stburack@gmail.com",
+                Type = VacationType.Bungalow,
+                Adults = 0,
+                Children =4,
+                Pet = false,
+                Area = VacationArea.DeadSea,
+                SubArea = "Ein Gedi",
+                ChildrensAttractions = Choices.Yes,
+                FitnessCenter = Choices.DontCare,
+                Garden = Choices.No,
+                Jacuzzi = Choices.Yes,
+                Parking = Choices.No,
+                Pool = Choices.No,
+                Stars = StarRating.one_star,
+                Status = Status.Active,
+                WiFi = Choices.DontCare
+            },
+            new GuestRequest
+            {
+                PrivateName = "BuBu",
+                FamilyName = "Fishelevski",
+                RegistrationDate = Configuration.today,
+                EntryDate = new DateTime(2020, 5, 03),
+                ReleaseDate = new DateTime(2020, 5, 07),
+                MailAddress = "stburack@gmail.com",
+                Type = VacationType.BeachHouse,
+                Adults = 1,
+                Children = 7,
+                Pet = true,
+                Area = VacationArea.Center,
+                SubArea = "Tel Aviv",
+                ChildrensAttractions = Choices.Yes,
+                FitnessCenter = Choices.DontCare,
+                Garden = Choices.DontCare,
+                Jacuzzi = Choices.No,
+                Parking = Choices.No,
+                Pool = Choices.No,
+                Stars = StarRating.four_star,
+                Status = Status.Active,
+                WiFi = Choices.No
+            },
+            new GuestRequest
+            {
+                PrivateName = "Shalom",
+                FamilyName = "Zaide",
+                RegistrationDate = Configuration.today,
+                EntryDate = new DateTime(2020, 4, 03),
+                ReleaseDate = new DateTime(2020, 4, 07),
+                MailAddress = "stburack@gmail.com",
+                Type = VacationType.Hotel,
+                Adults = 3,
+                Children = 2,
+                Pet = true,
+                Area = VacationArea.Jerusalem,
+                SubArea = "beitar",
+                ChildrensAttractions = Choices.No,
+                FitnessCenter = Choices.No,
+                Garden = Choices.No,
+                Jacuzzi = Choices.No,
+                Parking = Choices.No,
+                Pool = Choices.No,
+                Stars = StarRating.two_star,
+                Status = Status.Active,
+                WiFi = Choices.No
+            },
+            new GuestRequest
         {
-            PrivateName = "wanted",FamilyName = "dead or alive",RegistrationDate = Configuration.today,
+            PrivateName = "MoMO",
+            FamilyName = "DoDo",
+            RegistrationDate = Configuration.today,
             EntryDate = new DateTime(2020, 8, 03),
             ReleaseDate = new DateTime(2020, 8, 05),
             MailAddress = "stburack@gmail.com",
-            Type = VacationType.Hotel,
-            Adults = 2,
-            Children = 3,
+            Type = VacationType.Tent,
+            Adults = 0,
+            Children =1,
             Pet = false,
             Area = VacationArea.South,
             SubArea = "Herzliya",
@@ -65,7 +163,7 @@ namespace DAL
             Status = Status.Active,
             WiFi = Choices.Yes
         },
-        new GuestRequest
+            new GuestRequest
         {
             PrivateName = "sori",
             FamilyName = "teigman",
@@ -88,10 +186,37 @@ namespace DAL
             Stars = StarRating.five_star,
             WiFi = Choices.Yes
         },
-        new GuestRequest(){PrivateName="Esther", FamilyName="burack", MailAddress="stburack@gmail.com",Status=Status.NotAddressedYet,RegistrationDate=new DateTime(2020, 09, 09), EntryDate=new DateTime(2020, 09, 25), ReleaseDate=new DateTime(2020, 09, 28), Area=VacationArea.Center, SubArea="BatYam", Type=VacationType.Hut, Adults=2, Children=3, Pool=Choices.Yes, Jacuzzi=Choices.No, Garden=Choices.DontCare, ChildrensAttractions=Choices.Yes, FitnessCenter=Choices.DontCare, Parking=Choices.Yes, GuestRequestKey=12345678, Pet=false, Stars=StarRating.four_star, WiFi=Choices.Yes},
-            new GuestRequest(){PrivateName="Mother", FamilyName="Burack", MailAddress="stburack@gmail.com", Status=Status.Active, RegistrationDate=new DateTime(2020, 08, 01), EntryDate=new DateTime(2020, 02, 02), ReleaseDate=new DateTime(2020, 02, 08), Area=VacationArea.North, SubArea="Tiberias", Adults=2, Children=7, ChildrensAttractions=Choices.No, FitnessCenter=Choices.No, Garden=Choices.Yes, GuestRequestKey=20000000, Jacuzzi=Choices.Yes, Parking=Choices.Yes, Pet=false, Pool=Choices.Yes, Stars=StarRating.four_star, Type=VacationType.Hotel, WiFi=Choices.DontCare},
-            new GuestRequest(){PrivateName="Aviva", FamilyName="Nam", MailAddress="Man@gmail.com",Status=Status.Closed,RegistrationDate=new DateTime(2019, 08, 10), EntryDate=new DateTime(2019, 08, 29), ReleaseDate=new DateTime(2019, 09, 03), Area=VacationArea.DeadSea, SubArea="Arad", Type=VacationType.LogCabin, Adults=4, Children=17, Pool=Choices.No, Jacuzzi=Choices.Yes, Garden=Choices.Yes, ChildrensAttractions=Choices.DontCare, WiFi=Choices.No, Stars=StarRating.five_star, FitnessCenter=Choices.Yes, GuestRequestKey=12365479, Parking=Choices.Yes, Pet=true},
-            new GuestRequest(){PrivateName="Sara", FamilyName="Teig", MailAddress="Teig@gmail.com",Status=Status.Active,RegistrationDate=new DateTime(2020, 03, 16), EntryDate=new DateTime(2020, 04, 01), ReleaseDate=new DateTime(2020, 04, 04), Area=VacationArea.South, SubArea="Netanya", Type=VacationType.Hotel, Adults=1, Children=8, Pool=Choices.Yes, Jacuzzi=Choices.Yes, Garden=Choices.No, ChildrensAttractions=Choices.Yes, Pet=false, Parking=Choices.DontCare, GuestRequestKey=98765432, FitnessCenter=Choices.DontCare, Stars=StarRating.dontCare, WiFi=Choices.Yes }
+            new GuestRequest()
+            { PrivateName="Esther",
+                FamilyName ="burack",
+                MailAddress ="stburack@gmail.com",
+                Status =Status.NotAddressedYet,
+                RegistrationDate =new DateTime(2020, 09, 09),
+                EntryDate =new DateTime(2020, 09, 25),
+                ReleaseDate =new DateTime(2020, 09, 28),
+                Area =VacationArea.Center, SubArea="BatYam",
+                Type =VacationType.Hut,
+                Adults =2,
+                Children =3,
+                Pool =Choices.Yes,
+                Jacuzzi =Choices.No,
+                Garden =Choices.DontCare,
+                ChildrensAttractions =Choices.Yes,
+                FitnessCenter =Choices.DontCare,
+                Parking =Choices.Yes,
+                GuestRequestKey =12345678,
+                Pet =false,
+                Stars =StarRating.four_star,
+                WiFi =Choices.Yes
+            },
+            new GuestRequest()
+            { PrivateName="Yossi", FamilyName="Burack", MailAddress="stburack@gmail.com", Status=Status.Active, RegistrationDate=new DateTime(2020, 08, 01), EntryDate=new DateTime(2020, 02, 02), ReleaseDate=new DateTime(2020, 02, 08), Area=VacationArea.North, SubArea="Tiberias", Adults=2, Children=7, ChildrensAttractions=Choices.No, FitnessCenter=Choices.No, Garden=Choices.Yes, GuestRequestKey=40000000, Jacuzzi=Choices.Yes, Parking=Choices.Yes, Pet=false, Pool=Choices.Yes, Stars=StarRating.four_star, Type=VacationType.Hotel, WiFi=Choices.DontCare},
+            new GuestRequest()
+            { PrivateName="Mother", FamilyName="Burack", MailAddress="stburack@gmail.com", Status=Status.Active, RegistrationDate=new DateTime(2020, 08, 01), EntryDate=new DateTime(2020, 02, 02), ReleaseDate=new DateTime(2020, 02, 08), Area=VacationArea.North, SubArea="Tiberias", Adults=2, Children=7, ChildrensAttractions=Choices.No, FitnessCenter=Choices.No, Garden=Choices.Yes, GuestRequestKey=20000000, Jacuzzi=Choices.Yes, Parking=Choices.Yes, Pet=false, Pool=Choices.Yes, Stars=StarRating.four_star, Type=VacationType.Hotel, WiFi=Choices.DontCare},
+            new GuestRequest()
+            { PrivateName="Aviva", FamilyName="Nam", MailAddress="Man@gmail.com",Status=Status.Closed,RegistrationDate=new DateTime(2019, 08, 10), EntryDate=new DateTime(2019, 08, 29), ReleaseDate=new DateTime(2019, 09, 03), Area=VacationArea.DeadSea, SubArea="Arad", Type=VacationType.LogCabin, Adults=4, Children=17, Pool=Choices.No, Jacuzzi=Choices.Yes, Garden=Choices.Yes, ChildrensAttractions=Choices.DontCare, WiFi=Choices.No, Stars=StarRating.five_star, FitnessCenter=Choices.Yes, GuestRequestKey=12365479, Parking=Choices.Yes, Pet=true},
+            new GuestRequest()
+            { PrivateName="Sara", FamilyName="Teig", MailAddress="Teig@gmail.com",Status=Status.Active,RegistrationDate=new DateTime(2020, 03, 16), EntryDate=new DateTime(2020, 04, 01), ReleaseDate=new DateTime(2020, 04, 04), Area=VacationArea.South, SubArea="Netanya", Type=VacationType.Hotel, Adults=1, Children=8, Pool=Choices.Yes, Jacuzzi=Choices.Yes, Garden=Choices.No, ChildrensAttractions=Choices.Yes, Pet=false, Parking=Choices.DontCare, GuestRequestKey=98765432, FitnessCenter=Choices.DontCare, Stars=StarRating.dontCare, WiFi=Choices.Yes }
         };
 
         internal static List<Host> My_Host = new List<Host>
@@ -163,7 +288,7 @@ namespace DAL
 
         internal static List<Order> OrderCollection = new List<Order>()
         {
-            new Order(){HostingUnitKey=20000000, GuestRequestKey=20000000, OrderKey=20000000, Status=Status.Active, CreateDate=new DateTime(2000, 09, 09), SentEmail=default(DateTime)},
+            new Order(){HostingUnitKey=30000000, GuestRequestKey=30000000, OrderKey=30000000, Status=Status.Active, CreateDate=new DateTime(2000, 09, 09), SentEmail=default(DateTime)},
             new Order(){HostingUnitKey=12345678,GuestRequestKey=12345678,OrderKey=12345678,Status=Status.Active, CreateDate=new DateTime(1963, 10, 04), SentEmail=default(DateTime)},
             new Order(){HostingUnitKey=98735478,GuestRequestKey=63749587,OrderKey=54637382,Status=Status.Closed, CreateDate=new DateTime(2000, 04, 16),  SentEmail=new DateTime(2019, 04, 25)},
             new Order(){HostingUnitKey=65748493,GuestRequestKey=65740912,OrderKey=65019468,Status=Status.NoAnswer, CreateDate=new DateTime(2019, 11, 11),  SentEmail=default(DateTime)}

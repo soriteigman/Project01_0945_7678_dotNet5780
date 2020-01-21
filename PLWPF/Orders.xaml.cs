@@ -25,7 +25,7 @@ namespace PLWPF
     {
         IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
         HostingUnit HU = null;
-        IEnumerable<GuestRequest> gr;//all his requests
+        IList<GuestRequest> gr;//all his requests
         public IEnumerable<HostingUnit> units { get; set; }//all his units
         IEnumerable<GuestRequest> req;//list of all requests that match any of the units
         IEnumerable<Order> ord;//all his orders
@@ -137,12 +137,21 @@ namespace PLWPF
             #endregion
         }
         #region units
+        private bool Condition(int k)//removes requests that were delt with
+        {
+            foreach(Order o in myOrders)
+            {
+                if (o.GuestRequestKey == k)
+                    return true;
+            }
+            return false;
+        }
         private void addOrder(object sender, RoutedEventArgs e)
         {
             HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
             if (HU == null)
                 return;
-            gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(HU));
+            gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(HU)).ToList();
             #region אתחול
             if (gr == null || gr.Count() == 0)//doesnt have requests that match this unit
             {
@@ -175,7 +184,17 @@ namespace PLWPF
             #endregion
             this.myRequests.Visibility = Visibility.Visible;
             TC.SelectedIndex = 3;
- 
+            List<GuestRequest> list = new List<GuestRequest>();
+            foreach(GuestRequest i in gr )
+            {
+                list.Add(i);
+            }
+            list.RemoveAll(g => Condition(g.GuestRequestKey));
+            gr.Clear();
+            foreach(GuestRequest guest in list)
+            {
+                gr.Add(guest);
+            }
             this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
             this.newOrderTabUserControl.DataGrid.UnselectAll();
 
@@ -444,6 +463,11 @@ namespace PLWPF
             this.AllRequeststab.DataGrid.ItemsSource = req;
             TC.SelectedIndex = 0;
             this.myRequests.Visibility = Visibility.Hidden;
+            this.OrdersTabUserControl.DataGrid.UnselectAll();
+            this.OrdersTabUserControl.AddButton.IsEnabled = false;
+            this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
+            this.OrdersTabUserControl.updateButton.IsEnabled = false;
+
 
         }
         private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//gr header display
