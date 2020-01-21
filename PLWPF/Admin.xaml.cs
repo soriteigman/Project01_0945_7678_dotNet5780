@@ -161,6 +161,8 @@ namespace PLWPF
 
         private void HUWayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             switch (e.PropertyName)
             {
                 case "HostingUnitKey":
@@ -237,8 +239,8 @@ namespace PLWPF
                                                                    item.MailAddress,
                                                                    item.Status,
                                                                    item.RegistrationDate,
-                                                                   EntryDate = item.EntryDate.ToShortDateString(),
-                                                                   ReleaseDate = item.ReleaseDate.ToShortDateString(),
+                                                                   item.EntryDate,
+                                                                   item.ReleaseDate,
                                                                    item.Area,
                                                                    item.SubArea,
                                                                    item.Type,
@@ -267,6 +269,8 @@ namespace PLWPF
         }
         private void GRWayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             switch (e.PropertyName)
             {
                 case "GuestRequestKey":
@@ -347,9 +351,9 @@ namespace PLWPF
                                                        item.HostingUnitKey,
                                                        item.GuestRequestKey,
                                                        item.OrderKey,
-                                                       SentEmail = item.SentEmail.ToShortDateString(),
+                                                       item.SentEmail,
                                                        item.Status,
-                                                       CreateDate = item.CreateDate.ToShortDateString(),
+                                                       item.CreateDate,
                                                    };
         }
         private void OResetFilters(object sender, RoutedEventArgs e)
@@ -362,6 +366,8 @@ namespace PLWPF
         }
         private void OWayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             switch (e.PropertyName)
             {
                 case "GuestRequestKey":
