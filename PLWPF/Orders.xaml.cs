@@ -423,8 +423,9 @@ namespace PLWPF
         private void createOrder(object sender, RoutedEventArgs e)//to do
         {
             GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
-            _bl.AddOrder(_bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey));
-
+            Order newOrd = _bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey);
+            _bl.AddOrder(newOrd);
+            MessageBox.Show("Order created succesfully,\nyour new order key is: "+newOrd.OrderKey, "Order", MessageBoxButton.OK, MessageBoxImage.Information);
             ord = _bl.GetsOpenOrders().ToList();
             myOrders.Clear();
             foreach (int key in keys)
