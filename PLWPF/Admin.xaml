@@ -12,7 +12,12 @@
                    BorderThickness="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="39,10,10,58"  >
             <TabItem
                 Header="Orders"  Name="ListOfOrders" TabIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold">
-                <local:OrderUserControl1 x:Name="MyOrderstab"/>
+                <local:OrderUserControl1 x:Name="MyOrderstab">
+                    <Style data>
+
+
+                    </Style>
+                </local:OrderUserControl1>
             </TabItem>
 
             <TabItem
