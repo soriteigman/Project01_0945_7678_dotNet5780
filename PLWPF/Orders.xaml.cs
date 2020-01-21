@@ -59,7 +59,7 @@ namespace PLWPF
             #endregion
 
             #region units
-            this.OrdersTabUserControl.AddButton.Content = "shoe requests that match this unit";
+            this.OrdersTabUserControl.AddButton.Content = "show requests that match this unit";
             this.OrdersTabUserControl.FilterName.TextChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterKey.SelectionChanged += ApplyFiltering;
             this.OrdersTabUserControl.FilterStar.SelectionChanged += ApplyFiltering;
@@ -437,6 +437,9 @@ namespace PLWPF
                 }
             }
             this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+            this.AllRequeststab.DataGrid.ItemsSource = req;
+            TC.SelectedIndex = 0;
+            this.myRequests.Visibility = Visibility.Hidden;
 
         }
         private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//gr header display
