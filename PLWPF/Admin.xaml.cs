@@ -131,6 +131,7 @@ namespace PLWPF
                                                              {
                                                                  item.HostingUnitKey,
                                                                  item.HostingUnitName,
+                                                                 item.Owner,
                                                                  item.Area,
                                                                  item.SubArea,
                                                                  item.Type,
@@ -168,14 +169,17 @@ namespace PLWPF
                 case "HostingUnitKey":
                     e.Column.Header = "Property Key";
                     break;
+                case "HostingUnitName":
+                    e.Column.Header = "Property Name";
+                    break;
                 case "Owner":
-                    e.Column.Visibility = Visibility.Collapsed;
+                    //e.Column.Visibility = Visibility.Collapsed;
                     break;
                 case "Area":
                     e.Column.Header = "Area";
                     break;
                 case "SubArea":
-                    e.Column.Header = "Sub Area";
+                    e.Column.Header = "Sub-Area";
                     break;
                 case "Type":
                     e.Column.Header = "Property Type";
@@ -199,7 +203,7 @@ namespace PLWPF
                     e.Column.Header = "Garden";
                     break;
                 case "ChildrensAttractions":
-                    e.Column.Header = "Childrens\n Attractions";
+                    e.Column.Header = "Childrens\nAttractions";
                     break;
                 case "FitnessCenter":
                     e.Column.Header = "Fitness Center";
@@ -234,6 +238,7 @@ namespace PLWPF
                                                                orderby item.PrivateName, item.FamilyName
                                                                select new
                                                                {
+                                                                   item.GuestRequestKey,
                                                                    item.PrivateName,
                                                                    item.FamilyName,
                                                                    item.MailAddress,
@@ -242,19 +247,20 @@ namespace PLWPF
                                                                    item.EntryDate,
                                                                    item.ReleaseDate,
                                                                    item.Area,
-                                                                   item.SubArea,
                                                                    item.Type,
                                                                    item.Adults,
                                                                    item.Children,
-                                                                   item.Pet,
-                                                                   item.WiFi,
-                                                                   item.Parking,
                                                                    item.Pool,
                                                                    item.Jacuzzi,
                                                                    item.Garden,
                                                                    item.ChildrensAttractions,
+                                                                   item.Pet,
                                                                    item.FitnessCenter,
                                                                    item.Stars,
+                                                                   item.WiFi,
+                                                                   item.Parking,
+                                                                   item.SubArea,
+
                                                                };
         }
         private void GRResetFilters(object sender, RoutedEventArgs e)
@@ -269,12 +275,13 @@ namespace PLWPF
         }
         private void GRWayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+
             if (e.PropertyType == typeof(System.DateTime))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
             switch (e.PropertyName)
             {
                 case "GuestRequestKey":
-                    e.Column.Header = "guest Request Key";
+                    e.Column.Header = "Request Key";
                     break;
                 case "PrivateName":
                     e.Column.Header = "First Name";
@@ -283,7 +290,10 @@ namespace PLWPF
                     e.Column.Header = "Last Name";
                     break;
                 case "MailAddress":
-                    e.Column.Header = "Email";
+                    e.Column.Header = "Email Address";
+                    break;
+                case "Status":
+                    e.Column.Header = "Guest Request Status";
                     break;
                 case "RegistrationDate":
                     e.Column.Header = "Registration Date";
@@ -298,10 +308,16 @@ namespace PLWPF
                     e.Column.Header = "Area";
                     break;
                 case "SubArea":
-                    e.Column.Header = "Sub Area";
+                    e.Column.Header = "Sub-Area";
                     break;
                 case "Type":
-                    e.Column.Header = "Property Type";
+                    e.Column.Header = "Vacation Type";
+                    break;
+                case "Adults":
+                    e.Column.Header = "Adults";
+                    break;
+                case "Children":
+                    e.Column.Header = "Children";
                     break;
                 case "Pet":
                     e.Column.Header = "Pet";
@@ -322,7 +338,7 @@ namespace PLWPF
                     e.Column.Header = "Garden";
                     break;
                 case "ChildrensAttractions":
-                    e.Column.Header = "Childrens\n Attractions";
+                    e.Column.Header = "Childrens\nAttractions";
                     break;
                 case "FitnessCenter":
                     e.Column.Header = "Fitness Center";
@@ -330,10 +346,8 @@ namespace PLWPF
                 case "Stars":
                     e.Column.Header = "Rating";
                     break;
-                
                 default:
                     break;
-
             }
         }
 
@@ -351,9 +365,9 @@ namespace PLWPF
                                                        item.HostingUnitKey,
                                                        item.GuestRequestKey,
                                                        item.OrderKey,
-                                                       item.SentEmail,
-                                                       item.Status,
                                                        item.CreateDate,
+                                                       item.Status,
+                                                       item.SentEmail,
                                                    };
         }
         private void OResetFilters(object sender, RoutedEventArgs e)
@@ -371,63 +385,23 @@ namespace PLWPF
             switch (e.PropertyName)
             {
                 case "GuestRequestKey":
-                    e.Column.Header = "guest Request Key";
+                    e.Column.Header = "Guest Request Key";
                     break;
-                case "PrivateName":
-                    e.Column.Header = "First Name";
+                case "HostingUnitKey":
+                    e.Column.Header = "Hosting Unit Key";
                     break;
-                case "FamilyName":
-                    e.Column.Header = "Last Name";
+                case "OrderKey":
+                    e.Column.Header = "Order Key";
                     break;
-                case "MailAddress":
-                    e.Column.Header = "Email";
+                case "Status":
+                    e.Column.Header = "Request Status";
                     break;
-                case "RegistrationDate":
-                    e.Column.Header = "Registration Date";
+                case "CreateDate":
+                    e.Column.Header = "Create Date";
                     break;
-                case "entryDate":
-                    e.Column.Header = "Entry Date";
+                case "SentEmail":
+                    e.Column.Header = "Email Date";
                     break;
-                case "releaseDate":
-                    e.Column.Header = "Release Date";
-                    break;
-                case "Area":
-                    e.Column.Header = "Area";
-                    break;
-                case "SubArea":
-                    e.Column.Header = "Sub Area";
-                    break;
-                case "Type":
-                    e.Column.Header = "Property Type";
-                    break;
-                case "Pet":
-                    e.Column.Header = "Pet";
-                    break;
-                case "WiFi":
-                    e.Column.Header = "Wifi";
-                    break;
-                case "Parking":
-                    e.Column.Header = "Parking";
-                    break;
-                case "Pool":
-                    e.Column.Header = "Pool";
-                    break;
-                case "Jacuzzi":
-                    e.Column.Header = "Jacuzzi";
-                    break;
-                case "Garden":
-                    e.Column.Header = "Garden";
-                    break;
-                case "ChildrensAttractions":
-                    e.Column.Header = "Childrens\n Attractions";
-                    break;
-                case "FitnessCenter":
-                    e.Column.Header = "Fitness Center";
-                    break;
-                case "Stars":
-                    e.Column.Header = "Rating";
-                    break;
-
                 default:
                     break;
 
