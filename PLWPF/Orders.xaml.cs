@@ -136,7 +136,6 @@ namespace PLWPF
             this.MyRequeststab.DataGrid.AutoGeneratingColumn += WayOfViewOr;
             #endregion
         }
-
         #region units
         private bool Condition(int k)//removes requests that were delt with
         {
@@ -493,7 +492,6 @@ namespace PLWPF
             }
             return false;
         }
-
         private void WayOfViewgr(object sender, DataGridAutoGeneratingColumnEventArgs e)//gr header display
         {
             if (e.PropertyType == typeof(System.DateTime))
@@ -607,13 +605,34 @@ namespace PLWPF
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this.MyRequeststab.DataGrid);
+            UpdateOrder uo = new UpdateOrder((Order)MyRequeststab.DataGrid.SelectedItem, this);
             uo.Show();
 
 
         }
 
+        //public void UpdateOrderList()
+        //{
+
+        //    ord = _bl.GetsOpenOrders().ToList();
+        //    myOrders.Clear();
+        //    foreach (int key in keys)
+        //    {
+        //        foreach (Order o in ord)
+        //        {
+        //            if (o.HostingUnitKey == key)
+        //                myOrders.Add(o);
+        //        }
+        //    }
+        //    this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+
+        //}
+        //Orders or = new Orders(1);
+
+        //public delegate void del();
+        //public del deleg = new del(or.UpdateOrderList);
+
         #endregion
-    }    
+    }   
 }
 
