@@ -237,8 +237,8 @@ namespace PLWPF
                                                                    item.MailAddress,
                                                                    item.Status,
                                                                    item.RegistrationDate,
-                                                                   item.EntryDate,
-                                                                   item.ReleaseDate,
+                                                                   EntryDate = item.EntryDate.ToShortDateString(),
+                                                                   ReleaseDate = item.ReleaseDate.ToShortDateString(),
                                                                    item.Area,
                                                                    item.SubArea,
                                                                    item.Type,
@@ -343,12 +343,13 @@ namespace PLWPF
                                                    orderby item.CreateDate, item.Status
                                                    select new
                                                    {
+
                                                        item.HostingUnitKey,
                                                        item.GuestRequestKey,
                                                        item.OrderKey,
+                                                       SentEmail = item.SentEmail.ToShortDateString(),
                                                        item.Status,
-                                                       item.SentEmail,
-                                                       item.CreateDate,                                                     
+                                                       CreateDate = item.CreateDate.ToShortDateString(),
                                                    };
         }
         private void OResetFilters(object sender, RoutedEventArgs e)
