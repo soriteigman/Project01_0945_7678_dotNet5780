@@ -79,5 +79,9 @@ namespace PLWPF
             }
         }
 
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

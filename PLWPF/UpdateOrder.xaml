@@ -8,8 +8,8 @@
         Title="Order Status Update" Icon="Resources/house.png" Height="161.579" Width="300.69">
     <Grid >
         <Button Name="update" Content="Update" IsEnabled="False" HorizontalAlignment="Left" Margin="181,83,0,0" VerticalAlignment="Top" Width="75" Click="update_Click"/>
-        <Button Name="cancel" Content="Cancel" HorizontalAlignment="Left" Margin="40,83,0,0" VerticalAlignment="Top" Width="75"/>
-        <CheckBox Content="Check the box if you wish to close this Order" FontSize="12" Margin="14,24,23,0" VerticalAlignment="Top" RenderTransformOrigin="-0.067,0.62" Checked="CheckBox_Checked" Height="29"/>
+        <Button Name="cancel" Content="Cancel" HorizontalAlignment="Left" Margin="40,83,0,0" VerticalAlignment="Top" Width="75" Click="cancel_Click"/>
+        <CheckBox Content="Check the box if you wish to book this Order" FontSize="12" Margin="14,24,10,0" VerticalAlignment="Top" RenderTransformOrigin="-0.067,0.62" Checked="CheckBox_Checked" Height="29"/>
         <Image Source="Resources/logoOption2.2.png"/>
     </Grid>
 </Window>

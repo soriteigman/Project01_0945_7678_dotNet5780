@@ -527,7 +527,7 @@ namespace BL
             IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
             foreach (GuestRequest req in requests)
             {
-                if(req.Status==Status.Booked)
+                if(req.Status==Status.Closed)
                     TotalCommission += CalculateComission(req);
             }
             return TotalCommission;
