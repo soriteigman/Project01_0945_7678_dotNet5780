@@ -53,9 +53,9 @@ namespace PLWPF
             this.MyOrderstab.FilterType.SelectionChanged += OApplyFiltering;
             this.MyOrderstab.ResetFiltersButton.Click += OResetFilters;
             this.MyOrderstab.DataGrid.AutoGeneratingColumn += OWayOfView;
-            this.MyOrderstab.commissionLabel.Visibility = Visibility.Hidden;
-            this.MyOrderstab.totalCommissionText.Visibility = Visibility.Hidden;
-            this.MyOrderstab.totalCommissionText.Text = _bl.TotalCommissionCalculator();
+            this.MyOrderstab.commissionLabel.Visibility = Visibility.Visible;
+            this.MyOrderstab.totalCommissionText.Visibility = Visibility.Visible;
+            this.MyOrderstab.totalCommissionText.Text = (_bl.TotalCommissionCalculator()).ToString();
 
             this.MyOrderstab.Ltype.Content = "Filter Status";
             this.MyOrderstab.FilterType.ItemsSource = Enum.GetValues(typeof(BE.Status));

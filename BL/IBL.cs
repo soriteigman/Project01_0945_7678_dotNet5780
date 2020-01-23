@@ -55,7 +55,7 @@ namespace BL
         bool DateOK(DateTime start, DateTime end);
         Predicate<GuestRequest> BuildPredicate(HostingUnit hu);//based on a hosting unit builds a predicate to filter all guest requests
         bool DateLengthPermission(DateTime s, DateTime e);//checks if stay is at least one full day long
-        int TotalCommissionCalculator(int c);//calculates total commission from all the bookings on the website
+        int TotalCommissionCalculator();//calculates total commission from all the bookings on the website
         bool IsValidEmail(string email);
         bool AvailabilityCheck(HostingUnit hu, GuestRequest gr);//checks if requested dates are available
         int CalculateDurationOfStay(GuestRequest gr);//returns duration of stay

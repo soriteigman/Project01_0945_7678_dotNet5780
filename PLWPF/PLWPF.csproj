@@ -59,9 +59,6 @@
     <Compile Include="OrderUserControl1.xaml.cs">
       <DependentUpon>OrderUserControl1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateHuPage.xaml.cs">
-      <DependentUpon>UpdateHuPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UpdateHuWindow.xaml.cs">
       <DependentUpon>UpdateHuWindow.xaml</DependentUpon>
     </Compile>
@@ -127,10 +124,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OrderUserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UpdateHuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
