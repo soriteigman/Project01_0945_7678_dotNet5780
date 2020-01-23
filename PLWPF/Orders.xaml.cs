@@ -161,60 +161,7 @@ namespace PLWPF
             }
             return false;
         }
-        private void addOrder(object sender, RoutedEventArgs e)
-        {
-            HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
-            if (HU == null)
-                return;
-            gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(HU)).ToList();
-            #region אתחול
-            if (gr == null || gr.Count() == 0)//doesnt have requests that match this unit
-            {
-                this.newOrderTabUserControl.FilterKey.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.FilterName.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.FilterStar.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.FilterArea.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.FilterType.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.ResetFiltersButton.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.AddButton.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.empty.Visibility = Visibility.Visible;
-            }
-            else//has requests that match his unit
-            {
-                this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
-                this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "GuestReq";
-                this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
-                this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
-                this.newOrderTabUserControl.FilterName.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.FilterStar.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.FilterArea.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.FilterType.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.ResetFiltersButton.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.AddButton.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Visible;
-                this.newOrderTabUserControl.empty.Visibility = Visibility.Hidden;
-                this.newOrderTabUserControl.DataGrid.IsEnabled = true;
-            }
-            #endregion
-            this.myRequests.Visibility = Visibility.Visible;
-            TC.SelectedIndex = 3;
-            List<GuestRequest> list = new List<GuestRequest>();
-            foreach (GuestRequest i in gr)
-            {
-                list.Add(i);
-            }
-            list.RemoveAll(g => Condition(g.GuestRequestKey));
-            gr.Clear();
-            foreach (GuestRequest guest in list)
-            {
-                gr.Add(guest);
-            }
-            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
-            this.newOrderTabUserControl.DataGrid.UnselectAll();
 
-
-        }
         private void updateHu(object sender, RoutedEventArgs e)
         {
             if (OrdersTabUserControl.DataGrid.SelectedItem != null && OrdersTabUserControl.DataGrid.SelectedItem is HostingUnit)
@@ -229,8 +176,6 @@ namespace PLWPF
             if (OrdersTabUserControl.DataGrid.SelectedItem != null && OrdersTabUserControl.DataGrid.SelectedItem is HostingUnit)
             {
                 new UpdateHuWindow((HostingUnit)OrdersTabUserControl.DataGrid.SelectedItem).Show();
-                //closeOpenMain = false;//don't open main after closing
-                //this.Close();
             }
         }//sends to unit information with data of current row to bind to
         private void ShowButtons(object sender, SelectionChangedEventArgs e)
@@ -325,7 +270,7 @@ namespace PLWPF
                                                                  item.Beds,
                                                              };
         }
-        private void WayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)//hu header display
+        private void WayOfView(object sender, DataGridAutoGeneratingColumnEventArgs e)//hosting unit header display
         {
             if (e.PropertyType == typeof(System.DateTime))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
@@ -587,6 +532,62 @@ namespace PLWPF
         #endregion
 
         #region orders
+
+        private void addOrder(object sender, RoutedEventArgs e)
+        {
+            HU = (HostingUnit)this.OrdersTabUserControl.DataGrid.SelectedItem;
+            if (HU == null)
+                return;
+            gr = _bl.AllRequestsThatMatch(_bl.BuildPredicate(HU)).ToList();
+            #region אתחול
+            if (gr == null || gr.Count() == 0)//doesnt have requests that match this unit
+            {
+                this.newOrderTabUserControl.FilterKey.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.FilterName.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.FilterStar.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.FilterArea.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.FilterType.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.ResetFiltersButton.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.AddButton.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.empty.Visibility = Visibility.Visible;
+            }
+            else//has requests that match his unit
+            {
+                this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
+                this.newOrderTabUserControl.DataGrid.DisplayMemberPath = "GuestReq";
+                this.newOrderTabUserControl.DataGrid.SelectedIndex = 0;
+                this.newOrderTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
+                this.newOrderTabUserControl.FilterName.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.FilterStar.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.FilterArea.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.FilterType.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.ResetFiltersButton.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.AddButton.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.DataGrid.Visibility = Visibility.Visible;
+                this.newOrderTabUserControl.empty.Visibility = Visibility.Hidden;
+                this.newOrderTabUserControl.DataGrid.IsEnabled = true;
+            }
+            #endregion
+            this.myRequests.Visibility = Visibility.Visible;
+            TC.SelectedIndex = 3;
+            List<GuestRequest> list = new List<GuestRequest>();
+            foreach (GuestRequest i in gr)
+            {
+                list.Add(i);
+            }
+            list.RemoveAll(g => Condition(g.GuestRequestKey));
+            gr.Clear();
+            foreach (GuestRequest guest in list)
+            {
+                gr.Add(guest);
+            }
+            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
+            this.newOrderTabUserControl.DataGrid.UnselectAll();
+
+
+        }
+
 
         private void WayOfViewOr(object sender, DataGridAutoGeneratingColumnEventArgs e)//order header display
         {

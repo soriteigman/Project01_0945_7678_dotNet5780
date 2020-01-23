@@ -45,6 +45,7 @@ namespace PLWPF
             this.MyOrderstab.AddButton.Visibility = Visibility.Hidden;
             this.MyOrderstab.updateButton.Visibility = Visibility.Hidden;
             this.MyOrderstab.RemoveButton.Visibility = Visibility.Hidden;
+            this.MyOrderstab.refreshButton.Visibility = Visibility.Hidden;
             this.MyOrderstab.FilterName.Visibility=Visibility.Hidden;
             this.MyOrderstab.FilterKey.Visibility = Visibility.Hidden;
             this.MyOrderstab.FilterStar.Visibility = Visibility.Hidden;
@@ -52,6 +53,9 @@ namespace PLWPF
             this.MyOrderstab.FilterType.SelectionChanged += OApplyFiltering;
             this.MyOrderstab.ResetFiltersButton.Click += OResetFilters;
             this.MyOrderstab.DataGrid.AutoGeneratingColumn += OWayOfView;
+            this.MyOrderstab.commissionLabel.Visibility = Visibility.Hidden;
+            this.MyOrderstab.totalCommissionText.Visibility = Visibility.Hidden;
+            this.MyOrderstab.totalCommissionText.Text = _bl.TotalCommissionCalculator();
 
             this.MyOrderstab.Ltype.Content = "Filter Status";
             this.MyOrderstab.FilterType.ItemsSource = Enum.GetValues(typeof(BE.Status));
@@ -66,6 +70,7 @@ namespace PLWPF
             this.MyRequeststab.AddButton.Visibility = Visibility.Hidden;
             this.MyRequeststab.updateButton.Visibility = Visibility.Hidden;
             this.MyRequeststab.RemoveButton.Visibility = Visibility.Hidden;
+            this.MyRequeststab.refreshButton.Visibility = Visibility.Hidden;
             this.MyRequeststab.Lkey.Visibility = Visibility.Hidden;
             this.MyRequeststab.FilterKey.Visibility = Visibility.Hidden;
             this.MyRequeststab.FilterName.TextChanged += GRApplyFiltering;
@@ -95,6 +100,7 @@ namespace PLWPF
             this.MyUnitstab.AddButton.Visibility = Visibility.Hidden;
             this.MyUnitstab.updateButton.Visibility = Visibility.Hidden;
             this.MyUnitstab.RemoveButton.Visibility = Visibility.Hidden;
+            this.MyUnitstab.refreshButton.Visibility = Visibility.Hidden;
             this.MyUnitstab.FilterName.TextChanged += HUApplyFiltering;
             this.MyUnitstab.Lkey.Visibility = Visibility.Hidden;
             this.MyUnitstab.FilterKey.Visibility = Visibility.Hidden;
