@@ -496,9 +496,9 @@ namespace DAL
             try
             {
                 LoadHostingUnits();
-                HostingUnit tmp = (from hu in HostingUnitRoot.Elements()
+                var tmp = (from hu in HostingUnitRoot.Elements()
                                where hu.Element("HostingUnitKey").Value == key.ToString()
-                               select(XElementHUToHU(hu)).FirstOrDefault();
+                               select(XElementHUToHU(hu))).FirstOrDefault();
                 if (tmp == null)
                     return false;
                 else
@@ -742,31 +742,49 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override List<Trainee> GetAllTrainee()
+        public List<HostingUnit> GetHostingUnits()
         {
             try
             {
                 LoadHostingUnits();
-                return new List<Trainee>((from trainee in HostingUnitRoot.Elements()
-                                          select new Trainee(trainee.Element("ID").Value)
-                                          {
-                                              LastName = trainee.Element("Name").Element("LastName").Value,
-                                              FirstName = trainee.Element("Name").Element("FirstName").Value,
-                                              BirthDay = new DateTime(int.Parse(trainee.Element("BirthDay").Element("Year").Value),
-                                                                      int.Parse(trainee.Element("BirthDay").Element("Month").Value),
-                                                                      int.Parse(trainee.Element("BirthDay").Element("Day").Value)),
-                                              Age = int.Parse(trainee.Element("Age").Value),
-                                              Gender = (Gender)Enum.Parse(typeof(Gender), trainee.Element("Gender").Value),
-                                              PhoneNumber = trainee.Element("PhoneNumber").Value,
-                                              VehicleType = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), trainee.Element("VehicleType").Value),
-                                              Address = new Address(trainee.Element("Address").Element("City").Value,
-                                                                    trainee.Element("Address").Element("Street").Value,
-                                                                    int.Parse(trainee.Element("Address").Element("NumOfBuilding").Value)),
-                                              GearOfTrainne = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), trainee.Element("GearOfTrainne").Value),
-                                              NameOfTeacher = trainee.Element("NameOfTeacher").Value,
-                                              ProfilePicturePath = trainee.Element("ProfilePicturePath").Value,
-                                              SchoolName = trainee.Element("SchoolName").Value,
-                                              NumOfLessons = int.Parse(trainee.Element("NumOfLessons").Value)
+                return new List<HostingUnit>((from hu in HostingUnitRoot.Elements()
+                                              select new HostingUnit()
+                                              {
+                                                  HostingUnitKey = int.Parse(hu.Element("HostingUnitKey").Value),
+                                                  Owner = new Host()
+                                                  {
+                                                      HostKey = int.Parse(hu.Element("HostKey").Value),
+                                                      PrivateName = hu.Element("Name").Element("PrivateName").Value,
+                                                      FamilyName = hu.Element("Name").Element("FamilyName").Value,
+                                                      PhoneNumber = int.Parse(hu.Element("PhoneNumber").Value),
+                                                      MailAddress = hu.Element("MailAddress").Value,
+                                                      BankBranchDetails = new BankBranch()
+                                                      {
+                                                          BankNumber = int.Parse(hu.Element("BankNumber").Value),
+                                                          BankName = hu.Element("BankName").Value,
+                                                          BranchNumber = int.Parse(hu.Element("BranchNumber").Value),
+                                                          BranchAddress = hu.Element("BranchAddress").Value,
+                                                          BranchCity = hu.Element("BranchCity").Value,
+                                                      },
+                                                      BankAccountNumber = int.Parse(hu.Element("BankAccountNumber").Value),
+                                                      CollectionClearance = hu.Element("CollectionClearance").Value == "true",
+                                                  },
+
+                                              HostingUnitName = hu.Element("HostingUnitName").Value,
+                                              //diary
+                                              Area = (VacationArea)Enum.Parse(typeof(VacationArea), hu.Element("Area").Value),
+                                              SubArea = hu.Element("SubArea").Value,
+                                              Type = (VacationType)Enum.Parse(typeof(VacationType), hu.Element("Type").Value),
+                                              Beds=int.Parse(hu.Element("Beds").Value),
+                                              Pet = hu.Element("Pet").Value == "true",
+                                              WiFi = hu.Element("Pet").Value == "true",
+                                              Parking = hu.Element("Pet").Value == "true",
+                                              Pool = hu.Element("Pet").Value == "true",
+                                              Jacuzzi = hu.Element("Pet").Value == "true",
+                                              Garden = hu.Element("Pet").Value == "true",
+                                              ChildrensAttractions = hu.Element("Pet").Value == "true",
+                                              FitnessCenter = hu.Element("Pet").Value == "true",
+                                              Stars = (StarRating)Enum.Parse(typeof(StarRating), hu.Element("Stars").Value),
                                           }).ToList());
             }
             catch (FileLoadException a)
@@ -777,43 +795,43 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override List<Trainee> FilterTrainee(Predicate<Trainee> condition)
-        {
-            try
-            {
-                LoadHostingUnits();
-                List<Trainee> trainees = new List<Trainee>((from trainee in HostingUnitRoot.Elements()
-                                                            select new Trainee(trainee.Element("ID").Value)
-                                                            {
-                                                                LastName = trainee.Element("Name").Element("LastName").Value,
-                                                                FirstName = trainee.Element("Name").Element("FirstName").Value,
-                                                                BirthDay = new DateTime(int.Parse(trainee.Element("BirthDay").Element("Year").Value),
-                                                                                        int.Parse(trainee.Element("BirthDay").Element("Month").Value),
-                                                                                        int.Parse(trainee.Element("BirthDay").Element("Day").Value)),
-                                                                Age = int.Parse(trainee.Element("Age").Value),
-                                                                Gender = (Gender)Enum.Parse(typeof(Gender), trainee.Element("Gender").Value),
-                                                                PhoneNumber = trainee.Element("PhoneNumber").Value,
-                                                                VehicleType = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), trainee.Element("VehicleType").Value),
-                                                                Address = new Address(trainee.Element("Address").Element("City").Value,
-                                                                                      trainee.Element("Address").Element("Street").Value,
-                                                                                      int.Parse(trainee.Element("Address").Element("NumOfBuilding").Value)),
-                                                                GearOfTrainne = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), trainee.Element("GearOfTrainne").Value),
-                                                                NameOfTeacher = trainee.Element("NameOfTeacher").Value,
-                                                                SchoolName = trainee.Element("SchoolName").Value,
-                                                                ProfilePicturePath = trainee.Element("ProfilePicturePath").Value,
-                                                                NumOfLessons = int.Parse(trainee.Element("NumOfLessons").Value)
-                                                            }).ToList());
+        //public override List<Trainee> FilterTrainee(Predicate<Trainee> condition)
+        //{
+        //    try
+        //    {
+        //        LoadHostingUnits();
+        //        List<Trainee> trainees = new List<Trainee>((from trainee in HostingUnitRoot.Elements()
+        //                                                    select new Trainee(trainee.Element("ID").Value)
+        //                                                    {
+        //                                                        LastName = trainee.Element("Name").Element("LastName").Value,
+        //                                                        FirstName = trainee.Element("Name").Element("FirstName").Value,
+        //                                                        BirthDay = new DateTime(int.Parse(trainee.Element("BirthDay").Element("Year").Value),
+        //                                                                                int.Parse(trainee.Element("BirthDay").Element("Month").Value),
+        //                                                                                int.Parse(trainee.Element("BirthDay").Element("Day").Value)),
+        //                                                        Age = int.Parse(trainee.Element("Age").Value),
+        //                                                        Gender = (Gender)Enum.Parse(typeof(Gender), trainee.Element("Gender").Value),
+        //                                                        PhoneNumber = trainee.Element("PhoneNumber").Value,
+        //                                                        VehicleType = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), trainee.Element("VehicleType").Value),
+        //                                                        Address = new Address(trainee.Element("Address").Element("City").Value,
+        //                                                                              trainee.Element("Address").Element("Street").Value,
+        //                                                                              int.Parse(trainee.Element("Address").Element("NumOfBuilding").Value)),
+        //                                                        GearOfTrainne = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), trainee.Element("GearOfTrainne").Value),
+        //                                                        NameOfTeacher = trainee.Element("NameOfTeacher").Value,
+        //                                                        SchoolName = trainee.Element("SchoolName").Value,
+        //                                                        ProfilePicturePath = trainee.Element("ProfilePicturePath").Value,
+        //                                                        NumOfLessons = int.Parse(trainee.Element("NumOfLessons").Value)
+        //                                                    }).ToList());
 
-                List<Trainee> tmp = (from trainee in trainees
-                                     where condition(trainee)
-                                     select new Trainee(trainee)).ToList();
-                return tmp;
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-        }
+        //        List<Trainee> tmp = (from trainee in trainees
+        //                             where condition(trainee)
+        //                             select new Trainee(trainee)).ToList();
+        //        return tmp;
+        //    }
+        //    catch (FileLoadException a)
+        //    {
+        //        throw a;
+        //    }
+        //}
 
         //test---------------------------------------------------------------------------
         //-------------------------------------------------------------------------------
@@ -826,12 +844,12 @@ namespace DAL
         {
             try
             {
-                OrderRoot = new XElement("Tests");
+                OrderRoot = new XElement("Order");
                 OrderRoot.Save(OrderPath);
             }
             catch
             {
-                throw new FileLoadException("Can not start the project check your Test Xml files");
+                throw new FileLoadException("Can not start the project check your Order Xml files");
             }
         }
 
@@ -840,7 +858,7 @@ namespace DAL
         /// <summary>
         /// Load the file and throw FileLoadException if an exception has been thrown 
         /// </summary>
-        void LoadTests()
+        void LoadOrder()
         {
             try
             {
@@ -849,7 +867,7 @@ namespace DAL
             catch
             {
 
-                throw new FileLoadException("Tests file load problem");
+                throw new FileLoadException("Order file load problem");
             }
         }
 
@@ -858,7 +876,7 @@ namespace DAL
         /// <summary>
         /// Save the changes in the file
         /// </summary>
-        void SaveTests()
+        void SaveOrders()
         {
             try
             {
@@ -866,20 +884,21 @@ namespace DAL
             }
             catch
             {
-                throw new FileNotFoundException("Unable to save tests in XML file");
+                throw new FileNotFoundException("Unable to save Orders in XML file");
             }
         }
 
         //-----------------------------------------------------------------------------
 
-        public override bool TestExist(int testSerialNumber)
+        public bool ORexist(int key)
         {
             try
             {
-                LoadTests();
-                Test tmp = (from test in OrderRoot.Elements()
-                            where int.Parse(test.Element("TestSerialNumber").Element("value").Value) == testSerialNumber
-                            select new Test(XElementTestToTest(test))).FirstOrDefault();
+                LoadOrder();
+                var tmp = (from ord in OrderRoot.Elements()
+                            where int.Parse(ord.Element("orderKey").Value) == key
+                            select ord).FirstOrDefault();
+ 
                 if (tmp == null)
                     return false;
                 else
@@ -894,104 +913,70 @@ namespace DAL
         //-----------------------------------------------------------------------------
 
         /// <summary>
-        /// Converting a test from the file to _DO.Test
+        /// Converting a Order from the file to BL.Order
         /// </summary>
-        /// <param name="toConvert"> the XElement test to convert</param>
-        /// <returns> the converted _DO.Test </returns>
-        Test XElementTestToTest(XElement toConvert)
+        /// <param name="toConvert"> the XElement Order to convert</param>
+        /// <returns> the converted Order </returns>
+        Order XElementOrderToOrder(XElement toConvert)
         {
-            return new Test()
+            return new Order()
             {
-                TesterID = toConvert.Element("TesterID").Value,
-                TraineeID = toConvert.Element("TraineeID").Value,
-                DateAndHourOfTest = new DateTime(int.Parse(toConvert.Element("DateAndHourOfTest").Element("Year").Value),
-                                                        int.Parse(toConvert.Element("DateAndHourOfTest").Element("Month").Value),
-                                                        int.Parse(toConvert.Element("DateAndHourOfTest").Element("Day").Value),
-                                                        int.Parse(toConvert.Element("DateAndHourOfTest").Element("Hour").Value),
-                                                        0, 0),
-                LocationOfTest = new Address(toConvert.Element("LocationOfTest").Element("City").Value,
-                                                          toConvert.Element("LocationOfTest").Element("Street").Value,
-                                                          int.Parse(toConvert.Element("LocationOfTest").Element("NumOfBuilding").Value)),
-                StatusOfTest = (TestStatus)Enum.Parse(typeof(TestStatus), toConvert.Element("StatusOfTest").Value),
-                GearType = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), toConvert.Element("GearType").Value),
-                TypeOfCar = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), toConvert.Element("TypeOfCar").Value),
-                GiveWay = bool.Parse(toConvert.Element("GiveWay").Value),
-                SaveDistance = bool.Parse(toConvert.Element("SaveDistance").Value),
-                MirrorUse = bool.Parse(toConvert.Element("MirrorUse").Value),
-                ReverseParking = bool.Parse(toConvert.Element("ReverseParking").Value),
-                Signals = bool.Parse(toConvert.Element("Signals").Value),
-                StopSign = bool.Parse(toConvert.Element("StopSign").Value),
-                RightOfWay = bool.Parse(toConvert.Element("RightOfWay").Value),
-                ControledTheVehicle = bool.Parse(toConvert.Element("ControledTheVehicle").Value),
-                Passed = bool.Parse(toConvert.Element("Passed").Value),
-                Faild = bool.Parse(toConvert.Element("Faild").Value),
-                ClipPath = toConvert.Element("ClipPath").Value,
-                IsClipUpload = bool.Parse(toConvert.Element("IsClipUpload").Value),
-                NoteOfTester = toConvert.Element("NoteOfTester").Value,
-                CurrentTestSerialNumber = int.Parse(toConvert.Element("TestSerialNumber").Element("value").Value)
+                HostingUnitKey = int.Parse(toConvert.Element("HostingUnitKey").Value),
+                GuestRequestKey = int.Parse(toConvert.Element("GuestRequestKey").Value),
+                OrderKey = int.Parse(toConvert.Element("OrderKey").Value),
+                Status = (Status)Enum.Parse(typeof(Status), toConvert.Element("Status").Value),
+                CreateDate = new DateTime(int.Parse(toConvert.Element("CreateDate").Element("CreateDateYear").Value),
+                                                        int.Parse(toConvert.Element("CreateDate").Element("CreateDateMonth").Value),
+                                                        int.Parse(toConvert.Element("CreateDate").Element("CreateDateDay").Value)
+                                                        ),
+                SentEmail = new DateTime(int.Parse(toConvert.Element("SentEmail").Element("SentEmailYear").Value),
+                                                        int.Parse(toConvert.Element("SentEmail").Element("SentEmailMonth").Value),
+                                                        int.Parse(toConvert.Element("SentEmail").Element("SentEmailDay").Value)
+                                                        ),
             };
         }
 
         //-----------------------------------------------------------------------------
 
         /// <summary>
-        /// Converting a test to XElement test to save in file 
+        /// Converting a Order to XElement Order to save in file 
         /// </summary>
-        /// <param name="testToConvert"> the test to convert </param>
-        /// <returns> the converted XElement test </returns>
-        XElement TestToXElementTest(Test testToConvert)
+        /// <param name="OrderToConvert"> the Order to convert </param>
+        /// <returns> the converted XElement Order </returns>
+        XElement OrderToXElementOrder(Order OrderToConvert)
         {
-            XElement serialValue = new XElement("value", testToConvert.CurrentTestSerialNumber);
-            XElement serialNumber = new XElement("TestSerialNumber", serialValue);
-            XElement testerID = new XElement("TesterID", testToConvert.TesterID);
-            XElement traineeID = new XElement("TraineeID", testToConvert.TraineeID);
-            XElement saveDistance = new XElement("SaveDistance", testToConvert.SaveDistance);
-            XElement mirrorUse = new XElement("MirrorUse", testToConvert.MirrorUse);
-            XElement reverseParking = new XElement("ReverseParking", testToConvert.ReverseParking);
-            XElement signals = new XElement("Signals", testToConvert.Signals);
-            XElement stopSign = new XElement("StopSign", testToConvert.StopSign);
-            XElement rightOfWay = new XElement("RightOfWay", testToConvert.RightOfWay);
-            XElement controledTheVehicle = new XElement("ControledTheVehicle", testToConvert.ControledTheVehicle);
-            XElement passed = new XElement("Passed", testToConvert.Passed);
-            XElement faild = new XElement("Faild", testToConvert.Faild);
-            XElement GiveWay = new XElement("GiveWay", testToConvert.GiveWay);
-            XElement ClipPath = new XElement("ClipPath", testToConvert.ClipPath);
-            XElement IsClipUpload = new XElement("IsClipUpload", testToConvert.IsClipUpload);
-            XElement noteOfTester = new XElement("NoteOfTester", testToConvert.NoteOfTester);
-            XElement statusOfTest = new XElement("StatusOfTest", testToConvert.StatusOfTest.ToString());
-            XElement GearType = new XElement("GearType", testToConvert.GearType.ToString());
-            XElement TypeOfCar = new XElement("TypeOfCar", testToConvert.TypeOfCar.ToString());
-            XElement city = new XElement("City", testToConvert.LocationOfTest.City);
-            XElement street = new XElement("Street", testToConvert.LocationOfTest.Street);
-            XElement numOfBuilding = new XElement("NumOfBuilding", testToConvert.LocationOfTest.NumOfBuilding);
-            XElement locationOfTest = new XElement("LocationOfTest", city, street, numOfBuilding);
-            XElement year = new XElement("Year", testToConvert.DateAndHourOfTest.Year);
-            XElement month = new XElement("Month", testToConvert.DateAndHourOfTest.Month);
-            XElement day = new XElement("Day", testToConvert.DateAndHourOfTest.Day);
-            XElement hour = new XElement("Hour", testToConvert.DateAndHourOfTest.Hour);
-            XElement dateAndHourOfTest = new XElement("DateAndHourOfTest", year, month, day, hour);
-            XElement test = new XElement("Test", serialNumber, testerID, traineeID, dateAndHourOfTest,
-                                         locationOfTest, saveDistance, mirrorUse, reverseParking, signals,
-                                         stopSign, rightOfWay, controledTheVehicle, passed, faild, IsClipUpload, ClipPath, GiveWay, noteOfTester, GearType, TypeOfCar, statusOfTest);
-            return test;
+            XElement OrderKey = new XElement("OrderKey", OrderToConvert.OrderKey);
+            XElement GuestRequestKey = new XElement("GuestRequestKey", OrderToConvert.GuestRequestKey);
+            XElement HostingUnitKey = new XElement("HostingUnitKey", OrderToConvert.HostingUnitKey);
+            XElement CreateDateyear = new XElement("CreateDateYear", OrderToConvert.CreateDate.Year);
+            XElement CreateDatemonth = new XElement("CreateDateMonth", OrderToConvert.CreateDate.Month);
+            XElement CreateDateday = new XElement("CreateDateDay", OrderToConvert.CreateDate.Day);
+            XElement CreateDate = new XElement("CreateDate", CreateDateyear, CreateDatemonth, CreateDateday);
+            XElement SentEmailyear = new XElement("SentEmailYear", OrderToConvert.SentEmail.Year);
+            XElement SentEmailmonth = new XElement("SentEmailMonth", OrderToConvert.SentEmail.Month);
+            XElement SentEmailday = new XElement("SentEmailDay", OrderToConvert.SentEmail.Day);
+            XElement SentEmail = new XElement("SentEmail", CreateDateyear, CreateDatemonth, CreateDateday);
+
+            XElement Order = new XElement("Order", OrderKey, GuestRequestKey, HostingUnitKey, CreateDate, SentEmail);
+            return Order;
         }
 
         //-----------------------------------------------------------------------------
 
-        public override int AddTest(Test newTest)
+        public int AddOrder(Order newOrder)
         {
             try
             {
                 int serial;
-                LoadTests();
+                LoadOrder();
                 LoadConfigs();
-                if (newTest.CurrentTestSerialNumber != 0)
+                if (newOrder.CurrentTestSerialNumber != 0)
                     throw new ArgumentException("Serial number most be 0");
                 serial = int.Parse(ConfigRoot.Element("SerialNumber").Element("value").Value);
-                OrderRoot.Add(TestToXElementTest(new Test(serial, newTest)));
+                OrderRoot.Add(TestToXElementTest(new Test(serial, newOrder)));
                 ConfigRoot.Element("SerialNumber").Element("value").Value = (serial + 1).ToString();
                 SaveConfigs();
-                SaveTests();
+                SaveOrders();
                 return serial;
             }
             catch (FileLoadException a)
@@ -1010,14 +995,14 @@ namespace DAL
         {
             try
             {
-                LoadTests();
+                LoadOrder();
                 if (TestExist(updatedTest.CurrentTestSerialNumber))
                 {
                     (from test in OrderRoot.Elements()
                      where test.Element("TestSerialNumber").Element("value").Value == updatedTest.CurrentTestSerialNumber.ToString()
                      select test).FirstOrDefault().Remove();
                     OrderRoot.Add(TestToXElementTest(updatedTest));
-                    SaveTests();
+                    SaveOrders();
                 }
                 else
                     throw new KeyNotFoundException("Test to update doesn't exist");
@@ -1039,14 +1024,14 @@ namespace DAL
         {
             try
             {
-                LoadTests();
+                LoadOrder();
                 if (TestExist(testToUpdate.CurrentTestSerialNumber))
                 {
                     (from test in OrderRoot.Elements()
                      where test.Element("TestSerialNumber").Element("value").Value == testToUpdate.CurrentTestSerialNumber.ToString()
                      select test).FirstOrDefault().Remove();
                     OrderRoot.Add(TestToXElementTest(testToUpdate));
-                    SaveTests();
+                    SaveOrders();
                 }
                 else
                     throw new KeyNotFoundException("Test to update doesn't exist");
@@ -1067,7 +1052,7 @@ namespace DAL
         {
             try
             {
-                LoadTests();
+                LoadOrder();
                 if (TestExist(serialNumber))
                 {
                     return (from test in OrderRoot.Elements()
@@ -1089,7 +1074,7 @@ namespace DAL
         {
             try
             {
-                LoadTests();
+                LoadOrder();
                 return new List<Test>((from test in OrderRoot.Elements()
                                        select new Test()
                                        {
@@ -1134,7 +1119,7 @@ namespace DAL
         {
             try
             {
-                LoadTests();
+                LoadOrder();
                 List<Test> tests = new List<Test>((from test in OrderRoot.Elements()
                                                    select new Test()
                                                    {

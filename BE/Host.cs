@@ -16,7 +16,6 @@ namespace BE
         BankBranch bankBranchDetails;
         int bankAccountNumber;
         bool collectionClearance;
-        //int toPayOwner;
 
         public override string ToString()
         {
