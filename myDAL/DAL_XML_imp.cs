@@ -42,11 +42,11 @@ namespace DAL
         /// </summary>
         private DAL_XML_imp()
         {
-            Thread configUpdateTread = new Thread(CheckIfUpdated);
-            configUpdateTread.Start();
+            Thread configUpdateThread = new Thread(CheckIfUpdated);
+            configUpdateThread.Start();
             try
             {
-                //giving the pathes to the strings (testerPath etc.)
+                //giving the paths to the strings (GuestRequestPath etc.)
                 string str = Assembly.GetExecutingAssembly().Location;
                 string localPath = Path.GetDirectoryName(str);
                 for (int i = 0; i < 3; i++)
@@ -844,7 +844,7 @@ namespace DAL
         {
             try
             {
-                OrderRoot = new XElement("Order");
+                OrderRoot = new XElement("Orders");
                 OrderRoot.Save(OrderPath);
             }
             catch
@@ -963,21 +963,16 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public int AddOrder(Order newOrder)
+        public void AddOrder(Order newOrder)
         {
             try
             {
-                int serial;
                 LoadOrder();
                 LoadConfigs();
-                if (newOrder.CurrentTestSerialNumber != 0)
-                    throw new ArgumentException("Serial number most be 0");
-                serial = int.Parse(ConfigRoot.Element("SerialNumber").Element("value").Value);
-                OrderRoot.Add(TestToXElementTest(new Test(serial, newOrder)));
-                ConfigRoot.Element("SerialNumber").Element("value").Value = (serial + 1).ToString();
-                SaveConfigs();
+                if (ORexist(newOrder.OrderKey))
+                    throw new DuplicateWaitObjectException("Order already exists");
+                OrderRoot.Add(OrderToXElementOrder(newOrder));
                 SaveOrders();
-                return serial;
             }
             catch (FileLoadException a)
             {
@@ -991,21 +986,21 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override void UpdateTest(Test updatedTest)
+        public void UpdateOrder(Order updateOrder)
         {
             try
             {
                 LoadOrder();
-                if (TestExist(updatedTest.CurrentTestSerialNumber))
+                if (ORexist(updateOrder.OrderKey))
                 {
-                    (from test in OrderRoot.Elements()
-                     where test.Element("TestSerialNumber").Element("value").Value == updatedTest.CurrentTestSerialNumber.ToString()
-                     select test).FirstOrDefault().Remove();
-                    OrderRoot.Add(TestToXElementTest(updatedTest));
+                    (from or in OrderRoot.Elements()
+                     where or.Element("OrderKey").Value == updateOrder.OrderKey.ToString()
+                     select or).FirstOrDefault().Remove();
+                    OrderRoot.Add(OrderToXElementOrder(updateOrder));
                     SaveOrders();
                 }
                 else
-                    throw new KeyNotFoundException("Test to update doesn't exist");
+                    throw new KeyNotFoundException("Order to update doesn't exist");
             }
             catch (FileLoadException a)
             {
@@ -1020,27 +1015,49 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override void UpdateTestStatus(Test testToUpdate)
+        //public override void UpdateTestStatus(Test testToUpdate)
+        //{
+        //    try
+        //    {
+        //        LoadOrder();
+        //        if (TestExist(testToUpdate.CurrentTestSerialNumber))
+        //        {
+        //            (from test in OrderRoot.Elements()
+        //             where test.Element("TestSerialNumber").Element("value").Value == testToUpdate.CurrentTestSerialNumber.ToString()
+        //             select test).FirstOrDefault().Remove();
+        //            OrderRoot.Add(TestToXElementTest(testToUpdate));
+        //            SaveOrders();
+        //        }
+        //        else
+        //            throw new KeyNotFoundException("Test to update doesn't exist");
+        //    }
+        //    catch (FileLoadException a)
+        //    {
+        //        throw a;
+        //    }
+        //    catch (FileNotFoundException a)
+        //    {
+        //        throw a;
+        //    }
+        //}
+
+        //-----------------------------------------------------------------------------
+
+        public Order SearchOrbyID(int key)
         {
             try
             {
                 LoadOrder();
-                if (TestExist(testToUpdate.CurrentTestSerialNumber))
+                if (ORexist(key))
                 {
-                    (from test in OrderRoot.Elements()
-                     where test.Element("TestSerialNumber").Element("value").Value == testToUpdate.CurrentTestSerialNumber.ToString()
-                     select test).FirstOrDefault().Remove();
-                    OrderRoot.Add(TestToXElementTest(testToUpdate));
-                    SaveOrders();
+                    return (from or in OrderRoot.Elements()
+                            where or.Element("OrderKey").Value == key.ToString()
+                            select XElementOrderToOrder(or)).FirstOrDefault();
                 }
                 else
-                    throw new KeyNotFoundException("Test to update doesn't exist");
+                    throw new KeyNotFoundException("Order doesn't exist");
             }
             catch (FileLoadException a)
-            {
-                throw a;
-            }
-            catch (FileNotFoundException a)
             {
                 throw a;
             }
@@ -1048,63 +1065,24 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override Test GetTestBySerialNumber(int serialNumber)
+        public List<Order> GetAllOrders()
         {
             try
             {
                 LoadOrder();
-                if (TestExist(serialNumber))
-                {
-                    return (from test in OrderRoot.Elements()
-                            where test.Element("TestSerialNumber").Element("value").Value == serialNumber.ToString()
-                            select new Test(XElementTestToTest(test))).FirstOrDefault();
-                }
-                else
-                    throw new KeyNotFoundException("Test doesn't exist");
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public override List<Test> GetAllTests()
-        {
-            try
-            {
-                LoadOrder();
-                return new List<Test>((from test in OrderRoot.Elements()
-                                       select new Test()
+                return new List<Order>((from or in OrderRoot.Elements()
+                                       select new Order()
                                        {
-                                           TesterID = test.Element("TesterID").Value,
-                                           TraineeID = test.Element("TraineeID").Value,
-                                           DateAndHourOfTest = new DateTime(int.Parse(test.Element("DateAndHourOfTest").Element("Year").Value),
-                                                                      int.Parse(test.Element("DateAndHourOfTest").Element("Month").Value),
-                                                                      int.Parse(test.Element("DateAndHourOfTest").Element("Day").Value),
-                                                                      int.Parse(test.Element("DateAndHourOfTest").Element("Hour").Value),
-                                                                      0, 0),
-                                           LocationOfTest = new Address(test.Element("LocationOfTest").Element("City").Value,
-                                                                        test.Element("LocationOfTest").Element("Street").Value,
-                                                                        int.Parse(test.Element("LocationOfTest").Element("NumOfBuilding").Value)),
-                                           StatusOfTest = (TestStatus)Enum.Parse(typeof(TestStatus), test.Element("StatusOfTest").Value),
-                                           GearType = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), test.Element("GearType").Value),
-                                           TypeOfCar = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), test.Element("TypeOfCar").Value),
-                                           GiveWay = bool.Parse(test.Element("GiveWay").Value),
-                                           SaveDistance = bool.Parse(test.Element("SaveDistance").Value),
-                                           MirrorUse = bool.Parse(test.Element("MirrorUse").Value),
-                                           ReverseParking = bool.Parse(test.Element("ReverseParking").Value),
-                                           Signals = bool.Parse(test.Element("Signals").Value),
-                                           StopSign = bool.Parse(test.Element("StopSign").Value),
-                                           RightOfWay = bool.Parse(test.Element("RightOfWay").Value),
-                                           ControledTheVehicle = bool.Parse(test.Element("ControledTheVehicle").Value),
-                                           Passed = bool.Parse(test.Element("Passed").Value),
-                                           Faild = bool.Parse(test.Element("Faild").Value),
-                                           NoteOfTester = test.Element("NoteOfTester").Value,
-                                           ClipPath = test.Element("ClipPath").Value,
-                                           IsClipUpload = bool.Parse(test.Element("IsClipUpload").Value),
-                                           CurrentTestSerialNumber = int.Parse(test.Element("TestSerialNumber").Element("value").Value)
+                                           OrderKey = Convert.ToInt32(or.Element("OrderKey").Value),
+                                           HostingUnitKey = Convert.ToInt32(or.Element("HostingUnitKey").Value),
+                                           GuestRequestKey = Convert.ToInt32(or.Element("GuestRequestKey").Value),
+                                           CreateDate = new DateTime(int.Parse(or.Element("CreateDate").Element("CreateDateYear").Value),
+                                                                      int.Parse(or.Element("CreateDate").Element("CreateDateMonth").Value),
+                                                                      int.Parse(or.Element("CreateDate").Element("CreateDateDay").Value)),
+                                           SentEmail = new DateTime(int.Parse(or.Element("SentEmail").Element("SentEmailYear").Value),
+                                                                      int.Parse(or.Element("SentEmail").Element("SentEmailMonth").Value),
+                                                                      int.Parse(or.Element("SentEmail").Element("SentEmailDay").Value)),
+                                           Status = (Status)Enum.Parse(typeof(Status), or.Element("Status").Value),
                                        }).ToList());
             }
             catch (FileLoadException a)
@@ -1115,52 +1093,52 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override List<Test> FilterTests(Predicate<Test> condition)
-        {
-            try
-            {
-                LoadOrder();
-                List<Test> tests = new List<Test>((from test in OrderRoot.Elements()
-                                                   select new Test()
-                                                   {
-                                                       TesterID = test.Element("TesterID").Value,
-                                                       TraineeID = test.Element("TraineeID").Value,
-                                                       DateAndHourOfTest = new DateTime(int.Parse(test.Element("DateAndHourOfTest").Element("Year").Value),
-                                                                                  int.Parse(test.Element("DateAndHourOfTest").Element("Month").Value),
-                                                                                  int.Parse(test.Element("DateAndHourOfTest").Element("Day").Value),
-                                                                                  int.Parse(test.Element("DateAndHourOfTest").Element("Hour").Value),
-                                                                                  0, 0),
-                                                       LocationOfTest = new Address(test.Element("LocationOfTest").Element("City").Value,
-                                                                                    test.Element("LocationOfTest").Element("Street").Value,
-                                                                                    int.Parse(test.Element("LocationOfTest").Element("NumOfBuilding").Value)),
-                                                       StatusOfTest = (TestStatus)Enum.Parse(typeof(TestStatus), test.Element("StatusOfTest").Value),
-                                                       GearType = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), test.Element("GearType").Value),
-                                                       TypeOfCar = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), test.Element("TypeOfCar").Value),
-                                                       GiveWay = bool.Parse(test.Element("GiveWay").Value),
-                                                       SaveDistance = bool.Parse(test.Element("SaveDistance").Value),
-                                                       MirrorUse = bool.Parse(test.Element("MirrorUse").Value),
-                                                       ReverseParking = bool.Parse(test.Element("ReverseParking").Value),
-                                                       Signals = bool.Parse(test.Element("Signals").Value),
-                                                       StopSign = bool.Parse(test.Element("StopSign").Value),
-                                                       RightOfWay = bool.Parse(test.Element("RightOfWay").Value),
-                                                       ControledTheVehicle = bool.Parse(test.Element("ControledTheVehicle").Value),
-                                                       Passed = bool.Parse(test.Element("Passed").Value),
-                                                       Faild = bool.Parse(test.Element("Faild").Value),
-                                                       NoteOfTester = test.Element("NoteOfTester").Value,
-                                                       ClipPath = test.Element("ClipPath").Value,
-                                                       IsClipUpload = bool.Parse(test.Element("IsClipUpload").Value),
-                                                       CurrentTestSerialNumber = int.Parse(test.Element("TestSerialNumber").Element("value").Value)
-                                                   }).ToList());
-                List<Test> tmp = (from test in tests
-                                  where condition(test)
-                                  select new Test(test)).ToList();
-                return tmp;
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-        }
+        //public override List<Test> FilterTests(Predicate<Test> condition)
+        //{
+        //    try
+        //    {
+        //        LoadOrder();
+        //        List<Test> tests = new List<Test>((from test in OrderRoot.Elements()
+        //                                           select new Test()
+        //                                           {
+        //                                               TesterID = test.Element("TesterID").Value,
+        //                                               TraineeID = test.Element("TraineeID").Value,
+        //                                               DateAndHourOfTest = new DateTime(int.Parse(test.Element("DateAndHourOfTest").Element("Year").Value),
+        //                                                                          int.Parse(test.Element("DateAndHourOfTest").Element("Month").Value),
+        //                                                                          int.Parse(test.Element("DateAndHourOfTest").Element("Day").Value),
+        //                                                                          int.Parse(test.Element("DateAndHourOfTest").Element("Hour").Value),
+        //                                                                          0, 0),
+        //                                               LocationOfTest = new Address(test.Element("LocationOfTest").Element("City").Value,
+        //                                                                            test.Element("LocationOfTest").Element("Street").Value,
+        //                                                                            int.Parse(test.Element("LocationOfTest").Element("NumOfBuilding").Value)),
+        //                                               StatusOfTest = (TestStatus)Enum.Parse(typeof(TestStatus), test.Element("StatusOfTest").Value),
+        //                                               GearType = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), test.Element("GearType").Value),
+        //                                               TypeOfCar = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), test.Element("TypeOfCar").Value),
+        //                                               GiveWay = bool.Parse(test.Element("GiveWay").Value),
+        //                                               SaveDistance = bool.Parse(test.Element("SaveDistance").Value),
+        //                                               MirrorUse = bool.Parse(test.Element("MirrorUse").Value),
+        //                                               ReverseParking = bool.Parse(test.Element("ReverseParking").Value),
+        //                                               Signals = bool.Parse(test.Element("Signals").Value),
+        //                                               StopSign = bool.Parse(test.Element("StopSign").Value),
+        //                                               RightOfWay = bool.Parse(test.Element("RightOfWay").Value),
+        //                                               ControledTheVehicle = bool.Parse(test.Element("ControledTheVehicle").Value),
+        //                                               Passed = bool.Parse(test.Element("Passed").Value),
+        //                                               Faild = bool.Parse(test.Element("Faild").Value),
+        //                                               NoteOfTester = test.Element("NoteOfTester").Value,
+        //                                               ClipPath = test.Element("ClipPath").Value,
+        //                                               IsClipUpload = bool.Parse(test.Element("IsClipUpload").Value),
+        //                                               CurrentTestSerialNumber = int.Parse(test.Element("TestSerialNumber").Element("value").Value)
+        //                                           }).ToList());
+        //        List<Test> tmp = (from test in tests
+        //                          where condition(test)
+        //                          select new Test(test)).ToList();
+        //        return tmp;
+        //    }
+        //    catch (FileLoadException a)
+        //    {
+        //        throw a;
+        //    }
+        // }
 
         //configs------------------------------------------------------------------------
 
@@ -1173,37 +1151,33 @@ namespace DAL
             try
             {
                 ConfigRoot = new XElement("Configs");
-                XElement readAble = new XElement("readAble", true);
-                XElement writeAble = new XElement("writeAble", true);
-                XElement notReadAble = new XElement("readAble", false);
-                XElement notWriteable = new XElement("writeAble", false);
-                XElement minTesterAgeValue = new XElement("value", 40);
-                XElement minTraineeAgeValue = new XElement("value", 18);
-                XElement minTimeRangeBetweenTestValue = new XElement("value", 7);
-                XElement minlessonsValue = new XElement("value", 20);
-                XElement maxTesterAgeValue = new XElement("value", 67);
-                XElement serialValue = new XElement("value", 10000000);
-                XElement serialNumber = new XElement("SerialNumber", serialValue, notReadAble, notWriteable);
-                XElement minLessons = new XElement("minLessons", minlessonsValue, readAble, writeAble);
-                XElement maxTesterAge = new XElement("maxTesterAge", maxTesterAgeValue, readAble, writeAble);
-                XElement minTraineeAge = new XElement("minTraineeAge", minTraineeAgeValue, readAble, writeAble);
-                XElement minTimeRangeBetweenTest = new XElement("minTimeRangeBetweenTest", minTimeRangeBetweenTestValue, readAble, writeAble);
-                XElement minTesterAge = new XElement("minTesterAge", minTesterAgeValue, readAble, writeAble);
-                ConfigRoot.Add(serialNumber, minLessons, maxTesterAge, minTesterAge, minTraineeAge, minTimeRangeBetweenTest);
+
+                XElement todayYear = new XElement("todayYear", DateTime.Today.Year);
+                XElement todayMonth = new XElement("todayMonth", DateTime.Today.Month);
+                XElement todayDay = new XElement("todayDay", DateTime.Today.Day);
+                XElement today = new XElement("today", todayYear, todayMonth, todayDay);
+
+                XElement commission = new XElement("value", 10);
+                XElement ExpDay = new XElement("value", 10);
+                XElement HostingUnitKey_s = new XElement("value", 10000000);
+                XElement GuestRequestKey_s = new XElement("value", 10000000);
+                XElement OrderKey_s = new XElement("value", 10000000);
+                
+                ConfigRoot.Add(HostingUnitKey_s, GuestRequestKey_s, OrderKey_s, ExpDay, commission, today);
                 ConfigRoot.Save(ConfigPath);
             }
             catch
             {
-                throw new FileLoadException("Can not start the project check your Config Xml files");
+                throw new FileLoadException("Cannot start the project check your Config Xml files");
             }
-        }
+    }
 
-        //----------------------------------------------------------------------------
+    //----------------------------------------------------------------------------
 
-        /// <summary>
-        /// Load the file and throw FileLoadException if an exception has been thrown 
-        /// </summary>
-        void LoadConfigs()
+    /// <summary>
+    /// Load the file and throw FileLoadException if an exception has been thrown 
+    /// </summary>
+    void LoadConfigs()
         {
             try
             {
@@ -1240,18 +1214,18 @@ namespace DAL
             try
             {
                 LoadConfigs();
-                Dictionary<string, object> confings = new Dictionary<string, object>();
+                Dictionary<string, object> configs = new Dictionary<string, object>();
                 var objFoeDictionary = (from cnfg in ConfigRoot.Elements()
                                         where cnfg.Name.LocalName != "SerialNumber"
                                         where cnfg.Element("readAble").Value == "true"
                                         select new { Key = cnfg.Name.LocalName, Value = cnfg.Element("value").Value });
                 foreach (var item in objFoeDictionary)
                 {
-                    confings.Add(item.Key, item.Value as object);
+                    configs.Add(item.Key, item.Value as object);
                 }
-                if (confings.Any())
+                if (configs.Any())
                 {
-                    return new Dictionary<string, object>(confings);
+                    return new Dictionary<string, object>(configs);
                 }
                 else
                     throw new NullReferenceException("There is no configuration to return");
