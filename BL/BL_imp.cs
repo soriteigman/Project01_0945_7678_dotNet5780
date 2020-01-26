@@ -340,7 +340,7 @@ namespace BL
         {
             try
             {
-                o.OrderKey = Configuration.OrderKey_s++;
+                //o.OrderKey = Configuration.OrderKey_s++;
                 if (!AvailabilityCheck(dal_bl.SearchHUbyID(o.HostingUnitKey), dal_bl.searchGRbyID(o.GuestRequestKey)))
                     throw new InvalidOperationException("unit not available for this request");
                 if (!dal_bl.HUexist(o.HostingUnitKey))
@@ -574,7 +574,7 @@ namespace BL
             return (endDate - startDate).Days;
         }
         public void SendEmail(Order o)//sends email when order status changes to "sent mail"
-        {            
+        {      
             GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey);
             Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
          

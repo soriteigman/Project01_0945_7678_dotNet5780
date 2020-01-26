@@ -1,2 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Orders />
+<Orders>
+  <Order>
+    <OrderKey>10000003</OrderKey>
+    <GuestRequestKey>10000001</GuestRequestKey>
+    <HostingUnitKey>10000001</HostingUnitKey>
+    <CreateDate>
+      <CreateDateYear>2020</CreateDateYear>
+      <CreateDateMonth>1</CreateDateMonth>
+      <CreateDateDay>26</CreateDateDay>
+    </CreateDate>
+    <SentEmail>
+      <CreateDateYear>2020</CreateDateYear>
+      <CreateDateMonth>1</CreateDateMonth>
+      <CreateDateDay>26</CreateDateDay>
+    </SentEmail>
+  </Order>
+</Orders>

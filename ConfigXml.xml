@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Configs>
-  <value>10000000</value>
-  <value>10000000</value>
-  <value>10000000</value>
-  <value>10</value>
-  <value>10</value>
+<Configuration>
+  <HostingUnitKey_s>10000001</HostingUnitKey_s>
+  <GuestRequest_s>10000001</GuestRequest_s>
+  <OrderKey_s>10000003</OrderKey_s>
+  <ExpDay>10</ExpDay>
+  <commission>10</commission>
   <today>
     <todayYear>2020</todayYear>
     <todayMonth>1</todayMonth>
     <todayDay>26</todayDay>
   </today>
-</Configs>
+</Configuration>

@@ -1,73 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HostingUnits>
   <HostingUnit>
-    <HostingUnitKey>10000000</HostingUnitKey>
-    <HostingUnitName>plz work</HostingUnitName>
+    <HostingUnitKey>10000001</HostingUnitKey>
+    <HostingUnitName>paradise island</HostingUnitName>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
       <HostKey>337757678</HostKey>
       <Name>
         <PrivateName>sori</PrivateName>
         <FamilyName>teigman</FamilyName>
       </Name>
-      <PhoneNumber>111</PhoneNumber>
+      <PhoneNumber>11</PhoneNumber>
       <MailAddress>soriteigman@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>111</BankNumber>
+        <BankNumber>11</BankNumber>
         <BankName>hapoalim</BankName>
-        <BranchNumber>111</BranchNumber>
-        <BranchAddress>sss</BranchAddress>
-        <BranchCity>sss</BranchCity>
+        <BranchNumber>11</BranchNumber>
+        <BranchAddress>dd</BranchAddress>
+        <BranchCity>dd</BranchCity>
       </BankBranchDetails>
-      <BankAccountNumber>1111</BankAccountNumber>
-    </Owner>
-    <Area>South</Area>
-    <Type>BeachHouse</Type>
-    <SubArea>Netanya</SubArea>
-    <Pet>false</Pet>
-    <WiFi>true</WiFi>
-    <Parking>false</Parking>
-    <Pool>true</Pool>
-    <Jacuzzi>true</Jacuzzi>
-    <Garden>false</Garden>
-    <ChildrensAttractions>false</ChildrensAttractions>
-    <FitnessCenter>false</FitnessCenter>
-    <Stars>five_star</Stars>
-    <Beds>7</Beds>
-  </HostingUnit>
-  <HostingUnit>
-    <HostingUnitKey>10000000</HostingUnitKey>
-    <HostingUnitName>hello its me</HostingUnitName>
-    <Owner>
-      <HostKey>337757678</HostKey>
-      <Name>
-        <PrivateName>sss</PrivateName>
-        <FamilyName>ssss</FamilyName>
-      </Name>
-      <PhoneNumber>111</PhoneNumber>
-      <MailAddress>soriteigman@gmail.com</MailAddress>
-      <CollectionClearance>true</CollectionClearance>
-      <BankBranchDetails>
-        <BankNumber>111</BankNumber>
-        <BankName>ggg</BankName>
-        <BranchNumber>111</BranchNumber>
-        <BranchAddress>111</BranchAddress>
-        <BranchCity>ddd</BranchCity>
-      </BankBranchDetails>
-      <BankAccountNumber>111</BankAccountNumber>
+      <BankAccountNumber>11</BankAccountNumber>
     </Owner>
     <Area>North</Area>
-    <Type>Tent</Type>
-    <SubArea>Nazareth</SubArea>
+    <Type>Hotel</Type>
+    <SubArea>Caesarea</SubArea>
     <Pet>false</Pet>
     <WiFi>true</WiFi>
-    <Parking>false</Parking>
+    <Parking>true</Parking>
     <Pool>true</Pool>
     <Jacuzzi>true</Jacuzzi>
     <Garden>false</Garden>
     <ChildrensAttractions>false</ChildrensAttractions>
     <FitnessCenter>false</FitnessCenter>
     <Stars>five_star</Stars>
-    <Beds>7</Beds>
+    <Beds>2</Beds>
   </HostingUnit>
 </HostingUnits>

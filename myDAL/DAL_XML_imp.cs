@@ -163,19 +163,19 @@ namespace DAL
             return new GuestRequest()
             {
                 GuestRequestKey = Convert.ToInt32(toConvert.Element("GuestRequestKey").Value),
-                PrivateName = toConvert.Element("Name").Element("FirstName").Value,
+                PrivateName = toConvert.Element("Name").Element("PrivateName").Value,
                 FamilyName=toConvert.Element("Name").Element("FamilyName").Value,
                 MailAddress = toConvert.Element("MailAddress").Value,
                 Status = (Status)Enum.Parse(typeof(Status), toConvert.Element("Status").Value),
-                RegistrationDate = new DateTime(int.Parse(toConvert.Element("RegistrationDate").Element("Year").Value),
-                                                       int.Parse(toConvert.Element("RegistrationDate").Element("Month").Value),
-                                                       int.Parse(toConvert.Element("RegistrationDate").Element("Day").Value)),
-                EntryDate = new DateTime(int.Parse(toConvert.Element("EntryDate").Element("Year").Value),
-                                                       int.Parse(toConvert.Element("EntryDate").Element("Month").Value),
-                                                       int.Parse(toConvert.Element("EntryDate").Element("Day").Value)),
-                ReleaseDate = new DateTime(int.Parse(toConvert.Element("ReleaseDate").Element("Year").Value),
-                                                       int.Parse(toConvert.Element("ReleaseDate").Element("Month").Value),
-                                                       int.Parse(toConvert.Element("ReleaseDate").Element("Day").Value)),
+                RegistrationDate = new DateTime(int.Parse(toConvert.Element("RegistrationDate").Element("YearReg").Value),
+                                                       int.Parse(toConvert.Element("RegistrationDate").Element("MonthReg").Value),
+                                                       int.Parse(toConvert.Element("RegistrationDate").Element("DayReg").Value)),
+                EntryDate = new DateTime(int.Parse(toConvert.Element("EntryDate").Element("YearEntry").Value),
+                                                       int.Parse(toConvert.Element("EntryDate").Element("MonthEntry").Value),
+                                                       int.Parse(toConvert.Element("EntryDate").Element("DayEntry").Value)),
+                ReleaseDate = new DateTime(int.Parse(toConvert.Element("ReleaseDate").Element("YearRelease").Value),
+                                                       int.Parse(toConvert.Element("ReleaseDate").Element("MonthRelease").Value),
+                                                       int.Parse(toConvert.Element("ReleaseDate").Element("DayRelease").Value)),
                 Area = (VacationArea)Enum.Parse(typeof(VacationArea), toConvert.Element("Area").Value),
                 Type = (VacationType)Enum.Parse(typeof(VacationType), toConvert.Element("Type").Value),
                 Adults = Convert.ToInt32(toConvert.Element("Adults").Value),
@@ -251,8 +251,11 @@ namespace DAL
                 LoadConfigs();
                 if (!GRexist(newGR.GuestRequestKey))
                 {
-                    newGR.GuestRequestKey = Configuration.GuestRequest_s++;
+                    int tmp = int.Parse(ConfigRoot.Element("GuestRequest_s").Value) + 1;
+                    newGR.GuestRequestKey = tmp;
+                    ConfigRoot.Element("GuestRequest_s").Value = tmp.ToString();
                     GuestRequestRoot.Add(GRToXElementGR(newGR));
+                    ConfigRoot.Save(ConfigPath);
                     SaveGuestRequests();
                 }
                 else
@@ -355,6 +358,7 @@ namespace DAL
                                             FitnessCenter = (Choices)Enum.Parse(typeof(Choices), gr.Element("FitnessCenter").Value),
                                             WiFi = (Choices)Enum.Parse(typeof(Choices), gr.Element("WiFi").Value),
                                             Parking = (Choices)Enum.Parse(typeof(Choices), gr.Element("Parking").Value),
+                                            Stars = (StarRating)Enum.Parse(typeof(StarRating), gr.Element("Stars").Value),
                                             SubArea = gr.Element("SubArea").Value,
                                         }).ToList();
                 return guests;
@@ -499,28 +503,27 @@ namespace DAL
         /// <returns> the converted BE.HostingUnit </returns>
         HostingUnit XElementHUToHU(XElement toConvert)
         {
-            return new HostingUnit()//serializer?
+            HostingUnit temp = new HostingUnit()//serializer?
             {
-                HostingUnitKey= Convert.ToInt32(toConvert.Element("HostingUnitKey").Value),
+                HostingUnitKey = Convert.ToInt32(toConvert.Element("HostingUnitKey").Value),
                 HostingUnitName = toConvert.Element("HostingUnitName").Value,
-                //Diary=
                 Owner=new Host()
                 {
-                    HostKey= Convert.ToInt32(toConvert.Element("HostKey").Value),
-                    PrivateName= toConvert.Element("Name").Element("PrivateName").Value,
-                    FamilyName = toConvert.Element("Name").Element("FamilyName").Value,
-                    PhoneNumber = Convert.ToInt32(toConvert.Element("PhoneNumber").Value),
-                    MailAddress = toConvert.Element("MailAddress").Value,
-                    CollectionClearance=toConvert.Element("CollectionClearance").Value=="true",
+                    HostKey= Convert.ToInt32(toConvert.Element("Owner").Element("HostKey").Value),
+                    PrivateName= toConvert.Element("Owner").Element("Name").Element("PrivateName").Value,
+                    FamilyName = toConvert.Element("Owner").Element("Name").Element("FamilyName").Value,
+                    PhoneNumber = Convert.ToInt32(toConvert.Element("Owner").Element("PhoneNumber").Value),
+                    MailAddress = toConvert.Element("Owner").Element("MailAddress").Value,
+                    CollectionClearance= toConvert.Element("Owner").Element("CollectionClearance").Value=="true",
                     BankBranchDetails=new BankBranch()
                     {
-                        BankNumber = Convert.ToInt32(toConvert.Element("BankNumber").Value),
-                        BankName = toConvert.Element("BankName").Value,
-                        BranchNumber = Convert.ToInt32(toConvert.Element("BranchNumber").Value),
-                        BranchAddress = toConvert.Element("BranchAddress").Value,
-                        BranchCity = toConvert.Element("BranchCity").Value,
+                        BankNumber = Convert.ToInt32(toConvert.Element("Owner").Element("BankBranchDetails").Element("BankNumber").Value),
+                        BankName = toConvert.Element("Owner").Element("BankBranchDetails").Element("BankName").Value,
+                        BranchNumber = Convert.ToInt32(toConvert.Element("Owner").Element("BankBranchDetails").Element("BranchNumber").Value),
+                        BranchAddress = toConvert.Element("Owner").Element("BankBranchDetails").Element("BranchAddress").Value,
+                        BranchCity = toConvert.Element("Owner").Element("BankBranchDetails").Element("BranchCity").Value,
                     },
-                    BankAccountNumber=Convert.ToInt32(toConvert.Element("BankAccountNumber").Value),
+                    BankAccountNumber=Convert.ToInt32(toConvert.Element("Owner").Element("BankAccountNumber").Value),
                 },
                 Area = (VacationArea)Enum.Parse(typeof(VacationArea), toConvert.Element("Area").Value),
                 Type = (VacationType)Enum.Parse(typeof(VacationType), toConvert.Element("Type").Value),
@@ -536,6 +539,16 @@ namespace DAL
                 Stars = (StarRating)Enum.Parse(typeof(StarRating), toConvert.Element("Stars").Value),
                 Beds = Convert.ToInt32(toConvert.Element("Beds").Value),
             };
+            var t = toConvert.Element("Diary").Value;
+            int k = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                for (int j = 0; j < 31; j++)
+                {
+                    temp.Diary[i, j] = bool.Parse(t.Split(' ')[k++]);
+                }
+            }
+            return temp;
         }
 
         //-----------------------------------------------------------------------------
@@ -549,7 +562,14 @@ namespace DAL
         {
             XElement HostingUnitKey = new XElement("HostingUnitKey", huToConvert.HostingUnitKey);
             XElement HostingUnitName = new XElement("HostingUnitName", huToConvert.HostingUnitName);
-            //XElement Diary=
+            XElement Diary = new XElement("Diary");
+            for (int i = 0; i < 12; i++)
+            {
+                for (int j = 0; j < 31; j++)
+                {
+                    Diary.Add(huToConvert.Diary[i, j].ToString() + " ");
+                }
+            }
 
             XElement BankNumber = new XElement("BankNumber", huToConvert.Owner.BankBranchDetails.BankNumber);
             XElement BankName = new XElement("BankName", huToConvert.Owner.BankBranchDetails.BankName);
@@ -584,7 +604,7 @@ namespace DAL
             XElement Stars = new XElement("Stars", huToConvert.Stars.ToString());
             XElement Beds = new XElement("Beds", huToConvert.Beds);
       
-            XElement hostingUnit = new XElement("HostingUnit", HostingUnitKey, HostingUnitName/*, Diary*/, Owner, Area, Type, SubArea, Pet,
+            XElement hostingUnit = new XElement("HostingUnit", HostingUnitKey, HostingUnitName, Diary, Owner, Area, Type, SubArea, Pet,
                                                        WiFi, Parking, Pool, Jacuzzi, Garden, ChildrensAttractions, FitnessCenter, Stars, Beds);
             return hostingUnit;
         }
@@ -599,8 +619,11 @@ namespace DAL
                 LoadConfigs();
                 if (!HUexist(newHU.HostingUnitKey))
                 {
-                    newHU.HostingUnitKey = Configuration.HostingUnitKey_s++;
+                    int tmp = int.Parse(ConfigRoot.Element("HostingUnitKey_s").Value) + 1;
+                    newHU.HostingUnitKey = tmp;
+                    ConfigRoot.Element("HostingUnitKey_s").Value = tmp.ToString();
                     HostingUnitRoot.Add(HUToXElementHU(newHU));
+                    ConfigRoot.Save(ConfigPath);
                     SaveHostingUnits();
                 }
                 else
@@ -700,30 +723,31 @@ namespace DAL
         
         public IEnumerable<HostingUnit> ListOfHostingUnits()//gets all hosting units
         {
+            List<HostingUnit> units;
             try
             {
                 LoadHostingUnits();
-                return new List<HostingUnit>((from hu in HostingUnitRoot.Elements()
+                units=((from hu in HostingUnitRoot.Elements()
                                               select new HostingUnit()
                                               {
                                                   HostingUnitKey = int.Parse(hu.Element("HostingUnitKey").Value),
                                                   Owner = new Host()
                                                   {
-                                                      HostKey = int.Parse(hu.Element("HostKey").Value),
-                                                      PrivateName = hu.Element("Name").Element("PrivateName").Value,
-                                                      FamilyName = hu.Element("Name").Element("FamilyName").Value,
-                                                      PhoneNumber = int.Parse(hu.Element("PhoneNumber").Value),
-                                                      MailAddress = hu.Element("MailAddress").Value,
+                                                      HostKey = int.Parse(hu.Element("Owner").Element("HostKey").Value),
+                                                      PrivateName = hu.Element("Owner").Element("Name").Element("PrivateName").Value,
+                                                      FamilyName = hu.Element("Owner").Element("Name").Element("FamilyName").Value,
+                                                      PhoneNumber = int.Parse(hu.Element("Owner").Element("PhoneNumber").Value),
+                                                      MailAddress = hu.Element("Owner").Element("MailAddress").Value,
                                                       BankBranchDetails = new BankBranch()
                                                       {
-                                                          BankNumber = int.Parse(hu.Element("BankNumber").Value),
-                                                          BankName = hu.Element("BankName").Value,
-                                                          BranchNumber = int.Parse(hu.Element("BranchNumber").Value),
-                                                          BranchAddress = hu.Element("BranchAddress").Value,
-                                                          BranchCity = hu.Element("BranchCity").Value,
+                                                          BankNumber = int.Parse(hu.Element("Owner").Element("BankBranchDetails").Element("BankNumber").Value),
+                                                          BankName = hu.Element("Owner").Element("BankBranchDetails").Element("BankName").Value,
+                                                          BranchNumber = int.Parse(hu.Element("Owner").Element("BankBranchDetails").Element("BranchNumber").Value),
+                                                          BranchAddress = hu.Element("Owner").Element("BankBranchDetails").Element("BranchAddress").Value,
+                                                          BranchCity = hu.Element("Owner").Element("BankBranchDetails").Element("BranchCity").Value,
                                                       },
-                                                      BankAccountNumber = int.Parse(hu.Element("BankAccountNumber").Value),
-                                                      CollectionClearance = hu.Element("CollectionClearance").Value == "true",
+                                                      BankAccountNumber = int.Parse(hu.Element("Owner").Element("BankAccountNumber").Value),
+                                                      CollectionClearance = hu.Element("Owner").Element("CollectionClearance").Value == "true",
                                                   },
 
                                               HostingUnitName = hu.Element("HostingUnitName").Value,
@@ -742,6 +766,7 @@ namespace DAL
                                               FitnessCenter = hu.Element("FitnessCenter").Value == "true",
                                               Stars = (StarRating)Enum.Parse(typeof(StarRating), hu.Element("Stars").Value),
                                           }).ToList());
+                return units;
             }
             catch (FileLoadException a)
             {
@@ -762,21 +787,21 @@ namespace DAL
                                                                 HostingUnitKey = int.Parse(hu.Element("HostingUnitKey").Value),
                                                                 Owner = new Host()
                                                                 {
-                                                                    HostKey = int.Parse(hu.Element("HostKey").Value),
-                                                                    PrivateName = hu.Element("Name").Element("PrivateName").Value,
-                                                                    FamilyName = hu.Element("Name").Element("FamilyName").Value,
-                                                                    PhoneNumber = int.Parse(hu.Element("PhoneNumber").Value),
-                                                                    MailAddress = hu.Element("MailAddress").Value,
+                                                                    HostKey = int.Parse(hu.Element("Owner").Element("HostKey").Value),
+                                                                    PrivateName = hu.Element("Owner").Element("Name").Element("PrivateName").Value,
+                                                                    FamilyName = hu.Element("Owner").Element("Name").Element("FamilyName").Value,
+                                                                    PhoneNumber = int.Parse(hu.Element("Owner").Element("PhoneNumber").Value),
+                                                                    MailAddress = hu.Element("Owner").Element("MailAddress").Value,
                                                                     BankBranchDetails = new BankBranch()
                                                                     {
-                                                                        BankNumber = int.Parse(hu.Element("BankNumber").Value),
-                                                                        BankName = hu.Element("BankName").Value,
-                                                                        BranchNumber = int.Parse(hu.Element("BranchNumber").Value),
-                                                                        BranchAddress = hu.Element("BranchAddress").Value,
-                                                                        BranchCity = hu.Element("BranchCity").Value,
+                                                                        BankNumber = int.Parse(hu.Element("Owner").Element("BankBranchDetails").Element("BankNumber").Value),
+                                                                        BankName = hu.Element("Owner").Element("BankBranchDetails").Element("BankName").Value,
+                                                                        BranchNumber = int.Parse(hu.Element("Owner").Element("BankBranchDetails").Element("BranchNumber").Value),
+                                                                        BranchAddress = hu.Element("Owner").Element("BankBranchDetails").Element("BranchAddress").Value,
+                                                                        BranchCity = hu.Element("Owner").Element("BankBranchDetails").Element("BranchCity").Value,
                                                                     },
-                                                                    BankAccountNumber = int.Parse(hu.Element("BankAccountNumber").Value),
-                                                                    CollectionClearance = hu.Element("CollectionClearance").Value == "true",
+                                                                    BankAccountNumber = int.Parse(hu.Element("Owner").Element("BankAccountNumber").Value),
+                                                                    CollectionClearance = hu.Element("Owner").Element("CollectionClearance").Value == "true",
                                                                 },
 
                                                                 HostingUnitName = hu.Element("HostingUnitName").Value,
@@ -929,6 +954,7 @@ namespace DAL
             XElement SentEmailmonth = new XElement("SentEmailMonth", OrderToConvert.SentEmail.Month);
             XElement SentEmailday = new XElement("SentEmailDay", OrderToConvert.SentEmail.Day);
             XElement SentEmail = new XElement("SentEmail", CreateDateyear, CreateDatemonth, CreateDateday);
+            XElement Status = new XElement("Status", OrderToConvert.Status);
 
             XElement Order = new XElement("Order", OrderKey, GuestRequestKey, HostingUnitKey, CreateDate, SentEmail);
             return Order;
@@ -942,11 +968,18 @@ namespace DAL
             {
                 LoadOrder();
                 LoadConfigs();
-                if (ORexist(newOrder.OrderKey))
+                if (!ORexist(newOrder.OrderKey))
+                {
+                    int tmp = int.Parse(ConfigRoot.Element("OrderKey_s").Value) + 1;
+                    newOrder.OrderKey = tmp;
+                    ConfigRoot.Element("OrderKey_s").Value = tmp.ToString();
+                    OrderRoot.Add(OrderToXElementOrder(newOrder));
+                    ConfigRoot.Save(ConfigPath);
+                    SaveOrders();
+                }
+                else
                     throw new DuplicateWaitObjectException("Order already exists");
-                OrderRoot.Add(OrderToXElementOrder(newOrder));
-                SaveConfigs();
-                SaveOrders();
+
             }
             catch (FileLoadException a)
             {
@@ -1013,10 +1046,11 @@ namespace DAL
 
         public IEnumerable<Order> ListOfOrders()//gets all the orders saved in the system
         {
+            List<Order> orders;
             try
             {
                 LoadOrder();
-                return new List<Order>((from or in OrderRoot.Elements()
+                orders=(from or in OrderRoot.Elements()
                                        select new Order()
                                        {
                                            OrderKey = Convert.ToInt32(or.Element("OrderKey").Value),
@@ -1029,7 +1063,8 @@ namespace DAL
                                                                       int.Parse(or.Element("SentEmail").Element("SentEmailMonth").Value),
                                                                       int.Parse(or.Element("SentEmail").Element("SentEmailDay").Value)),
                                            Status = (Status)Enum.Parse(typeof(Status), or.Element("Status").Value),
-                                       }).ToList());
+                                       }).ToList();
+                return orders;
             }
             catch (FileLoadException a)
             {
@@ -1079,20 +1114,20 @@ namespace DAL
         {
             try
             {
-                ConfigRoot = new XElement("Configs");
+                ConfigRoot = new XElement("Configuration");
 
                 XElement todayYear = new XElement("todayYear", DateTime.Today.Year);
                 XElement todayMonth = new XElement("todayMonth", DateTime.Today.Month);
                 XElement todayDay = new XElement("todayDay", DateTime.Today.Day);
                 XElement today = new XElement("today", todayYear, todayMonth, todayDay);
 
-                XElement commission = new XElement("value", 10);
-                XElement ExpDay = new XElement("value", 10);
-                XElement HostingUnitKey_s = new XElement("value", 10000000);
-                XElement GuestRequestKey_s = new XElement("value", 10000000);
-                XElement OrderKey_s = new XElement("value", 10000000);
+                XElement commission = new XElement("commission", 10);
+                XElement ExpDay = new XElement("ExpDay", 10);
+                XElement HostingUnitKey_s = new XElement("HostingUnitKey_s", 10000000);
+                XElement GuestRequest_s = new XElement("GuestRequest_s", 10000000);
+                XElement OrderKey_s = new XElement("OrderKey_s", 10000000);
                 
-                ConfigRoot.Add(HostingUnitKey_s, GuestRequestKey_s, OrderKey_s, ExpDay, commission, today);
+                ConfigRoot.Add(HostingUnitKey_s, GuestRequest_s, OrderKey_s, ExpDay, commission, today);
                 ConfigRoot.Save(ConfigPath);
             }
             catch

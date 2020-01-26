@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <GuestRequests>
   <GuestRequest>
-    <GuestRequestKey>10000000</GuestRequestKey>
+    <GuestRequestKey>10000001</GuestRequestKey>
     <Name>
-      <FamilyName>bur</FamilyName>
-      <PrivateName>st</PrivateName>
+      <FamilyName>burack</FamilyName>
+      <PrivateName>esti</PrivateName>
     </Name>
     <MailAddress>stburack@gmail.com</MailAddress>
     <Status>Active</Status>
@@ -21,97 +21,21 @@
     <ReleaseDate>
       <YearRelease>2020</YearRelease>
       <MonthRelease>1</MonthRelease>
-      <DayRelease>29</DayRelease>
+      <DayRelease>30</DayRelease>
     </ReleaseDate>
-    <Area>Jerusalem</Area>
-    <Type>Tent</Type>
-    <Adults>1</Adults>
-    <Children>0</Children>
-    <Pool>Yes</Pool>
-    <Jacuzzi>Yes</Jacuzzi>
-    <Garden>Yes</Garden>
-    <ChildrensAttractions>DontCare</ChildrensAttractions>
-    <FitnessCenter>DontCare</FitnessCenter>
-    <Stars>three_star</Stars>
-    <WiFi>No</WiFi>
-    <Parking>DontCare</Parking>
-    <Pet>false</Pet>
-    <SubArea>BeitShemesh</SubArea>
-  </GuestRequest>
-  <GuestRequest>
-    <GuestRequestKey>10000001</GuestRequestKey>
-    <Name>
-      <FamilyName>gagag</FamilyName>
-      <PrivateName>gagag</PrivateName>
-    </Name>
-    <MailAddress>stburack@gmail.com</MailAddress>
-    <Status>Active</Status>
-    <RegistrationDate>
-      <YearReg>2020</YearReg>
-      <MonthReg>1</MonthReg>
-      <DayReg>26</DayReg>
-    </RegistrationDate>
-    <EntryDate>
-      <YearEntry>2020</YearEntry>
-      <MonthEntry>1</MonthEntry>
-      <DayEntry>31</DayEntry>
-    </EntryDate>
-    <ReleaseDate>
-      <YearRelease>2020</YearRelease>
-      <MonthRelease>2</MonthRelease>
-      <DayRelease>4</DayRelease>
-    </ReleaseDate>
-    <Area>Jerusalem</Area>
+    <Area>North</Area>
     <Type>Hotel</Type>
-    <Adults>1</Adults>
-    <Children>0</Children>
-    <Pool>DontCare</Pool>
-    <Jacuzzi>DontCare</Jacuzzi>
-    <Garden>DontCare</Garden>
-    <ChildrensAttractions>DontCare</ChildrensAttractions>
-    <FitnessCenter>DontCare</FitnessCenter>
-    <Stars>two_star</Stars>
-    <WiFi>DontCare</WiFi>
-    <Parking>DontCare</Parking>
-    <Pet>false</Pet>
-    <SubArea>Beitar</SubArea>
-  </GuestRequest>
-  <GuestRequest>
-    <GuestRequestKey>10000000</GuestRequestKey>
-    <Name>
-      <FamilyName>bu</FamilyName>
-      <PrivateName>st</PrivateName>
-    </Name>
-    <MailAddress>stbuarck@gmail.com</MailAddress>
-    <Status>Active</Status>
-    <RegistrationDate>
-      <YearReg>2020</YearReg>
-      <MonthReg>1</MonthReg>
-      <DayReg>26</DayReg>
-    </RegistrationDate>
-    <EntryDate>
-      <YearEntry>2020</YearEntry>
-      <MonthEntry>1</MonthEntry>
-      <DayEntry>29</DayEntry>
-    </EntryDate>
-    <ReleaseDate>
-      <YearRelease>2020</YearRelease>
-      <MonthRelease>1</MonthRelease>
-      <DayRelease>31</DayRelease>
-    </ReleaseDate>
-    <Area>Eilat</Area>
-    <Type>Bungalow</Type>
-    <Adults>1</Adults>
+    <Adults>2</Adults>
     <Children>0</Children>
     <Pool>Yes</Pool>
     <Jacuzzi>Yes</Jacuzzi>
     <Garden>DontCare</Garden>
-    <ChildrensAttractions>No</ChildrensAttractions>
+    <ChildrensAttractions>DontCare</ChildrensAttractions>
     <FitnessCenter>DontCare</FitnessCenter>
     <Stars>five_star</Stars>
     <WiFi>Yes</WiFi>
-    <Parking>DontCare</Parking>
-    <Pet>true</Pet>
-    <SubArea>Eilat</SubArea>
+    <Parking>Yes</Parking>
+    <Pet>false</Pet>
+    <SubArea>Caesarea</SubArea>
   </GuestRequest>
 </GuestRequests>
