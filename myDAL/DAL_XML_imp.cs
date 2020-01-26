@@ -203,23 +203,23 @@ namespace DAL
         /// <returns> the converted XElement GuestRequest </returns>
         XElement GRToXElementGR(GuestRequest GuestRequestToConvert)
         {
-            XElement GuestRequestKey = new XElement("ID", GuestRequestToConvert.GuestRequestKey);
+            XElement GuestRequestKey = new XElement("GuestRequestKey", GuestRequestToConvert.GuestRequestKey);
             XElement PrivateName = new XElement("PrivateName", GuestRequestToConvert.PrivateName);
             XElement FamilyName = new XElement("FamilyName", GuestRequestToConvert.FamilyName);
             XElement MailAddress = new XElement("MailAddress", GuestRequestToConvert.MailAddress);
             XElement Status = new XElement("Status", GuestRequestToConvert.Status);
-            XElement yearReg = new XElement("Year", GuestRequestToConvert.RegistrationDate.Year);
-            XElement monthReg = new XElement("Month", GuestRequestToConvert.RegistrationDate.Month);
-            XElement dayReg = new XElement("Day", GuestRequestToConvert.RegistrationDate.Day);
-            XElement yearEntry = new XElement("Year", GuestRequestToConvert.EntryDate.Year);
-            XElement monthEntry = new XElement("Month", GuestRequestToConvert.EntryDate.Month);
-            XElement dayEntry = new XElement("Day", GuestRequestToConvert.EntryDate.Day);
-            XElement yearRelease = new XElement("Year", GuestRequestToConvert.ReleaseDate.Year);
-            XElement monthRelease = new XElement("Month", GuestRequestToConvert.ReleaseDate.Month);
-            XElement dayRelease = new XElement("Day", GuestRequestToConvert.ReleaseDate.Day);
-            XElement RegistrationDate = new XElement("RegistrationDate", yearReg, monthReg, dayReg);
-            XElement EntryDate = new XElement("EntryDate", yearEntry, monthEntry, dayEntry);
-            XElement ReleaseDate = new XElement("ReleaseDate", yearRelease, monthRelease, dayRelease);
+            XElement YearReg = new XElement("YearReg", GuestRequestToConvert.RegistrationDate.Year);
+            XElement MonthReg = new XElement("MonthReg", GuestRequestToConvert.RegistrationDate.Month);
+            XElement DayReg = new XElement("DayReg", GuestRequestToConvert.RegistrationDate.Day);
+            XElement YearEntry = new XElement("YearEntry", GuestRequestToConvert.EntryDate.Year);
+            XElement MonthEntry = new XElement("MonthEntry", GuestRequestToConvert.EntryDate.Month);
+            XElement DayEntry = new XElement("DayEntry", GuestRequestToConvert.EntryDate.Day);
+            XElement YearRelease = new XElement("YearRelease", GuestRequestToConvert.ReleaseDate.Year);
+            XElement MonthRelease = new XElement("MonthRelease", GuestRequestToConvert.ReleaseDate.Month);
+            XElement DayRelease = new XElement("DayRelease", GuestRequestToConvert.ReleaseDate.Day);
+            XElement RegistrationDate = new XElement("RegistrationDate", YearReg, MonthReg, DayReg);
+            XElement EntryDate = new XElement("EntryDate", YearEntry, MonthEntry, DayEntry);
+            XElement ReleaseDate = new XElement("ReleaseDate", YearRelease, MonthRelease, DayRelease);
             XElement Area = new XElement("Area", GuestRequestToConvert.Area.ToString());
             XElement Type = new XElement("Type", GuestRequestToConvert.Type.ToString());
             XElement Adults = new XElement("Adults", GuestRequestToConvert.Adults);
@@ -251,6 +251,7 @@ namespace DAL
                 LoadConfigs();
                 if (!GRexist(newGR.GuestRequestKey))
                 {
+                    newGR.GuestRequestKey = Configuration.GuestRequest_s++;
                     GuestRequestRoot.Add(GRToXElementGR(newGR));
                     SaveGuestRequests();
                 }

@@ -1,2 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<HostingUnits />
+<HostingUnits>
+  <HostingUnit>
+    <HostingUnitKey>0</HostingUnitKey>
+    <HostingUnitName>i have it all</HostingUnitName>
+    <Owner>
+      <HostKey>337757678</HostKey>
+      <Name>
+        <LastName>sori</LastName>
+        <LastName>teigman</LastName>
+      </Name>
+      <LastName>111111111</LastName>
+      <LastName>soriteigman@gmail.com</LastName>
+      <LastName>true</LastName>
+      <BankBranchDetails>
+        <BankNumber>11111111</BankNumber>
+        <BankName>hapoalim</BankName>
+        <BranchNumber>11111111</BranchNumber>
+        <BranchAddress>dddddddd</BranchAddress>
+        <BranchCity>dddddddd</BranchCity>
+      </BankBranchDetails>
+      <LastName>1111111</LastName>
+    </Owner>
+    <Area>North</Area>
+    <Type>BeachHouse</Type>
+    <SubArea>Caesarea</SubArea>
+    <Pet>true</Pet>
+    <WiFi>true</WiFi>
+    <Parking>true</Parking>
+    <Pool>true</Pool>
+    <Jacuzzi>true</Jacuzzi>
+    <Garden>true</Garden>
+    <ChildrensAttractions>true</ChildrensAttractions>
+    <FitnessCenter>true</FitnessCenter>
+    <Stars>five_star</Stars>
+    <Beds>6</Beds>
+  </HostingUnit>
+</HostingUnits>
