@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configs>
+  <value>10000000</value>
+  <value>10000000</value>
+  <value>10000000</value>
+  <value>10</value>
+  <value>10</value>
+  <today>
+    <todayYear>2020</todayYear>
+    <todayMonth>1</todayMonth>
+    <todayDay>26</todayDay>
+  </today>
+</Configs>

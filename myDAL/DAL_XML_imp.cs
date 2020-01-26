@@ -42,8 +42,6 @@ namespace DAL
         /// </summary>
         private DAL_XML_imp()
         {
-            Thread configUpdateThread = new Thread(CheckIfUpdated);
-            configUpdateThread.Start();
             try
             {
                 //giving the paths to the strings (GuestRequestPath etc.)
@@ -250,6 +248,7 @@ namespace DAL
             try
             {
                 LoadGuestRequests();
+                LoadConfigs();
                 if (!GRexist(newGR.GuestRequestKey))
                 {
                     GuestRequestRoot.Add(GRToXElementGR(newGR));
@@ -278,7 +277,7 @@ namespace DAL
                 if (GRexist(updateGR.GuestRequestKey))
                 {
                     (from gr in GuestRequestRoot.Elements()
-                     where gr.Element("ID").Value == updateGR.GuestRequestKey.ToString()
+                     where gr.Element("GuestRequestKey").Value == updateGR.GuestRequestKey.ToString()
                      select gr
                      ).FirstOrDefault().Remove();
                     GuestRequestRoot.Add(GRToXElementGR(updateGR));
@@ -296,39 +295,6 @@ namespace DAL
                 throw a;
             }
         }
-
-        //-----------------------------------------------------------------------------
-
-        //public override void DeleteTester(string testerID)
-        //{
-        //    try
-        //    {
-        //        LoadSchedules();
-        //        LoadGuestRequests();
-        //        if (GRexist(testerID))
-        //        {
-        //            (from tester in GuestRequestRoot.Elements()
-        //             where tester.Element("ID").Value == testerID
-        //             select tester
-        //             ).FirstOrDefault().Remove();
-        //            (from schd in scheduleRoot.Elements()
-        //             where schd.Element("value").Value == testerID
-        //             select schd).FirstOrDefault().Remove();
-        //            SaveSchedules();
-        //            SaveGuestRequests();
-        //        }
-        //        else
-        //            throw new KeyNotFoundException("Tester to delete doesn't exist");
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        //    catch (FileNotFoundException a)
-        //    {
-        //        throw a;
-        //    }
-        //}
 
         //-----------------------------------------------------------------------------
 
@@ -354,7 +320,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public IEnumerable<GuestRequest> ListOfCustomers()
+        public IEnumerable<GuestRequest> ListOfCustomers()//gets all of the requests saved in the system
         {
             List<GuestRequest> guests;
             try
@@ -400,7 +366,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public IEnumerable<GuestRequest> GetAllRequests(Func<GuestRequest, bool> condition=null)
+        public IEnumerable<GuestRequest> GetAllRequests(Func<GuestRequest, bool> condition=null)//gets all requests that fit the condition
         {
             try
             {
@@ -445,6 +411,8 @@ namespace DAL
                 throw a;
             }
         }
+
+
 
         //HostingUnit------------------------------------------------------------------------
 
@@ -524,10 +492,10 @@ namespace DAL
         //-----------------------------------------------------------------------------
 
         /// <summary>
-        /// Converting a XElement HostingUnit from the file to HostingUnit
+        /// Converting a XElement HostingUnit from the file to BE.HostingUnit
         /// </summary>
         /// <param name="toConvert"> the XElement HostingUnit to convert</param>
-        /// <returns> the converted HostingUnit </returns>
+        /// <returns> the converted BE.HostingUnit </returns>
         HostingUnit XElementHUToHU(XElement toConvert)
         {
             return new HostingUnit()//serializer?
@@ -627,6 +595,7 @@ namespace DAL
             try
             {
                 LoadHostingUnits();
+                LoadConfigs();
                 if (!HUexist(newHU.HostingUnitKey))
                 {
                     HostingUnitRoot.Add(HUToXElementHU(newHU));
@@ -716,7 +685,7 @@ namespace DAL
                             select (XElementHUToHU(hu))).FirstOrDefault();
                 }
                 else
-                    throw new KeyNotFoundException("HostingUnit doesn't exist");
+                    throw new KeyNotFoundException("HostingUnit to find doesn't exist");
             }
             catch (FileLoadException a)
             {
@@ -727,7 +696,7 @@ namespace DAL
         //-----------------------------------------------------------------------------
 
         
-        public IEnumerable<HostingUnit> ListOfHostingUnits()
+        public IEnumerable<HostingUnit> ListOfHostingUnits()//gets all hosting units
         {
             try
             {
@@ -780,7 +749,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public IEnumerable<HostingUnit> GetAllUnits(Func<HostingUnit, bool> condition)
+        public IEnumerable<HostingUnit> GetAllUnits(Func<HostingUnit, bool> condition)//gets all units that match the condition
         {
             try
             {
@@ -836,12 +805,11 @@ namespace DAL
             }
         }
 
-        //test---------------------------------------------------------------------------
-        //-------------------------------------------------------------------------------
+        //Orders---------------------------------------------------------------------------
 
         /// <summary>
         /// Create the file in the path thet is given 
-        /// if an exception has been thrown trrow FileLoadException
+        /// if an exception has been thrown throw FileLoadException
         /// </summary>
         void CreateOrderFile()
         {
@@ -852,7 +820,7 @@ namespace DAL
             }
             catch
             {
-                throw new FileLoadException("Can not start the project check your Order Xml files");
+                throw new FileLoadException("Cannot start the project check your Order Xml files");
             }
         }
 
@@ -899,7 +867,7 @@ namespace DAL
             {
                 LoadOrder();
                 var tmp = (from ord in OrderRoot.Elements()
-                            where int.Parse(ord.Element("orderKey").Value) == key
+                            where int.Parse(ord.Element("OrderKey").Value) == key
                             select ord).FirstOrDefault();
  
                 if (tmp == null)
@@ -916,7 +884,7 @@ namespace DAL
         //-----------------------------------------------------------------------------
 
         /// <summary>
-        /// Converting a Order from the file to BL.Order
+        /// Converting a Order from the file to BE.Order
         /// </summary>
         /// <param name="toConvert"> the XElement Order to convert</param>
         /// <returns> the converted Order </returns>
@@ -975,6 +943,7 @@ namespace DAL
                 if (ORexist(newOrder.OrderKey))
                     throw new DuplicateWaitObjectException("Order already exists");
                 OrderRoot.Add(OrderToXElementOrder(newOrder));
+                SaveConfigs();
                 SaveOrders();
             }
             catch (FileLoadException a)
@@ -1018,34 +987,6 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        //public override void UpdateTestStatus(Test testToUpdate)
-        //{
-        //    try
-        //    {
-        //        LoadOrder();
-        //        if (TestExist(testToUpdate.CurrentTestSerialNumber))
-        //        {
-        //            (from test in OrderRoot.Elements()
-        //             where test.Element("TestSerialNumber").Element("value").Value == testToUpdate.CurrentTestSerialNumber.ToString()
-        //             select test).FirstOrDefault().Remove();
-        //            OrderRoot.Add(TestToXElementTest(testToUpdate));
-        //            SaveOrders();
-        //        }
-        //        else
-        //            throw new KeyNotFoundException("Test to update doesn't exist");
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        //    catch (FileNotFoundException a)
-        //    {
-        //        throw a;
-        //    }
-        //}
-
-        //-----------------------------------------------------------------------------
-
         public Order SearchOrbyID(int key)
         {
             try
@@ -1058,7 +999,7 @@ namespace DAL
                             select XElementOrderToOrder(or)).FirstOrDefault();
                 }
                 else
-                    throw new KeyNotFoundException("Order doesn't exist");
+                    throw new KeyNotFoundException("Order to find doesn't exist");
             }
             catch (FileLoadException a)
             {
@@ -1068,7 +1009,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public IEnumerable<Order> ListOfOrders()
+        public IEnumerable<Order> ListOfOrders()//gets all the orders saved in the system
         {
             try
             {
@@ -1096,7 +1037,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public IEnumerable<Order> GetAllOrders(Func<Order, bool> condition=null)
+        public IEnumerable<Order> GetAllOrders(Func<Order, bool> condition=null)//gets all orders that fit the condition
         {
             try
             {
@@ -1130,7 +1071,7 @@ namespace DAL
 
         /// <summary>
         /// Create the file in the path thet is given 
-        /// if an exception has been thrown trrow FileLoadException
+        /// if an exception has been thrown throw FileLoadException
         /// </summary>
         void CreateConfigFile()
         {
@@ -1195,35 +1136,6 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        //public Dictionary<string, object> GetConfig()
-        //{
-        //    try
-        //    {
-        //        LoadConfigs();
-        //        Dictionary<string, object> configs = new Dictionary<string, object>();
-        //        var objFoeDictionary = (from cnfg in ConfigRoot.Elements()
-        //                                where cnfg.Name.LocalName != "SerialNumber"
-        //                                where cnfg.Element("readAble").Value == "true"
-        //                                select new { Key = cnfg.Name.LocalName, Value = cnfg.Element("value").Value });
-        //        foreach (var item in objFoeDictionary)
-        //        {
-        //            configs.Add(item.Key, item.Value as object);
-        //        }
-        //        if (configs.Any())
-        //        {
-        //            return new Dictionary<string, object>(configs);
-        //        }
-        //        else
-        //            throw new NullReferenceException("There is no configuration to return");
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        //}
-
-        //-----------------------------------------------------------------------------
-
         public object GetSpecificConfig(string key)
         {
             try
@@ -1263,14 +1175,19 @@ namespace DAL
             return true;
         }
 
+        public IEnumerable<BankBranch> ListOfBanks()
+        {
+            throw new NotImplementedException();
+        }
+
         //-----------------------------------------------------------------------------
 
-       
+
 
         /// <summary>
-        
 
-       
+
+
     }
 
 }

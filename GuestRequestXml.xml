@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GuestRequests>
+  <GuestRequest>
+    <ID>0</ID>
+    <Name>
+      <FamilyName>teigman</FamilyName>
+      <PrivateName>sori</PrivateName>
+    </Name>
+    <MailAddress>soriteigman@gmail.com</MailAddress>
+    <Status>Active</Status>
+    <RegistrationDate>
+      <Year>2020</Year>
+      <Month>1</Month>
+      <Day>26</Day>
+    </RegistrationDate>
+    <EntryDate>
+      <Year>2020</Year>
+      <Month>1</Month>
+      <Day>28</Day>
+    </EntryDate>
+    <ReleaseDate>
+      <Year>2020</Year>
+      <Month>1</Month>
+      <Day>30</Day>
+    </ReleaseDate>
+    <Area>Eilat</Area>
+    <Type>Tent</Type>
+    <Adults>2</Adults>
+    <Children>3</Children>
+    <Pool>Yes</Pool>
+    <Jacuzzi>Yes</Jacuzzi>
+    <Garden>DontCare</Garden>
+    <ChildrensAttractions>DontCare</ChildrensAttractions>
+    <FitnessCenter>No</FitnessCenter>
+    <Stars>two_star</Stars>
+    <WiFi>Yes</WiFi>
+    <Parking>No</Parking>
+    <Pet>true</Pet>
+    <SubArea>Eilat</SubArea>
+  </GuestRequest>
+</GuestRequests>
