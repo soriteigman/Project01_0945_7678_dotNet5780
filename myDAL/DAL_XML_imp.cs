@@ -558,14 +558,14 @@ namespace DAL
             XElement BranchCity = new XElement("BranchCity", huToConvert.Owner.BankBranchDetails.BranchCity);
 
             XElement HostKey = new XElement("HostKey", huToConvert.Owner.HostKey);
-            XElement PrivateName = new XElement("LastName", huToConvert.Owner.PrivateName);
-            XElement FamilyName = new XElement("LastName", huToConvert.Owner.FamilyName);
-            XElement PhoneNumber = new XElement("LastName", huToConvert.Owner.PhoneNumber);
-            XElement MailAddress = new XElement("LastName", huToConvert.Owner.MailAddress);
-            XElement CollectionClearance = new XElement("LastName", huToConvert.Owner.CollectionClearance);
+            XElement PrivateName = new XElement("PrivateName", huToConvert.Owner.PrivateName);
+            XElement FamilyName = new XElement("FamilyName", huToConvert.Owner.FamilyName);
+            XElement PhoneNumber = new XElement("PhoneNumber", huToConvert.Owner.PhoneNumber);
+            XElement MailAddress = new XElement("MailAddress", huToConvert.Owner.MailAddress);
+            XElement CollectionClearance = new XElement("CollectionClearance", huToConvert.Owner.CollectionClearance);
             XElement BankBranchDetails = new XElement("BankBranchDetails", BankNumber, BankName, BranchNumber,
                 BranchAddress, BranchCity);
-            XElement BankAccountNumber = new XElement("LastName", huToConvert.Owner.BankAccountNumber);
+            XElement BankAccountNumber = new XElement("BankAccountNumber", huToConvert.Owner.BankAccountNumber);
             XElement Name = new XElement("Name", PrivateName, FamilyName);
 
             XElement Owner = new XElement("Owner", HostKey, Name, PhoneNumber, MailAddress, CollectionClearance,
@@ -599,6 +599,7 @@ namespace DAL
                 LoadConfigs();
                 if (!HUexist(newHU.HostingUnitKey))
                 {
+                    newHU.HostingUnitKey = Configuration.HostingUnitKey_s++;
                     HostingUnitRoot.Add(HUToXElementHU(newHU));
                     SaveHostingUnits();
                 }
@@ -732,13 +733,13 @@ namespace DAL
                                               Type = (VacationType)Enum.Parse(typeof(VacationType), hu.Element("Type").Value),
                                               Beds=int.Parse(hu.Element("Beds").Value),
                                               Pet = hu.Element("Pet").Value == "true",
-                                              WiFi = hu.Element("Pet").Value == "true",
-                                              Parking = hu.Element("Pet").Value == "true",
-                                              Pool = hu.Element("Pet").Value == "true",
-                                              Jacuzzi = hu.Element("Pet").Value == "true",
-                                              Garden = hu.Element("Pet").Value == "true",
-                                              ChildrensAttractions = hu.Element("Pet").Value == "true",
-                                              FitnessCenter = hu.Element("Pet").Value == "true",
+                                              WiFi = hu.Element("WiFi").Value == "true",
+                                              Parking = hu.Element("Parking").Value == "true",
+                                              Pool = hu.Element("Pool").Value == "true",
+                                              Jacuzzi = hu.Element("Jacuzzi").Value == "true",
+                                              Garden = hu.Element("Garden").Value == "true",
+                                              ChildrensAttractions = hu.Element("ChildrensAttractions").Value == "true",
+                                              FitnessCenter = hu.Element("FitnessCenter").Value == "true",
                                               Stars = (StarRating)Enum.Parse(typeof(StarRating), hu.Element("Stars").Value),
                                           }).ToList());
             }
@@ -785,13 +786,13 @@ namespace DAL
                                                                 Type = (VacationType)Enum.Parse(typeof(VacationType), hu.Element("Type").Value),
                                                                 Beds = int.Parse(hu.Element("Beds").Value),
                                                                 Pet = hu.Element("Pet").Value == "true",
-                                                                WiFi = hu.Element("Pet").Value == "true",
-                                                                Parking = hu.Element("Pet").Value == "true",
-                                                                Pool = hu.Element("Pet").Value == "true",
-                                                                Jacuzzi = hu.Element("Pet").Value == "true",
-                                                                Garden = hu.Element("Pet").Value == "true",
-                                                                ChildrensAttractions = hu.Element("Pet").Value == "true",
-                                                                FitnessCenter = hu.Element("Pet").Value == "true",
+                                                                WiFi = hu.Element("WiFi").Value == "true",
+                                                                Parking = hu.Element("Parking").Value == "true",
+                                                                Pool = hu.Element("Pool").Value == "true",
+                                                                Jacuzzi = hu.Element("Jacuzzi").Value == "true",
+                                                                Garden = hu.Element("Garden").Value == "true",
+                                                                ChildrensAttractions = hu.Element("ChildrensAttractions").Value == "true",
+                                                                FitnessCenter = hu.Element("FitnessCenter").Value == "true",
                                                                 Stars = (StarRating)Enum.Parse(typeof(StarRating), hu.Element("Stars").Value),
                                                             }).ToList());
 
