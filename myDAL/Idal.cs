@@ -12,7 +12,7 @@ namespace DAL
     {
 
         #region GuestRequest
-        IEnumerable<BE.GuestRequest> GetAllRequests(Func<BE.GuestRequest, bool> predicate = null);
+        IEnumerable<GuestRequest> GetAllRequests(Func<GuestRequest, bool> predicate = null);
 
         void AddGuestRequest(GuestRequest gr);
         void UpdateGuestRequest(GuestRequest gr);
@@ -24,7 +24,7 @@ namespace DAL
 
 
         #region HostingUnit
-        IEnumerable<BE.HostingUnit> GetAllUnits(Func<BE.HostingUnit, bool> predicate = null);
+        IEnumerable<HostingUnit> GetAllUnits(Func<HostingUnit, bool> predicate = null);
 
         void AddHostingUnit(HostingUnit hu);
 
@@ -50,7 +50,7 @@ namespace DAL
         Order SearchOrbyID(int key);
         bool ORexist(int key);
 
-        IEnumerable<BE.Order> GetAllOrders(Func<BE.Order, bool> predicate = null);
+        IEnumerable<Order> GetAllOrders(Func<Order, bool> predicate = null);
 
         #endregion
 

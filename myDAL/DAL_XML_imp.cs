@@ -354,7 +354,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public List<GuestRequest> ListOfCustomers()
+        public IEnumerable<GuestRequest> ListOfCustomers()
         {
             List<GuestRequest> guests;
             try
@@ -400,41 +400,51 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        //public List<Tester> FilterTesters(Predicate<Tester> condition)
-        //{
-        //    try
-        //    {
-        //        LoadGuestRequests();
-        //        List<Tester> testers = new List<Tester>(from tester in GuestRequestRoot.Elements()
-        //                                                select new Tester(tester.Element("ID").Value)
-        //                                                {
-        //                                                    LastName = tester.Element("Name").Element("LastName").Value,
-        //                                                    FirstName = tester.Element("Name").Element("FirstName").Value,
-        //                                                    BirthDay = new DateTime(int.Parse(tester.Element("BirthDay").Element("Year").Value),
-        //                                                                            int.Parse(tester.Element("BirthDay").Element("Month").Value),
-        //                                                                            int.Parse(tester.Element("BirthDay").Element("Day").Value)),
-        //                                                    Age = int.Parse(tester.Element("Age").Value),
-        //                                                    Gender = (Gender)Enum.Parse(typeof(Gender), tester.Element("Gender").Value),
-        //                                                    YearsOfExperience = int.Parse(tester.Element("YearsOfExperience").Value),
-        //                                                    MaxDistanceForTest = int.Parse(tester.Element("MaxDistanceForTest").Value),
-        //                                                    MaxTestInWeek = int.Parse(tester.Element("MaxTestInWeek").Value),
-        //                                                    PhoneNumber = tester.Element("PhoneNumber").Value,
-        //                                                    ProfilePicturePath = tester.Element("ProfilePicturePath").Value,
-        //                                                    VehicleType = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), tester.Element("VehicleType").Value),
-        //                                                    Address = new Address(tester.Element("Address").Element("City").Value,
-        //                                                                          tester.Element("Address").Element("Street").Value,
-        //                                                                          int.Parse(tester.Element("Address").Element("NumOfBuilding").Value))
-        //                                                }).ToList();
-        //        List<Tester> tmp = (from tester in testers
-        //                            where condition(tester)
-        //                            select new Tester(tester)).ToList();
-        //        return tmp;
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        //}
+        public IEnumerable<GuestRequest> GetAllRequests(Func<GuestRequest, bool> condition=null)
+        {
+            try
+            {
+                LoadGuestRequests();
+                List<GuestRequest> guestRequests = new List<GuestRequest>(from gr in GuestRequestRoot.Elements()
+                                                        select new GuestRequest()
+                                                        {
+                                                            GuestRequestKey = Convert.ToInt32(gr.Element("GuestRequestKey").Value),
+                                                            FamilyName = gr.Element("Name").Element("FamilyName").Value,
+                                                            PrivateName = gr.Element("Name").Element("PrivateName").Value,
+                                                            MailAddress = gr.Element("MailAddress").Value,
+                                                            Status = (Status)Enum.Parse(typeof(Status), gr.Element("Status").Value),
+                                                            RegistrationDate = new DateTime(int.Parse(gr.Element("RegistrationDate").Element("YearReg").Value),
+                                                                    int.Parse(gr.Element("RegistrationDate").Element("MonthReg").Value),
+                                                                    int.Parse(gr.Element("RegistrationDate").Element("DayReg").Value)),
+                                                            EntryDate = new DateTime(int.Parse(gr.Element("EntryDate").Element("YearEntry").Value),
+                                                                    int.Parse(gr.Element("EntryDate").Element("MonthEntry").Value),
+                                                                    int.Parse(gr.Element("EntryDate").Element("DayEntry").Value)),
+                                                            ReleaseDate = new DateTime(int.Parse(gr.Element("ReleaseDate").Element("YearRelease").Value),
+                                                                    int.Parse(gr.Element("ReleaseDate").Element("MonthRelease").Value),
+                                                                    int.Parse(gr.Element("ReleaseDate").Element("DayRelease").Value)),
+                                                            Area = (VacationArea)Enum.Parse(typeof(VacationArea), gr.Element("Area").Value),
+                                                            Type = (VacationType)Enum.Parse(typeof(VacationType), gr.Element("Type").Value),
+                                                            Adults = Convert.ToInt32(gr.Element("Adults").Value),
+                                                            Children = Convert.ToInt32(gr.Element("Children").Value),
+                                                            Pool = (Choices)Enum.Parse(typeof(Choices), gr.Element("Pool").Value),
+                                                            Jacuzzi = (Choices)Enum.Parse(typeof(Choices), gr.Element("Jacuzzi").Value),
+                                                            Garden = (Choices)Enum.Parse(typeof(Choices), gr.Element("Garden").Value),
+                                                            ChildrensAttractions = (Choices)Enum.Parse(typeof(Choices), gr.Element("ChildrensAttractions").Value),
+                                                            FitnessCenter = (Choices)Enum.Parse(typeof(Choices), gr.Element("FitnessCenter").Value),
+                                                            WiFi = (Choices)Enum.Parse(typeof(Choices), gr.Element("WiFi").Value),
+                                                            Parking = (Choices)Enum.Parse(typeof(Choices), gr.Element("Parking").Value),
+                                                            SubArea = gr.Element("SubArea").Value,
+                                                        }).ToList();
+                List<GuestRequest> tmp = (from gr in guestRequests
+                                          where condition(gr)
+                                    select gr).ToList();
+                return tmp;
+            }
+            catch (FileLoadException a)
+            {
+                throw a;
+            }
+        }
 
         //HostingUnit------------------------------------------------------------------------
 
@@ -514,10 +524,10 @@ namespace DAL
         //-----------------------------------------------------------------------------
 
         /// <summary>
-        /// Converting a trainee from the file to _DO.Trainee
+        /// Converting a XElement HostingUnit from the file to HostingUnit
         /// </summary>
-        /// <param name="toConvert"> the XElement trainee to convert</param>
-        /// <returns> the converted _DO.Trainee </returns>
+        /// <param name="toConvert"> the XElement HostingUnit to convert</param>
+        /// <returns> the converted HostingUnit </returns>
         HostingUnit XElementHUToHU(XElement toConvert)
         {
             return new HostingUnit()//serializer?
@@ -556,20 +566,16 @@ namespace DAL
                 FitnessCenter = toConvert.Element("FitnessCenter").Value == "true",
                 Stars = (StarRating)Enum.Parse(typeof(StarRating), toConvert.Element("Stars").Value),
                 Beds = Convert.ToInt32(toConvert.Element("Beds").Value),
-
-                //Address = new Address(toConvert.Element("Address").Element("City").Value,
-                //                                      toConvert.Element("Address").Element("Street").Value,
-                //                                      int.Parse(toConvert.Element("Address").Element("NumOfBuilding").Value)),
             };
         }
 
         //-----------------------------------------------------------------------------
 
         /// <summary>
-        /// Converting a trainee to XElement to save in file 
+        /// Converting a HostingUnit to XElement to save in file 
         /// </summary>
-        /// <param name="traineeToConvert"> the trainee to convert </param>
-        /// <returns> the converted XElement trainee </returns>
+        /// <param name="HostingUnitToConvert"> the HostingUnit to convert </param>
+        /// <returns> the converted XElement HostingUnit </returns>
         XElement HUToXElementHU(HostingUnit huToConvert)
         {
             XElement HostingUnitKey = new XElement("HostingUnitKey", huToConvert.HostingUnitKey);
@@ -720,29 +726,8 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        //public string GetTraineeNameByID(string traineeID)
-        //{
-        //    try
-        //    {
-        //        LoadHostingUnits();
-        //        string tmp = (from trainee in HostingUnitRoot.Elements()
-        //                      where trainee.Element("ID").Value == traineeID
-        //                      select trainee.Element("Name").Element("FirstName").Value
-        //                             + " " + trainee.Element("Name").Element("LastName").Value).FirstOrDefault();
-        //        if (tmp != null)
-        //            return tmp;
-        //        else
-        //            throw new KeyNotFoundException("Trainee Doesn't exist");
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        //}
-
-        //-----------------------------------------------------------------------------
-
-        public List<HostingUnit> GetHostingUnits()
+        
+        public IEnumerable<HostingUnit> ListOfHostingUnits()
         {
             try
             {
@@ -795,43 +780,61 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        //public override List<Trainee> FilterTrainee(Predicate<Trainee> condition)
-        //{
-        //    try
-        //    {
-        //        LoadHostingUnits();
-        //        List<Trainee> trainees = new List<Trainee>((from trainee in HostingUnitRoot.Elements()
-        //                                                    select new Trainee(trainee.Element("ID").Value)
-        //                                                    {
-        //                                                        LastName = trainee.Element("Name").Element("LastName").Value,
-        //                                                        FirstName = trainee.Element("Name").Element("FirstName").Value,
-        //                                                        BirthDay = new DateTime(int.Parse(trainee.Element("BirthDay").Element("Year").Value),
-        //                                                                                int.Parse(trainee.Element("BirthDay").Element("Month").Value),
-        //                                                                                int.Parse(trainee.Element("BirthDay").Element("Day").Value)),
-        //                                                        Age = int.Parse(trainee.Element("Age").Value),
-        //                                                        Gender = (Gender)Enum.Parse(typeof(Gender), trainee.Element("Gender").Value),
-        //                                                        PhoneNumber = trainee.Element("PhoneNumber").Value,
-        //                                                        VehicleType = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), trainee.Element("VehicleType").Value),
-        //                                                        Address = new Address(trainee.Element("Address").Element("City").Value,
-        //                                                                              trainee.Element("Address").Element("Street").Value,
-        //                                                                              int.Parse(trainee.Element("Address").Element("NumOfBuilding").Value)),
-        //                                                        GearOfTrainne = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), trainee.Element("GearOfTrainne").Value),
-        //                                                        NameOfTeacher = trainee.Element("NameOfTeacher").Value,
-        //                                                        SchoolName = trainee.Element("SchoolName").Value,
-        //                                                        ProfilePicturePath = trainee.Element("ProfilePicturePath").Value,
-        //                                                        NumOfLessons = int.Parse(trainee.Element("NumOfLessons").Value)
-        //                                                    }).ToList());
+        public IEnumerable<HostingUnit> GetAllUnits(Func<HostingUnit, bool> condition)
+        {
+            try
+            {
+                LoadHostingUnits();
+                List<HostingUnit> HUs = new List<HostingUnit>((from hu in HostingUnitRoot.Elements()
+                                                            select new HostingUnit()
+                                                            {
+                                                                HostingUnitKey = int.Parse(hu.Element("HostingUnitKey").Value),
+                                                                Owner = new Host()
+                                                                {
+                                                                    HostKey = int.Parse(hu.Element("HostKey").Value),
+                                                                    PrivateName = hu.Element("Name").Element("PrivateName").Value,
+                                                                    FamilyName = hu.Element("Name").Element("FamilyName").Value,
+                                                                    PhoneNumber = int.Parse(hu.Element("PhoneNumber").Value),
+                                                                    MailAddress = hu.Element("MailAddress").Value,
+                                                                    BankBranchDetails = new BankBranch()
+                                                                    {
+                                                                        BankNumber = int.Parse(hu.Element("BankNumber").Value),
+                                                                        BankName = hu.Element("BankName").Value,
+                                                                        BranchNumber = int.Parse(hu.Element("BranchNumber").Value),
+                                                                        BranchAddress = hu.Element("BranchAddress").Value,
+                                                                        BranchCity = hu.Element("BranchCity").Value,
+                                                                    },
+                                                                    BankAccountNumber = int.Parse(hu.Element("BankAccountNumber").Value),
+                                                                    CollectionClearance = hu.Element("CollectionClearance").Value == "true",
+                                                                },
 
-        //        List<Trainee> tmp = (from trainee in trainees
-        //                             where condition(trainee)
-        //                             select new Trainee(trainee)).ToList();
-        //        return tmp;
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        //}
+                                                                HostingUnitName = hu.Element("HostingUnitName").Value,
+                                                                //diary
+                                                                Area = (VacationArea)Enum.Parse(typeof(VacationArea), hu.Element("Area").Value),
+                                                                SubArea = hu.Element("SubArea").Value,
+                                                                Type = (VacationType)Enum.Parse(typeof(VacationType), hu.Element("Type").Value),
+                                                                Beds = int.Parse(hu.Element("Beds").Value),
+                                                                Pet = hu.Element("Pet").Value == "true",
+                                                                WiFi = hu.Element("Pet").Value == "true",
+                                                                Parking = hu.Element("Pet").Value == "true",
+                                                                Pool = hu.Element("Pet").Value == "true",
+                                                                Jacuzzi = hu.Element("Pet").Value == "true",
+                                                                Garden = hu.Element("Pet").Value == "true",
+                                                                ChildrensAttractions = hu.Element("Pet").Value == "true",
+                                                                FitnessCenter = hu.Element("Pet").Value == "true",
+                                                                Stars = (StarRating)Enum.Parse(typeof(StarRating), hu.Element("Stars").Value),
+                                                            }).ToList());
+
+                List<HostingUnit> tmp = (from hu in HUs
+                                     where condition(hu)
+                                     select hu).ToList();
+                return tmp;
+            }
+            catch (FileLoadException a)
+            {
+                throw a;
+            }
+        }
 
         //test---------------------------------------------------------------------------
         //-------------------------------------------------------------------------------
@@ -1065,7 +1068,7 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public List<Order> GetAllOrders()
+        public IEnumerable<Order> ListOfOrders()
         {
             try
             {
@@ -1093,52 +1096,35 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        //public override List<Test> FilterTests(Predicate<Test> condition)
-        //{
-        //    try
-        //    {
-        //        LoadOrder();
-        //        List<Test> tests = new List<Test>((from test in OrderRoot.Elements()
-        //                                           select new Test()
-        //                                           {
-        //                                               TesterID = test.Element("TesterID").Value,
-        //                                               TraineeID = test.Element("TraineeID").Value,
-        //                                               DateAndHourOfTest = new DateTime(int.Parse(test.Element("DateAndHourOfTest").Element("Year").Value),
-        //                                                                          int.Parse(test.Element("DateAndHourOfTest").Element("Month").Value),
-        //                                                                          int.Parse(test.Element("DateAndHourOfTest").Element("Day").Value),
-        //                                                                          int.Parse(test.Element("DateAndHourOfTest").Element("Hour").Value),
-        //                                                                          0, 0),
-        //                                               LocationOfTest = new Address(test.Element("LocationOfTest").Element("City").Value,
-        //                                                                            test.Element("LocationOfTest").Element("Street").Value,
-        //                                                                            int.Parse(test.Element("LocationOfTest").Element("NumOfBuilding").Value)),
-        //                                               StatusOfTest = (TestStatus)Enum.Parse(typeof(TestStatus), test.Element("StatusOfTest").Value),
-        //                                               GearType = (TypeOfGear)Enum.Parse(typeof(TypeOfGear), test.Element("GearType").Value),
-        //                                               TypeOfCar = (TypeOfVehicle)Enum.Parse(typeof(TypeOfVehicle), test.Element("TypeOfCar").Value),
-        //                                               GiveWay = bool.Parse(test.Element("GiveWay").Value),
-        //                                               SaveDistance = bool.Parse(test.Element("SaveDistance").Value),
-        //                                               MirrorUse = bool.Parse(test.Element("MirrorUse").Value),
-        //                                               ReverseParking = bool.Parse(test.Element("ReverseParking").Value),
-        //                                               Signals = bool.Parse(test.Element("Signals").Value),
-        //                                               StopSign = bool.Parse(test.Element("StopSign").Value),
-        //                                               RightOfWay = bool.Parse(test.Element("RightOfWay").Value),
-        //                                               ControledTheVehicle = bool.Parse(test.Element("ControledTheVehicle").Value),
-        //                                               Passed = bool.Parse(test.Element("Passed").Value),
-        //                                               Faild = bool.Parse(test.Element("Faild").Value),
-        //                                               NoteOfTester = test.Element("NoteOfTester").Value,
-        //                                               ClipPath = test.Element("ClipPath").Value,
-        //                                               IsClipUpload = bool.Parse(test.Element("IsClipUpload").Value),
-        //                                               CurrentTestSerialNumber = int.Parse(test.Element("TestSerialNumber").Element("value").Value)
-        //                                           }).ToList());
-        //        List<Test> tmp = (from test in tests
-        //                          where condition(test)
-        //                          select new Test(test)).ToList();
-        //        return tmp;
-        //    }
-        //    catch (FileLoadException a)
-        //    {
-        //        throw a;
-        //    }
-        // }
+        public IEnumerable<Order> GetAllOrders(Func<Order, bool> condition=null)
+        {
+            try
+            {
+                LoadOrder();
+                List<Order> ORs = new List<Order>((from or in OrderRoot.Elements()
+                                                   select new Order()
+                                                   {
+                                                       OrderKey = Convert.ToInt32(or.Element("OrderKey").Value),
+                                                       HostingUnitKey = Convert.ToInt32(or.Element("HostingUnitKey").Value),
+                                                       GuestRequestKey = Convert.ToInt32(or.Element("GuestRequestKey").Value),
+                                                       CreateDate = new DateTime(int.Parse(or.Element("CreateDate").Element("CreateDateYear").Value),
+                                                                      int.Parse(or.Element("CreateDate").Element("CreateDateMonth").Value),
+                                                                      int.Parse(or.Element("CreateDate").Element("CreateDateDay").Value)),
+                                                       SentEmail = new DateTime(int.Parse(or.Element("SentEmail").Element("SentEmailYear").Value),
+                                                                      int.Parse(or.Element("SentEmail").Element("SentEmailMonth").Value),
+                                                                      int.Parse(or.Element("SentEmail").Element("SentEmailDay").Value)),
+                                                       Status = (Status)Enum.Parse(typeof(Status), or.Element("Status").Value),
+                                                   }).ToList());
+                List<Order> tmp = (from o in ORs
+                                  where condition(o)
+                                  select o).ToList();
+                return tmp;
+            }
+            catch (FileLoadException a)
+            {
+                throw a;
+            }
+        }
 
         //configs------------------------------------------------------------------------
 
@@ -1209,36 +1195,36 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override Dictionary<string, object> GetConfig()
-        {
-            try
-            {
-                LoadConfigs();
-                Dictionary<string, object> configs = new Dictionary<string, object>();
-                var objFoeDictionary = (from cnfg in ConfigRoot.Elements()
-                                        where cnfg.Name.LocalName != "SerialNumber"
-                                        where cnfg.Element("readAble").Value == "true"
-                                        select new { Key = cnfg.Name.LocalName, Value = cnfg.Element("value").Value });
-                foreach (var item in objFoeDictionary)
-                {
-                    configs.Add(item.Key, item.Value as object);
-                }
-                if (configs.Any())
-                {
-                    return new Dictionary<string, object>(configs);
-                }
-                else
-                    throw new NullReferenceException("There is no configuration to return");
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-        }
+        //public Dictionary<string, object> GetConfig()
+        //{
+        //    try
+        //    {
+        //        LoadConfigs();
+        //        Dictionary<string, object> configs = new Dictionary<string, object>();
+        //        var objFoeDictionary = (from cnfg in ConfigRoot.Elements()
+        //                                where cnfg.Name.LocalName != "SerialNumber"
+        //                                where cnfg.Element("readAble").Value == "true"
+        //                                select new { Key = cnfg.Name.LocalName, Value = cnfg.Element("value").Value });
+        //        foreach (var item in objFoeDictionary)
+        //        {
+        //            configs.Add(item.Key, item.Value as object);
+        //        }
+        //        if (configs.Any())
+        //        {
+        //            return new Dictionary<string, object>(configs);
+        //        }
+        //        else
+        //            throw new NullReferenceException("There is no configuration to return");
+        //    }
+        //    catch (FileLoadException a)
+        //    {
+        //        throw a;
+        //    }
+        //}
 
         //-----------------------------------------------------------------------------
 
-        public override object GetSpecificConfig(string key)
+        public object GetSpecificConfig(string key)
         {
             try
             {
@@ -1247,8 +1233,7 @@ namespace DAL
                 {
                     return (from cnfg in ConfigRoot.Elements()
                             where cnfg.Name.LocalName == key
-                            where bool.Parse(cnfg.Element("readAble").Value) == true
-                            select cnfg.Value).First();
+                            select cnfg.Value).FirstOrDefault();
                 }
                 else
                     throw new KeyNotFoundException("This config doesn't exist");
@@ -1280,221 +1265,12 @@ namespace DAL
 
         //-----------------------------------------------------------------------------
 
-        public override void ChangeConfig(string parm, object value)
-        {
-            try
-            {
-                LoadConfigs();
-                if (ConfigExists(parm))
-                {
-                    foreach (var item in ConfigRoot.Elements())
-                    {
-                        if (item.Name.LocalName == parm)
-                        {
-                            if (bool.Parse(item.Element("writeAble").Value) == true)
-                            {
-                                item.Element("value").Value = value.ToString();
-                                SaveConfigs();
-                                updated = true;
-                                break;
-                            }
-                            else
-                                throw new AccessViolationException("Not alwod to change this config");
-                        }
-                    }
-                }
-                else
-                    throw new KeyNotFoundException("This config doesn't exist");
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-            catch (FileNotFoundException a)
-            {
-                throw a;
-            }
-        }
-
-        //-----------------------------------------------------------------------------
+       
 
         /// <summary>
-        /// Checking if the flag of change config is true 
-        /// if it is, it will operate the configUpdate event
-        /// if it is not, it will make the thread sleep for 1 second
-        /// </summary>
-        void CheckIfUpdated()
-        {
-            while (true)
-            {
-                if (updated)
-                {
-                    updated = false;
-                    instance?.ConfigUpdated();
-                }
-                Thread.Sleep(1000);
-            }
-        }
+        
 
-        //schedules----------------------------------------------------------------------
-
-        /// <summary>
-        /// Create the file in the path thet is given 
-        /// if an exception has been thrown trrow FileLoadException
-        /// </summary>
-        void CreateScheduleFile()
-        {
-            try
-            {
-                scheduleRoot = new XElement("Schedules");
-                scheduleRoot.Save(schedulePath);
-            }
-            catch
-            {
-                throw new FileLoadException("Can not start the project check your Schedules Xml files");
-            }
-        }
-
-        //----------------------------------------------------------------------------
-
-        /// <summary>
-        /// Load the file and throw FileLoadException if an exception has been thrown 
-        /// </summary>
-        void LoadSchedules()
-        {
-            try
-            {
-                scheduleRoot = XElement.Load(schedulePath);
-            }
-            catch
-            {
-                throw new FileLoadException("Unable to open schedules fiile");
-            }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        /// <summary>
-        /// Save the changes in the file
-        /// </summary>
-        void SaveSchedules()
-        {
-            try
-            {
-                scheduleRoot.Save(schedulePath);
-            }
-            catch
-            {
-                throw new FileNotFoundException("Unable to save schedules Xml file");
-            }
-        }
-
-        XElement ScheduleToXElement(bool[,] schdule)
-        {
-            XElement week = new XElement("week");
-            for (int i = 0; i < 5; i++)
-            {
-                XElement day = new XElement("day" + (i + 1));
-                for (int j = 0; j < 6; j++)
-                {
-                    XElement hour = new XElement("hour" + (j + 9), schdule[j, i]);
-                    day.Add(hour);
-                }
-                week.Add(day);
-            }
-            return week;
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public override void SetSchedule(string testerID, bool[,] testerSchedule)
-        {
-            try
-            {
-                LoadSchedules();
-                XElement IDValue = new XElement("value", testerID);
-                XElement ID = new XElement("ID", IDValue);
-                XElement schedule = new XElement(ScheduleToXElement(testerSchedule));
-                ID.Add(schedule);
-                scheduleRoot.Add(ID);
-                SaveSchedules();
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-            catch (FileNotFoundException a)
-            {
-                throw a;
-            }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public override void UpdateSchedule(string testerId, bool[,] schedhule)
-        {
-            try
-            {
-                LoadGuestRequests();
-                LoadSchedules();
-                if (GRexist(testerId))
-                {
-                    (from schd in scheduleRoot.Elements()
-                     where schd.Element("value").Value == testerId
-                     select schd).FirstOrDefault().Remove();
-                    SaveSchedules();
-                    SetSchedule(testerId, schedhule);
-                }
-                else
-                    throw new KeyNotFoundException("Tester with this ID doesn't exist");
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-            catch (FileNotFoundException a)
-            {
-                throw a;
-            }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public override bool[,] GetTesterScheduleByID(string testerID)
-        {
-            bool[,] testerSchedule = new bool[6, 5];
-            try
-            {
-                LoadGuestRequests();
-                LoadSchedules();
-                if (GRexist(testerID))
-                {
-                    XElement schedule = (from schd in scheduleRoot.Elements()
-                                         where schd.Element("value").Value == testerID
-                                         select new XElement(schd.Element("week"))).FirstOrDefault();
-
-                    if (schedule != null)
-                    {
-                        for (int i = 0; i < 5; i++)
-                        {
-                            for (int j = 0; j < 6; j++)
-                            {
-                                testerSchedule[j, i] = bool.Parse(schedule.Element("day" + (i + 1)).Element("hour" + (j + 9)).Value);
-                            }
-                        }
-                        return testerSchedule;
-                    }
-                    else
-                        throw new KeyNotFoundException("Didn't find this tester's schedule in Xml file");
-                }
-                else
-                    throw new KeyNotFoundException("Tester with this ID doesn't exist");
-            }
-            catch (FileLoadException a)
-            {
-                throw a;
-            }
-        }
+       
     }
 
 }

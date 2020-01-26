@@ -27,7 +27,7 @@ namespace DAL
 
         //----------------------------------------------------------------------------------------------
         #region GuestRequest
-        public IEnumerable<BE.GuestRequest> GetAllRequests(Func<BE.GuestRequest, bool> predicate = null)
+        public IEnumerable<BE.GuestRequest> GetAllRequests(Func<GuestRequest, bool> predicate = null)
         {
             IEnumerable<GuestRequest> LHu = ListOfCustomers();
             if (predicate == null)
