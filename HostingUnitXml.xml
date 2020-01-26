@@ -1,2 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<HostingUnits />
+<HostingUnits>
+  <HostingUnit>
+    <HostingUnitKey>10000000</HostingUnitKey>
+    <HostingUnitName>plz work</HostingUnitName>
+    <Owner>
+      <HostKey>337757678</HostKey>
+      <Name>
+        <PrivateName>sori</PrivateName>
+        <FamilyName>teigman</FamilyName>
+      </Name>
+      <PhoneNumber>111</PhoneNumber>
+      <MailAddress>soriteigman@gmail.com</MailAddress>
+      <CollectionClearance>true</CollectionClearance>
+      <BankBranchDetails>
+        <BankNumber>111</BankNumber>
+        <BankName>hapoalim</BankName>
+        <BranchNumber>111</BranchNumber>
+        <BranchAddress>sss</BranchAddress>
+        <BranchCity>sss</BranchCity>
+      </BankBranchDetails>
+      <BankAccountNumber>1111</BankAccountNumber>
+    </Owner>
+    <Area>South</Area>
+    <Type>BeachHouse</Type>
+    <SubArea>Netanya</SubArea>
+    <Pet>false</Pet>
+    <WiFi>true</WiFi>
+    <Parking>false</Parking>
+    <Pool>true</Pool>
+    <Jacuzzi>true</Jacuzzi>
+    <Garden>false</Garden>
+    <ChildrensAttractions>false</ChildrensAttractions>
+    <FitnessCenter>false</FitnessCenter>
+    <Stars>five_star</Stars>
+    <Beds>7</Beds>
+  </HostingUnit>
+</HostingUnits>
