@@ -35,6 +35,7 @@ namespace BL
         void ChangeRequestStatus(Order o);//after order status changes to closed, also close to request status
         IEnumerable<GuestRequest> AllRequestsThatMatch(Predicate<GuestRequest> conditions);//returns all requests that fullfill the conditions 
         int NumOfSent_GR_Orders(GuestRequest gr);//returns the num of orders that were sent for that guest request
+        IEnumerable<GuestRequest> DaysPassedOnReq(int numOfDays);//returns all req that were created "numOfDays" ago
 
         #endregion
 

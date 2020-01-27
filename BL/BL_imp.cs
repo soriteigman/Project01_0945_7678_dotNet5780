@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BE;
 using DAL;
 using System.Net.Mail;
+using System.Threading;
 
 namespace BL
 {
@@ -421,12 +422,24 @@ namespace BL
             return ord;
 
         }
+        public IEnumerable<GuestRequest> DaysPassedOnReq(int numOfDays)//returns all gr that were sent a email/ created "numOfDays" ago
+        {
+            IEnumerable<GuestRequest> gr = dal_bl.ListOfCustomers();//gets the list of gr
+
+            var createResult = from ger in gr //creates a list of all gr that need to be closed
+                               where (ger.RegistrationDate.AddDays(numOfDays) < Configuration.today && ger.Status == Status.Active)
+                               select ger;
+
+            return createResult;
+
+        }
+        
         public IEnumerable<Order> DaysPassedOnOrders(int numOfDays)//returns all orders that were sent a email/ created "numOfDays" ago
         {
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
             var createResult = from ord in orders //creates a list of all orders that need to be closed
-                               where (ord.SentEmail.AddDays(numOfDays)<Configuration.today)
+                               where (ord.SentEmail.AddDays(numOfDays)<Configuration.today && ord.Status!=Status.Closed)
                                select ord;
 
             return createResult;
@@ -591,40 +604,41 @@ namespace BL
             return (endDate - startDate).Days;
         }
         public void SendEmail(Order o)//sends email when order status changes to "sent mail"
-        {      
+        {
             GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey);
-            Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
-         
-            try
-            {
-                IsValidEmail(gr.MailAddress);
-                IsValidEmail(h.MailAddress);
-            }
-            catch(InvalidOperationException a)
-            {
-                throw a;
-            }
-            Console.WriteLine("email was sent, catch it if u can!!!!");
+                Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
 
-            MailMessage mail = new MailMessage();
-            mail.To.Add(gr.MailAddress);
-            mail.From = new MailAddress("stburack@gmail.com");
-            mail.Subject = "vacation home offer";
-            mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? if so please contact me at "+h.MailAddress;
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
+                try
+                {
+                    IsValidEmail(gr.MailAddress);
+                    IsValidEmail(h.MailAddress);
+                }
+                catch (InvalidOperationException a)
+                {
+                    throw a;
+                }
+            new Thread(() =>
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(gr.MailAddress);
+                mail.From = new MailAddress("stburack@gmail.com");
+                mail.Subject = "vacation home offer";
+                mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? if so please contact me at " + h.MailAddress;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
 
-            smtp.Credentials = new System.Net.NetworkCredential("stminiproject@gmail.com", "stmini123");
-            smtp.EnableSsl = true;
-            try
-            {
-                smtp.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+                smtp.Credentials = new System.Net.NetworkCredential("stminiproject@gmail.com", "stmini123");
+                smtp.EnableSsl = true;
+                try
+                {
+                    smtp.Send(mail);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }).Start();
         }
         #endregion
 

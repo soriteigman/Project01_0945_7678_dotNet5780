@@ -132,41 +132,45 @@ namespace PLWPF
         #region daily
         private void DailyUpdate()
         {
-            //Time when method needs to be called
-            var DailyTime = "01:00:00";
-            var timeParts = DailyTime.Split(new char[1] { ':' });
-
-            var dateNow = DateTime.Now;
-            var date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day,
-                       int.Parse(timeParts[0]), int.Parse(timeParts[1]), int.Parse(timeParts[2]));
-            TimeSpan ts;
-            if (date > dateNow)
-                ts = date - dateNow;
-            else
+            while (true)
             {
-                date = date.AddDays(1);
-                ts = date - dateNow;
+                DateTime _DateLastRun;
+                _DateLastRun = DateTime.Now.Date;
+
+                if (_DateLastRun < DateTime.Now.Date)
+                {
+                    OrderDailyMethod();
+                    ReqDailyMethod();
+                    _DateLastRun = DateTime.Now.Date;
+                }
             }
-
-            //waits certan time and run the code
-            Task.Delay(ts).ContinueWith((x) => SomeMethod());
-
-            Console.Read();
         }
 
-        private void SomeMethod()
+        private void ReqDailyMethod()
+        {
+            IEnumerable<GuestRequest> listOfreq = _bl.DaysPassedOnReq(31);
+            List<GuestRequest> g = new List<GuestRequest>();
+            foreach (GuestRequest o in listOfreq)
+            {
+                g.Add(o);
+            }
+            g.ForEach(element => element.Status = Status.Closed);
+            g.ForEach(element => _bl.Updategr(element));
+        }
+
+        private void OrderDailyMethod()
         {
             IEnumerable<Order> listOfOrder = _bl.DaysPassedOnOrders(31);
-            List<Order> ord=null;
+            List<Order> ord=new List<Order>();
             foreach(Order o in listOfOrder)
             {
                 ord.Add(o);
             }
             ord.ForEach(element => element.Status = Status.Closed);
             ord.ForEach(element => _bl.UpdateOrder(element));
- 
         }
         #endregion
+
         #region hu func
         private void HUApplyFiltering(object sender, RoutedEventArgs e)
         {

@@ -76,4 +76,42 @@
     <Pet>true</Pet>
     <SubArea>Beitar</SubArea>
   </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000007</GuestRequestKey>
+    <Name>
+      <FamilyName>burack</FamilyName>
+      <PrivateName>st</PrivateName>
+    </Name>
+    <MailAddress>stburack@gmail.com</MailAddress>
+    <Status>Active</Status>
+    <RegistrationDate>
+      <YearReg>2020</YearReg>
+      <MonthReg>1</MonthReg>
+      <DayReg>27</DayReg>
+    </RegistrationDate>
+    <EntryDate>
+      <YearEntry>2020</YearEntry>
+      <MonthEntry>5</MonthEntry>
+      <DayEntry>18</DayEntry>
+    </EntryDate>
+    <ReleaseDate>
+      <YearRelease>2020</YearRelease>
+      <MonthRelease>5</MonthRelease>
+      <DayRelease>21</DayRelease>
+    </ReleaseDate>
+    <Area>Jerusalem</Area>
+    <Type>BeachHouse</Type>
+    <Adults>1</Adults>
+    <Children>0</Children>
+    <Pool>Yes</Pool>
+    <Jacuzzi>Yes</Jacuzzi>
+    <Garden>Yes</Garden>
+    <ChildrensAttractions>DontCare</ChildrensAttractions>
+    <FitnessCenter>DontCare</FitnessCenter>
+    <Stars>five_star</Stars>
+    <WiFi>DontCare</WiFi>
+    <Parking>DontCare</Parking>
+    <Pet>true</Pet>
+    <SubArea>Beitar</SubArea>
+  </GuestRequest>
 </GuestRequests>
