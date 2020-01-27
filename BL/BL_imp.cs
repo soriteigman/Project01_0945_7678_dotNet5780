@@ -419,8 +419,6 @@ namespace BL
             {
                 throw e;
             }
-            return ord;
-
         }
         public IEnumerable<GuestRequest> DaysPassedOnReq(int numOfDays)//returns all gr that were sent a email/ created "numOfDays" ago
         {
@@ -623,7 +621,8 @@ namespace BL
                 mail.To.Add(gr.MailAddress);
                 mail.From = new MailAddress("stburack@gmail.com");
                 mail.Subject = "vacation home offer";
-                mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in continuing the process? if so please contact me at " + h.MailAddress;
+                mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in cont" +
+                "inuing the process? if so please contact me at " + h.MailAddress;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
@@ -642,11 +641,17 @@ namespace BL
         }
         #endregion
 
-        public IEnumerable<BankBranch> ListOfBanks()
+        #region bank
+        public IEnumerable<BankBranch> ListOfBanks(string searchString)
+        {
+            return dal_bl.GetAllbanks(t => ((t.BankName.Contains(searchString)||t.BranchAddress.Contains(searchString)||t.BranchCity.Contains(searchString))));
+        }
+            public IEnumerable<BankBranch> ListOfBanks()
         {
             return dal_bl.ListOfBanks();//returns the list of orders
 
         }
+        #endregion
 
     }
 }

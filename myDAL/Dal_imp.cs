@@ -242,6 +242,11 @@ namespace DAL
             return from bankAccount in DataSource.BankAccountCollection
                    select bankAccount.Clone();
         }
+
+        public IEnumerable<BankBranch> GetAllbanks(Func<BankBranch, bool> condition = null)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }

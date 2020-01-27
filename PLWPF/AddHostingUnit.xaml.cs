@@ -50,7 +50,6 @@ namespace PLWPF
 
             this.BankInfoTabUserControl.Lname.Content = "Search";
             this.BankInfoTabUserControl.Lkey.Content = "Please select your bank branch";
-            //this.BankInfoTabUserControl.Lkey.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.Lstar.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.Larea.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.Ltype.Visibility = Visibility.Hidden;
@@ -65,39 +64,25 @@ namespace PLWPF
 
 
 
-            //this.BankInfoTabUserControl.FilterName.TextChanged += ApplyFiltering;
-            //this.BankInfoTabUserControl.FilterKey.SelectionChanged += ApplyFiltering;
-            //this.BankInfoTabUserControl.FilterStar.SelectionChanged += ApplyFiltering;
-            //this.BankInfoTabUserControl.FilterArea.SelectionChanged += ApplyFiltering;
-            //this.BankInfoTabUserControl.FilterType.SelectionChanged += ApplyFiltering;
-            //this.BankInfoTabUserControl.AddButton.Click += addOrder;
-            //this.BankInfoTabUserControl.updateButton.Click += updateHu;
-            //this.BankInfoTabUserControl.RemoveButton.Click += remove_Click;
-
-            //this.OrdersTabUserControl.DataGrid.MouseDoubleClick += DataGridRow_MouseDoubleClick;
-
-            //this.OrdersTabUserControl.refreshButton.Visibility = Visibility.Hidden;
-
-            //this.OrdersTabUserControl.FilterKey.ItemsSource = keys;
-            //this.OrdersTabUserControl.FilterKey.SelectedItem = "{Binding Path=UnitKey,Mode=TwoWay}";
-
-            //this.OrdersTabUserControl.FilterStar.ItemsSource = Enum.GetValues(typeof(BE.StarRating));
-            //this.OrdersTabUserControl.FilterStar.SelectedItem = "{Binding Path=UnitStar,Mode=TwoWay}";
-
-            //this.OrdersTabUserControl.FilterArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
-            //this.OrdersTabUserControl.FilterArea.SelectedItem = "{Binding Path=UnitArea,Mode=TwoWay}";
-
-            //this.OrdersTabUserControl.FilterType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
-            //this.OrdersTabUserControl.FilterType.SelectedItem = "{Binding Path=UnitPath,Mode=TwoWay}";
-
-            //this.OrdersTabUserControl.DataGrid.ItemsSource = units;
-            //this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
-            //this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
-            //this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
-
+            this.BankInfoTabUserControl.FilterName.TextChanged += ApplyFilteringBank;
 
             #endregion
 
+        }
+
+        private void ApplyFilteringBank(object sender, TextChangedEventArgs e)
+        {
+            this.BankInfoTabUserControl.DataGrid.ItemsSource = from item in _bl.ListOfBanks(
+                                                    this.BankInfoTabUserControl.FilterName.Text)
+                                                             orderby item.BankName, item.BankNumber, item.BranchNumber
+                                                             select new
+                                                             {
+                                                                 item.BankName,
+                                                                 item.BankNumber,
+                                                                 item.BranchNumber,
+                                                                 item.BranchAddress,
+                                                                 item.BranchCity
+                                                             };
         }
 
 
