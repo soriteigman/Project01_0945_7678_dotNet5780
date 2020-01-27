@@ -39,7 +39,6 @@ namespace PLWPF
             InitializeComponent();
             units = _bl.searchHUbyOwner(id);//list of all units for this host
             ord = _bl.GetsOpenOrders().ToList();
-            //myOrds = ord.ToList();
             #region איתחול
             foreach (HostingUnit h in units)
             {

@@ -57,6 +57,7 @@ namespace DAL
 
         #region Bank
         IEnumerable<BankBranch> ListOfBanks();
+        IEnumerable<BankBranch> GetAllbanks(Func<BankBranch, bool> condition = null);//gets all requests that fit the condition
 
         #endregion
 

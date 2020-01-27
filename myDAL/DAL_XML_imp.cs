@@ -1226,9 +1226,25 @@ namespace DAL
 
         //Banks-----------------------------------------------------------------------------
         #region banks
-       
+
 
         //save banks
+        public IEnumerable<BankBranch> GetAllbanks(Func<BankBranch, bool> condition = null)//gets all requests that fit the condition
+        {
+            try
+            {
+                List <BankBranch> banks= ListOfBanks().ToList();
+                List<BankBranch> tmp = (from bank in banks
+                                          where condition(bank)
+                                          select bank).ToList();
+                return tmp;
+            }
+            catch (FileLoadException a)
+            {
+                throw a;
+            }
+        }
+
         public IEnumerable<BankBranch> ListOfBanks()
         {
 

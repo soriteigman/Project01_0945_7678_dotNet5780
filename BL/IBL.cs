@@ -78,5 +78,7 @@ namespace BL
         #endregion
 
         IEnumerable<BankBranch> ListOfBanks();
+        IEnumerable<BankBranch> ListOfBanks(string searchString);
+
     }
 }
