@@ -126,7 +126,7 @@
             <Label Name="type" Content="Property Type:" Grid.Column="0" Grid.Row="11" Margin="1,2.333,0.667,2.333"/>
             <Label Name="bank" Content="Bank Account:" Grid.Column="0" Grid.Row="12" Margin="1,3.667,4.667,1.333"/>
 
-            <CheckBox Name="Pets" Content="Pets" IsChecked="{Binding Pets, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Margin="1.333,4.667,-0.667,0.667" Grid.Column="1" Grid.Row="16"/>
+            <CheckBox Name="Pets" Content="Pets" IsChecked="{Binding Pet, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Margin="1.333,4.667,-0.667,0.667" Grid.Column="1" Grid.Row="16"/>
             <CheckBox Name="Wifi" Content="WiFi" Margin="-2,33,0.667,33.667" IsChecked="{Binding WiFi, Mode=TwoWay,UpdateSourceTrigger=Explicit}" RenderTransformOrigin="0.174,0.467" Grid.Row="14" Grid.RowSpan="3"/>
             <CheckBox Name="Parking" Content="Parking" Margin="0,0.667,0.667,33" IsChecked="{Binding Parking, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Row="13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
             <CheckBox Name="Pool" Content="Pool" Margin="0.333,4.667,0.333,0" IsChecked="{Binding Pool, Mode=TwoWay,UpdateSourceTrigger=Explicit}" Grid.Column="1" Grid.Row="13" Grid.RowSpan="2" Height="29" VerticalAlignment="Top"/>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GuestRequests>
+  <GuestRequest>
+    <GuestRequestKey>10000001</GuestRequestKey>
+    <Name>
+      <FamilyName>burack</FamilyName>
+      <PrivateName>st</PrivateName>
+    </Name>
+    <MailAddress>stburack@gmail.com</MailAddress>
+    <Status>Closed</Status>
+    <RegistrationDate>
+      <YearReg>2020</YearReg>
+      <MonthReg>1</MonthReg>
+      <DayReg>27</DayReg>
+    </RegistrationDate>
+    <EntryDate>
+      <YearEntry>2020</YearEntry>
+      <MonthEntry>1</MonthEntry>
+      <DayEntry>28</DayEntry>
+    </EntryDate>
+    <ReleaseDate>
+      <YearRelease>2020</YearRelease>
+      <MonthRelease>1</MonthRelease>
+      <DayRelease>30</DayRelease>
+    </ReleaseDate>
+    <Area>North</Area>
+    <Type>BeachHouse</Type>
+    <Adults>1</Adults>
+    <Children>0</Children>
+    <Pool>Yes</Pool>
+    <Jacuzzi>Yes</Jacuzzi>
+    <Garden>Yes</Garden>
+    <ChildrensAttractions>Yes</ChildrensAttractions>
+    <FitnessCenter>Yes</FitnessCenter>
+    <Stars>five_star</Stars>
+    <WiFi>Yes</WiFi>
+    <Parking>Yes</Parking>
+    <Pet>true</Pet>
+    <SubArea>Caesarea</SubArea>
+  </GuestRequest>
+</GuestRequests>

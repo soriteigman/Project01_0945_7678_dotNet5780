@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <HostingUnitKey_s>10000001</HostingUnitKey_s>
+  <GuestRequest_s>10000001</GuestRequest_s>
+  <OrderKey_s>10000001</OrderKey_s>
+  <ExpDay>10</ExpDay>
+  <commission>10</commission>
+  <today>
+    <todayYear>2020</todayYear>
+    <todayMonth>1</todayMonth>
+    <todayDay>27</todayDay>
+  </today>
+</Configuration>
