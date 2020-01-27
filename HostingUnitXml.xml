@@ -36,4 +36,40 @@
     <Stars>five_star</Stars>
     <Beds>2</Beds>
   </HostingUnit>
+  <HostingUnit>
+    <HostingUnitKey>10000002</HostingUnitKey>
+    <HostingUnitName>awesome twoesome</HostingUnitName>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
+    <Owner>
+      <HostKey>337757678</HostKey>
+      <Name>
+        <PrivateName>sori</PrivateName>
+        <FamilyName>teigman</FamilyName>
+      </Name>
+      <PhoneNumber>1234</PhoneNumber>
+      <MailAddress>soriteigman@gmail.com</MailAddress>
+      <CollectionClearance>true</CollectionClearance>
+      <BankBranchDetails>
+        <BankNumber>13</BankNumber>
+        <BankName>Union Bank of Israel Ltd</BankName>
+        <BranchNumber>92</BranchNumber>
+        <BranchAddress>18 Hertzel st., Hadera 38421 57</BranchAddress>
+        <BranchCity>HADERA</BranchCity>
+      </BankBranchDetails>
+      <BankAccountNumber>1234</BankAccountNumber>
+    </Owner>
+    <Area>North</Area>
+    <Type>Hotel</Type>
+    <SubArea>Caesarea</SubArea>
+    <Pet>false</Pet>
+    <WiFi>true</WiFi>
+    <Parking>true</Parking>
+    <Pool>true</Pool>
+    <Jacuzzi>true</Jacuzzi>
+    <Garden>true</Garden>
+    <ChildrensAttractions>true</ChildrensAttractions>
+    <FitnessCenter>false</FitnessCenter>
+    <Stars>five_star</Stars>
+    <Beds>9</Beds>
+  </HostingUnit>
 </HostingUnits>

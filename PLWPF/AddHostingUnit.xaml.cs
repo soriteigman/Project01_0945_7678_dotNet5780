@@ -38,6 +38,9 @@ namespace PLWPF
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
 
             #region banks
+
+            this.BankInfoTabUserControl.DataGrid.UnselectAll();
+
             this.BankInfoTabUserControl.AddButton.Visibility=Visibility.Hidden;
             this.BankInfoTabUserControl.RemoveButton.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.refreshButton.Visibility = Visibility.Hidden;
@@ -46,7 +49,8 @@ namespace PLWPF
             this.BankInfoTabUserControl.ResetFiltersButton.Content = "DONE";
 
             this.BankInfoTabUserControl.Lname.Content = "Search";
-            this.BankInfoTabUserControl.Lkey.Visibility = Visibility.Hidden;
+            this.BankInfoTabUserControl.Lkey.Content = "Please select your bank branch";
+            //this.BankInfoTabUserControl.Lkey.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.Lstar.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.Larea.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.Ltype.Visibility = Visibility.Hidden;
@@ -56,14 +60,16 @@ namespace PLWPF
             this.BankInfoTabUserControl.FilterType.Visibility = Visibility.Hidden;
             this.BankInfoTabUserControl.DataGrid.ItemsSource = _bl.ListOfBanks();
 
+            this.BankInfoTabUserControl.DataGrid.SelectionChanged += ShowButtons;
+            this.BankInfoTabUserControl.ResetFiltersButton.Click += done_Click;
+
+
 
             //this.BankInfoTabUserControl.FilterName.TextChanged += ApplyFiltering;
             //this.BankInfoTabUserControl.FilterKey.SelectionChanged += ApplyFiltering;
             //this.BankInfoTabUserControl.FilterStar.SelectionChanged += ApplyFiltering;
             //this.BankInfoTabUserControl.FilterArea.SelectionChanged += ApplyFiltering;
             //this.BankInfoTabUserControl.FilterType.SelectionChanged += ApplyFiltering;
-            //this.BankInfoTabUserControl.ResetFiltersButton.Click += ResetFilters;
-            //this.BankInfoTabUserControl.DataGrid.SelectionChanged += ShowButtons;
             //this.BankInfoTabUserControl.AddButton.Click += addOrder;
             //this.BankInfoTabUserControl.updateButton.Click += updateHu;
             //this.BankInfoTabUserControl.RemoveButton.Click += remove_Click;
@@ -88,7 +94,6 @@ namespace PLWPF
             //this.OrdersTabUserControl.DataGrid.DisplayMemberPath = "units";
             //this.OrdersTabUserControl.DataGrid.SelectedIndex = 0;
             //this.OrdersTabUserControl.DataGrid.AutoGeneratingColumn += WayOfView;
-            //this.OrdersTabUserControl.DataGrid.UnselectAll();
 
 
             #endregion
@@ -180,7 +185,7 @@ namespace PLWPF
 
         #endregion
 
-
+        #region textbox simple functions
         private void id_PreviewMouseDown(object sender, MouseButtonEventArgs e)//cleaning the text box so you can write the ID 
         {
             if (ID.Text == "Enter Your ID")
@@ -253,6 +258,68 @@ namespace PLWPF
                 Email.Text = "Enter Your Email Address";
         }
 
+        private void HUname_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (HUname.Text == "")
+                HUname.Text = "Give Your Property a Name";
+        }
+
+        private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (BankAcctNum.Text == "")
+                BankAcctNum.Text = "Enter Your Bank Account Number";
+        }
+
+        private void Beds_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (Beds.Text == "")
+                Beds.Text = "Amount of Beds Your Property has";
+        }
+
+        private void Fname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Fname.BorderBrush = Brushes.Black;
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Email.BorderBrush = Brushes.Black;
+
+        }
+
+        private void ID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ID.BorderBrush = Brushes.Black;
+        }
+
+        private void Lname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Lname.BorderBrush = Brushes.Black;
+        }
+
+        private void Phonenum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Phonenum.BorderBrush = Brushes.Black;
+        }
+
+        private void BankAcctNum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BankAcctNum.BorderBrush = Brushes.Black;
+        }
+
+        private void Beds_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Beds.BorderBrush = Brushes.Black;
+        }
+
+
+
+        private void HUname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            HUname.BorderBrush = Brushes.Black;
+
+        }
+        #endregion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -266,23 +333,7 @@ namespace PLWPF
 
             //_bl.AddHostingUnit();
         }
-        private void HUname_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (HUname.Text == "")
-                HUname.Text = "Give Your Property a Name";
-        }
-
-        private void BankAcctNum_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (BankAcctNum.Text == "")
-                BankAcctNum.Text = "Enter the City your Branch is Located in";
-        }
-
-        private void Beds_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (Beds.Text == "")
-                Beds.Text = "Amount of Beds Your Property has";
-        }
+       
 
         private void next_Click(object sender, RoutedEventArgs e)
         {
@@ -318,6 +369,12 @@ namespace PLWPF
                 Email.BorderBrush = Brushes.Red;
                 flag = false;
                 email_flag = false;
+            }
+
+            if(BankInfoTabUserControl.DataGrid.SelectedItem==null)
+            {
+                //if equals null
+                flag = false;
             }
 
             if (ID.Text == "Enter Your ID")
@@ -418,15 +475,8 @@ namespace PLWPF
             {
                 HostingUnit hu = new HostingUnit();
                 Host h = new Host();
-                BankBranch b = new BankBranch
-                {
-                    //BankNumber = Convert.ToInt32(Banknum.Text),
-                    //BankName = Bankname.Text,
-                    //BranchNumber = Convert.ToInt32(Branchnum.Text),
-                    //BranchAddress = Bankaddress.Text,
-                    //BranchCity = Bankcity.Text
-                };
-
+                BankBranch b = (BankBranch)BankInfoTabUserControl.DataGrid.SelectedItem;
+               
                 h.HostKey = Convert.ToInt32(ID.Text);
                 h.PrivateName = Fname.Text;
                 h.FamilyName = Lname.Text;
@@ -516,49 +566,7 @@ namespace PLWPF
 
         }
 
-        private void Fname_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Fname.BorderBrush = Brushes.Black;
-        }
-
-        private void Email_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Email.BorderBrush = Brushes.Black;
-
-        }
         
-        private void ID_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ID.BorderBrush = Brushes.Black;
-        }
-
-        private void Lname_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Lname.BorderBrush = Brushes.Black;
-        }
-
-        private void Phonenum_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Phonenum.BorderBrush = Brushes.Black;
-        }
-
-        private void BankAcctNum_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            BankAcctNum.BorderBrush = Brushes.Black;
-        }
-
-        private void Beds_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Beds.BorderBrush = Brushes.Black;
-        }
-
-       
-
-        private void HUname_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            HUname.BorderBrush = Brushes.Black;
-
-        }
 
         private void cbArea_DropDownOpened(object sender, EventArgs e)
         {
