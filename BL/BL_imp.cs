@@ -628,6 +628,11 @@ namespace BL
         }
         #endregion
 
+        public IEnumerable<BankBranch> ListOfBanks()
+        {
+            return dal_bl.ListOfBanks();//returns the list of orders
+
+        }
 
     }
 }

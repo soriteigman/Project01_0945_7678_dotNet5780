@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using BE;
@@ -35,6 +38,9 @@ namespace DAL
         XElement ConfigRoot;
         string ConfigPath;
 
+        public static volatile bool bankDownloaded = false;//flag if bank was downloaded
+        BackgroundWorker worker;
+
         //-----------------
         /// <summary>
         /// Ctor 
@@ -44,6 +50,10 @@ namespace DAL
         {
             try
             {
+                //bank download
+                worker = new BackgroundWorker();
+                worker.DoWork += Worker_DoWork;
+                worker.RunWorkerAsync();
                 //giving the paths to the strings (GuestRequestPath etc.)
                 string str = Assembly.GetExecutingAssembly().Location;
                 string localPath = Path.GetDirectoryName(str);
@@ -1214,13 +1224,124 @@ namespace DAL
             return true;
         }
 
+        //Banks-----------------------------------------------------------------------------
+        #region banks
+       
+
+        //save banks
         public IEnumerable<BankBranch> ListOfBanks()
         {
-            throw new NotImplementedException();
+
+
+            List<BankBranch> banks = new List<BankBranch>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"atm.xml");
+            XmlNode rootNode = doc.DocumentElement;
+            //DisplayNodes(rootNode);
+
+            XmlNodeList children = rootNode.ChildNodes;
+            foreach (XmlNode child in children)
+            {
+                BankBranch b = GetBranchByXmlNode(child);
+                if (b != null)
+                {
+                    banks.Add(b);
+                }
+            }
+
+            return banks;
         }
 
-        //-----------------------------------------------------------------------------
 
+        private static BankBranch GetBranchByXmlNode(XmlNode node)
+        {
+            if (node.Name != "BRANCH") return null;
+            BankBranch branch = new BankBranch();
+            //branch.BankAcountNumber = -1;
+
+            XmlNodeList children = node.ChildNodes;
+
+            foreach (XmlNode child in children)
+            {
+                switch (child.Name)
+                {
+                    case "Bank_Code":
+                        branch.BankNumber = int.Parse(child.InnerText);
+                        break;
+                    case "Bank_Name":
+                        branch.BankName = child.InnerText;
+                        break;
+                    case "Branch_Code":
+                        branch.BranchNumber = int.Parse(child.InnerText);
+                        break;
+                    case "Address":
+                        branch.BranchAddress = child.InnerText;
+                        break;
+                    case "City":
+                        branch.BranchCity = child.InnerText;
+                        break;
+
+                }
+
+            }
+
+            if (branch.BranchNumber > 0)
+                return branch;
+
+            return null;
+
+        }
+
+  
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            object ob = e.Argument;
+            while (bankDownloaded == false)//continues until it downloads
+            {
+                try
+                {
+                    DownloadBank();
+                    Thread.Sleep(2000);//sleeps before trying
+                }
+                catch
+                {
+
+                }
+            }
+
+            ListOfBanks();//saves branches to ds
+        }
+        void DownloadBank()
+        {
+            #region downloadBank
+            string xmlLocalPath = @"atm.xml";
+            WebClient wc = new WebClient();
+            try
+            {
+                string xmlServerPath =
+               @"https://www.boi.org.il/en/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_en.xml";
+                wc.DownloadFile(xmlServerPath, xmlLocalPath);
+                bankDownloaded = true;
+            }
+            catch
+            {
+
+                string xmlServerPath = @"http://www.jct.ac.il/~coshri/atm.xml";
+                wc.DownloadFile(xmlServerPath, xmlLocalPath);
+                bankDownloaded = true;
+
+            }
+            finally
+            {
+                wc.Dispose();
+            }
+
+            #endregion
+
+        }
+
+        #endregion
 
 
         /// <summary>

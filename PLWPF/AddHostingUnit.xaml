@@ -79,6 +79,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid >
+                    
                     <Label Content="Please fill out your Personal info here" FontSize="25" Margin="194,10,188,306"/>
                     <Button Name="next" Content="NEXT" Style="{DynamicResource RoundCorner}" FontSize="25" Margin="595,21,42,315" Click="next_Click"/>
                     <TextBox Name="ID" MaxLength="9" Text="Enter Your ID" BorderBrush="Black" FontSize="18" Height="45" Width="325" Margin="44,85,375,245" PreviewMouseDown="id_PreviewMouseDown" MouseLeave="ID_MouseLeave" Opacity="0.5" TextChanged="ID_TextChanged"/>
@@ -142,18 +143,10 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <Label Content="Please fill out your Bank info here" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Margin="168,27,169,308.667"/>
+                    <local:OrderUserControl1 x:Name="BankInfoTabUserControl"/>
 
-                    <Button Name="prev2" Content="PREV" Style="{DynamicResource RoundCorner}" FontSize="25" Margin="49,21,588,315" Click="prev_Click" />
-                    <Button Name="done" Content="DONE" Style="{DynamicResource RoundCorner}" FontSize="25"  Margin="595,21,42,315" Click="done_Click" />
-
-                    <TextBox Name="Bankname" Text="Enter Your Bank Name" BorderBrush="Black" FontSize="18" Margin="49,131,381,204" PreviewMouseDown="Bankname_PreviewMouseDown" MouseLeave="Bankname_MouseLeave" Opacity="0.5" TextChanged="Bankname_TextChanged"/>
-                    <TextBox Name="Banknum" Text="Enter Your Bank's Number" BorderBrush="Black" FontSize="18" Margin="49,199,381,135" PreviewMouseDown="Banknum_PreviewMouseDown" MouseLeave="Banknum_MouseLeave" Opacity="0.5" TextChanged="Banknum_TextChanged"/>
-                    <TextBox Name="Branchnum" Text="Enter Your Branch's Number" BorderBrush="Black" FontSize="18" Margin="403,131,27,203" PreviewMouseDown="BankBranch_PreviewMouseDown" MouseLeave="Branchnum_MouseLeave" Opacity="0.5" TextChanged="Branchnum_TextChanged"/>
-                    <TextBox Name="Bankaddress" Text="Enter Your Branch's Address" BorderBrush="Black" FontSize="18" Margin="403,199,27,135" PreviewMouseDown="BankAddress_PreviewMouseDown" MouseLeave="Bankaddress_MouseLeave" Opacity="0.5" TextChanged="Bankaddress_TextChanged"/>
-                    <TextBox Name="Bankcity" Text="Enter the City your Branch is Located in" BorderBrush="Black" FontSize="18" Margin="189,272,169,62" PreviewMouseDown="Bankcity_PreviewMouseDown" MouseLeave="Bankcity_MouseLeave" Opacity="0.5" TextChanged="Bankcity_TextChanged"/>
-                    <Image Source="Resources/logoOption2.2.png" Margin="580,301,-24,-12.333"/>
-
+                    <Button Name="prev2" Content="PREV" Style="{DynamicResource RoundCorner}" FontSize="25" Margin="1014,149,-377,187.667" Click="prev_Click" />
+                    <Button Name="done" Content="DONE" Style="{DynamicResource RoundCorner}" FontSize="25"  Margin="846,71,-209,264.667" Click="done_Click" />
                 </Grid>
             </TabItem>
         </TabControl>
