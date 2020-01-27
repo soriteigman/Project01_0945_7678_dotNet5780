@@ -336,11 +336,12 @@ namespace BL
         {
             return dal_bl.GetAllOrders(t => (status == null || status == t.Status));
         }
+
         public void AddOrder(Order o)
         {
             try
             {
-                //o.OrderKey = Configuration.OrderKey_s++;
+                Host h= dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
                 if (!AvailabilityCheck(dal_bl.SearchHUbyID(o.HostingUnitKey), dal_bl.searchGRbyID(o.GuestRequestKey)))
                     throw new InvalidOperationException("unit not available for this request");
                 if (!dal_bl.HUexist(o.HostingUnitKey))
@@ -348,8 +349,16 @@ namespace BL
                 if (!dal_bl.GRexist(o.GuestRequestKey))
                     throw new KeyNotFoundException("request doesnt exist");
                 dal_bl.AddOrder(o.Clone());
-                o.Status = Status.SentEmail;
-                UpdateOrder(o.Clone());
+                //o.Status = Status.SentEmail;
+                //UpdateOrder(o.Clone());
+                if (h.CollectionClearance)
+                {
+                    o.SentEmail = Configuration.today;
+                    SendEmail(o.Clone());
+
+                }
+                else throw new InvalidOperationException("cannot send email without permission to charge");
+
             }
             catch (Exception a)
             {
@@ -362,7 +371,7 @@ namespace BL
             {
                 Order oldO = dal_bl.SearchOrbyID(newO.OrderKey);
                 if (oldO.Status == Status.Closed)
-                    throw new InvalidOperationException("cannot change status");
+                    throw new InvalidOperationException("cannot change status that is already closed");
                 Host h = dal_bl.SearchHUbyID(newO.HostingUnitKey).Owner;
                 if (newO.Status == Status.Booked)
                 {
@@ -371,16 +380,16 @@ namespace BL
                     Updategr(g.Clone());
                     UpdateDiary(newO.Clone());
                 }
-                if (newO.Status == Status.SentEmail)
-                {
-                    if (h.CollectionClearance)
-                    {
-                        newO.SentEmail = Configuration.today;
-                        SendEmail(newO.Clone());
+                //if (newO.Status == Status.SentEmail)
+                //{
+                //    if (h.CollectionClearance)
+                //    {
+                //        newO.SentEmail = Configuration.today;
+                //        SendEmail(newO.Clone());
 
-                    }
-                    else throw new InvalidOperationException("cannot send email without permission to charge");
-                }
+                //    }
+                //    else throw new InvalidOperationException("cannot send email without permission to charge");
+                //}
                 dal_bl.UpdateOrder(newO.Clone());
 
             }
@@ -399,7 +408,7 @@ namespace BL
                 GuestRequestKey = GRkey,
                 HostingUnitKey = HUkey,
                 CreateDate = Configuration.today,
-                Status = Status.Active
+                Status = Status.SentEmail
             };
             return ord;
         }
@@ -477,7 +486,7 @@ namespace BL
             bool VacaSubArea(GuestRequest gr) { return gr.SubArea == hu.SubArea; }
             bool VacaType(GuestRequest gr) { return gr.Pool == Choices.Yes || gr.Pool == Choices.DontCare; }
             bool NumBeds(GuestRequest gr) { return hu.Beds >= (gr.Children + gr.Adults); }
-            bool StarRating(GuestRequest gr) { return gr.Stars == hu.Stars; }
+            bool StarRating(GuestRequest gr) { return gr.Stars <= hu.Stars; }
             bool Status(GuestRequest gr) { return gr.Status != BE.Status.Closed; }
 
 

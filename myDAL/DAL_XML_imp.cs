@@ -953,10 +953,10 @@ namespace DAL
             XElement SentEmailyear = new XElement("SentEmailYear", OrderToConvert.SentEmail.Year);
             XElement SentEmailmonth = new XElement("SentEmailMonth", OrderToConvert.SentEmail.Month);
             XElement SentEmailday = new XElement("SentEmailDay", OrderToConvert.SentEmail.Day);
-            XElement SentEmail = new XElement("SentEmail", CreateDateyear, CreateDatemonth, CreateDateday);
+            XElement SentEmail = new XElement("SentEmail", SentEmailyear, SentEmailmonth, SentEmailday);
             XElement Status = new XElement("Status", OrderToConvert.Status);
 
-            XElement Order = new XElement("Order", OrderKey, GuestRequestKey, HostingUnitKey, CreateDate, SentEmail);
+            XElement Order = new XElement("Order", OrderKey, GuestRequestKey, HostingUnitKey, Status, CreateDate, SentEmail);
             return Order;
         }
 
@@ -968,7 +968,7 @@ namespace DAL
             {
                 LoadOrder();
                 LoadConfigs();
-                if (!ORexist(newOrder.OrderKey))
+                if (!ORexist(newOrder.OrderKey))//whats the point of this check if doesnt have a key yet
                 {
                     int tmp = int.Parse(ConfigRoot.Element("OrderKey_s").Value) + 1;
                     newOrder.OrderKey = tmp;

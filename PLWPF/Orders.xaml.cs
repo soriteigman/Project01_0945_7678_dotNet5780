@@ -408,7 +408,7 @@ namespace PLWPF
             GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
             Order newOrd = _bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey);
             _bl.AddOrder(newOrd);
-            MessageBox.Show("Order created succesfully,\nyour new order key is: " + newOrd.OrderKey, "Order", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Order created succesfully", "Order", MessageBoxButton.OK, MessageBoxImage.Information);
             ord = _bl.GetsOpenOrders().ToList();
             myOrders.Clear();
             foreach (int key in keys)

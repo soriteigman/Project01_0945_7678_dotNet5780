@@ -2,7 +2,7 @@
 <HostingUnits>
   <HostingUnit>
     <HostingUnitKey>10000001</HostingUnitKey>
-    <HostingUnitName>paradise island</HostingUnitName>
+    <HostingUnitName>heaven on earth</HostingUnitName>
     <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
       <HostKey>337757678</HostKey>
@@ -10,30 +10,66 @@
         <PrivateName>sori</PrivateName>
         <FamilyName>teigman</FamilyName>
       </Name>
-      <PhoneNumber>11</PhoneNumber>
+      <PhoneNumber>12345</PhoneNumber>
       <MailAddress>soriteigman@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>11</BankNumber>
+        <BankNumber>12345</BankNumber>
         <BankName>hapoalim</BankName>
-        <BranchNumber>11</BranchNumber>
-        <BranchAddress>dd</BranchAddress>
-        <BranchCity>dd</BranchCity>
+        <BranchNumber>12345</BranchNumber>
+        <BranchAddress>kanfei</BranchAddress>
+        <BranchCity>jerusalem</BranchCity>
       </BankBranchDetails>
-      <BankAccountNumber>11</BankAccountNumber>
+      <BankAccountNumber>12345</BankAccountNumber>
     </Owner>
     <Area>North</Area>
-    <Type>Hotel</Type>
+    <Type>BeachHouse</Type>
     <SubArea>Caesarea</SubArea>
-    <Pet>false</Pet>
+    <Pet>true</Pet>
     <WiFi>true</WiFi>
     <Parking>true</Parking>
     <Pool>true</Pool>
     <Jacuzzi>true</Jacuzzi>
-    <Garden>false</Garden>
-    <ChildrensAttractions>false</ChildrensAttractions>
-    <FitnessCenter>false</FitnessCenter>
+    <Garden>true</Garden>
+    <ChildrensAttractions>true</ChildrensAttractions>
+    <FitnessCenter>true</FitnessCenter>
     <Stars>five_star</Stars>
-    <Beds>2</Beds>
+    <Beds>8</Beds>
+  </HostingUnit>
+  <HostingUnit>
+    <HostingUnitKey>10000002</HostingUnitKey>
+    <HostingUnitName>diocletian's palace</HostingUnitName>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
+    <Owner>
+      <HostKey>337757678</HostKey>
+      <Name>
+        <PrivateName>sori</PrivateName>
+        <FamilyName>teigman</FamilyName>
+      </Name>
+      <PhoneNumber>12345</PhoneNumber>
+      <MailAddress>soriteigman@gmail.com</MailAddress>
+      <CollectionClearance>true</CollectionClearance>
+      <BankBranchDetails>
+        <BankNumber>12345</BankNumber>
+        <BankName>hapoalim</BankName>
+        <BranchNumber>12345</BranchNumber>
+        <BranchAddress>kanfei</BranchAddress>
+        <BranchCity>jerusalem</BranchCity>
+      </BankBranchDetails>
+      <BankAccountNumber>12345</BankAccountNumber>
+    </Owner>
+    <Area>South</Area>
+    <Type>Hotel</Type>
+    <SubArea>Netanya</SubArea>
+    <Pet>true</Pet>
+    <WiFi>true</WiFi>
+    <Parking>true</Parking>
+    <Pool>true</Pool>
+    <Jacuzzi>false</Jacuzzi>
+    <Garden>false</Garden>
+    <ChildrensAttractions>true</ChildrensAttractions>
+    <FitnessCenter>true</FitnessCenter>
+    <Stars>four_star</Stars>
+    <Beds>6</Beds>
   </HostingUnit>
 </HostingUnits>
