@@ -623,7 +623,7 @@ namespace BL
                 mail.To.Add(gr.MailAddress);
                 mail.From = new MailAddress("stburack@gmail.com");
                 mail.Subject = "vacation home offer";
-                mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in coninuing the process? if so please contact me at " + h.MailAddress;
+                mail.Body = "Hello, I am a Host at 'Keep Calm, Vacation On'. My vacation home suits your request. Are you interested in continuing the process? if so please contact me at " + h.MailAddress;
                 mail.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
