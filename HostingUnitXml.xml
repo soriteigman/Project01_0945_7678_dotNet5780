@@ -2,7 +2,7 @@
 <HostingUnits>
   <HostingUnit>
     <HostingUnitKey>10000001</HostingUnitKey>
-    <HostingUnitName>heaven on earth</HostingUnitName>
+    <HostingUnitName>heaven</HostingUnitName>
     <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
       <HostKey>337757678</HostKey>
@@ -10,17 +10,17 @@
         <PrivateName>sori</PrivateName>
         <FamilyName>teigman</FamilyName>
       </Name>
-      <PhoneNumber>12345</PhoneNumber>
+      <PhoneNumber>123</PhoneNumber>
       <MailAddress>soriteigman@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>12345</BankNumber>
-        <BankName>hapoalim</BankName>
-        <BranchNumber>12345</BranchNumber>
-        <BranchAddress>kanfei</BranchAddress>
-        <BranchCity>jerusalem</BranchCity>
+        <BankNumber>12</BankNumber>
+        <BankName>gd</BankName>
+        <BranchNumber>12</BranchNumber>
+        <BranchAddress>de</BranchAddress>
+        <BranchCity>de</BranchCity>
       </BankBranchDetails>
-      <BankAccountNumber>12345</BankAccountNumber>
+      <BankAccountNumber>33</BankAccountNumber>
     </Owner>
     <Area>North</Area>
     <Type>BeachHouse</Type>
@@ -35,41 +35,5 @@
     <FitnessCenter>true</FitnessCenter>
     <Stars>five_star</Stars>
     <Beds>8</Beds>
-  </HostingUnit>
-  <HostingUnit>
-    <HostingUnitKey>10000002</HostingUnitKey>
-    <HostingUnitName>diocletian's palace</HostingUnitName>
-    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
-    <Owner>
-      <HostKey>337757678</HostKey>
-      <Name>
-        <PrivateName>sori</PrivateName>
-        <FamilyName>teigman</FamilyName>
-      </Name>
-      <PhoneNumber>12345</PhoneNumber>
-      <MailAddress>soriteigman@gmail.com</MailAddress>
-      <CollectionClearance>true</CollectionClearance>
-      <BankBranchDetails>
-        <BankNumber>12345</BankNumber>
-        <BankName>hapoalim</BankName>
-        <BranchNumber>12345</BranchNumber>
-        <BranchAddress>kanfei</BranchAddress>
-        <BranchCity>jerusalem</BranchCity>
-      </BankBranchDetails>
-      <BankAccountNumber>12345</BankAccountNumber>
-    </Owner>
-    <Area>South</Area>
-    <Type>Hotel</Type>
-    <SubArea>Netanya</SubArea>
-    <Pet>true</Pet>
-    <WiFi>true</WiFi>
-    <Parking>true</Parking>
-    <Pool>true</Pool>
-    <Jacuzzi>false</Jacuzzi>
-    <Garden>false</Garden>
-    <ChildrensAttractions>true</ChildrensAttractions>
-    <FitnessCenter>true</FitnessCenter>
-    <Stars>four_star</Stars>
-    <Beds>6</Beds>
   </HostingUnit>
 </HostingUnits>
