@@ -13,8 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Timers;
 using BE;
 using BL;
+using System.Threading;
 
 namespace PLWPF
 {
@@ -32,6 +34,10 @@ namespace PLWPF
         public Admin()
         {
             InitializeComponent();
+
+            Thread thread = new Thread(DailyUpdate);
+            thread.Start();
+
             #region orders
             IBL _bl = BL.FactoryBL.getBL();//creates an instance of bl
             orders = _bl.GetsOpenOrders();
@@ -46,7 +52,7 @@ namespace PLWPF
             this.MyOrderstab.updateButton.Visibility = Visibility.Hidden;
             this.MyOrderstab.RemoveButton.Visibility = Visibility.Hidden;
             this.MyOrderstab.refreshButton.Visibility = Visibility.Hidden;
-            this.MyOrderstab.FilterName.Visibility=Visibility.Hidden;
+            this.MyOrderstab.FilterName.Visibility = Visibility.Hidden;
             this.MyOrderstab.FilterKey.Visibility = Visibility.Hidden;
             this.MyOrderstab.FilterStar.Visibility = Visibility.Hidden;
             this.MyOrderstab.FilterArea.Visibility = Visibility.Hidden;
@@ -123,6 +129,44 @@ namespace PLWPF
             #endregion
 
         }
+        #region daily
+        private void DailyUpdate()
+        {
+            //Time when method needs to be called
+            var DailyTime = "01:00:00";
+            var timeParts = DailyTime.Split(new char[1] { ':' });
+
+            var dateNow = DateTime.Now;
+            var date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day,
+                       int.Parse(timeParts[0]), int.Parse(timeParts[1]), int.Parse(timeParts[2]));
+            TimeSpan ts;
+            if (date > dateNow)
+                ts = date - dateNow;
+            else
+            {
+                date = date.AddDays(1);
+                ts = date - dateNow;
+            }
+
+            //waits certan time and run the code
+            Task.Delay(ts).ContinueWith((x) => SomeMethod());
+
+            Console.Read();
+        }
+
+        private void SomeMethod()
+        {
+            IEnumerable<Order> listOfOrder = _bl.DaysPassedOnOrders(31);
+            List<Order> ord=null;
+            foreach(Order o in listOfOrder)
+            {
+                ord.Add(o);
+            }
+            ord.ForEach(element => element.Status = Status.Closed);
+            ord.ForEach(element => _bl.UpdateOrder(element));
+ 
+        }
+        #endregion
         #region hu func
         private void HUApplyFiltering(object sender, RoutedEventArgs e)
         {
@@ -132,26 +176,26 @@ namespace PLWPF
                                                     this.MyUnitstab.FilterStar.SelectedItem as BE.StarRating?,
                                                     this.MyUnitstab.FilterArea.SelectedItem as BE.VacationArea?,
                                                     this.MyUnitstab.FilterType.SelectedItem as BE.VacationType?)
-                                                             orderby item.HostingUnitName, item.HostingUnitKey
-                                                             select new
-                                                             {
-                                                                 item.HostingUnitKey,
-                                                                 item.HostingUnitName,
-                                                                 item.Owner,
-                                                                 item.Area,
-                                                                 item.SubArea,
-                                                                 item.Type,
-                                                                 item.Pet,
-                                                                 item.WiFi,
-                                                                 item.Parking,
-                                                                 item.Pool,
-                                                                 item.Jacuzzi,
-                                                                 item.Garden,
-                                                                 item.ChildrensAttractions,
-                                                                 item.FitnessCenter,
-                                                                 item.Stars,
-                                                                 item.Beds,
-                                                             };
+                                                   orderby item.HostingUnitName, item.HostingUnitKey
+                                                   select new
+                                                   {
+                                                       item.HostingUnitKey,
+                                                       item.HostingUnitName,
+                                                       item.Owner,
+                                                       item.Area,
+                                                       item.SubArea,
+                                                       item.Type,
+                                                       item.Pet,
+                                                       item.WiFi,
+                                                       item.Parking,
+                                                       item.Pool,
+                                                       item.Jacuzzi,
+                                                       item.Garden,
+                                                       item.ChildrensAttractions,
+                                                       item.FitnessCenter,
+                                                       item.Stars,
+                                                       item.Beds,
+                                                   };
         }
 
         private void HUResetFilters(object sender, RoutedEventArgs e)
@@ -241,33 +285,33 @@ namespace PLWPF
                                                     this.MyRequeststab.FilterStar.SelectedItem as BE.StarRating?,
                                                     this.MyRequeststab.FilterArea.SelectedItem as BE.VacationArea?,
                                                     this.MyRequeststab.FilterType.SelectedItem as BE.VacationType?)
-                                                               orderby item.PrivateName, item.FamilyName
-                                                               select new
-                                                               {
-                                                                   item.GuestRequestKey,
-                                                                   item.PrivateName,
-                                                                   item.FamilyName,
-                                                                   item.MailAddress,
-                                                                   item.Status,
-                                                                   item.RegistrationDate,
-                                                                   item.EntryDate,
-                                                                   item.ReleaseDate,
-                                                                   item.Area,
-                                                                   item.Type,
-                                                                   item.Adults,
-                                                                   item.Children,
-                                                                   item.Pool,
-                                                                   item.Jacuzzi,
-                                                                   item.Garden,
-                                                                   item.ChildrensAttractions,
-                                                                   item.Pet,
-                                                                   item.FitnessCenter,
-                                                                   item.Stars,
-                                                                   item.WiFi,
-                                                                   item.Parking,
-                                                                   item.SubArea,
+                                                      orderby item.PrivateName, item.FamilyName
+                                                      select new
+                                                      {
+                                                          item.GuestRequestKey,
+                                                          item.PrivateName,
+                                                          item.FamilyName,
+                                                          item.MailAddress,
+                                                          item.Status,
+                                                          item.RegistrationDate,
+                                                          item.EntryDate,
+                                                          item.ReleaseDate,
+                                                          item.Area,
+                                                          item.Type,
+                                                          item.Adults,
+                                                          item.Children,
+                                                          item.Pool,
+                                                          item.Jacuzzi,
+                                                          item.Garden,
+                                                          item.ChildrensAttractions,
+                                                          item.Pet,
+                                                          item.FitnessCenter,
+                                                          item.Stars,
+                                                          item.WiFi,
+                                                          item.Parking,
+                                                          item.SubArea,
 
-                                                               };
+                                                      };
         }
         private void GRResetFilters(object sender, RoutedEventArgs e)
         {
@@ -364,17 +408,17 @@ namespace PLWPF
         {
             this.MyOrderstab.DataGrid.ItemsSource = from item in _bl.GetAllOrders(
                                                     this.MyOrderstab.FilterType.SelectedItem as BE.Status?)
-                                                   orderby item.CreateDate, item.Status
-                                                   select new
-                                                   {
+                                                    orderby item.CreateDate, item.Status
+                                                    select new
+                                                    {
 
-                                                       item.HostingUnitKey,
-                                                       item.GuestRequestKey,
-                                                       item.OrderKey,
-                                                       item.CreateDate,
-                                                       item.Status,
-                                                       item.SentEmail,
-                                                   };
+                                                        item.HostingUnitKey,
+                                                        item.GuestRequestKey,
+                                                        item.OrderKey,
+                                                        item.CreateDate,
+                                                        item.Status,
+                                                        item.SentEmail,
+                                                    };
         }
         private void OResetFilters(object sender, RoutedEventArgs e)
         {
@@ -413,11 +457,9 @@ namespace PLWPF
 
             }
         }
-
-
         #endregion
+
+
+
     }
-
-
-
 }

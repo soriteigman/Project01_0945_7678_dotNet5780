@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <GuestRequests>
   <GuestRequest>
-    <GuestRequestKey>10000001</GuestRequestKey>
+    <GuestRequestKey>10000005</GuestRequestKey>
     <Name>
-      <FamilyName>burack</FamilyName>
+      <FamilyName>bu</FamilyName>
       <PrivateName>st</PrivateName>
     </Name>
     <MailAddress>stburack@gmail.com</MailAddress>
@@ -16,26 +16,64 @@
     <EntryDate>
       <YearEntry>2020</YearEntry>
       <MonthEntry>1</MonthEntry>
-      <DayEntry>28</DayEntry>
+      <DayEntry>29</DayEntry>
     </EntryDate>
     <ReleaseDate>
       <YearRelease>2020</YearRelease>
       <MonthRelease>1</MonthRelease>
-      <DayRelease>30</DayRelease>
+      <DayRelease>31</DayRelease>
     </ReleaseDate>
-    <Area>North</Area>
+    <Area>Jerusalem</Area>
     <Type>BeachHouse</Type>
     <Adults>1</Adults>
     <Children>0</Children>
     <Pool>Yes</Pool>
     <Jacuzzi>Yes</Jacuzzi>
     <Garden>Yes</Garden>
-    <ChildrensAttractions>Yes</ChildrensAttractions>
-    <FitnessCenter>Yes</FitnessCenter>
+    <ChildrensAttractions>DontCare</ChildrensAttractions>
+    <FitnessCenter>DontCare</FitnessCenter>
     <Stars>five_star</Stars>
-    <WiFi>Yes</WiFi>
-    <Parking>Yes</Parking>
+    <WiFi>DontCare</WiFi>
+    <Parking>DontCare</Parking>
     <Pet>true</Pet>
-    <SubArea>Caesarea</SubArea>
+    <SubArea>Beitar</SubArea>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000006</GuestRequestKey>
+    <Name>
+      <FamilyName>nu</FamilyName>
+      <PrivateName>ni</PrivateName>
+    </Name>
+    <MailAddress>stburack@gmail.com</MailAddress>
+    <Status>Active</Status>
+    <RegistrationDate>
+      <YearReg>2020</YearReg>
+      <MonthReg>1</MonthReg>
+      <DayReg>27</DayReg>
+    </RegistrationDate>
+    <EntryDate>
+      <YearEntry>2020</YearEntry>
+      <MonthEntry>1</MonthEntry>
+      <DayEntry>29</DayEntry>
+    </EntryDate>
+    <ReleaseDate>
+      <YearRelease>2020</YearRelease>
+      <MonthRelease>1</MonthRelease>
+      <DayRelease>31</DayRelease>
+    </ReleaseDate>
+    <Area>Jerusalem</Area>
+    <Type>Hotel</Type>
+    <Adults>1</Adults>
+    <Children>0</Children>
+    <Pool>Yes</Pool>
+    <Jacuzzi>Yes</Jacuzzi>
+    <Garden>Yes</Garden>
+    <ChildrensAttractions>DontCare</ChildrensAttractions>
+    <FitnessCenter>DontCare</FitnessCenter>
+    <Stars>five_star</Stars>
+    <WiFi>DontCare</WiFi>
+    <Parking>DontCare</Parking>
+    <Pet>true</Pet>
+    <SubArea>Beitar</SubArea>
   </GuestRequest>
 </GuestRequests>
