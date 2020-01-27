@@ -1,39 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HostingUnits>
   <HostingUnit>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostingUnitName>heaven</HostingUnitName>
-    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
+    <HostingUnitKey>10000003</HostingUnitKey>
+    <HostingUnitName>me</HostingUnitName>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False True True False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
-      <HostKey>337757678</HostKey>
+      <HostKey>315320945</HostKey>
       <Name>
-        <PrivateName>sori</PrivateName>
-        <FamilyName>teigman</FamilyName>
+        <PrivateName>me</PrivateName>
+        <FamilyName>me</FamilyName>
       </Name>
-      <PhoneNumber>123</PhoneNumber>
-      <MailAddress>soriteigman@gmail.com</MailAddress>
+      <PhoneNumber>53</PhoneNumber>
+      <MailAddress>stburack@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>12</BankNumber>
-        <BankName>gd</BankName>
-        <BranchNumber>12</BranchNumber>
-        <BranchAddress>de</BranchAddress>
-        <BranchCity>de</BranchCity>
+        <BankNumber>1</BankNumber>
+        <BankName>q</BankName>
+        <BranchNumber>1</BranchNumber>
+        <BranchAddress>q</BranchAddress>
+        <BranchCity>q</BranchCity>
       </BankBranchDetails>
-      <BankAccountNumber>33</BankAccountNumber>
+      <BankAccountNumber>1</BankAccountNumber>
     </Owner>
-    <Area>North</Area>
+    <Area>Jerusalem</Area>
     <Type>BeachHouse</Type>
-    <SubArea>Caesarea</SubArea>
+    <SubArea>Beitar</SubArea>
     <Pet>true</Pet>
-    <WiFi>true</WiFi>
-    <Parking>true</Parking>
+    <WiFi>false</WiFi>
+    <Parking>false</Parking>
     <Pool>true</Pool>
     <Jacuzzi>true</Jacuzzi>
     <Garden>true</Garden>
-    <ChildrensAttractions>true</ChildrensAttractions>
-    <FitnessCenter>true</FitnessCenter>
+    <ChildrensAttractions>false</ChildrensAttractions>
+    <FitnessCenter>false</FitnessCenter>
     <Stars>five_star</Stars>
-    <Beds>8</Beds>
+    <Beds>2</Beds>
   </HostingUnit>
 </HostingUnits>

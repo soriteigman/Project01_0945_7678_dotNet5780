@@ -219,6 +219,7 @@ namespace BL
                 hu.Diary[start.Month - 1, start.Day - 1] = true;
                 start = start.AddDays(1);
             }
+            dal_bl.UpdateHostingUnit(hu);
         }
 
         #endregion
@@ -316,7 +317,6 @@ namespace BL
         {
             return dal_bl.ListOfCustomers();//returns the list of orders
         }
-
         public int NumOfSent_GR_Orders(GuestRequest gr)//returns the num of orders that were sent for that guest request
         {
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
@@ -400,25 +400,33 @@ namespace BL
         }
         public Order CreateOrder(int HUkey, int GRkey)//in case of gr and hu matching creates an order for them
         {
-
-            if (!AvailabilityCheck(dal_bl.SearchHUbyID(HUkey), dal_bl.searchGRbyID(GRkey)))
-                throw new InvalidOperationException("unit not available for this request");
-            Order ord = new Order
+            Order ord=new Order();
+            try
             {
-                GuestRequestKey = GRkey,
-                HostingUnitKey = HUkey,
-                CreateDate = Configuration.today,
-                Status = Status.SentEmail
-            };
+                if (!AvailabilityCheck(dal_bl.SearchHUbyID(HUkey), dal_bl.searchGRbyID(GRkey)))
+                    throw new InvalidOperationException("unit not available for this request");
+                ord = new Order
+                {
+                    GuestRequestKey = GRkey,
+                    HostingUnitKey = HUkey,
+                    CreateDate = Configuration.today,
+                    Status = Status.SentEmail
+                };
+                return ord;
+            }
+            catch (InvalidProgramException e)
+            {
+                throw e;
+            }
             return ord;
+
         }
-        public IEnumerable<Order> DaysPassedOnOrders(int numOfDays, Predicate<Order> conditions)//returns all orders that were sent a email/ created "numOfDays" ago
+        public IEnumerable<Order> DaysPassedOnOrders(int numOfDays)//returns all orders that were sent a email/ created "numOfDays" ago
         {
-            IDal dal_bl = DAL.FactoryDal.getDal();//creates an instance of dal
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
-            var createResult = from ord in orders //creates a list of all orders that fit the condition
-                               where (conditions(ord))
+            var createResult = from ord in orders //creates a list of all orders that need to be closed
+                               where (ord.SentEmail.AddDays(numOfDays)<Configuration.today)
                                select ord;
 
             return createResult;

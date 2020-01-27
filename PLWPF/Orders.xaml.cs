@@ -405,41 +405,47 @@ namespace PLWPF
 
         private void createOrder(object sender, RoutedEventArgs e)//to do
         {
-            GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
-            Order newOrd = _bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey);
-            _bl.AddOrder(newOrd);
-            MessageBox.Show("Order created succesfully", "Order", MessageBoxButton.OK, MessageBoxImage.Information);
-            ord = _bl.GetsOpenOrders().ToList();
-            myOrders.Clear();
-            foreach (int key in keys)
+            try
             {
-                foreach (Order o in ord)
+                GuestRequest GR = (GuestRequest)this.newOrderTabUserControl.DataGrid.SelectedItem;
+                Order newOrd = _bl.CreateOrder(HU.HostingUnitKey, GR.GuestRequestKey);
+                _bl.AddOrder(newOrd);
+                MessageBox.Show("Order created succesfully", "Order", MessageBoxButton.OK, MessageBoxImage.Information);
+                ord = _bl.GetsOpenOrders().ToList();
+                myOrders.Clear();
+                foreach (int key in keys)
                 {
-                    if (o.HostingUnitKey == key)
-                        myOrders.Add(o);
+                    foreach (Order o in ord)
+                    {
+                        if (o.HostingUnitKey == key)
+                            myOrders.Add(o);
+                    }
                 }
+                this.MyRequeststab.DataGrid.ItemsSource = myOrders;
+                this.AllRequeststab.DataGrid.ItemsSource = req;
+                TC.SelectedIndex = 0;
+                this.myRequests.Visibility = Visibility.Hidden;
+                this.OrdersTabUserControl.DataGrid.UnselectAll();
+                this.OrdersTabUserControl.AddButton.IsEnabled = false;
+                this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
+                this.OrdersTabUserControl.updateButton.IsEnabled = false;
+                List<GuestRequest> list = new List<GuestRequest>();
+                foreach (GuestRequest i in req)
+                {
+                    list.Add(i);
+                }
+                list.RemoveAll(g => AllCondition(g.GuestRequestKey));
+                req.Clear();
+                foreach (GuestRequest guest in list)
+                {
+                    req.Add(guest);
+                }
+                this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
             }
-            this.MyRequeststab.DataGrid.ItemsSource = myOrders;
-            this.AllRequeststab.DataGrid.ItemsSource = req;
-            TC.SelectedIndex = 0;
-            this.myRequests.Visibility = Visibility.Hidden;
-            this.OrdersTabUserControl.DataGrid.UnselectAll();
-            this.OrdersTabUserControl.AddButton.IsEnabled = false;
-            this.OrdersTabUserControl.RemoveButton.IsEnabled = false;
-            this.OrdersTabUserControl.updateButton.IsEnabled = false;
-            List<GuestRequest> list = new List<GuestRequest>();
-            foreach (GuestRequest i in req)
+            catch(Exception a)
             {
-                list.Add(i);
+                MessageBox.Show(a.Message);
             }
-            list.RemoveAll(g => AllCondition(g.GuestRequestKey));
-            req.Clear();
-            foreach (GuestRequest guest in list)
-            {
-                req.Add(guest);
-            }
-            this.newOrderTabUserControl.DataGrid.ItemsSource = gr;
-
 
         }
         private bool AllCondition(int k)//removes requests that were delt with
