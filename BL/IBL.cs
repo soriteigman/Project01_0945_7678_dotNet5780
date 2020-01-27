@@ -75,5 +75,7 @@ namespace BL
         IEnumerable<IGrouping<VacationArea, HostingUnit>> Group_HU_ByArea();//groups the units by area of choice
 
         #endregion
+
+        IEnumerable<BankBranch> ListOfBanks();
     }
 }
