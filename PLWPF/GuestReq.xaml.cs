@@ -131,8 +131,17 @@ namespace PLWPF
             {
                 ErrorEmail.Visibility = Visibility.Hidden;
             }
-
-            if(PName.Text=="")
+            //if((int.Parse(numadult.Text)==0)/* && int.Parse(numadult.Text)==0)*/)
+            //{
+            //    Erroradult.Visibility = Visibility.Visible;
+            //    ErrorKids.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    Erroradult.Visibility = Visibility.Hidden;
+            //    ErrorKids.Visibility = Visibility.Hidden;
+            //}
+            if (PName.Text=="")
             {
                 flag = false;
                 Errorpname.Visibility = Visibility.Visible;
