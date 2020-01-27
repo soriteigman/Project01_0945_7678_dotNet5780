@@ -32,6 +32,7 @@ namespace PLWPF
             hu1 = hu;
             this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
+            this.cbBank.ItemsSource = myBL.ListOfBanks();
 
             this.DataContext = hu;
             this.Closing += Window_Closing;
@@ -68,7 +69,7 @@ namespace PLWPF
                 hu2.Owner.MailAddress = Email.Text;
                 hu2.Owner.BankAccountNumber = Convert.ToInt32(BankAcctNum.Text);
                 hu2.Owner.CollectionClearance = (bool)CollectionClearance.IsChecked;
-                //hu2.Owner.BankBranchDetails=(BankBranch)cbBank.SelectedItem;
+                hu2.Owner.BankBranchDetails=(BankBranch)cbBank.SelectedItem;
                 hu2.HostingUnitName = HUname.Text;
                 hu2.Beds = Convert.ToInt32(Beds.Text);
                 hu2.Pet = (bool)Pets.IsChecked;
@@ -94,9 +95,11 @@ namespace PLWPF
                     be = Beds.GetBindingExpression(TextBox.TextProperty);
                     be.UpdateSource();
 
-                    //be = cbBank.GetBindingExpression(ComboBox.ContextMenuProperty);
-                    //be.UpdateSource();
-
+                    be = cbBank.GetBindingExpression(ComboBox.TextProperty);//null
+                    if (be!=null)
+                    {
+                        be.UpdateSource();
+                    }
                     be = Pool.GetBindingExpression(CheckBox.IsCheckedProperty);
                     be.UpdateSource();
                     be = Jacuzzi.GetBindingExpression(CheckBox.IsCheckedProperty);
