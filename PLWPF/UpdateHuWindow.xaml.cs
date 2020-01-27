@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -33,7 +34,7 @@ namespace PLWPF
             this.cbArea.ItemsSource = Enum.GetValues(typeof(BE.VacationArea));
             this.cbType.ItemsSource = Enum.GetValues(typeof(BE.VacationType));
             this.cbBank.ItemsSource = myBL.ListOfBanks();
-
+           
             this.DataContext = hu;
             this.Closing += Window_Closing;
 
@@ -57,11 +58,6 @@ namespace PLWPF
                 flag = false;
                 email_flag = false;
             }
-            //if(Convert.ToInt32(Beds)<=0)
-            //{
-            //    flag = false;
-            //    Beds.BorderBrush = Brushes.Red;
-            //}
 
             if (flag)
             {
@@ -95,7 +91,7 @@ namespace PLWPF
                     be = Beds.GetBindingExpression(TextBox.TextProperty);
                     be.UpdateSource();
 
-                    be = cbBank.GetBindingExpression(ComboBox.TextProperty);//null
+                    be = cbBank.GetBindingExpression(ComboBox.TextProperty);
                     if (be!=null)
                     {
                         be.UpdateSource();

@@ -17,10 +17,26 @@
     </SentEmail>
   </Order>
   <Order>
+    <OrderKey>10000006</OrderKey>
+    <GuestRequestKey>10000008</GuestRequestKey>
+    <HostingUnitKey>10000003</HostingUnitKey>
+    <Status>SentEmail</Status>
+    <CreateDate>
+      <CreateDateYear>2020</CreateDateYear>
+      <CreateDateMonth>1</CreateDateMonth>
+      <CreateDateDay>27</CreateDateDay>
+    </CreateDate>
+    <SentEmail>
+      <SentEmailYear>1</SentEmailYear>
+      <SentEmailMonth>1</SentEmailMonth>
+      <SentEmailDay>1</SentEmailDay>
+    </SentEmail>
+  </Order>
+  <Order>
     <OrderKey>10000005</OrderKey>
     <GuestRequestKey>10000007</GuestRequestKey>
     <HostingUnitKey>10000003</HostingUnitKey>
-    <Status>SentEmail</Status>
+    <Status>Booked</Status>
     <CreateDate>
       <CreateDateYear>2020</CreateDateYear>
       <CreateDateMonth>1</CreateDateMonth>

@@ -3,7 +3,7 @@
   <HostingUnit>
     <HostingUnitKey>10000003</HostingUnitKey>
     <HostingUnitName>me</HostingUnitName>
-    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False True True False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
       <HostKey>315320945</HostKey>
       <Name>
@@ -14,11 +14,11 @@
       <MailAddress>stburack@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>1</BankNumber>
-        <BankName>q</BankName>
-        <BranchNumber>1</BranchNumber>
-        <BranchAddress>q</BranchAddress>
-        <BranchCity>q</BranchCity>
+        <BankNumber>11</BankNumber>
+        <BankName>Israel Discount Bank Ltd</BankName>
+        <BranchNumber>111</BranchNumber>
+        <BranchAddress>DIMONA</BranchAddress>
+        <BranchCity>DIMONA</BranchCity>
       </BankBranchDetails>
       <BankAccountNumber>1</BankAccountNumber>
     </Owner>
@@ -52,9 +52,9 @@
       <BankBranchDetails>
         <BankNumber>13</BankNumber>
         <BankName>Union Bank of Israel Ltd</BankName>
-        <BranchNumber>92</BranchNumber>
-        <BranchAddress>18 Hertzel st., Hadera 38421 57</BranchAddress>
-        <BranchCity>HADERA</BranchCity>
+        <BranchNumber>140</BranchNumber>
+        <BranchAddress>9 Ahad Ha'am st. Tel Aviv 9</BranchAddress>
+        <BranchCity>TEL AVIV - YAFO</BranchCity>
       </BankBranchDetails>
       <BankAccountNumber>1234</BankAccountNumber>
     </Owner>
