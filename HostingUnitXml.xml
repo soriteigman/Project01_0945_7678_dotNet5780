@@ -14,11 +14,11 @@
       <MailAddress>stburack@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>11</BankNumber>
-        <BankName>Israel Discount Bank Ltd</BankName>
-        <BranchNumber>111</BranchNumber>
-        <BranchAddress>DIMONA</BranchAddress>
-        <BranchCity>DIMONA</BranchCity>
+        <BankNumber>31</BankNumber>
+        <BankName>The First International Bank of Israel Ltd</BankName>
+        <BranchNumber>64</BranchNumber>
+        <BranchAddress>2, Tzamarot st., Herzliya 2</BranchAddress>
+        <BranchCity>HERZLIYYA</BranchCity>
       </BankBranchDetails>
       <BankAccountNumber>1</BankAccountNumber>
     </Owner>
@@ -35,41 +35,5 @@
     <FitnessCenter>false</FitnessCenter>
     <Stars>five_star</Stars>
     <Beds>2</Beds>
-  </HostingUnit>
-  <HostingUnit>
-    <HostingUnitKey>10000002</HostingUnitKey>
-    <HostingUnitName>awesome twoesome</HostingUnitName>
-    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
-    <Owner>
-      <HostKey>337757678</HostKey>
-      <Name>
-        <PrivateName>sori</PrivateName>
-        <FamilyName>teigman</FamilyName>
-      </Name>
-      <PhoneNumber>1234</PhoneNumber>
-      <MailAddress>soriteigman@gmail.com</MailAddress>
-      <CollectionClearance>true</CollectionClearance>
-      <BankBranchDetails>
-        <BankNumber>13</BankNumber>
-        <BankName>Union Bank of Israel Ltd</BankName>
-        <BranchNumber>140</BranchNumber>
-        <BranchAddress>9 Ahad Ha'am st. Tel Aviv 9</BranchAddress>
-        <BranchCity>TEL AVIV - YAFO</BranchCity>
-      </BankBranchDetails>
-      <BankAccountNumber>1234</BankAccountNumber>
-    </Owner>
-    <Area>North</Area>
-    <Type>Hotel</Type>
-    <SubArea>Caesarea</SubArea>
-    <Pet>false</Pet>
-    <WiFi>true</WiFi>
-    <Parking>true</Parking>
-    <Pool>true</Pool>
-    <Jacuzzi>true</Jacuzzi>
-    <Garden>true</Garden>
-    <ChildrensAttractions>true</ChildrensAttractions>
-    <FitnessCenter>false</FitnessCenter>
-    <Stars>five_star</Stars>
-    <Beds>9</Beds>
   </HostingUnit>
 </HostingUnits>

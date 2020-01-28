@@ -36,6 +36,7 @@ namespace PLWPF
             this.cbBank.ItemsSource = myBL.ListOfBanks();
            
             this.DataContext = hu;
+            this.cbBank.Text = (hu.Owner.BankBranchDetails).ToString();
             this.Closing += Window_Closing;
 
         }
@@ -59,73 +60,83 @@ namespace PLWPF
                 email_flag = false;
             }
 
-            if (flag)
+            if (!myBL.AllowedToChangeCommission(hu2))
             {
-                hu2.Owner.PhoneNumber = Convert.ToInt32(Phonenum.Text);
-                hu2.Owner.MailAddress = Email.Text;
-                hu2.Owner.BankAccountNumber = Convert.ToInt32(BankAcctNum.Text);
-                hu2.Owner.CollectionClearance = (bool)CollectionClearance.IsChecked;
-                hu2.Owner.BankBranchDetails=(BankBranch)cbBank.SelectedItem;
-                hu2.HostingUnitName = HUname.Text;
-                hu2.Beds = Convert.ToInt32(Beds.Text);
-                hu2.Pet = (bool)Pets.IsChecked;
-                hu2.WiFi = (bool)Wifi.IsChecked;
-                hu2.Parking = (bool)Parking.IsChecked;
-                hu2.Pool = (bool)Pool.IsChecked;
-                hu2.Jacuzzi = (bool)Jacuzzi.IsChecked;
-                hu2.Garden = (bool)Garden.IsChecked;
-                hu2.ChildrensAttractions = (bool)chiAttract.IsChecked;
-                hu2.FitnessCenter = (bool)FitnessCenter.IsChecked;
-
-                try
+                if (!(bool)CollectionClearance.IsChecked && hu2.Owner.CollectionClearance)
                 {
-                    // explicit update of each property of the hosting unit
-                    BindingExpression be = HUname.GetBindingExpression(TextBox.TextProperty);
-                    be.UpdateSource();
-                    be = Phonenum.GetBindingExpression(TextBox.TextProperty);
-                    be.UpdateSource();
-                    be = BankAcctNum.GetBindingExpression(TextBox.TextProperty);
-                    be.UpdateSource();
-                    be = Email.GetBindingExpression(TextBox.TextProperty);
-                    be.UpdateSource();
-                    be = Beds.GetBindingExpression(TextBox.TextProperty);
-                    be.UpdateSource();
-
-                    be = cbBank.GetBindingExpression(ComboBox.TextProperty);
-                    if (be!=null)
-                    {
-                        be.UpdateSource();
-                    }
-                    be = Pool.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = Jacuzzi.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = Pets.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = Garden.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = Parking.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = Wifi.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = chiAttract.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = FitnessCenter.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-                    be = CollectionClearance.GetBindingExpression(CheckBox.IsCheckedProperty);
-                    be.UpdateSource();
-
-                    myBL.UpdateHostingUnit(hu2);
-                    updated = true;
-                    Close();
+                    flag = false;
+                    MessageBox.Show("cannot change collection clearance when property has booked orders");
                 }
-                catch(Exception a)
-                {
-                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
 
             }
+                if (flag)
+                {
+                    hu2.Owner.PhoneNumber = Convert.ToInt32(Phonenum.Text);
+                    hu2.Owner.MailAddress = Email.Text;
+                    hu2.Owner.BankAccountNumber = Convert.ToInt32(BankAcctNum.Text);
+                    hu2.Owner.CollectionClearance = (bool)CollectionClearance.IsChecked;
+                    hu2.Owner.BankBranchDetails = (BankBranch)cbBank.SelectedItem;
+                    hu2.HostingUnitName = HUname.Text;
+                    hu2.Beds = Convert.ToInt32(Beds.Text);
+                    hu2.Pet = (bool)Pets.IsChecked;
+                    hu2.WiFi = (bool)Wifi.IsChecked;
+                    hu2.Parking = (bool)Parking.IsChecked;
+                    hu2.Pool = (bool)Pool.IsChecked;
+                    hu2.Jacuzzi = (bool)Jacuzzi.IsChecked;
+                    hu2.Garden = (bool)Garden.IsChecked;
+                    hu2.ChildrensAttractions = (bool)chiAttract.IsChecked;
+                    hu2.FitnessCenter = (bool)FitnessCenter.IsChecked;
+
+                    try
+                    {
+                        // explicit update of each property of the hosting unit
+                        BindingExpression be = HUname.GetBindingExpression(TextBox.TextProperty);
+                        be.UpdateSource();
+                        be = Phonenum.GetBindingExpression(TextBox.TextProperty);
+                        be.UpdateSource();
+                        be = BankAcctNum.GetBindingExpression(TextBox.TextProperty);
+                        be.UpdateSource();
+                        be = Email.GetBindingExpression(TextBox.TextProperty);
+                        be.UpdateSource();
+                        be = Beds.GetBindingExpression(TextBox.TextProperty);
+                        be.UpdateSource();
+
+                        be = cbBank.GetBindingExpression(ComboBox.TextProperty);
+                        if (be != null)
+                        {
+                            be.UpdateSource();
+                        }
+                        be = Pool.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = Jacuzzi.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = Pets.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = Garden.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = Parking.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = Wifi.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = chiAttract.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = FitnessCenter.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+                        be = CollectionClearance.GetBindingExpression(CheckBox.IsCheckedProperty);
+                        be.UpdateSource();
+
+                        myBL.UpdateHostingUnit(hu2);
+                        updated = true;
+                        Close();
+                    }
+                    catch (Exception a)
+                    {
+                        MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+
+            
 
         }
 

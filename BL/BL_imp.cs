@@ -342,7 +342,7 @@ namespace BL
         {
             try
             {
-                Host h= dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
+                Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
                 if (!AvailabilityCheck(dal_bl.SearchHUbyID(o.HostingUnitKey), dal_bl.searchGRbyID(o.GuestRequestKey)))
                     throw new InvalidOperationException("unit not available for this request");
                 if (!dal_bl.HUexist(o.HostingUnitKey))
@@ -401,7 +401,7 @@ namespace BL
         }
         public Order CreateOrder(int HUkey, int GRkey)//in case of gr and hu matching creates an order for them
         {
-            Order ord=new Order();
+            Order ord = new Order();
             try
             {
                 if (!AvailabilityCheck(dal_bl.SearchHUbyID(HUkey), dal_bl.searchGRbyID(GRkey)))
@@ -431,13 +431,13 @@ namespace BL
             return createResult;
 
         }
-        
+
         public IEnumerable<Order> DaysPassedOnOrders(int numOfDays)//returns all orders that were sent a email/ created "numOfDays" ago
         {
             IEnumerable<Order> orders = dal_bl.ListOfOrders();//gets the list of orders
 
             var createResult = from ord in orders //creates a list of all orders that need to be closed
-                               where (ord.SentEmail.AddDays(numOfDays)<Configuration.today && ord.Status!=Status.Closed)
+                               where (ord.SentEmail.AddDays(numOfDays) < Configuration.today && ord.Status != Status.Closed)
                                select ord;
 
             return createResult;
@@ -545,7 +545,7 @@ namespace BL
         }
         public bool DateLengthPermission(DateTime start, DateTime end)//checks if stay is at least one full day long
         {
-            if (end>start)//if theres at least one day difference between the start and end dates
+            if (end > start)//if theres at least one day difference between the start and end dates
                 return true;
             return false;
         }
@@ -555,7 +555,7 @@ namespace BL
             IEnumerable<GuestRequest> requests = dal_bl.ListOfCustomers();//gets the list of requests
             foreach (GuestRequest req in requests)
             {
-                if(req.Status==Status.Closed)
+                if (req.Status == Status.Closed)
                     TotalCommission += CalculateComission(req);
             }
             return TotalCommission;
@@ -604,17 +604,17 @@ namespace BL
         public void SendEmail(Order o)//sends email when order status changes to "sent mail"
         {
             GuestRequest gr = dal_bl.searchGRbyID(o.GuestRequestKey);
-                Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
+            Host h = dal_bl.SearchHUbyID(o.HostingUnitKey).Owner;
 
-                try
-                {
-                    IsValidEmail(gr.MailAddress);
-                    IsValidEmail(h.MailAddress);
-                }
-                catch (InvalidOperationException a)
-                {
-                    throw a;
-                }
+            try
+            {
+                IsValidEmail(gr.MailAddress);
+                IsValidEmail(h.MailAddress);
+            }
+            catch (InvalidOperationException a)
+            {
+                throw a;
+            }
             new Thread(() =>
             {
                 MailMessage mail = new MailMessage();
@@ -638,6 +638,15 @@ namespace BL
                     throw ex;
                 }
             }).Start();
+        }
+
+        public bool AllowedToChangeCommission(HostingUnit hu)
+        {
+            IEnumerable<Order> orders = dal_bl.GetAllOrders(t => (t.HostingUnitKey == hu.HostingUnitKey && t.Status==Status.Booked ));
+            if (orders.FirstOrDefault() == null)
+                return true;
+            return false;
+
         }
         #endregion
 

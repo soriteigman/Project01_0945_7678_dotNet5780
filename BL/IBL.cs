@@ -61,6 +61,7 @@ namespace BL
         bool AvailabilityCheck(HostingUnit hu, GuestRequest gr);//checks if requested dates are available
         int CalculateDurationOfStay(GuestRequest gr);//returns duration of stay
         int CalculateComission(GuestRequest gr);//calculates comission
+        bool AllowedToChangeCommission(HostingUnit hu);//checks if there are any open orders connected to this unit
         void SendEmail(Order o);//sends email when order status changes to "sent mail"
         int NumOfDaysInBetweeen(DateTime startDate, DateTime endDate = default(DateTime));//remember if the end date is null change it to Configuration.today
         IEnumerable<Order> DaysPassedOnOrders(int numOfDays);//returns all orders that were sent a email/ created "numOfDays" ago
@@ -77,8 +78,11 @@ namespace BL
 
         #endregion
 
+        //----------------------------------------------------------------------------------------------
+
+        #region banks
         IEnumerable<BankBranch> ListOfBanks();
         IEnumerable<BankBranch> ListOfBanks(string searchString);
-
+        #endregion
     }
 }
