@@ -18,7 +18,7 @@ namespace BE
 
         public static int commission = 10;
 
-        public static DateTime today = DateTime.Today.AddDays(-35);
+        public static DateTime today = DateTime.Today;
         public static DateTime _DateLastRun = default(DateTime);
 
 
