@@ -138,7 +138,8 @@ namespace PLWPF
                 {
                     OrderDailyMethod();
                     ReqDailyMethod();
-                    Configuration._DateLastRun = DateTime.Now.Date;
+                    _bl.UpdateConfig(DateTime.Now.Date);
+                    //Configuration._DateLastRun = DateTime.Now.Date;
                     TimeSpan ts = DateTime.Now.Date - Configuration._DateLastRun;
                     Thread.Sleep(ts);
                 }

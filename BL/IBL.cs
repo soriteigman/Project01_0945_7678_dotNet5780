@@ -65,7 +65,7 @@ namespace BL
         void SendEmail(Order o);//sends email when order status changes to "sent mail"
         int NumOfDaysInBetweeen(DateTime startDate, DateTime endDate = default(DateTime));//remember if the end date is null change it to Configuration.today
         IEnumerable<Order> DaysPassedOnOrders(int numOfDays);//returns all orders that were sent a email/ created "numOfDays" ago
-        //void UpdateConfig(DateTime dt);
+        void UpdateConfig(DateTime dt);
         #endregion
 
         //----------------------------------------------------------------------------------------------
