@@ -1137,6 +1137,10 @@ namespace DAL
                 XElement todayMonth = new XElement("todayMonth", DateTime.Today.Month);
                 XElement todayDay = new XElement("todayDay", DateTime.Today.Day);
                 XElement today = new XElement("today", todayYear, todayMonth, todayDay);
+                XElement lastYear = new XElement("_DateLastRun", DateTime.Today.Year);
+                XElement lastMonth = new XElement("_DateLastRun", DateTime.Today.Month);
+                XElement lastDay = new XElement("_DateLastRun", DateTime.Today.Day);
+                XElement _DateLastRun = new XElement("_DateLastRun", lastYear, lastMonth, lastDay);
 
                 XElement commission = new XElement("commission", 10);
                 XElement ExpDay = new XElement("ExpDay", 10);
@@ -1144,7 +1148,7 @@ namespace DAL
                 XElement GuestRequest_s = new XElement("GuestRequest_s", 9999999);
                 XElement OrderKey_s = new XElement("OrderKey_s", 9999999);
                 
-                ConfigRoot.Add(HostingUnitKey_s, GuestRequest_s, OrderKey_s, ExpDay, commission, today);
+                ConfigRoot.Add(HostingUnitKey_s, GuestRequest_s, OrderKey_s, ExpDay, commission, today, _DateLastRun);
                 ConfigRoot.Save(ConfigPath);
             }
             catch
