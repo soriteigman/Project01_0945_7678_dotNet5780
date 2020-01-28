@@ -2,35 +2,35 @@
 <HostingUnits>
   <HostingUnit>
     <HostingUnitKey>10000000</HostingUnitKey>
-    <HostingUnitName>esther</HostingUnitName>
+    <HostingUnitName>no clearance</HostingUnitName>
     <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
       <HostKey>315320945</HostKey>
       <Name>
-        <PrivateName>esti</PrivateName>
-        <FamilyName>burack</FamilyName>
+        <PrivateName>me</PrivateName>
+        <FamilyName>me</FamilyName>
       </Name>
       <PhoneNumber>537208407</PhoneNumber>
       <MailAddress>stburack@gmail.com</MailAddress>
-      <CollectionClearance>true</CollectionClearance>
+      <CollectionClearance>false</CollectionClearance>
       <BankBranchDetails>
         <BankNumber>13</BankNumber>
         <BankName>Union Bank of Israel Ltd</BankName>
-        <BranchNumber>198</BranchNumber>
+        <BranchNumber>196</BranchNumber>
         <BranchAddress>6-8 Ahuzat Baeit st. Tel Aviv 61024 6</BranchAddress>
         <BranchCity>TEL AVIV - YAFO</BranchCity>
       </BankBranchDetails>
-      <BankAccountNumber>123456</BankAccountNumber>
+      <BankAccountNumber>344556</BankAccountNumber>
     </Owner>
     <Area>Jerusalem</Area>
-    <Type>BeachHouse</Type>
-    <SubArea>Beitar</SubArea>
-    <Pet>true</Pet>
-    <WiFi>false</WiFi>
+    <Type>Tent</Type>
+    <SubArea>BeitShemesh</SubArea>
+    <Pet>false</Pet>
+    <WiFi>true</WiFi>
     <Parking>false</Parking>
     <Pool>true</Pool>
     <Jacuzzi>true</Jacuzzi>
-    <Garden>true</Garden>
+    <Garden>false</Garden>
     <ChildrensAttractions>false</ChildrensAttractions>
     <FitnessCenter>false</FitnessCenter>
     <Stars>five_star</Stars>
@@ -38,25 +38,61 @@
   </HostingUnit>
   <HostingUnit>
     <HostingUnitKey>10000001</HostingUnitKey>
-    <HostingUnitName>have it all</HostingUnitName>
+    <HostingUnitName>soris unit</HostingUnitName>
     <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
     <Owner>
       <HostKey>315320945</HostKey>
       <Name>
-        <PrivateName>esti</PrivateName>
-        <FamilyName>bu</FamilyName>
+        <PrivateName>sori</PrivateName>
+        <FamilyName>teigman</FamilyName>
       </Name>
-      <PhoneNumber>657876466</PhoneNumber>
-      <MailAddress>stburack@gmail.com</MailAddress>
+      <PhoneNumber>583295002</PhoneNumber>
+      <MailAddress>soriteigman@gmail.com</MailAddress>
       <CollectionClearance>true</CollectionClearance>
       <BankBranchDetails>
-        <BankNumber>39</BankNumber>
-        <BankName>State Bank Of India</BankName>
-        <BranchNumber>1</BranchNumber>
-        <BranchAddress>RAMAT GAN</BranchAddress>
-        <BranchCity>RAMAT GAN</BranchCity>
+        <BankNumber>14</BankNumber>
+        <BankName>Bank Otsar Ha-hayal Ltd</BankName>
+        <BranchNumber>311</BranchNumber>
+        <BranchAddress>17, H'banim way 17</BranchAddress>
+        <BranchCity>PARDES HANNA-KARKUR</BranchCity>
       </BankBranchDetails>
-      <BankAccountNumber>5678</BankAccountNumber>
+      <BankAccountNumber>11111</BankAccountNumber>
+    </Owner>
+    <Area>North</Area>
+    <Type>BeachHouse</Type>
+    <SubArea>Caesarea</SubArea>
+    <Pet>false</Pet>
+    <WiFi>true</WiFi>
+    <Parking>true</Parking>
+    <Pool>true</Pool>
+    <Jacuzzi>false</Jacuzzi>
+    <Garden>false</Garden>
+    <ChildrensAttractions>false</ChildrensAttractions>
+    <FitnessCenter>true</FitnessCenter>
+    <Stars>four_star</Stars>
+    <Beds>9</Beds>
+  </HostingUnit>
+  <HostingUnit>
+    <HostingUnitKey>10000002</HostingUnitKey>
+    <HostingUnitName>has it all</HostingUnitName>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
+    <Owner>
+      <HostKey>315320945</HostKey>
+      <Name>
+        <PrivateName>sori</PrivateName>
+        <FamilyName>teigman</FamilyName>
+      </Name>
+      <PhoneNumber>11111</PhoneNumber>
+      <MailAddress>soriteigman@gmail.com</MailAddress>
+      <CollectionClearance>true</CollectionClearance>
+      <BankBranchDetails>
+        <BankNumber>14</BankNumber>
+        <BankName>Bank Otsar Ha-hayal Ltd</BankName>
+        <BranchNumber>376</BranchNumber>
+        <BranchAddress>Machane Yafa, Beer Sheva 0</BranchAddress>
+        <BranchCity>HAZERIM</BranchCity>
+      </BankBranchDetails>
+      <BankAccountNumber>11111</BankAccountNumber>
     </Owner>
     <Area>Eilat</Area>
     <Type>Hotel</Type>
@@ -71,77 +107,5 @@
     <FitnessCenter>true</FitnessCenter>
     <Stars>five_star</Stars>
     <Beds>5</Beds>
-  </HostingUnit>
-  <HostingUnit>
-    <HostingUnitKey>10000002</HostingUnitKey>
-    <HostingUnitName>hello</HostingUnitName>
-    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
-    <Owner>
-      <HostKey>315320945</HostKey>
-      <Name>
-        <PrivateName>mother</PrivateName>
-        <FamilyName>burack</FamilyName>
-      </Name>
-      <PhoneNumber>537208407</PhoneNumber>
-      <MailAddress>stburack@gmail.com</MailAddress>
-      <CollectionClearance>true</CollectionClearance>
-      <BankBranchDetails>
-        <BankNumber>13</BankNumber>
-        <BankName>Union Bank of Israel Ltd</BankName>
-        <BranchNumber>158</BranchNumber>
-        <BranchAddress>13 Pinhas Eilon st. 13</BranchAddress>
-        <BranchCity>HOLON</BranchCity>
-      </BankBranchDetails>
-      <BankAccountNumber>6789</BankAccountNumber>
-    </Owner>
-    <Area>North</Area>
-    <Type>BeachHouse</Type>
-    <SubArea>Caesarea</SubArea>
-    <Pet>true</Pet>
-    <WiFi>false</WiFi>
-    <Parking>false</Parking>
-    <Pool>true</Pool>
-    <Jacuzzi>true</Jacuzzi>
-    <Garden>true</Garden>
-    <ChildrensAttractions>false</ChildrensAttractions>
-    <FitnessCenter>false</FitnessCenter>
-    <Stars>five_star</Stars>
-    <Beds>6</Beds>
-  </HostingUnit>
-  <HostingUnit>
-    <HostingUnitKey>10000003</HostingUnitKey>
-    <HostingUnitName>doesnt have clearance</HostingUnitName>
-    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
-    <Owner>
-      <HostKey>315320945</HostKey>
-      <Name>
-        <PrivateName>esther</PrivateName>
-        <FamilyName>burack</FamilyName>
-      </Name>
-      <PhoneNumber>537208407</PhoneNumber>
-      <MailAddress>stburack@gmail.com</MailAddress>
-      <CollectionClearance>false</CollectionClearance>
-      <BankBranchDetails>
-        <BankNumber>13</BankNumber>
-        <BankName>Union Bank of Israel Ltd</BankName>
-        <BranchNumber>71</BranchNumber>
-        <BranchAddress>12 Jerusalem st., Ashdod 77523 12</BranchAddress>
-        <BranchCity>ASHDOD</BranchCity>
-      </BankBranchDetails>
-      <BankAccountNumber>4567</BankAccountNumber>
-    </Owner>
-    <Area>Jerusalem</Area>
-    <Type>LogCabin</Type>
-    <SubArea>Jerusalem</SubArea>
-    <Pet>true</Pet>
-    <WiFi>true</WiFi>
-    <Parking>false</Parking>
-    <Pool>false</Pool>
-    <Jacuzzi>true</Jacuzzi>
-    <Garden>false</Garden>
-    <ChildrensAttractions>false</ChildrensAttractions>
-    <FitnessCenter>true</FitnessCenter>
-    <Stars>four_star</Stars>
-    <Beds>7</Beds>
   </HostingUnit>
 </HostingUnits>
