@@ -247,6 +247,11 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateConfig(DateTime dt)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }
