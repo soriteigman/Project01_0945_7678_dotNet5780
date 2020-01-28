@@ -8,8 +8,9 @@ namespace BE
 {
     public class BankBranch
     {
-        int bankNumber;
+
         string bankName;
+        int bankNumber;
         int branchNumber;
         string branchAddress;
         string branchCity;
