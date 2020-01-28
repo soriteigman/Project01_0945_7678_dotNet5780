@@ -134,14 +134,13 @@ namespace PLWPF
         {
             while (true)
             {
-                DateTime _DateLastRun;
-                _DateLastRun = DateTime.Now.Date;
-
-                if (_DateLastRun < DateTime.Now.Date)
+                if (Configuration._DateLastRun < DateTime.Now.Date)
                 {
                     OrderDailyMethod();
                     ReqDailyMethod();
-                    _DateLastRun = DateTime.Now.Date;
+                    Configuration._DateLastRun = DateTime.Now.Date;
+                    TimeSpan ts = DateTime.Now.Date - Configuration._DateLastRun;
+                    Thread.Sleep(ts);
                 }
             }
         }

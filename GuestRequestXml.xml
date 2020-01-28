@@ -1,2 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<GuestRequests />
+<GuestRequests>
+  <GuestRequest>
+    <GuestRequestKey>10000000</GuestRequestKey>
+    <Name>
+      <FamilyName>burack</FamilyName>
+      <PrivateName>esti</PrivateName>
+    </Name>
+    <MailAddress>stburack@gmail.com</MailAddress>
+    <Status>Active</Status>
+    <RegistrationDate>
+      <YearReg>2020</YearReg>
+      <MonthReg>1</MonthReg>
+      <DayReg>28</DayReg>
+    </RegistrationDate>
+    <EntryDate>
+      <YearEntry>2020</YearEntry>
+      <MonthEntry>2</MonthEntry>
+      <DayEntry>3</DayEntry>
+    </EntryDate>
+    <ReleaseDate>
+      <YearRelease>2020</YearRelease>
+      <MonthRelease>2</MonthRelease>
+      <DayRelease>6</DayRelease>
+    </ReleaseDate>
+    <Area>Jerusalem</Area>
+    <Type>BeachHouse</Type>
+    <Adults>2</Adults>
+    <Children>3</Children>
+    <Pool>Yes</Pool>
+    <Jacuzzi>Yes</Jacuzzi>
+    <Garden>Yes</Garden>
+    <ChildrensAttractions>DontCare</ChildrensAttractions>
+    <FitnessCenter>DontCare</FitnessCenter>
+    <Stars>five_star</Stars>
+    <WiFi>DontCare</WiFi>
+    <Parking>DontCare</Parking>
+    <Pet>true</Pet>
+    <SubArea>Beitar</SubArea>
+  </GuestRequest>
+</GuestRequests>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HostingUnits>
+  <HostingUnit>
+    <HostingUnitKey>10000000</HostingUnitKey>
+    <HostingUnitName>esther</HostingUnitName>
+    <Diary>False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False False </Diary>
+    <Owner>
+      <HostKey>315320945</HostKey>
+      <Name>
+        <PrivateName>esti</PrivateName>
+        <FamilyName>burack</FamilyName>
+      </Name>
+      <PhoneNumber>537208407</PhoneNumber>
+      <MailAddress>stburack@gmail.com</MailAddress>
+      <CollectionClearance>true</CollectionClearance>
+      <BankBranchDetails>
+        <BankNumber>13</BankNumber>
+        <BankName>Union Bank of Israel Ltd</BankName>
+        <BranchNumber>198</BranchNumber>
+        <BranchAddress>6-8 Ahuzat Baeit st. Tel Aviv 61024 6</BranchAddress>
+        <BranchCity>TEL AVIV - YAFO</BranchCity>
+      </BankBranchDetails>
+      <BankAccountNumber>123456</BankAccountNumber>
+    </Owner>
+    <Area>Jerusalem</Area>
+    <Type>BeachHouse</Type>
+    <SubArea>Beitar</SubArea>
+    <Pet>true</Pet>
+    <WiFi>false</WiFi>
+    <Parking>false</Parking>
+    <Pool>true</Pool>
+    <Jacuzzi>true</Jacuzzi>
+    <Garden>true</Garden>
+    <ChildrensAttractions>false</ChildrensAttractions>
+    <FitnessCenter>false</FitnessCenter>
+    <Stars>five_star</Stars>
+    <Beds>6</Beds>
+  </HostingUnit>
+</HostingUnits>
