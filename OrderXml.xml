@@ -1,2 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Orders />
+<Orders>
+  <Order>
+    <OrderKey>10000000</OrderKey>
+    <GuestRequestKey>10000000</GuestRequestKey>
+    <HostingUnitKey>10000000</HostingUnitKey>
+    <Status>Closed</Status>
+    <CreateDate>
+      <CreateDateYear>2019</CreateDateYear>
+      <CreateDateMonth>12</CreateDateMonth>
+      <CreateDateDay>24</CreateDateDay>
+    </CreateDate>
+    <SentEmail>
+      <SentEmailYear>1</SentEmailYear>
+      <SentEmailMonth>1</SentEmailMonth>
+      <SentEmailDay>1</SentEmailDay>
+    </SentEmail>
+  </Order>
+  <Order>
+    <OrderKey>10000001</OrderKey>
+    <GuestRequestKey>10000001</GuestRequestKey>
+    <HostingUnitKey>10000001</HostingUnitKey>
+    <Status>SentEmail</Status>
+    <CreateDate>
+      <CreateDateYear>2019</CreateDateYear>
+      <CreateDateMonth>12</CreateDateMonth>
+      <CreateDateDay>24</CreateDateDay>
+    </CreateDate>
+    <SentEmail>
+      <SentEmailYear>1</SentEmailYear>
+      <SentEmailMonth>1</SentEmailMonth>
+      <SentEmailDay>1</SentEmailDay>
+    </SentEmail>
+  </Order>
+</Orders>

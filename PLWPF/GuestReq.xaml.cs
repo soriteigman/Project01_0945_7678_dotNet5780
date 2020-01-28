@@ -131,16 +131,17 @@ namespace PLWPF
             {
                 ErrorEmail.Visibility = Visibility.Hidden;
             }
-            //if((int.Parse(numadult.Text)==0)/* && int.Parse(numadult.Text)==0)*/)
-            //{
-            //    Erroradult.Visibility = Visibility.Visible;
-            //    ErrorKids.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    Erroradult.Visibility = Visibility.Hidden;
-            //    ErrorKids.Visibility = Visibility.Hidden;
-            //}
+            if ((numadult.Text == "0") && (numkid.Text=="0"))
+            {
+                flag = false;
+                Erroradult.Visibility = Visibility.Visible;
+                ErrorKids.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Erroradult.Visibility = Visibility.Hidden;
+                ErrorKids.Visibility = Visibility.Hidden;
+            }
             if (PName.Text=="")
             {
                 flag = false;
@@ -180,26 +181,6 @@ namespace PLWPF
             else
             {
                 Errorarea.Visibility = Visibility.Hidden;
-            }
-
-            if (numkid.Text== null)
-            {
-                flag = false;
-                ErrorKids.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                ErrorKids.Visibility = Visibility.Hidden;
-            }
-
-            if (numadult.Text == null)
-            {
-                flag = false;
-                Erroradult.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Erroradult.Visibility = Visibility.Hidden;
             }
 
             if (type.SelectedValue == null)
