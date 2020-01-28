@@ -23,7 +23,7 @@ namespace DAL
         public static DAL_XML_imp Instance { get { return instance; } }
 
         //Flag for config update
-        public volatile bool updated = false;
+        //public volatile bool updated = false;
 
         //Roots and paths of the files
         XElement GuestRequestRoot;
@@ -85,7 +85,7 @@ namespace DAL
         }
 
         static DAL_XML_imp() { }
-
+        #region guest request
         //GuestRequest-------------------------------------------------------------------------
 
         /// <summary>
@@ -429,8 +429,9 @@ namespace DAL
             }
         }
 
+        #endregion
 
-
+        #region hosting units
         //HostingUnit------------------------------------------------------------------------
 
         /// <summary>
@@ -843,7 +844,9 @@ namespace DAL
                 throw a;
             }
         }
+        #endregion
 
+        #region orders
         //Orders---------------------------------------------------------------------------
 
         /// <summary>
@@ -1115,7 +1118,9 @@ namespace DAL
                 throw a;
             }
         }
+        #endregion
 
+        #region configuration
         //configs------------------------------------------------------------------------
 
         /// <summary>
@@ -1135,9 +1140,9 @@ namespace DAL
 
                 XElement commission = new XElement("commission", 10);
                 XElement ExpDay = new XElement("ExpDay", 10);
-                XElement HostingUnitKey_s = new XElement("HostingUnitKey_s", 10000000);
-                XElement GuestRequest_s = new XElement("GuestRequest_s", 10000000);
-                XElement OrderKey_s = new XElement("OrderKey_s", 10000000);
+                XElement HostingUnitKey_s = new XElement("HostingUnitKey_s", 9999999);
+                XElement GuestRequest_s = new XElement("GuestRequest_s", 9999999);
+                XElement OrderKey_s = new XElement("OrderKey_s", 9999999);
                 
                 ConfigRoot.Add(HostingUnitKey_s, GuestRequest_s, OrderKey_s, ExpDay, commission, today);
                 ConfigRoot.Save(ConfigPath);
@@ -1223,9 +1228,10 @@ namespace DAL
             }
             return true;
         }
+        #endregion
 
-        //Banks-----------------------------------------------------------------------------
         #region banks
+        //Banks-----------------------------------------------------------------------------
 
 
         //save banks
