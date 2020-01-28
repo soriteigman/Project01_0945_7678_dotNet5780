@@ -60,7 +60,7 @@ namespace DAL
         IEnumerable<BankBranch> GetAllbanks(Func<BankBranch, bool> condition = null);//gets all requests that fit the condition
 
         #endregion
-        void UpdateConfig(DateTime dt);
+        //void UpdateConfig(DateTime dt);
 
     }
 }

@@ -648,10 +648,10 @@ namespace BL
             return false;
 
         }
-        public void UpdateConfig(DateTime dt)
-        {
-            dal_bl.UpdateConfig(dt);
-        }
+        //public void UpdateConfig(DateTime dt)
+        //{
+        //    dal_bl.UpdateConfig(dt);
+        //}
         #endregion
 
         #region bank
