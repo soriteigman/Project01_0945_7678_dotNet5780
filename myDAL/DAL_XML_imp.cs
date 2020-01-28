@@ -1232,6 +1232,14 @@ namespace DAL
             }
             return true;
         }
+
+
+        public void UpdateConfig(DateTime dt)
+        {
+            ConfigRoot.Element("_DateLastRun").Element("lastYear").Value = dt.Year.ToString();
+            ConfigRoot.Element("_DateLastRun").Element("lastMonth").Value = dt.Month.ToString();
+            ConfigRoot.Element("_DateLastRun").Element("lastDay").Value = dt.Day.ToString();
+        }
         #endregion
 
         #region banks
