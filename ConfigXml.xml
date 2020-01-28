@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuration>
-  <HostingUnitKey_s>10000002</HostingUnitKey_s>
-  <GuestRequest_s>10000002</GuestRequest_s>
+  <HostingUnitKey_s>9999999</HostingUnitKey_s>
+  <GuestRequest_s>9999999</GuestRequest_s>
   <OrderKey_s>9999999</OrderKey_s>
   <ExpDay>10</ExpDay>
   <commission>10</commission>
@@ -11,8 +11,8 @@
     <todayDay>28</todayDay>
   </today>
   <_DateLastRun>
-    <_DateLastRun>2020</_DateLastRun>
-    <_DateLastRun>1</_DateLastRun>
-    <_DateLastRun>28</_DateLastRun>
+    <lastYear>2020</lastYear>
+    <lastMonth>1</lastMonth>
+    <lastDay>28</lastDay>
   </_DateLastRun>
 </Configuration>

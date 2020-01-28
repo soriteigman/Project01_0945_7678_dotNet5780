@@ -648,9 +648,9 @@ namespace BL
             return false;
 
         }
-        public void UpdateConfig(DateTime dt)
+        public void UpdateConfig(string original, DateTime dt)
         {
-            dal_bl.UpdateConfig(dt);
+            dal_bl.UpdateConfig("_DateLastRun", dt);
         }
         #endregion
 

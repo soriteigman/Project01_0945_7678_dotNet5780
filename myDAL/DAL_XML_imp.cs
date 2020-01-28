@@ -1137,10 +1137,10 @@ namespace DAL
                 XElement todayMonth = new XElement("todayMonth", DateTime.Today.Month);
                 XElement todayDay = new XElement("todayDay", DateTime.Today.Day);
                 XElement today = new XElement("today", todayYear, todayMonth, todayDay);
-                //XElement lastYear = new XElement("_DateLastRun", DateTime.Today.Year);
-                //XElement lastMonth = new XElement("_DateLastRun", DateTime.Today.Month);
-                //XElement lastDay = new XElement("_DateLastRun", DateTime.Today.Day);
-                //XElement _DateLastRun = new XElement("_DateLastRun", lastYear, lastMonth, lastDay);
+                XElement lastYear = new XElement("lastYear", DateTime.Today.Year);
+                XElement lastMonth = new XElement("lastMonth", DateTime.Today.Month);
+                XElement lastDay = new XElement("lastDay", DateTime.Today.Day);
+                XElement _DateLastRun = new XElement("_DateLastRun", lastYear, lastMonth, lastDay);
 
                 XElement commission = new XElement("commission", 10);
                 XElement ExpDay = new XElement("ExpDay", 10);
@@ -1148,7 +1148,7 @@ namespace DAL
                 XElement GuestRequest_s = new XElement("GuestRequest_s", 9999999);
                 XElement OrderKey_s = new XElement("OrderKey_s", 9999999);
                 
-                ConfigRoot.Add(HostingUnitKey_s, GuestRequest_s, OrderKey_s, ExpDay, commission, today);
+                ConfigRoot.Add(HostingUnitKey_s, GuestRequest_s, OrderKey_s, ExpDay, commission, today, _DateLastRun);
                 ConfigRoot.Save(ConfigPath);
             }
             catch
@@ -1234,11 +1234,48 @@ namespace DAL
         }
 
 
-        public void UpdateConfig(DateTime dt)
+        public void UpdateConfig(string original, DateTime dt)//mayb object instead of datetime
         {
-            ConfigRoot.Element("_DateLastRun").Element("lastYear").Value = dt.Year.ToString();
-            ConfigRoot.Element("_DateLastRun").Element("lastMonth").Value = dt.Month.ToString();
-            ConfigRoot.Element("_DateLastRun").Element("lastDay").Value = dt.Day.ToString();
+            try
+            {
+                LoadConfigs();
+                if (ConfigExists(original))
+                {
+                    foreach (var item in ConfigRoot.Elements())
+                    {
+                        if (item.Name.LocalName == original)
+                        {
+                            item.Element/*("_DateLastRun").Element*/("lastYear").Value = dt.Year.ToString();
+                            item.Element/*("_DateLastRun").Element*/("lastMonth").Value = dt.Month.ToString();
+                            item.Element/*("_DateLastRun").Element*/("lastDay").Value = dt.Day.ToString();
+                            SaveConfigs();
+                            break;
+                        }
+                    }
+                }
+                else
+                    throw new KeyNotFoundException("This config doesn't exist");
+            }
+            catch (FileLoadException a)
+            {
+                throw a;
+            }
+            catch (FileNotFoundException a)
+            {
+                throw a;
+            }
+            //try
+            //{
+            //    LoadConfigs();
+            //    ConfigRoot.Element("_DateLastRun").Element("lastYear").Value = dt.Year.ToString();
+            //    ConfigRoot.Element("_DateLastRun").Element("lastMonth").Value = dt.Month.ToString();
+            //    ConfigRoot.Element("_DateLastRun").Element("lastDay").Value = dt.Day.ToString();
+
+            //}
+            //catch (FileLoadException a)
+            //{
+            //    throw a;
+            //}
         }
         #endregion
 
